@@ -1,0 +1,21 @@
+.continuous-slider .swiper-wrapper {
+    transition-timing-function: linear;
+}
+
+.continuous-slider .container::before,
+.continuous-slider .container::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background-image: linear-gradient(to right, var(--color-dark), transparent);
+    z-index: 2;
+}
+
+.continuous-slider .container::after {
+    left: auto;
+    right: 0;
+    transform: rotate(180deg);
+}

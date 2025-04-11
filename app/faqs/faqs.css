@@ -1,0 +1,9 @@
+.page-contact > .container .heading {
+    padding: 0;
+    text-align: center;
+}
+
+.page-contact > .container p {
+    max-width: 750px;
+    margin: auto;
+}

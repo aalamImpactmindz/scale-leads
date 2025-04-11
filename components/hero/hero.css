@@ -1,0 +1,11 @@
+.hero .container div {
+    padding-right: 50% !important;
+    background-image: url("../../public//assets/images/doughnut.png");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: right -15% top -40%;
+}
+
+.hero p {
+    max-width: 510px;
+}
