@@ -135,3 +135,11 @@ a {
 .border-gray {
   border-color: var(--color-border)!important;
 }
+
+.page-home > a {
+  left: 120px;
+  bottom: 80px;
+  min-width: 140px;
+  display: inline-block;
+  z-index: 1;
+}
