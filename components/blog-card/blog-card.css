@@ -1,0 +1,11 @@
+.blog-card img {
+    transition: 0.2s ease;
+}
+
+.blog-card:hover img {
+    transform: scale(1.04);
+}
+
+.blog-card:hover h3 {
+    color: var(--color-theme);
+}
