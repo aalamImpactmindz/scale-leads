@@ -7,7 +7,7 @@ import Image from "next/image";
 const blogHowToCreateAnEffectiveDesignPortfolio = () => {
   return (
     <div className="blog-detail sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="How to Create an Effective Design Portfolio" />
         <div className="ratio ratio-16x9 mb-3">
           <Image
@@ -24,21 +24,21 @@ const blogHowToCreateAnEffectiveDesignPortfolio = () => {
           <span>12 janv. 2022</span>
           <span>6 min read</span>
         </div>
-        <h3>What is a portfolio?</h3>
+        <h3 className="color-light">What is a portfolio?</h3>
         <p>
           A portfolio is any method used to showcase your best work. No matter
           the industry—fashion, architecture, or design—there are tons of ways
           to display your work in order to get a new job or expand your audience
           or customers.
         </p>
-        <h3>Types of design portfolios</h3>
+        <h3 className="color-light">Types of design portfolios</h3>
         <p>
           Depending on the type of design work that you do, there are different
           portfolio formats that will be best suited for your needs. A design
           portfolio can be digital in the form of a website, slideshow, or PDF,
           but it can also be analog in the form of a print book or poster.
         </p>
-        <h3>Graphic design portfolio</h3>
+        <h3 className="color-light">Graphic design portfolio</h3>
         <p>
           When it comes to graphic design, designing a PDF as your portfolio is
           becoming more and more popular to highlight your work and PDF design
@@ -50,7 +50,7 @@ const blogHowToCreateAnEffectiveDesignPortfolio = () => {
           best work along with the descriptions of each project and more related
           information.
         </p>
-        <h3>UX design portfolio</h3>
+        <h3 className="color-light">UX design portfolio</h3>
         <p>
           For UX designers, online portfolios are probably the most popular type
           today. This can be in the form of a simple one-page website with your

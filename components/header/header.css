@@ -47,3 +47,16 @@ header.nav-active .navigation {
     opacity: 1;
     pointer-events: all;
 }
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .nav-toggler {
+        transform: scale(0.7);
+    }
+    .links {
+        font-size: 14px;
+    }
+}

@@ -2,8 +2,8 @@
     transition-timing-function: linear;
 }
 
-.continuous-slider .container::before,
-.continuous-slider .container::after {
+.continuous-slider .container-xl::before,
+.continuous-slider .container-xl::after {
     content: "";
     position: absolute;
     left: 0.75rem;
@@ -14,8 +14,12 @@
     z-index: 2;
 }
 
-.continuous-slider .container::after {
+.continuous-slider .container-xl::after {
     left: auto;
     right: 0;
     transform: rotate(180deg);
+}
+
+.continuous-slider img {
+    max-width: 100%;
 }

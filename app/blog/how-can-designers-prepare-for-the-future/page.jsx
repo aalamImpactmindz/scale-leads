@@ -7,7 +7,7 @@ import Image from "next/image";
 const blogHowCanDesignersPrepareForTheFuture = () => {
   return (
     <div className="blog-detail sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="How Can Designers Prepare for the Future?" />
         <div className="ratio ratio-16x9 mb-3">
           <Image
@@ -34,7 +34,7 @@ const blogHowCanDesignersPrepareForTheFuture = () => {
           employment arrangements, competitive salaries, and opportunities to
           utilize both technical and creative skill sets.
         </p>
-        <h3>What does a career in web design involve?</h3>
+        <h3 className="color-light">What does a career in web design involve?</h3>
         <p>
           A career in website design can involve the design, creation, and
           coding of a range of website types. Other tasks will typically include
@@ -52,7 +52,7 @@ const blogHowCanDesignersPrepareForTheFuture = () => {
           determining how to best incorporate the necessary functionality.
           However, there can be significant overlap between the roles.
         </p>
-        <h3>Full-stack, back-end, and front-end web development</h3>
+        <h3 className="color-light">Full-stack, back-end, and front-end web development</h3>
         <p>
           The U.S. Bureau of Labor Statistics (BLS) Occupational Outlook
           Handbook tends to group web developers and digital designers into one
@@ -70,7 +70,7 @@ const blogHowCanDesignersPrepareForTheFuture = () => {
           closely with front-end engineers to establish the user-end
           functionality and appearance of a site.
         </p>
-        <h3>Are web designers in demand?</h3>
+        <h3 className="color-light">Are web designers in demand?</h3>
         <p>
           In our ever-increasingly digital environment, there is a constant need
           for websites—and therefore for web designers and developers. With 17.4
@@ -80,7 +80,7 @@ const blogHowCanDesignersPrepareForTheFuture = () => {
           expect a higher salary. Like all jobs, there are likely to be a range
           of opportunities, some of which are better paid than others.
         </p>
-        <h3>Best practices for creating a landing page</h3>
+        <h3 className="color-light">Best practices for creating a landing page</h3>
         <p>
           If you're interested in pursuing a career in web design or starting a
           freelance business, having a professional portfolio website is

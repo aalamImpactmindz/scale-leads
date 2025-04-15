@@ -6,8 +6,8 @@ import { Container } from "react-bootstrap";
 
 const Faqs = () => {
   return (
-    <div className="page-contact sec-padding">
-      <Container>
+    <div className="page-faqs sec-padding">
+      <Container fluid="xl">
         <Heading
           title="Frequently Asked Questions"
           highlightedWords={["Questions"]}

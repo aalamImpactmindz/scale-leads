@@ -5,7 +5,7 @@ import Heading from "../heading/Heading";
 const SuccessStories = () => {
   return (
     <section className="success-stories sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading
           title="Customer Success Stories"
           highlightedWords={["Success"]}

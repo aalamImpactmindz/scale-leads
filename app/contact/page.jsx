@@ -8,7 +8,7 @@ import { Container } from "react-bootstrap";
 const Contact = () => {
   return (
     <div className="page-contact">
-      <Container className="sec-padding pb-0 text-center">
+      <Container fluid="xl" className="sec-padding pb-0 text-center">
         <Heading
           title="Contacte Nous"
           highlightedWords={["Nous"]}

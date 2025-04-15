@@ -7,7 +7,7 @@ import Image from "next/image";
 const blogBuildingANavigationComponent = () => {
   return (
     <div className="blog-detail sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="Building a Navigation Component with Variables" />
         <div className="ratio ratio-16x9 mb-3">
           <Image
@@ -34,7 +34,7 @@ const blogBuildingANavigationComponent = () => {
           that it provides full control over its states, such as unique hover
           states of elements within another component.
         </p>
-        <h3>Starting at the atomic level</h3>
+        <h3 className="color-light">Starting at the atomic level</h3>
         <p>
           Framer allows you to create fully interactive and animated components,
           and even allows you to nest components within other components. We're
@@ -47,7 +47,7 @@ const blogBuildingANavigationComponent = () => {
           this reason, an optimal workflow includes starting with the 'deepest'
           nested component and building up from there.
         </p>
-        <h3>Nesting components</h3>
+        <h3 className="color-light">Nesting components</h3>
         <p>
           {" "}
           Once we have our two components ready, we can start creating the
@@ -57,7 +57,7 @@ const blogBuildingANavigationComponent = () => {
           other component to the Component Canvas and place it within your
           designed navigation bar.
         </p>
-        <h3>Triggering interactions from the navigation bar</h3>
+        <h3 className="color-light">Triggering interactions from the navigation bar</h3>
         <p>
           Back on the main canvas, we'd like to be able to tap 'Clothing' and
           navigate to an entire new Screen. If you'd connect the component using

@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 const PrivacyPolicy = () => {
   return (
     <div className="page-content sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="Privacy Policy" />
         <p>
           In urna urna, rhoncus sed lorem id, blandit vulputate sem. Nullam

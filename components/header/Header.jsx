@@ -32,12 +32,30 @@ const Header = () => {
     };
   }, []);
 
+  // nav links
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/", label: "Features" },
+    { href: "/abonnement", label: "Abonnements" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/faqs", label: "Faqs" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
     <header
       className={`py-4 position-relative z-1 ${navActive ? "nav-active" : ""}`}
     >
-      <Container className="d-flex align-items-center justify-content-between position-relative">
+      <Container
+        fluid="xl"
+        className="d-flex align-items-center justify-content-between position-relative"
+      >
         <Logo />
+        <div className="links ms-auto me-2 me-md-4 color-light">
+          <Link href="/login">Login</Link>
+          <span className="mx-2">|</span>
+          <Link href="/register">Register</Link>
+        </div>
         <div
           ref={togglerRef}
           className="nav-toggler bg-gray rounded-2 position-relative"
@@ -49,27 +67,16 @@ const Header = () => {
         {navActive && (
           <div
             ref={navRef}
-            className="navigation bg-gray p-3 rounded-2 color-light position-absolute top-100 mt-3"
+            className="navigation bg-gray p-3 rounded-2 color-light position-absolute top-100 mt-3 border border-gray"
           >
             <ul className="ls-none d-flex flex-column gap-3">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/">Features</Link>
-              </li>
-              <li>
-                <Link href="/abonnement">Abonnements</Link>
-              </li>
-              <li>
-                <Link href="/">Blog</Link>
-              </li>
-              <li>
-                <Link href="/faqs">Faqs</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
-              </li>
+              {navLinks.map(({ href, label }) => (
+                <li key={label}>
+                  <Link href={href} onClick={() => setNavActive(false)}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         )}

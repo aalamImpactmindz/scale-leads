@@ -7,7 +7,7 @@ import Image from "next/image";
 const blogStartingACareerInWebDesign = () => {
   return (
     <div className="blog-detail sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="Starting and Growing a Career in Web Design" />
         <div className="ratio ratio-16x9 mb-3">
           <Image
@@ -34,7 +34,7 @@ const blogStartingACareerInWebDesign = () => {
           employment arrangements, competitive salaries, and opportunities to
           utilize both technical and creative skill sets.
         </p>
-        <h3>What does a career in web design involve?</h3>
+        <h3 className="color-light">What does a career in web design involve?</h3>
         <p>
           A career in website design can involve the design, creation, and
           coding of a range of website types. Other tasks will typically include
@@ -49,7 +49,7 @@ const blogStartingACareerInWebDesign = () => {
           and determining how to best incorporate the necessary functionality.
           However, there can be significant overlap between the roles.
         </p>
-        <h3>Full-stack, back-end, and front-end web development</h3>
+        <h3 className="color-light">Full-stack, back-end, and front-end web development</h3>
         <p>
           The U.S. Bureau of Labor Statistics (BLS) Occupational Outlook
           Handbook tends to group web developers and digital designers into one
@@ -65,7 +65,7 @@ const blogStartingACareerInWebDesign = () => {
           closely with front-end engineers to establish the user-end
           functionality and appearance of a site.
         </p>
-        <h3>Are web designers in demand in 2022?</h3>
+        <h3 className="color-light">Are web designers in demand in 2022?</h3>
         <p>
           In our ever-increasingly digital environment, there is a constant need
           for websites—and therefore for web designers and developers. With 17.4

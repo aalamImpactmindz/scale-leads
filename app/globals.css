@@ -121,7 +121,7 @@ a {
 .accordion-item button {
   background-color: transparent !important;
   color: var(--color-light) !important;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 18px;
   padding: 15px 0;
   box-shadow: none !important;
@@ -144,7 +144,7 @@ a {
   z-index: 1;
 }
 
-.blog-detail>.container>.heading {
+.blog-detail>.container-xl>.heading {
   max-width: 800px;
   padding: 0;
   margin-left: auto;
@@ -156,6 +156,66 @@ a {
   color: var(--color-theme);
 }
 
-.link-main:hover {
+.link-main:hover,
+.page-login form>div a:hover {
   text-decoration: underline;
+}
+
+.page-home>a .btn-main {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.page-login .heading {
+  padding-right: 0;
+  text-align: center;
+}
+
+.form-control {
+  background-color: rgba(187, 187, 187, 0.15) !important;
+  border-color: var(--color-border);
+  color: var(--color-text) !important;
+  border-radius: 10px;
+}
+
+.form-control::placeholder {
+  color: var(--color-text);
+}
+
+.form-control:focus {
+  border-color: var(--color-theme);
+  box-shadow: none;
+}
+
+@media (max-width: 1199px) {
+  .page-home>a {
+    left: 25px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sec-padding {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .accordion-item button {
+    font-size: 16px;
+  }
+
+  .accordion-button::after {
+    background-size: 16px;
+    background-position: top 2px right 2px;
+  }
+
+  .page-content p {
+    font-size: 15px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .blog-detail .ratio img {
+    border-radius: 30px !important;
+  }
 }

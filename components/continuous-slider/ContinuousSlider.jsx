@@ -15,7 +15,7 @@ import Image from "next/image";
 const ContinuousSlider = () => {
   return (
     <div className="continuous-slider sec-padding" data-aos="zoom-in">
-      <Container className="position-relative">
+      <Container fluid="xl" className="position-relative">
         <Swiper
           modules={[Autoplay]}
           loop={true}
@@ -28,6 +28,20 @@ const ContinuousSlider = () => {
           spaceBetween={30}
           grabCursor={false}
           simulateTouch={false}
+          breakpoints={{
+            0: {
+              slidesPerView: 2.2,
+            },
+            768: {
+              slidesPerView: 2.8,
+            },
+            992: {
+              slidesPerView: 3.6,
+            },
+            1200: {
+              slidesPerView: 4.6,
+            },
+          }}
         >
           <SwiperSlide>
             <Image

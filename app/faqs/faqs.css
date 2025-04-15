@@ -1,9 +1,9 @@
-.page-contact > .container .heading {
+.page-faqs > .container-xl .heading {
     padding: 0;
     text-align: center;
 }
 
-.page-contact > .container p {
+.page-faqs > .container-xl p {
     max-width: 750px;
     margin: auto;
 }

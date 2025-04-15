@@ -6,13 +6,13 @@ import Heading from "../heading/Heading";
 const Plans = () => {
   return (
     <section className="plans sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading
           title="Choisis ton plan et automatise ta prospection dès aujourd'hui"
           highlightedWords={["automatise", "aujourd'hui"]}
           description="Nos offres sont conçu pour t'aider à automatiser ta prospection et obtenir plus de clients sans effort. Choisis le plan qui te correspond et commence dès maintenant."
         />
-        <Row data-aos="fade-up">
+        <Row data-aos="fade-up" className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
           <Col>
             <PlanCard
               title="OFFRE STARTER"

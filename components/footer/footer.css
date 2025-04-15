@@ -1,3 +1,9 @@
 footer li a:hover {
     text-decoration: underline;
 }
+
+@media(max-width: 575px) {
+    footer {
+        font-size: 14px;
+    }
+}

@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 const TermsConditions = () => {
   return (
     <div className="page-content sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="Terms & Conditions" />
         <p>
           In urna urna, rhoncus sed lorem id, blandit vulputate sem. Nullam

@@ -7,7 +7,7 @@ import Image from "next/image";
 const blogCreateALandingPageThatPerforms = () => {
   return (
     <div className="blog-detail sec-padding">
-      <Container>
+      <Container fluid="xl">
         <Heading title="Create a Landing Page That Performs Great" />
         <div className="ratio ratio-16x9 mb-3">
           <Image
@@ -24,7 +24,7 @@ const blogCreateALandingPageThatPerforms = () => {
           <span>15 mars 2022</span>
           <span>5 min read</span>
         </div>
-        <h3>What is a landing page?</h3>
+        <h3 className="color-light">What is a landing page?</h3>
         <p>
           Whether you work in marketing, sales, or product design, you
           understand the importance of a quality landing page. Landing pages are
@@ -35,7 +35,7 @@ const blogCreateALandingPageThatPerforms = () => {
           nature of landing pages means they come with a pretty standard set of
           best practices.
         </p>
-        <h3>Landing pages vs. front pages</h3>
+        <h3 className="color-light">Landing pages vs. front pages</h3>
         <p>
           A typical front page or website in general includes a full navigation
           bar with tons of links throughout the page linking to other pages or
@@ -61,7 +61,7 @@ const blogCreateALandingPageThatPerforms = () => {
           landing pages, you're getting high-quality leads that are actually
           interested in using your product.
         </p>
-        <h3>Best practices for creating a landing page</h3>
+        <h3 className="color-light">Best practices for creating a landing page</h3>
         <p>
           What makes an easy-to-use landing page? Overall, it's clear, concise,
           and doesn't give users any options except for the main CTA. In terms

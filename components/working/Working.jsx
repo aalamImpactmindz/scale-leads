@@ -10,13 +10,13 @@ import rocket from "@/public/assets/images/rocket.svg";
 const Working = () => {
   return (
     <section className="working sec-padding" id="how-it-works">
-      <Container>
+      <Container fluid="xl">
         <Heading
           title="Comment ça marche ?"
           highlightedWords={["marche"]}
           description="Notre système automatise ta prospection en 3 étapes simples. plus besoin de passer des heures à chercher des clients, on s'en occupe pour vous !"
         />
-        <Row data-aos="fade-up">
+        <Row data-aos="fade-up" className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
           <Col>
             <WorkingCard
               icon={arrowTopLeft}
