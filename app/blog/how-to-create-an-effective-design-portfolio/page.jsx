@@ -1,8 +1,9 @@
 import Heading from "@/components/heading/Heading";
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import imageBlog5 from "@/public/assets/images/blog5.png";
 import Image from "next/image";
+import BlogCard from "@/components/blog-card/BlogCard";
 
 const blogHowToCreateAnEffectiveDesignPortfolio = () => {
   return (
@@ -15,9 +16,8 @@ const blogHowToCreateAnEffectiveDesignPortfolio = () => {
             alt="Blog"
             fill
             priority
-            className="object-cover"
+            className="object-cover rounded-md-5"
             sizes="100vw"
-            style={{ borderRadius: "60px" }}
           />
         </div>
         <div className="d-flex flex-wrap justify-content-between small mb-3">
@@ -109,6 +109,40 @@ const blogHowToCreateAnEffectiveDesignPortfolio = () => {
           for your inspiration
         </p>
       </Container>
+      <div className="more-blogs sec-padding">
+        <Container>
+          <h3>Read More</h3>
+          <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog5}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog5}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog5}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };

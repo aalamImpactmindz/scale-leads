@@ -186,6 +186,10 @@ a {
   box-shadow: none;
 }
 
+.rounded-md-5 {
+  border-radius: 2rem !important;
+}
+
 @media (max-width: 1199px) {
   .page-home>a {
     left: 25px;
@@ -209,13 +213,13 @@ a {
 
   .page-content p {
     font-size: 15px;
-  }
+  } 
 
   body {
     font-size: 16px;
   }
 
-  .blog-detail .ratio img {
-    border-radius: 30px !important;
+  .rounded-md-5 {
+    border-radius: 1rem !important;
   }
 }

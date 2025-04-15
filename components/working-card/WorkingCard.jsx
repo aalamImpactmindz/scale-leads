@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const WorkingCard = ({ icon, title, description }) => {
   return (
-    <div className="working-card p-3 p-lg-4 bg-gray rounded-5 h-100">
+    <div className="working-card p-3 p-lg-4 bg-gray rounded-md-5 h-100">
       {icon && (
         <span className="bg-theme rounded-circle p-2 d-inline-flex justify-content-center align-items-center mb-4">
           <Image

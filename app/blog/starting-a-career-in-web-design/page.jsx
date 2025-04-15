@@ -1,8 +1,9 @@
 import Heading from "@/components/heading/Heading";
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import imageBlog1 from "@/public/assets/images/blog1.png";
 import Image from "next/image";
+import BlogCard from "@/components/blog-card/BlogCard";
 
 const blogStartingACareerInWebDesign = () => {
   return (
@@ -15,9 +16,8 @@ const blogStartingACareerInWebDesign = () => {
             alt="Blog"
             fill
             priority
-            className="object-cover"
+            className="object-cover rounded-md-5"
             sizes="100vw"
-            style={{ borderRadius: "60px" }}
           />
         </div>
         <div className="d-flex flex-wrap justify-content-between small mb-3">
@@ -34,7 +34,9 @@ const blogStartingACareerInWebDesign = () => {
           employment arrangements, competitive salaries, and opportunities to
           utilize both technical and creative skill sets.
         </p>
-        <h3 className="color-light">What does a career in web design involve?</h3>
+        <h3 className="color-light">
+          What does a career in web design involve?
+        </h3>
         <p>
           A career in website design can involve the design, creation, and
           coding of a range of website types. Other tasks will typically include
@@ -49,7 +51,9 @@ const blogStartingACareerInWebDesign = () => {
           and determining how to best incorporate the necessary functionality.
           However, there can be significant overlap between the roles.
         </p>
-        <h3 className="color-light">Full-stack, back-end, and front-end web development</h3>
+        <h3 className="color-light">
+          Full-stack, back-end, and front-end web development
+        </h3>
         <p>
           The U.S. Bureau of Labor Statistics (BLS) Occupational Outlook
           Handbook tends to group web developers and digital designers into one
@@ -78,6 +82,40 @@ const blogStartingACareerInWebDesign = () => {
           how to become a web designer in 2022.
         </p>
       </Container>
+      <div className="more-blogs sec-padding">
+        <Container>
+          <h3>Read More</h3>
+          <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog1}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog1}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog1}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };

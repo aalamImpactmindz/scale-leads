@@ -7,7 +7,7 @@ const BlogCard = ({ link, title, image, date, timeToRead }) => {
   return (
     <Link
       href={`/blog/${link}`}
-      className="blog-card bg-gray d-block rounded-4 overflow-hidden text-start h-100"
+      className="blog-card bg-gray d-block rounded-md-5 overflow-hidden text-start h-100"
     >
       <div className="b-card-image overflow-hidden ratio ratio-16x9">
         <Image

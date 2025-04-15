@@ -13,7 +13,7 @@ const Login = () => {
         <Heading title="My Account" />
         <Row className="row-cols-1 row-cols-md-2 g-3 g-md-4">
           <Col>
-            <div className="bg-gray p-3 rounded-4">
+            <div className="bg-gray p-3 rounded-md-5">
               <h4 className="color-light">Login</h4>
               <p>Already have an account? Log in to continue.</p>
               <Form className="mt-4">
@@ -36,7 +36,7 @@ const Login = () => {
             </div>
           </Col>
           <Col>
-            <div className="bg-gray p-3 rounded-4 h-100">
+            <div className="bg-gray p-3 rounded-md-5 h-100">
               <h4 className="color-light">New Customer?</h4>
               <p>
                 Create an account to easily track your order status and view

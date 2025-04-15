@@ -7,7 +7,7 @@ const Faqs = () => {
   return (
     <section className="faqs sec-padding">
       <Container fluid="xl">
-        <div className="bg-gray rounded-5 p-3 p-md-5">
+        <div className="bg-gray rounded-md-5 p-3 p-md-5">
           <Row className="row-cols-1 row-cols-lg-2 align-items-center">
             <Col>
               <Heading

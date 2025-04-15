@@ -1,8 +1,9 @@
 import Heading from "@/components/heading/Heading";
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import imageBlog2 from "@/public/assets/images/blog2.png";
 import Image from "next/image";
+import BlogCard from "@/components/blog-card/BlogCard";
 
 const blogCreateALandingPageThatPerforms = () => {
   return (
@@ -15,9 +16,8 @@ const blogCreateALandingPageThatPerforms = () => {
             alt="Blog"
             fill
             priority
-            className="object-cover"
+            className="object-cover rounded-md-5"
             sizes="100vw"
-            style={{ borderRadius: "60px" }}
           />
         </div>
         <div className="d-flex flex-wrap justify-content-between small mb-3">
@@ -61,7 +61,9 @@ const blogCreateALandingPageThatPerforms = () => {
           landing pages, you're getting high-quality leads that are actually
           interested in using your product.
         </p>
-        <h3 className="color-light">Best practices for creating a landing page</h3>
+        <h3 className="color-light">
+          Best practices for creating a landing page
+        </h3>
         <p>
           What makes an easy-to-use landing page? Overall, it's clear, concise,
           and doesn't give users any options except for the main CTA. In terms
@@ -88,13 +90,51 @@ const blogCreateALandingPageThatPerforms = () => {
         <p>
           If you're looking to create a high-converting landing page but don't
           know where to start, explore professional templates at{" "}
-          <a href="https://templyo.io/templates" target="_blank" className="link-main">
+          <a
+            href="https://templyo.io/templates"
+            target="_blank"
+            className="link-main"
+          >
             Templyo
           </a>
           . These templates are designed to simplify the process, helping you
           build beautiful, effective landing pages in no time.
         </p>
       </Container>
+      <div className="more-blogs sec-padding">
+        <Container>
+          <h3>Read More</h3>
+          <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog2}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog2}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+            <Col>
+              <BlogCard
+                link="/"
+                title="Lorem ipsum dolor sit amet consectetur"
+                image={imageBlog2}
+                date="8 avr. 2022"
+                timeToRead="6 min read"
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 };

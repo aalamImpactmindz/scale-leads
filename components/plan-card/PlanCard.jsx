@@ -5,7 +5,7 @@ import React from "react";
 const PlanCard = ({ title, price, description, features, customClass }) => {
   return (
     <div
-      className={`plan bg-gray rounded-4 px-2 px-lg-3 py-3 h-100 d-flex flex-column ${
+      className={`plan bg-gray rounded-md-5 px-3 px-md-2 px-lg-3 py-3 h-100 d-flex flex-column ${
         customClass ? customClass : ""
       }`}
     >
