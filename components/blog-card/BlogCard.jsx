@@ -18,7 +18,7 @@ const BlogCard = ({ link, title, image, date, timeToRead }) => {
           className="object-fit-cover w-100"
         />
       </div>
-      <div className="b-card-text p-3">
+      <div className="b-card-text p-3 p-md-4">
         <div className="d-flex flex-wrap justify-content-between mb-3">
           <span>{date}</span>
           <span>{timeToRead}</span>

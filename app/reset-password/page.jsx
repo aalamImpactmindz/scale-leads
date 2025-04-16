@@ -13,7 +13,7 @@ const ResetPassword = () => {
         <Heading title="Reset Password" />
         <Row className="justify-content-center">
           <Col sm={10} md={8} lg={6}>
-            <div className="bg-gray p-3 rounded-md-5">
+            <div className="bg-gray p-3 p-lg-4 rounded-md-5">
               <p>
                 Enter your e-mail address to reset your password. Further
                 instructions will be sent per e-mail.

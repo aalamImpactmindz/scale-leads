@@ -13,7 +13,7 @@ const Register = () => {
         <Heading title="My Account" />
         <Row className="row-cols-1 row-cols-md-2 g-3 g-md-4">
           <Col>
-            <div className="bg-gray p-3 rounded-md-5">
+            <div className="bg-gray p-3 p-lg-4 rounded-md-5">
               <h4 className="color-light">Register</h4>
               <p>Start your journey with us—it's quick and simple.</p>
               <Form className="mt-4">
@@ -44,7 +44,7 @@ const Register = () => {
             </div>
           </Col>
           <Col>
-            <div className="bg-gray p-3 rounded-md-5 h-100">
+            <div className="bg-gray p-3 p-lg-4 rounded-md-5 h-100">
               <h4 className="color-light">Already Have an Account?</h4>
               <p>
                 Log in to access your account, check your orders, and continue

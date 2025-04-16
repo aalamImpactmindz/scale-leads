@@ -165,7 +165,9 @@ a {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
 }
 
-.page-login .heading {
+.page-login .heading,
+.page-register .heading,
+.page-reset-password .heading {
   padding-right: 0;
   text-align: center;
 }
@@ -213,7 +215,7 @@ a {
 
   .page-content p {
     font-size: 15px;
-  } 
+  }
 
   body {
     font-size: 16px;

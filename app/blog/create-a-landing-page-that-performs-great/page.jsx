@@ -103,7 +103,9 @@ const blogCreateALandingPageThatPerforms = () => {
       </Container>
       <div className="more-blogs sec-padding">
         <Container>
-          <h3>Read More</h3>
+          <h3 className="mb-3">
+            Read <span className="color-theme">More</span>
+          </h3>
           <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
             <Col>
               <BlogCard
