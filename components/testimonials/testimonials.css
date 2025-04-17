@@ -1,0 +1,18 @@
+.testimonials-slider .swiper {
+    padding-bottom: 30px;
+}
+
+.swiper-pagination {
+    bottom: 0!important;
+}
+
+.swiper-pagination-bullet {
+    background-color: var(--color-border);
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--color-theme);
+}

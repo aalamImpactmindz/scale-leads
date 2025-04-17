@@ -28,7 +28,7 @@ const Heading = ({
 
   return (
     <div className={`heading mb-5 ${customClass ? customClass : ""}`}>
-      <h2 className="display-3 fw-medium color-light">
+      <h2 className="display-3 fw-semibold color-light">
         {getHighlightedText(title, highlightedWords)}
       </h2>
       {description && <p>{description}</p>}

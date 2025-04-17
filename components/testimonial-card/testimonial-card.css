@@ -1,0 +1,16 @@
+.t-t-left {
+    width: 50px;
+    height: 50px;
+}
+
+.t-t-right {
+    width: calc(100% - 65px);
+}
+
+.testimonial-card>p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+}

@@ -6,6 +6,7 @@ import Faqs from "@/components/faqs/Faqs";
 import SuccessStories from "@/components/success-stories/SuccessStories";
 import { Button } from "react-bootstrap";
 import Link from "next/link";
+import WalkThrough from "@/components/walkthrough/WalkThrough";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ContinuousSlider />
       <Working />
       <Plans />
+      <WalkThrough />
       <SuccessStories />
       <Faqs />
     </div>

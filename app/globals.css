@@ -192,6 +192,10 @@ a {
   border-radius: 2rem !important;
 }
 
+.rating svg {
+  color: #fec92c;
+}
+
 @media (max-width: 1199px) {
   .page-home>a {
     left: 25px;

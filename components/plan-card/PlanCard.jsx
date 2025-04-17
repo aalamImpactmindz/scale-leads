@@ -10,7 +10,7 @@ const PlanCard = ({ title, price, description, features, customClass }) => {
       }`}
     >
       <p className="small">{title}</p>
-      <h6 className="fs-1 color-white border-bottom pb-3 mb-3 color-light">
+      <h6 className="fs-1 color-white border-bottom border-gray pb-3 mb-3 color-light">
         {price}€/m
       </h6>
       <p>{description}</p>
