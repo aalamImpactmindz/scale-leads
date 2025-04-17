@@ -24,7 +24,7 @@ const Hero = () => {
             message.Connectez vos comptes une seule fois. Remplissez un
             formulaire. Et laissez tourner.
           </p>
-          <Button className="btn-main">Lancer ma machine (essai gratuit, sans CB)</Button>
+          <Button className="btn-main text-start">Lancer ma machine (essai gratuit, sans CB)</Button>
         </div>
       </Container>
     </section>
