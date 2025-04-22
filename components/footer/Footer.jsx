@@ -18,7 +18,7 @@ const Footer = () => {
     <footer className="bg-gray sec-padding-small mt-auto">
       <Container fluid="xl">
         <div className="ftr-top mb-5">
-          <h2 className="fw-bold">Launch your machine today</h2>
+          <h2 className="fw-bold">Launch your prospecting tool today</h2>
           <p>in 5 minutes, no credit card needed.</p>
           <Form className="d-flex flex-wrap flex-column flex-sm-row gap-3">
             <Form.Group controlId="formFooterEmail">

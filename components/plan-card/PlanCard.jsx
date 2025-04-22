@@ -16,7 +16,7 @@ const PlanCard = ({ title, price, description, features, customClass }) => {
         <span className="fs-1 me-2 color-white fw-bold">{price}€</span> / Month
       </h6>
       <Button className="btn-rounded w-100 mb-4 text-capitalize">
-        Start your project
+        Start your prospecting
       </Button>
       <ul className="ls-none d-flex flex-column gap-4 small mb-5">
         {features.map((feature, index) => {

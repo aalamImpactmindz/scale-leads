@@ -1,7 +1,7 @@
 import "./testimonial-card.css";
 import React from "react";
 import Image from "next/image";
-import imageUser from "@/public/assets/images/user.webp";
+import imageUser from "@/public/assets/images/user.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
@@ -28,8 +28,7 @@ const TestimonialCard = () => {
       <div className="testimonial-bottom">
         {/* <h5 className="color-light">Amazing Result!</h5> */}
         <p className="small mb-0">
-          I got 6 meetings in 10 days without doing anything. The machine does
-          it all.”
+          Got 4 replies in 2 days. Didn't touch a thing.
         </p>
         <div className="rating d-flex gap-1 mb-2 mt-5 small">
           <FontAwesomeIcon icon={faStar} />

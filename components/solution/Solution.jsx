@@ -9,7 +9,7 @@ const Solution = () => {
     <div className="solution mb-5 pb-5">
       <Container fluid="xl">
         <div className="solution-container p-3 p-sm-5 ps-0 ps-sm-0">
-          <Row className="row-cols-1 row-cols-lg-2 flex-column-reverse flex-lg-row">
+          <Row className="row-cols-1 row-cols-lg-2 flex-column-reverse flex-lg-row align-items-center">
             <Col>
               <Image src={imageSolution} alt="Solution" />
             </Col>
@@ -28,9 +28,9 @@ const Solution = () => {
                 </ol>
               </div>
               <h4 className="my-4 fw-light">Zero effort. Zero friction.</h4>
-              <Button className="btn-main text-uppercase mb-5 mb-lg-0">
+              {/* <Button className="btn-main text-uppercase mb-5 mb-lg-0">
                 See a free demo!
-              </Button>
+              </Button> */}
             </Col>
           </Row>
         </div>

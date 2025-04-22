@@ -22,10 +22,10 @@ const Hero = () => {
               message. Just connect your accounts once. Fill out a form. And let
               it run.
             </p>
-            <Button className="btn-bg text-uppercase me-5 mt-2">
-              Launch my machine <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
+            <Button className="btn-bg text-uppercase mt-2">
+              Launch my prospecting <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
             </Button>
-            <Button className="btn-main text-uppercase mt-2">Free Trial</Button>
+            {/* <Button className="btn-main text-uppercase mt-2">Free Trial</Button> */}
           </Col>
           <Col className="d-none d-lg-block">
           <Image src={imageAppView} priority={true} alt="App View" className="mw-100 object-fit-contain" />

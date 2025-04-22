@@ -7,7 +7,7 @@ const WalkThrough = () => {
     <div className="walkthrough sec-padding">
       <Container fluid="xl">
         <h2 className="fw-bold">
-          What does the <span className="color-theme-25">machine look like?</span>
+          What does the <span className="color-theme-25">prospecting tool look like?</span>
         </h2>
         <p className="fs-5 mb-2 fw-light">Here's exactly what you get when you subscribe:</p>
         <p className="fw-bold fs-5 mb-5">the dashboard, campaigns, stats — everything you'll see once logged in.</p>
