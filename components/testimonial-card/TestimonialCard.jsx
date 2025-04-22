@@ -26,7 +26,7 @@ const TestimonialCard = () => {
         </div>
       </div>
       <div className="testimonial-bottom">
-        <h5 className="color-light">Amazing Result!</h5>
+        {/* <h5 className="color-light">Amazing Result!</h5> */}
         <p className="small mb-0">
           I got 6 meetings in 10 days without doing anything. The machine does
           it all.”
