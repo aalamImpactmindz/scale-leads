@@ -3,15 +3,17 @@ import { Container } from "react-bootstrap";
 import Heading from "../heading/Heading";
 import Testimonials from "../testimonials/Testimonials";
 
-const SuccessStories = () => {
+const SuccessStories = ({ customClass }) => {
   return (
-    <section className="success-stories sec-padding">
+    <section
+      className={`success-stories sec-padding ${
+        customClass ? customClass : ""
+      }`}
+    >
       <Container fluid="xl">
-        <Heading
-          title="Customer Success Stories"
-          highlightedWords={["Success"]}
-          description="Discover how our platform has helped businesses create outstanding content effortlessly. Hear directly from our users about their success and satisfaction."
-        />
+        <h2 className="text-uppercase text-center mb-5 fw-bold">
+          <span className="color-theme-25">Customer</span> Response
+        </h2>
         <Testimonials />
       </Container>
     </section>

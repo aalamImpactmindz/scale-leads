@@ -6,7 +6,7 @@ const WorkingCard = ({ icon, title, description }) => {
   return (
     <div className="working-card p-3 p-lg-4 bg-gray rounded-md-5 h-100">
       {icon && (
-        <span className="bg-theme rounded-circle p-2 d-inline-flex justify-content-center align-items-center mb-4">
+        <span className="bg-theme-25 rounded-circle p-2 d-inline-flex justify-content-center align-items-center mb-4">
           <Image
             src={icon}
             alt={title || "Icon"}

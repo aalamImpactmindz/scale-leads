@@ -1,0 +1,32 @@
+import "./problem.css";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+
+const Problem = () => {
+  return (
+    <section className="problem pb-5">
+      <Container fluid="xl">
+        <div className="problem-container p-3 p-md-4 p-lg-5">
+          <Row className="row-cols-1 row-cols-lg-2 fs-5 g-5">
+            <Col>
+              <h2 className="color-theme-25 fw-bold">Problem</h2>
+              <p className="fs-4 fw-light">
+                Too many tools, too much setup, zero results?
+              </p>
+            </Col>
+            <Col>
+              <ol className="d-flex flex-column gap-3 fs-4 pe-4 fw-light">
+                <li>
+                  Freelancers and B2B agencies waste hours juggling tools…
+                </li>
+                <li>We eliminated all of them</li>
+              </ol>
+            </Col>
+          </Row>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
+export default Problem;

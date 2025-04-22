@@ -14,7 +14,7 @@ import Image from "next/image";
 
 const ContinuousSlider = () => {
   return (
-    <div className="continuous-slider sec-padding" data-aos="zoom-in">
+    <div className="continuous-slider sec-padding-small">
       <Container fluid="xl" className="position-relative">
         <Swiper
           modules={[Autoplay]}

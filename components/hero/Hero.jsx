@@ -1,31 +1,36 @@
-import "./hero.css";
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
+import imageAppView from "@/public/assets/images/app-view.png";
 
 const Hero = () => {
   return (
-    <section className="hero mt-4">
+    <section className="hero sec-padding ">
       <Container fluid="xl">
-        <div
-          className="bg-gray rounded-md-5 p-3 p-md-5 overflow-hidden d-flex flex-wrap flex-column justify-content-center align-items-start"
-          data-aos="fade-up"
-        >
-          <h1
-            className="my-0 display-1 fw-semibold color-light"
-            data-aos="fade-up"
-          >
-            Générez des <span className="color-theme">leads</span> qualifiés
-            pendant que vous <span className="color-theme">dormez.</span>
-          </h1>
-          <p data-aos="fade-up" data-aos-delay="100">
-            ScaleLeads automatise 100 % de votre prospection via email &
-            LinkedIn.Pas besoin de Zapier, PhantomBuster ou d'écrire un seul
-            message.Connectez vos comptes une seule fois. Remplissez un
-            formulaire. Et laissez tourner.
-          </p>
-          <Button className="btn-main text-start">Lancer ma machine (essai gratuit, sans CB)</Button>
-        </div>
+        <Row className="row-cols-1 row-cols-lg-2 my-5">
+          <Col>
+            <h1 className="text-light fw-normal display-5 mt-0">
+              <strong>Generate Qualified Leads</strong>
+              <br /> while you sleep.
+            </h1>
+            <p className="lh-lg mb-4 fs-5 fw-light">
+              ScaleLeads automates 100% of your prospecting via email &
+              LinkedIn. No need for Zapier,PhantomBuster, or writing a single
+              message. Just connect your accounts once. Fill out a form. And let
+              it run.
+            </p>
+            <Button className="btn-bg text-uppercase me-5 mt-2">
+              Launch my machine <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
+            </Button>
+            <Button className="btn-main text-uppercase mt-2">Free Trial</Button>
+          </Col>
+          <Col className="d-none d-lg-block">
+          <Image src={imageAppView} priority={true} alt="App View" className="mw-100 object-fit-contain" />
+          </Col>
+        </Row>
       </Container>
     </section>
   );

@@ -7,5 +7,5 @@
 }
 
 .blog-card:hover h3 {
-    color: var(--color-theme);
+    color: var(--color-theme-25);
 }

@@ -1,0 +1,14 @@
+.problem-container {
+    background-image: linear-gradient(270.62deg, #15131a 11.4%, #160a1d 125.04%);
+}
+
+.problem ol {
+    list-style: decimal-leading-zero;
+    margin-bottom: 0;
+}
+
+@media (max-width: 575px) {
+    .problem .fs-4 {
+        font-size: 18px !important;
+    }
+}

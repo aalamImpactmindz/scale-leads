@@ -1,0 +1,42 @@
+import "./solutions.css";
+import React from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Image from "next/image";
+import imageSolution from "@/public/assets/images/solution.png";
+
+const Solution = () => {
+  return (
+    <div className="solution mb-5 pb-5">
+      <Container fluid="xl">
+        <div className="solution-container p-3 p-sm-5 ps-0 ps-sm-0">
+          <Row className="row-cols-1 row-cols-lg-2 flex-column-reverse flex-lg-row">
+            <Col>
+              <Image src={imageSolution} alt="Solution" />
+            </Col>
+            <Col className="ps-4 ps-sm-5 ps-lg-0">
+              <h2 className="fw-bold">Solution</h2>
+              <p className="fs-5 mb-4">
+                You connect your email and LinkedIn once?
+              </p>
+              <div className="solutions p-3 p-md-4 p-lg-5">
+                <ol className="d-flex flex-column gap-3 fs-5">
+                  <li>You fill out a form with your target audience.</li>
+                  <li>
+                    And ScaleLeads automatically sends messages, follows up, and
+                    handles replies.
+                  </li>
+                </ol>
+              </div>
+              <h4 className="my-4 fw-light">Zero effort. Zero friction.</h4>
+              <Button className="btn-main text-uppercase mb-5 mb-lg-0">
+                See a free demo!
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      </Container>
+    </div>
+  );
+};
+
+export default Solution;

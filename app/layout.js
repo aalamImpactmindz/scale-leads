@@ -24,9 +24,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${fontOutfit.className}`}>
         <AOSInitializer />
-        <div className="overlay">
-          <div></div>
-        </div>
         <Header />
         {children}
         <Footer />

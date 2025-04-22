@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Logo = () => {
   return (
-    <div className="logo">
+    <div className="navbar-brand">
       <Link href="/" className="d-flex align-items-center lh-1">
         <Image src={logo} alt="App Logo" width={50} height={50} priority />
         <span className="fs-4 fw-semibold color-light">ScaleLeads</span>

@@ -8,12 +8,8 @@ import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 
 const TestimonialCard = () => {
   return (
-    <div className="testimonial-card border border-gray p-3 p-lg-4 rounded-md-5">
+    <div className="testimonial-card p-3 p-lg-4">
       <div className="testimonial-top d-flex flex-wrap align-items-center justify-content-between mb-4 position-relative">
-        <FontAwesomeIcon
-          icon={faQuoteRight}
-          className="fs-1 color-theme position-absolute end-0 top-0"
-        />
         <div className="t-t-left">
           <Image
             src={imageUser}
@@ -24,22 +20,25 @@ const TestimonialCard = () => {
             className="object-fit-cover rounded-circle"
           />
         </div>
-        <div className="t-t-right pe-5">
+        <div className="t-t-right">
           <h6 className="color-light mb-1 text-truncate">Jean M.</h6>
-          <p className="small mb-0 text-truncate">Consultant B2B</p>
+          <p className="small mb-0 text-truncate">B2B Consultant</p>
         </div>
       </div>
-      <div className="rating d-flex gap-1 mb-2 small">
-        <FontAwesomeIcon icon={faStar} />
-        <FontAwesomeIcon icon={faStar} />
-        <FontAwesomeIcon icon={faStar} />
-        <FontAwesomeIcon icon={faStar} />
-        <FontAwesomeIcon icon={faStar} />
+      <div className="testimonial-bottom">
+        <h5 className="color-light">Amazing Result!</h5>
+        <p className="small mb-0">
+          I got 6 meetings in 10 days without doing anything. The machine does
+          it all.”
+        </p>
+        <div className="rating d-flex gap-1 mb-2 mt-5 small">
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+        </div>
       </div>
-      <h5 className="color-light">Wow! Donec lectus nibh aliquet</h5>
-      <p className="small mb-0">
-        J'ai eu 6 RDVs en 10 jours sans rien faire. La machine fait tout.
-      </p>
     </div>
   );
 };
