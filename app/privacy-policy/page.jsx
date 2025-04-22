@@ -49,19 +49,6 @@ const PrivacyPolicy = () => {
           odio. Donec nisi metus, sollicitudin ac felis quis, condimentum
           rhoncus erat.
         </p>
-        <p>
-          3 bhaian naalon wadde te ik bhain naalon chote Charles Jockin da janam
-          England de birkenhead kasbe vich 3 August 1878 nu hoea c....Usde pita
-          da naam John Edwin te mata da naam Ellen Campbell c....1886 vich pati
-          di maut ton baad usdi maa nurse de taur te kamm karna shuru kar dindi
-          ae te kise tarike naal bachean nu paldi ae....Ghar di garibi nu dekhde
-          hoe jockin 11 saal di umar vich hi kishtian utte kamm karna shuru kar
-          dindae....28 saal di umar vich usda viah Louise Woodward naam di ik
-          kudi naal hundae....1907 vich usde ghar beti Lilian te 9 vich bete
-          Roland da janam hundae....Chote mote kamman naal hoi usdi shuruat kujh
-          hi saalan vich white star line company de wadde wadde jahazan utte
-          chief baker di naukri vich badal jandi ae
-        </p>
       </Container>
     </div>
   );
