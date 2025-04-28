@@ -26,7 +26,7 @@ const Plans = ({ customClass }) => {
           </Col>
           <Col>
             <PlanCard
-            planid="price_1RImt4KgPTS0WsrulgxTjEG0"
+              planid="price_1RImt4KgPTS0WsrulgxTjEG0"
               title="Pro Offer"
               price="349"
               features={[
@@ -40,7 +40,7 @@ const Plans = ({ customClass }) => {
           </Col>
           <Col>
             <PlanCard
-            planid="price_1RImtyKgPTS0WsruUnSrW8TH"
+              planid="price_1RImtyKgPTS0WsruUnSrW8TH"
               title="Elite Offer"
               price="499"
               features={[

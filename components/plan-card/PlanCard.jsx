@@ -11,23 +11,30 @@ import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { paymentlink } from "@/utils/service/userlogin";
-const PlanCard = ({ planid, title, price, description, features, customClass }) => {
+const PlanCard = ({
+  planid,
+  title,
+  price,
+  description,
+  features,
+  customClass,
+}) => {
   const { isLoggedIn } = useContext(AuthContext);
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
-const[email,setemail] = useState("");
+  const [email, setemail] = useState("");
   // Ensure the component is mounted before using the router
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  useEffect(()=>{
-     let token  = localStorage?.getItem("authToken");
-     if(token){
+  useEffect(() => {
+    let token = localStorage?.getItem("authToken");
+    if (token) {
       const decodedToken = jwtDecode(token);
       setemail(decodedToken?.email);
-     }
-  },[])
+    }
+  }, []);
 
   const handlecheckout = async () => {
     if (!isMounted) return; // Prevent executing before mount
@@ -41,7 +48,6 @@ const[email,setemail] = useState("");
         customerEmail: email,
       };
 
-
       try {
         // const response = await axios.post(
         //   "https://impactmindz.in/client/scaleleads/checkout-session",
@@ -50,7 +56,7 @@ const[email,setemail] = useState("");
         const response = await paymentlink(body);
 
         const sessionId = response.url;
-   
+
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
       } catch (err) {
         console.log(err);

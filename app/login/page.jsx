@@ -42,7 +42,7 @@ const Login = () => {
       const response = await userLogin(formData);
       console.log(response);
       const decodedToken = jwtDecode(response.token);
-    
+
       localStorage.setItem("authToken", response.token);
       localStorage.setItem("expires_at", decodedToken.exp);
       setIsLoggedIn(true);
@@ -84,7 +84,7 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formLoginPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="********"
                     required
                     value={formData.password}

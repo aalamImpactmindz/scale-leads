@@ -48,20 +48,18 @@ const Register = () => {
       //   formData
       // );
       const response = await userRegister(formData);
-     if(response.status){
-      setMessage(response?.message);
-      setError("");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-      });
-      setConfirmPassword("");
-     }
-     else{
-      setMessage(response?.message)
-     }
-      
+      if (response.status) {
+        setMessage(response?.message);
+        setError("");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setConfirmPassword("");
+      } else {
+        setMessage(response?.message);
+      }
     } catch (err) {
       setError(err?.response?.data?.message || "Registration failed.");
       setMessage("");
@@ -106,7 +104,7 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formRegisterPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="********"
                     required
                     value={formData.password}
@@ -121,7 +119,7 @@ const Register = () => {
                 >
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="********"
                     required
                     value={confirmPassword}

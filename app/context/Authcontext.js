@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
   // Optional: Clear localStorage if logged out
   useEffect(() => {
     if (isLoggedIn === false) {
-    
       localStorage.removeItem("authToken");
       localStorage.removeItem("expires_at");
     }
