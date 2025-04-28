@@ -23,7 +23,7 @@ const PlanCard = ({
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [email, setemail] = useState("");
-  // Ensure the component is mounted before using the router
+  
   useEffect(() => {
     setIsMounted(true);
   }, []);
