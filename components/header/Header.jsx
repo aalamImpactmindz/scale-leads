@@ -54,7 +54,7 @@ const Header = () => {
                   Blog 3
                 </Link>
               </NavDropdown>
-              <Link className="nav-link" href="/">
+              <Link className="nav-link" href="/faqs">
                 FAQs
               </Link>
             </Nav>

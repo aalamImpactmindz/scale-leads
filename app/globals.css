@@ -133,7 +133,7 @@ a {
   background-color: rgba(187, 187, 187, 0.15) !important;
   border-color: var(--color-border);
   color: var(--color-text) !important;
-  border-radius: 10px;
+  border-radius: 0;
 }
 
 .form-control::placeholder {

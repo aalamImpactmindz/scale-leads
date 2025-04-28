@@ -16,7 +16,7 @@ const blogHowToCreateAnEffectiveDesignPortfolio = () => {
             alt="Blog"
             fill
             priority
-            className="object-cover rounded-md-5"
+            className="object-cover"
             sizes="100vw"
           />
         </div>

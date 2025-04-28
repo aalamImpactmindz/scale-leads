@@ -1,10 +1,46 @@
+"use client";
 import "./plan-card.css";
 import { Button } from "react-bootstrap";
 import React from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 const PlanCard = ({ title, price, description, features, customClass }) => {
+  const handlecheckout = async () => {
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    );
+    let body = {
+      // bookingId: tourDetails?.bookingId,
+      // avatarId: tourDetails?.avatarId,
+      // price: totalCharges,
+      // product: tourDetails?.ExpId.ExperienceName,
+      // adminFee: adminfee,
+      // paymentType: "stripe",
+      // userId: user?._id,
+      // productId: tourDetails?.ExpId?._id,
+      price: 100,
+    };
+    // try {
+    //   let senddata = await paymentstripeApi(body);
+    //   const result = stripe.redirectToCheckout({ sessionId: senddata.id });
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    try {
+      const response = await axios.post(
+        "https://impactmindz.in/client/scaleleads/stripe/webhook",
+        body
+      );
+      console.log("Hello there!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div
       className={`plan p-3 px-md-2 p-lg-4 h-100 d-flex flex-column ${
@@ -15,7 +51,10 @@ const PlanCard = ({ title, price, description, features, customClass }) => {
       <h6 className="fs-6 fw-light color-text mb-3 color-light d-flex flex-wrap align-items-center">
         <span className="fs-1 me-2 color-white fw-bold">{price}€</span> / Month
       </h6>
-      <Button className="btn-rounded w-100 mb-4 text-capitalize">
+      <Button
+        className="btn-rounded w-100 mb-4 text-capitalize"
+        onClick={handlecheckout}
+      >
         Start your prospecting
       </Button>
       <ul className="ls-none d-flex flex-column gap-4 small mb-5">

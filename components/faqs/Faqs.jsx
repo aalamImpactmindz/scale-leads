@@ -1,3 +1,4 @@
+import "./faqs.css";
 import React from "react";
 import { Container, Row, Col, Accordion } from "react-bootstrap";
 import Heading from "../heading/Heading";
@@ -5,9 +6,9 @@ import AllFaqs from "../all-faqs/AllFaqs";
 
 const Faqs = () => {
   return (
-    <section className="faqs sec-padding">
+    <section className="faqs sec-padding pt-0">
       <Container fluid="xl">
-        <div className="bg-gray rounded-md-5 p-3 p-md-5">
+        <div className="p-3 p-md-5">
           <Row className="row-cols-1 row-cols-lg-2 align-items-center">
             <Col>
               <Heading

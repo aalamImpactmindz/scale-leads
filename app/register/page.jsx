@@ -5,46 +5,130 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
+import axios from "axios";
+import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
 
 const Register = () => {
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://impactmindz.in/client/scaleleads/api/register",
+        formData
+      );
+      setMessage("User registered successfully!");
+      setError("");
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+      });
+      setConfirmPassword("");
+    } catch (err) {
+      setError(err?.response?.data?.message || "Registration failed.");
+      setMessage("");
+    }
+  };
+
   return (
     <div className="page-register sec-padding">
       <Container fluid="xl">
         <Heading title="My Account" />
         <Row className="row-cols-1 row-cols-md-2 g-3 g-md-4">
           <Col>
-            <div className="bg-gray p-3 p-lg-4 rounded-md-5">
+            <div className="bg-gray p-3 p-lg-4">
               <h4 className="color-light">Register</h4>
               <p>Start your journey with us—it's quick and simple.</p>
-              <Form className="mt-4">
+              <Form className="mt-4" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formRegisterFullName">
                   <Form.Label>Full Name</Form.Label>
-                  <Form.Control type="email" placeholder="Jane Smith" />
+                  <Form.Control
+                    type="text"
+                    placeholder="Jane Smith"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formRegisterEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="jane@framer.com" />
+                  <Form.Control
+                    type="email"
+                    placeholder="jane@framer.com"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formRegisterPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="********" />
+                  <Form.Control
+                    type="text"
+                    placeholder="********"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group
                   className="mb-3"
                   controlId="formRegisterConfirmPassword"
                 >
                   <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control type="password" placeholder="********" />
+                  <Form.Control
+                    type="text"
+                    placeholder="********"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
                 </Form.Group>
                 <Button className="btn-main" type="submit">
                   Register
                 </Button>
+                {message && (
+                  <Alert
+                    variant="success"
+                    className="mt-3 small py-2 rounded-0"
+                  >
+                    {message}
+                  </Alert>
+                )}
+                {error && (
+                  <Alert variant="danger" className="mt-3 small py-2 rounded-0">
+                    {error}
+                  </Alert>
+                )}
               </Form>
             </div>
           </Col>
           <Col>
-            <div className="bg-gray p-3 p-lg-4 rounded-md-5 h-100">
+            <div className="bg-gray p-3 p-lg-4 h-100">
               <h4 className="color-light">Already Have an Account?</h4>
               <p>
                 Log in to access your account, check your orders, and continue

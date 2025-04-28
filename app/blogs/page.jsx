@@ -51,7 +51,7 @@ const allBlogs = [
 const Blogs = () => {
   return (
     <div className="page-blog">
-      <Container fluid="xl" className="sec-padding pb-0 text-center">
+      <Container fluid="xl" className="sec-padding text-center">
         <Heading
           title="Stay Inspired with Our Latest Insights"
           highlightedWords={["Insights"]}
