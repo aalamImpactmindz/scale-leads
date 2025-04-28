@@ -14,6 +14,7 @@ const Plans = ({ customClass }) => {
         <Row data-aos="fade-up" className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
           <Col>
             <PlanCard
+              planid="price_1RIlbsKgPTS0Wsru4dvuodiJ"
               title="Starter Offer"
               price="199"
               features={[
@@ -25,6 +26,7 @@ const Plans = ({ customClass }) => {
           </Col>
           <Col>
             <PlanCard
+            planid="price_1RImt4KgPTS0WsrulgxTjEG0"
               title="Pro Offer"
               price="349"
               features={[
@@ -38,6 +40,7 @@ const Plans = ({ customClass }) => {
           </Col>
           <Col>
             <PlanCard
+            planid="price_1RImtyKgPTS0WsruUnSrW8TH"
               title="Elite Offer"
               price="499"
               features={[

@@ -6,10 +6,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "../context/Authcontext";
+import { useContext } from "react";
+import { userRegister } from "@/utils/service/userlogin";
 
 const Register = () => {
+  const router = useRouter();
+  const { isLoggedIn } = useContext(AuthContext);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [formData, setFormData] = useState({
@@ -21,6 +27,13 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/");
+    }
+  }, [isLoggedIn, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,11 +43,13 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://impactmindz.in/client/scaleleads/api/register",
-        formData
-      );
-      setMessage("User registered successfully!");
+      // const response = await axios.post(
+      //   "https://impactmindz.in/client/scaleleads/api/register",
+      //   formData
+      // );
+      const response = await userRegister(formData);
+     if(response.status){
+      setMessage(response?.message);
       setError("");
       setFormData({
         name: "",
@@ -42,6 +57,11 @@ const Register = () => {
         password: "",
       });
       setConfirmPassword("");
+     }
+     else{
+      setMessage(response?.message)
+     }
+      
     } catch (err) {
       setError(err?.response?.data?.message || "Registration failed.");
       setMessage("");

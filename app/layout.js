@@ -6,7 +6,7 @@ import "./globals.css";
 import AOSInitializer from "@/components/aos-initializer/AOSInitializer";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
-import AuthChecker from "@/components/auth-checker/AuthChecker";
+import { AuthProvider } from "./context/Authcontext";
 
 const fontOutfit = Outfit({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -25,10 +25,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${fontOutfit.className}`}>
         <AOSInitializer />
-        <AuthChecker />
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

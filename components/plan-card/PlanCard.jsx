@@ -1,43 +1,62 @@
 "use client";
 import "./plan-card.css";
 import { Button } from "react-bootstrap";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { AuthContext } from "@/app/context/Authcontext";
+import { useContext } from "react";
+import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
+import { paymentlink } from "@/utils/service/userlogin";
+const PlanCard = ({ planid, title, price, description, features, customClass }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+const[email,setemail] = useState("");
+  // Ensure the component is mounted before using the router
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-const PlanCard = ({ title, price, description, features, customClass }) => {
+  useEffect(()=>{
+     let token  = localStorage?.getItem("authToken");
+     if(token){
+      const decodedToken = jwtDecode(token);
+      setemail(decodedToken?.email);
+     }
+  },[])
+
   const handlecheckout = async () => {
-    const stripe = await loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    );
-    let body = {
-      // bookingId: tourDetails?.bookingId,
-      // avatarId: tourDetails?.avatarId,
-      // price: totalCharges,
-      // product: tourDetails?.ExpId.ExperienceName,
-      // adminFee: adminfee,
-      // paymentType: "stripe",
-      // userId: user?._id,
-      // productId: tourDetails?.ExpId?._id,
-      price: 100,
-    };
-    // try {
-    //   let senddata = await paymentstripeApi(body);
-    //   const result = stripe.redirectToCheckout({ sessionId: senddata.id });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    if (!isMounted) return; // Prevent executing before mount
 
-    try {
-      const response = await axios.post(
-        "https://impactmindz.in/client/scaleleads/stripe/webhook",
-        body
+    if (isLoggedIn) {
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
       );
-      console.log("Hello there!");
-    } catch (err) {
-      console.log(err);
+      let body = {
+        priceId: planid,
+        customerEmail: email,
+      };
+
+
+      try {
+        // const response = await axios.post(
+        //   "https://impactmindz.in/client/scaleleads/checkout-session",
+        //   body
+        // );
+        const response = await paymentlink(body);
+
+        const sessionId = response.url;
+
+        const result = stripe.redirectToCheckout({ sessionId: sessionId });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      router.push("/login");
     }
   };
 

@@ -6,11 +6,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
 import { useRouter } from "next/navigation";
-
+import { jwtDecode } from "jwt-decode";
+import { useContext } from "react";
+import { AuthContext } from "../context/Authcontext";
+import { userLogin } from "@/utils/service/userlogin";
 const Login = () => {
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -20,16 +24,28 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/");
+    }
+  }, [isLoggedIn, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://impactmindz.in/client/scaleleads/api/login",
-        formData
-      );
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("expires_at", response.data.expires_at);
+      // const response = await axios.post(
+      //   "https://impactmindz.in/client/scaleleads/api/login",
+      //   formData
+      // );
+      const response = await userLogin(formData);
+      console.log(response);
+      const decodedToken = jwtDecode(response.token);
+    
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem("expires_at", decodedToken.exp);
+      setIsLoggedIn(true);
       setMessage("Login successful!");
       setError("");
 
