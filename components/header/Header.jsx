@@ -80,28 +80,21 @@ const Header = () => {
               <Link className="nav-link" href="/faqs">
                 FAQs
               </Link>
+              {isLoggedIn && (
+                <Link href="/" className="nav-link" onClick={handleLogout}>
+                  Logout
+                </Link>
+              )}
+              {!isLoggedIn && (
+                <Link href="/login" className="nav-link">
+                  Login
+                </Link>
+              )}
             </Nav>
           </Navbar.Collapse>
           <Link href="/contact" className="ms-auto ms-lg-5">
             <Button className="btn-main">Contact</Button>
           </Link>
-          {isLoggedIn && (
-            <FontAwesomeIcon
-              icon={faArrowRightFromBracket}
-              className="ms-lg-5 color-light"
-              title="Logout"
-              onClick={handleLogout}
-            />
-          )}
-          {!isLoggedIn && (
-            <Link href="/login" className="ms-auto ms-lg-5 login-link">
-              <FontAwesomeIcon
-                icon={faArrowRightToBracket}
-                className="color-light"
-                title="Login"
-              />
-            </Link>
-          )}
           <Navbar.Toggle aria-controls="navbar-main" className="ms-4" />
         </Container>
       </Navbar>

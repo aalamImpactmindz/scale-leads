@@ -50,7 +50,7 @@ const[email,setemail] = useState("");
         const response = await paymentlink(body);
 
         const sessionId = response.url;
-
+   
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
       } catch (err) {
         console.log(err);
