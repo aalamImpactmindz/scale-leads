@@ -1,3 +1,4 @@
+"use client";
 import "./success.css";
 import React from "react";
 import { Button, Container } from "react-bootstrap";

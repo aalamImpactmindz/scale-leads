@@ -1,3 +1,4 @@
+"use client";
 import "./cancel.css";
 import React from "react";
 import { Button, Container } from "react-bootstrap";
