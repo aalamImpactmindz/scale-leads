@@ -125,6 +125,10 @@ const Messages = () => {
               </Form.Group>
             ))}
 
+            <Button className="btn-main" type="submit">
+              Submit
+            </Button>
+
             {message && (
               <Alert variant="success" className="mt-3 small py-2 rounded-0">
                 {message}
@@ -136,10 +140,6 @@ const Messages = () => {
                 {error}
               </Alert>
             )}
-
-            <Button className="btn-main" type="submit">
-              Submit
-            </Button>
           </Form>
         )}
       </Container>
