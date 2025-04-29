@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../context/Authcontext";
 import { useRouter } from "next/navigation";
+import Alert from "react-bootstrap/Alert";
 
 const Messages = () => {
   const router = useRouter();
@@ -124,8 +125,17 @@ const Messages = () => {
               </Form.Group>
             ))}
 
-            {error && <p className="text-danger">{error}</p>}
-            {message && <p className="text-success">{message}</p>}
+            {message && (
+              <Alert variant="success" className="mt-3 small py-2 rounded-0">
+                {message}
+              </Alert>
+            )}
+
+            {error && (
+              <Alert variant="danger" className="mt-3 small py-2 rounded-0">
+                {error}
+              </Alert>
+            )}
 
             <Button className="btn-main" type="submit">
               Submit
