@@ -5,7 +5,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // Initially set to null
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
@@ -30,11 +30,17 @@ export const AuthProvider = ({ children }) => {
     if (isLoggedIn === false) {
       localStorage.removeItem("authToken");
       localStorage.removeItem("expires_at");
+      localStorage.removeItem("form_filled");
     }
   }, [isLoggedIn]);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

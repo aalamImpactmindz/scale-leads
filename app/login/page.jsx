@@ -23,35 +23,31 @@ const Login = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [formFilled, setFormFilled] = useState(false);
 
   // Redirect if already logged in
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push("/");
-    }
-  }, [isLoggedIn, router]);
+  // useEffect(() => {
+  //   if (isLoggedIn && localStorage.getItem("form_filled") === "true") {
+  //     router.push("/");
+  //   } else if (isLoggedIn && localStorage.getItem("form_filled") === "false") {
+  //     router.push("/onboarding-form");
+  //   }
+  // }, [isLoggedIn, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // const response = await axios.post(
-      //   "https://impactmindz.in/client/scaleleads/api/login",
-      //   formData
-      // );
       const response = await userLogin(formData);
-      console.log(response);
       const decodedToken = jwtDecode(response.token);
-
       localStorage.setItem("authToken", response.token);
       localStorage.setItem("expires_at", decodedToken.exp);
+      localStorage.setItem("form_filled", decodedToken.form_filled);
       setIsLoggedIn(true);
       setMessage("Login successful!");
       setError("");
-
-      // Optionally, store the token or redirect to another page
-      // localStorage.setItem("token", response.data.token);
-      router.push("/");
+      // extra
+      router.push("/onboarding-form");
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed.");
       setMessage("");
