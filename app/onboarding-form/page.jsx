@@ -22,6 +22,8 @@ const Register = () => {
     offer: "",
     website: "",
     channel: "",
+    message_count: "",
+    message_delay: "",
     tone: "",
     existing_messages: "",
     competitors: "",
@@ -60,6 +62,8 @@ const Register = () => {
           offer: "",
           website: "",
           channel: "",
+          message_count: "",
+          message_delay: "",
           tone: "",
           existing_messages: "",
           competitors: "",
@@ -127,15 +131,21 @@ const Register = () => {
                   controlId="formRegisterCompanySize"
                 >
                   <Form.Label>What size company are you targeting?</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter Size"
+                  <Form.Select
+                    aria-label="Select company size"
                     required
                     value={formData.company_size}
                     onChange={(e) =>
                       setFormData({ ...formData, company_size: e.target.value })
                     }
-                  />
+                    className="form-control"
+                  >
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-500">201-500 employees</option>
+                    <option value="500+">500+ employees</option>
+                  </Form.Select>
                 </Form.Group>
               </Col>
               <Col>
@@ -201,6 +211,62 @@ const Register = () => {
                       setFormData({ ...formData, channel: e.target.value })
                     }
                   />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group
+                  className="mb-3"
+                  controlId="formRegisterMessageCount"
+                >
+                  <Form.Label>How many follow-up messages you want?</Form.Label>
+                  <Form.Select
+                    aria-label="Select follow-up message count"
+                    required
+                    value={formData.message_count}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        message_count: e.target.value,
+                      })
+                    }
+                    className="form-control"
+                  >
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
+              <Col>
+                <Form.Group
+                  className="mb-3"
+                  controlId="formRegisterFollowUpDelay"
+                >
+                  <Form.Label>
+                    How much delay between follow-up messages?
+                  </Form.Label>
+                  <Form.Select
+                    aria-label="Select follow-up message delay"
+                    required
+                    value={formData.message_delay}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        message_delay: e.target.value,
+                      })
+                    }
+                    className="form-control"
+                  >
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="20">20 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="40">40 minutes</option>
+                  </Form.Select>
                 </Form.Group>
               </Col>
               <Col>

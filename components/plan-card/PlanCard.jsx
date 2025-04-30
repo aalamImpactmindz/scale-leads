@@ -85,7 +85,7 @@ const PlanCard = ({
       <ul className="ls-none d-flex flex-column gap-4 small mb-5">
         {features.map((feature, index) => {
           return (
-            <li key={index} className="position-relative ps-5">
+            <li key={index} className="position-relative">
               <span className="bg-gray rounded-circle d-flex flex-wrap align-items-center justify-content-center color-theme-25 position-absolute start-0">
                 <FontAwesomeIcon icon={faCheck} />
               </span>

@@ -14,10 +14,14 @@
     color: transparent;
 }
 
+.plan li {
+    padding-left: 40px;
+}
+
 .plan li span {
-    top: -4px;
-    width: 30px;
-    height: 30px;
+    top: -1px;
+    width: 24px;
+    height: 24px;
 }
 
 .popular {
@@ -46,4 +50,16 @@
 .popular .btn-rounded:focus-visible {
     background-color: var(--color-light) !important;
     opacity: 0.9;
+}
+
+@media (max-width: 575px) {
+    .plan li span {
+        top: 0;
+        width: 20px;
+        height: 20px;
+    }
+
+    .plan li {
+        padding-left: 30px;
+    }
 }
