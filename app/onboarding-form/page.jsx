@@ -17,13 +17,13 @@ const Register = () => {
   const [formData, setFormData] = useState({
     ideal_customer: "",
     sector: "",
-    company_size: "",
+    company_size: "1",
     objective: "",
     offer: "",
     website: "",
     channel: "",
-    message_count: "",
-    message_delay: "",
+    message_count: "1",
+    message_delay: "1",
     tone: "",
     existing_messages: "",
     competitors: "",
@@ -48,7 +48,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await userOnboardingForm(formData);
       if (response.status) {
@@ -57,13 +56,13 @@ const Register = () => {
         setFormData({
           ideal_customer: "",
           sector: "",
-          company_size: "",
+          company_size: "1",
           objective: "",
           offer: "",
           website: "",
           channel: "",
-          message_count: "",
-          message_delay: "",
+          message_count: "1",
+          message_delay: "1",
           tone: "",
           existing_messages: "",
           competitors: "",
@@ -140,11 +139,11 @@ const Register = () => {
                     }
                     className="form-control"
                   >
-                    <option value="1-10">1-10 employees</option>
-                    <option value="11-50">11-50 employees</option>
-                    <option value="51-200">51-200 employees</option>
-                    <option value="201-500">201-500 employees</option>
-                    <option value="500+">500+ employees</option>
+                    <option value="1">1 employee</option>
+                    <option value="2-10">2-10 employees</option>
+                    <option value="11-25">11-25 employees</option>
+                    <option value="26-50">26-50 employees</option>
+                    <option value="50+">50+ employees</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -231,11 +230,9 @@ const Register = () => {
                     }
                     className="form-control"
                   >
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -261,11 +258,10 @@ const Register = () => {
                     }
                     className="form-control"
                   >
-                    <option value="5">5 minutes</option>
-                    <option value="10">10 minutes</option>
-                    <option value="20">20 minutes</option>
-                    <option value="30">30 minutes</option>
-                    <option value="40">40 minutes</option>
+                    <option value="1">1 day</option>
+                    <option value="3">3 days</option>
+                    <option value="7">7 days</option>
+                    <option value="14">14 days</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

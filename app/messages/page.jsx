@@ -33,7 +33,7 @@ const Messages = () => {
       try {
         const response = await axiosInstance.get("/api/message-formats");
         const formats = response.data.formats || [];
-        console.log(response.data);
+        // console.log(response.data);
 
         setAllMessages(formats);
 
