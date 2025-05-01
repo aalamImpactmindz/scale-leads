@@ -40,7 +40,7 @@ const Header = () => {
         <Container fluid="xl">
           <Logo />
           <Navbar.Collapse id="navbar-main">
-            <Nav className="ms-auto gap-3 gap-lg-5">
+            <Nav className="ms-auto gap-3 gap-lg-4">
               <Link className="nav-link" href="/">
                 Accueil
               </Link>
@@ -80,22 +80,22 @@ const Header = () => {
               <Link className="nav-link" href="/faqs">
                 FAQ
               </Link>
-              {isLoggedIn && (
-                <Link href="/" className="nav-link" onClick={handleLogout}>
-                  Déconnexion
-                </Link>
-              )}
-              {!isLoggedIn && (
-                <Link href="/login" className="nav-link">
-                  Connexion
-                </Link>
-              )}
             </Nav>
           </Navbar.Collapse>
-          <Link href="/contact" className="ms-auto ms-lg-5">
-            <Button className="btn-main">Contact</Button>
+          {!isLoggedIn && (
+            <Link href="/login" className="ms-auto ms-lg-4">
+              <Button className="btn-main">Login</Button>
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link href="/" className="ms-3 ms-lg-4" onClick={handleLogout}>
+              <Button className="btn-main">Logout</Button>
+            </Link>
+          )}
+          <Link href="/register" className="ms-3 ms-lg-4">
+            <Button className="btn-main">Sign up</Button>
           </Link>
-          <Navbar.Toggle aria-controls="navbar-main" className="ms-4" />
+          <Navbar.Toggle aria-controls="navbar-main" className="ms-3" />
         </Container>
       </Navbar>
     </header>

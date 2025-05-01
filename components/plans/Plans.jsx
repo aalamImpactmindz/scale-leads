@@ -7,7 +7,7 @@ const Plans = ({ customClass }) => {
   return (
     <section className={`plans sec-padding ${customClass ? customClass : ""}`}>
       <Container fluid="xl">
-        <h2 className="mb-5">
+        <h2 className="mb-4 fw-bold">
           Choose your plan and
           <br /> automate your prospecting today
         </h2>

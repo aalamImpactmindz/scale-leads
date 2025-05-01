@@ -4,12 +4,13 @@ import SuccessStories from "@/components/success-stories/SuccessStories";
 import WalkThrough from "@/components/walkthrough/WalkThrough";
 import Problem from "@/components/problem/Problem";
 import Solution from "@/components/solution/Solution";
+import Working from "@/components/working/Working";
 
 export default function Home() {
   return (
     <div className="page-home">
       <Hero />
-      <Problem />
+      <Working customClass="pt-0" />
       <Solution />
       <WalkThrough />
       <Plans customClass="pt-0" />

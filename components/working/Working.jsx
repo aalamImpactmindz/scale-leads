@@ -1,41 +1,42 @@
 import React from "react";
 import WorkingCard from "../working-card/WorkingCard";
 import { Container, Row, Col } from "react-bootstrap";
-import Heading from "../heading/Heading";
 import logo from "@/public/assets/images/logo.png";
 import arrowTopLeft from "@/public/assets/images/arrow-top-left.svg";
 import userMultiple from "@/public/assets/images/user-multiple.svg";
 import rocket from "@/public/assets/images/rocket.svg";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMessage } from "@fortawesome/free-regular-svg-icons";
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
 
-const Working = () => {
+const Working = ({ customClass }) => {
   return (
-    <section className="working sec-padding" id="how-it-works">
+    <section
+      className={`working sec-padding ${customClass ? customClass : ""}`}
+      id="how-it-works"
+    >
       <Container fluid="xl">
-        <Heading
-          title="Comment ça marche ?"
-          highlightedWords={["marche"]}
-          description="Notre système automatise ta prospection en 3 étapes simples. plus besoin de passer des heures à chercher des clients, on s'en occupe pour vous !"
-        />
+        <h2 className="mb-4 fw-bold">Pourquoi ScaleLeads change la donne ?</h2>
         <Row data-aos="fade-up" className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
           <Col>
             <WorkingCard
-              icon={arrowTopLeft}
-              title="On trouve tes clients idéaux"
-              description="Nous identifions les meilleurs prospects pour ton business grâce a une analyse intelligente."
+              icon={faMagnifyingGlass}
+              title="Ciblage ultra précis"
+              description="Remplis un simple formulaire, on s'occupe de trouver les bons prospects."
             />
           </Col>
           <Col>
             <WorkingCard
-              icon={userMultiple}
-              title="On automatise la prospection"
-              description="Nous envoyons automatiquement des invitations et messages aux bonnes personnes."
+              icon={faMessage}
+              title="Messages générés automatiquement"
+              description="Grâce à l'IA, chaque message est personnalisé, personnalisable, aligné avec ton offre et en raccord avec le profil LinkedIn du prospect."
             />
           </Col>
           <Col>
             <WorkingCard
-              icon={rocket}
-              title="Transforme tes prospects en clients"
-              description="Tu échanges avec des prospects qualifiés et fermes plus de vente sans effort."
+              icon={faRotate}
+              title="100% automatisé"
+              description="Tout tourne tout seul. Envois, relances, suivi - t'as plus rien à faire."
             />
           </Col>
         </Row>

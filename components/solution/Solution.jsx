@@ -14,20 +14,30 @@ const Solution = () => {
               <Image src={imageSolution} alt="Solution" />
             </Col>
             <Col className="ps-4 ps-sm-5 ps-lg-0">
-              <h2 className="fw-bold">Solution</h2>
-              <p className="fs-5 mb-4">
+              <h2 className="fw-bold mb-5">
+                Conçu pour les freelances, agences et consultants B2B.
+              </h2>
+              {/* <p className="fs-5 mb-4">
                 You connect your email and LinkedIn once?
-              </p>
+              </p> */}
               <div className="solutions p-3 p-md-4 p-lg-5">
-                <ol className="d-flex flex-column gap-3 fs-5">
+                <p>
+                  Si tu vends une offre B2B avec un panier supérieur à 500€,
+                  ScaleLeads est fait pour toi.
+                </p>
+                <p>
+                  Tu veux plus de rendez-vous sans t'épuiser ? C'est bon, t'as
+                  trouvé.
+                </p>
+                {/* <ol className="d-flex flex-column gap-3 fs-5">
                   <li>You fill out a form with your target audience.</li>
                   <li>
                     And ScaleLeads automatically sends messages, follows up, and
                     handles replies.
                   </li>
-                </ol>
+                </ol> */}
               </div>
-              <h4 className="my-4 fw-light">Zero effort. Zero friction.</h4>
+              {/* <h4 className="my-4 fw-light">Zero effort. Zero friction.</h4> */}
               {/* <Button className="btn-main text-uppercase mb-5 mb-lg-0">
                 See a free demo!
               </Button> */}
