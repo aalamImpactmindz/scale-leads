@@ -42,28 +42,28 @@ const Header = () => {
           <Navbar.Collapse id="navbar-main">
             <Nav className="ms-auto gap-3 gap-lg-5">
               <Link className="nav-link" href="/">
-                Home
+                Accueil
               </Link>
-              <NavDropdown title="Features" id="features-dropdown">
+              <NavDropdown title="Fonctionnalités" id="features-dropdown">
                 <Link className="dropdown-item" href="/">
-                  Feature 1
+                  Fonctionnalité 1
                 </Link>
                 <Link className="dropdown-item" href="/">
-                  Feature 2
+                  Fonctionnalité 2
                 </Link>
                 <Link className="dropdown-item" href="/">
-                  Feature 3
+                  Fonctionnalité 3
                 </Link>
               </NavDropdown>
-              <NavDropdown title="Subscriptions" id="subscriptions-dropdown">
+              <NavDropdown title="Abonnements" id="subscriptions-dropdown">
                 <Link className="dropdown-item" href="/">
-                  Subscription 1
+                  Abonnement 1
                 </Link>
                 <Link className="dropdown-item" href="/">
-                  Subscription 2
+                  Abonnement 2
                 </Link>
                 <Link className="dropdown-item" href="/">
-                  Subscription 3
+                  Abonnement 3
                 </Link>
               </NavDropdown>
               <NavDropdown title="Blogs" id="blogs-dropdown">
@@ -78,16 +78,16 @@ const Header = () => {
                 </Link>
               </NavDropdown>
               <Link className="nav-link" href="/faqs">
-                FAQs
+                FAQ
               </Link>
               {isLoggedIn && (
                 <Link href="/" className="nav-link" onClick={handleLogout}>
-                  Logout
+                  Déconnexion
                 </Link>
               )}
               {!isLoggedIn && (
                 <Link href="/login" className="nav-link">
-                  Login
+                  Connexion
                 </Link>
               )}
             </Nav>
