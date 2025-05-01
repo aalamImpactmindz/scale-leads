@@ -74,7 +74,7 @@ const PlanCard = ({
     >
       <p className="small color-light">{title}</p>
       <h6 className="fs-6 fw-light color-text mb-3 color-light d-flex flex-wrap align-items-center">
-        <span className="fs-1 me-2 color-white fw-bold">{price}€</span> / Month
+        <span className="fs-1 me-2 color-white fw-bold">{price}€</span> / Mois
       </h6>
       <Button
         className="btn-rounded w-100 mb-4 text-capitalize"

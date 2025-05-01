@@ -268,7 +268,7 @@ a {
 }
 
 .form-control.form-select {
-  background-color: #6a30a5!important;
+  background-color: #6a30a5 !important;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -276,6 +276,13 @@ a {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 20px;
+}
+
+video {
+  background-color: transparent;
+  border: 1px solid;
+  border-image: linear-gradient(to right bottom, #8D4AEA, #EF31F9, #44006A);
+  border-image-slice: 1;
 }
 
 @media (max-width: 991px) {

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 
-const TestimonialCard = () => {
+const TestimonialCard = ({ name, role, review }) => {
   return (
     <div className="testimonial-card p-3 p-lg-4">
       <div className="testimonial-top d-flex flex-wrap align-items-center justify-content-between mb-4 position-relative">
@@ -21,15 +21,13 @@ const TestimonialCard = () => {
           />
         </div>
         <div className="t-t-right">
-          <h6 className="color-light mb-1 text-truncate">Jean M.</h6>
-          <p className="small mb-0 text-truncate">B2B Consultant</p>
+          <h6 className="color-light mb-1 text-truncate">{name}</h6>
+          <p className="small mb-0 text-truncate">{role}</p>
         </div>
       </div>
       <div className="testimonial-bottom">
         {/* <h5 className="color-light">Amazing Result!</h5> */}
-        <p className="small mb-0">
-          Got 4 replies in 2 days. Didn't touch a thing.
-        </p>
+        <p className="small mb-0">{review}</p>
         <div className="rating d-flex gap-1 mb-2 mt-5 small">
           <FontAwesomeIcon icon={faStar} />
           <FontAwesomeIcon icon={faStar} />
