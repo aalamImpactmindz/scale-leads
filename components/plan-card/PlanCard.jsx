@@ -82,7 +82,7 @@ const PlanCard = ({
           / Mois{" "}
         </span>
         {saveAnnually && (
-          <Badge bg="light" className="rounded-0 color-dark py-2">
+          <Badge bg="light" className="color-dark py-2">
             Save €{saveAnnually}
           </Badge>
         )}

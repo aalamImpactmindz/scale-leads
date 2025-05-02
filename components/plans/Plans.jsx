@@ -30,7 +30,7 @@ const Plans = ({ customClass }) => {
               title={
                 <span>
                   Annual{" "}
-                  <span className="badge bg-light ms-2 rounded-0 color-dark py-2">
+                  <span className="badge bg-light ms-2 color-dark py-2">
                     Save 15%
                   </span>
                 </span>
