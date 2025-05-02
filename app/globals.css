@@ -289,6 +289,10 @@ video {
   border-image-slice: 1;
 }
 
+.badge.bg-light {
+  background-image: linear-gradient(to top left, #d1afff 1.58%, #ffffff 94.6%) !important;
+}
+
 @media (max-width: 991px) {
   .navbar-toggler {
     border: 0;
