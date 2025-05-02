@@ -47,6 +47,7 @@ const WalkThrough = () => {
           preload="auto"
           autoPlay
           muted
+          loop
           poster={imagePoster.src}
           style={{ maxWidth: "100%" }}
         >

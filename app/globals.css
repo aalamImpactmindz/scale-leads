@@ -51,6 +51,10 @@ a {
   color: var(--color-light);
 }
 
+.color-dark {
+  color: var(--color-dark);
+}
+
 .color-theme-25 {
   color: var(--color-theme-25);
 }

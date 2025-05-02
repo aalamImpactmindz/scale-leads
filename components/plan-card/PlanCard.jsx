@@ -1,6 +1,6 @@
 "use client";
 import "./plan-card.css";
-import { Button } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,12 +18,13 @@ const PlanCard = ({
   description,
   features,
   customClass,
+  saveAnnually,
 }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [email, setemail] = useState("");
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -68,13 +69,23 @@ const PlanCard = ({
 
   return (
     <div
-      className={`plan p-3 px-md-2 p-lg-4 h-100 d-flex flex-column ${
+      className={`plan p-3 px-md-2 px-lg-3 py-lg-4 h-100 d-flex flex-column ${
         customClass ? customClass : ""
       }`}
     >
       <p className="small color-light">{title}</p>
-      <h6 className="fs-6 fw-light color-text mb-3 color-light d-flex flex-wrap align-items-center">
-        <span className="fs-1 me-2 color-white fw-bold">{price}€</span> / Mois
+      <h6 className="fs-6 fw-light color-text mb-3 color-light d-flex flex-wrap align-items-center gap-2">
+        <span className="me-2 d-inline-flex align-items-center">
+          <strong className="fs-2 fs-lg-1 me-2 color-white fw-bold fs-italic">
+            {price}€
+          </strong>{" "}
+          / Mois{" "}
+        </span>
+        {saveAnnually && (
+          <Badge bg="light" className="rounded-0 color-dark py-2">
+            Save €{saveAnnually}
+          </Badge>
+        )}
       </h6>
       <Button
         className="btn-rounded w-100 mb-4 text-capitalize"

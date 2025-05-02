@@ -17,7 +17,7 @@ const Working = ({ customClass }) => {
     >
       <Container fluid="xl">
         <h2 className="mb-4 fw-bold">Pourquoi ScaleLeads change la donne ?</h2>
-        <Row data-aos="fade-up" className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
+        <Row className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
           <Col>
             <WorkingCard
               icon={faMagnifyingGlass}

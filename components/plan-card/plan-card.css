@@ -6,7 +6,7 @@
     min-height: 530px;
 }
 
-.plan h6 span {
+.plan h6 strong {
     background-image: linear-gradient(90.89deg, #B44AFF, #44006A);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -29,7 +29,7 @@
     border: 0;
 }
 
-.popular h6 span {
+.popular h6 strong {
     color: var(--color-light) !important;
     background-image: none;
     -webkit-text-fill-color: inherit;

@@ -58,7 +58,7 @@ const Blogs = () => {
           description="Dive into our blog for the latest trends, tips, and insights in the world of design and AI technology. Whether you’re looking for inspiration, tutorials, or industry news, our articles are crafted to keep you informed and inspired."
         />
         {allBlogs.length > 0 && (
-          <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3" data-aos="fade-up">
+          <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
             {allBlogs.map((blog, index) => {
               return (
                 <Col key={index}>
