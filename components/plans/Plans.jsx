@@ -28,7 +28,7 @@ const Plans = ({ customClass }) => {
             <Tab
               eventKey="annual"
               title={
-                <span>
+                <span className="d-inline-flex align-items-center">
                   Annual{" "}
                   <span className="badge bg-light ms-2 color-dark py-2">
                     Save 15%
