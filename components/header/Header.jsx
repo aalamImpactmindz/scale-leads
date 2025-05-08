@@ -88,14 +88,14 @@ const Header = () => {
             </Link>
           )}
           {isLoggedIn && (
-            <Link href="/" className="ms-3 ms-lg-4" onClick={handleLogout}>
+            <Link href="/" className="ms-auto ms-lg-4" onClick={handleLogout}>
               <Button className="btn-main">Logout</Button>
             </Link>
           )}
-          <Link href="/register" className="ms-3 ms-lg-4">
+          <Link href="/register" className="ms-2 ms-lg-4">
             <Button className="btn-main">Sign up</Button>
           </Link>
-          <Navbar.Toggle aria-controls="navbar-main" className="ms-3" />
+          <Navbar.Toggle aria-controls="navbar-main" className="ms-2" />
         </Container>
       </Navbar>
     </header>

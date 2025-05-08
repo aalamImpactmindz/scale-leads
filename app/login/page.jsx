@@ -120,7 +120,7 @@ const Login = () => {
                 only ask for the information needed to make your shopping
                 experience faster and smoother.
               </p>
-              <Link href="/register">
+              <Link href="/register" className="d-inline-block">
                 <Button className="btn-main">Register</Button>
               </Link>
             </div>

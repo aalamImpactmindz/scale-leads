@@ -156,7 +156,7 @@ const Register = () => {
                 Log in to access your account, check your orders, and continue
                 where you left off.
               </p>
-              <Link href="/login">
+              <Link href="/login" className="d-inline-block">
                 <Button className="btn-main">Login</Button>
               </Link>
             </div>
