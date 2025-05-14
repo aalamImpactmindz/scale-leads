@@ -1,6 +1,7 @@
 @media (max-width: 575px) {
     header .btn-main {
         padding: 6px 10px;
+        font-size: 13px;
     }
 
     .navbar-brand span {

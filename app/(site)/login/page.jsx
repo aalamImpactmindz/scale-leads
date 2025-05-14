@@ -11,8 +11,10 @@ import Alert from "react-bootstrap/Alert";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { useContext } from "react";
-import { AuthContext } from "../context/Authcontext";
 import { userLogin } from "@/utils/service/userlogin";
+import { AuthContext } from "@/app/context/Authcontext";
+import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
+
 const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const router = useRouter();
@@ -55,6 +57,7 @@ const Login = () => {
   };
 
   return (
+    <PublicOnlyRoute>
     <div className="page-login sec-padding">
       <Container fluid="xl">
         <Heading title="My Account" />
@@ -128,6 +131,7 @@ const Login = () => {
         </Row>
       </Container>
     </div>
+    </PublicOnlyRoute>
   );
 };
 

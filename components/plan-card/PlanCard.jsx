@@ -100,7 +100,7 @@ const PlanCard = ({
               <span className="bg-gray rounded-circle d-flex flex-wrap align-items-center justify-content-center color-theme-25 position-absolute start-0">
                 <FontAwesomeIcon icon={faCheck} />
               </span>
-              {feature}
+              {feature.name}
             </li>
           );
         })}

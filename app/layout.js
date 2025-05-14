@@ -4,8 +4,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./globals.css";
 import AOSInitializer from "@/components/aos-initializer/AOSInitializer";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import { AuthProvider } from "./context/Authcontext";
 
 const fontOutfit = Outfit({
@@ -25,11 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${fontOutfit.className}`}>
         <AOSInitializer />
-        <AuthProvider>
-          <Header />
-          {children}
-          <Footer />
-        </AuthProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

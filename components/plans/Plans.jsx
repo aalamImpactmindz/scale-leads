@@ -5,18 +5,68 @@ import PlanCard from "../plan-card/PlanCard";
 import { Container, Row, Col } from "react-bootstrap";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { useState } from "react";
-import Badge from "react-bootstrap";
+import { useState, useEffect } from "react";
+import axiosInstance from "@/utils/axiosInstance";
+import { AuthContext } from "@/app/context/Authcontext";
+import { useContext } from "react";
 
 const Plans = ({ customClass }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [monthlyPlans, setMonthlyPlans] = useState([]);
+  const [yearlyPlans, setYearlyPlans] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("annual");
+  const [usersPlan, setUsersPlan] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get("/api/plans");
+      const allPlans = response.data.plans;
+      console.log(allPlans);
+      // Separate plans by interval
+      const monthly = allPlans.filter((plan) => plan.interval === "month");
+      const yearly = allPlans.filter((plan) => plan.interval === "year");
+      setMonthlyPlans(monthly);
+      setYearlyPlans(yearly);
+    } catch (err) {
+      console.log("Error fetching plans:", err);
+      setError("Could not load plans.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchUsersPlan = async () => {
+    try {
+      const response = await axiosInstance.get("/api/user/plan");
+      console.log(response.data);
+      setUsersPlan(response.data.plan);
+    } catch (err) {
+      console.log("Error fetching user's plan:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUsersPlan();
+    }
+  }, [isLoggedIn]);
+
   return (
-    <section className={`plans sec-padding ${customClass ? customClass : ""}`}>
+    <section
+      className={`plans sec-padding mb-4 ${customClass ? customClass : ""}`}
+    >
       <Container fluid="xl">
         <div className="heading-container position-relative">
           <h2 className="mb-4 fw-bold" style={{ paddingRight: "320px" }}>
-            Choose your plan and
-            <br /> automate your prospecting today
+            Subscriptions
           </h2>
           <Tabs
             activeKey={activeTab}
@@ -39,94 +89,57 @@ const Plans = ({ customClass }) => {
             <Tab eventKey="monthly-plans" title="Monthly" />
           </Tabs>
         </div>
-        {activeTab === "monthly-plans" && (
-          <Row className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
-            <Col>
-              <PlanCard
-                planid="price_1RIlbsKgPTS0Wsru4dvuodiJ"
-                title="Starter Offer"
-                price="199"
-                features={[
-                  "1 LinkedIn + 1 Email connected",
-                  "1 active campaign",
-                  "Fully automated execution (email + LinkedIn)",
-                ]}
-              />
-            </Col>
-            <Col>
-              <PlanCard
-                planid="price_1RImt4KgPTS0WsrulgxTjEG0"
-                title="Pro Offer"
-                price="349"
-                features={[
-                  "Up to 3 LinkedIn + 3 Email accounts",
-                  "1 ScaleLeads dashboard to manage everything",
-                  "Campaigns split across all accounts for higher volume",
-                  "Reports + performance overview",
-                ]}
-                customClass="popular"
-              />
-            </Col>
-            <Col>
-              <PlanCard
-                planid="price_1RImtyKgPTS0WsruUnSrW8TH"
-                title="Elite Offer"
-                price="499"
-                features={[
-                  "Up to 5 LinkedIn + 5 Email accounts",
-                  "1 ScaleLeads dashboard to manage everything",
-                  "Campaigns split across all accounts for higher volume",
-                  "Reports + performance overview",
-                ]}
-              />
-            </Col>
-          </Row>
-        )}
-        {activeTab === "annual" && (
-          <Row className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
-            <Col>
-              <PlanCard
-                planid="price_1RKCuQKgPTS0WsruoDufbl8z"
-                title="Starter Offer"
-                price="169.16"
-                saveAnnually="358"
-                features={[
-                  "1 LinkedIn + 1 Email connected",
-                  "1 active campaign",
-                  "Fully automated execution (email + LinkedIn)",
-                ]}
-              />
-            </Col>
-            <Col>
-              <PlanCard
-                planid="price_1RKCw9KgPTS0WsruVr1KjdVA"
-                title="Pro Offer"
-                price="296.66"
-                saveAnnually="628"
-                features={[
-                  "Up to 3 LinkedIn + 3 Email accounts",
-                  "1 ScaleLeads dashboard to manage everything",
-                  "Campaigns split across all accounts for higher volume",
-                  "Reports + performance overview",
-                ]}
-                customClass="popular"
-              />
-            </Col>
-            <Col>
-              <PlanCard
-                planid="price_1RKCxVKgPTS0WsruPMixNSU2"
-                title="Elite Offer"
-                price="424.16"
-                saveAnnually="898"
-                features={[
-                  "Up to 5 LinkedIn + 5 Email accounts",
-                  "1 ScaleLeads dashboard to manage everything",
-                  "Campaigns split across all accounts for higher volume",
-                  "Reports + performance overview",
-                ]}
-              />
-            </Col>
-          </Row>
+        {loading ? (
+          <div className="text-center py-5">
+            <p className="mt-3">Loading plans...</p>
+          </div>
+        ) : error ? (
+          <p className="text-danger">{error}</p>
+        ) : (
+          <>
+            {activeTab === "monthly-plans" && (
+              <Row className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
+                {monthlyPlans.map((plan, index) => (
+                  <Col key={plan.id}>
+                    <PlanCard
+                      planid={plan.price_id}
+                      title={plan.name}
+                      price={plan.amount}
+                      features={plan.features}
+                      customClass={
+                        usersPlan &&
+                        usersPlan.interval === "month" &&
+                        usersPlan.name === plan.name
+                          ? "your-plan"
+                          : ""
+                      }
+                    />
+                  </Col>
+                ))}
+              </Row>
+            )}
+            {activeTab === "annual" && (
+              <Row className="g-3 g-lg-4 row-cols-1 row-cols-md-3">
+                {yearlyPlans.map((plan, index) => (
+                  <Col key={plan.id}>
+                    <PlanCard
+                      planid={plan.price_id}
+                      title={plan.name}
+                      price={plan.amount}
+                      features={plan.features}
+                      customClass={
+                        usersPlan &&
+                        usersPlan.interval === "year" &&
+                        usersPlan.name === plan.name
+                          ? "your-plan"
+                          : ""
+                      }
+                    />
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </>
         )}
       </Container>
     </section>

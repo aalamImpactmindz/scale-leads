@@ -1,0 +1,167 @@
+"use client";
+import Heading from "@/components/heading/Heading";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Link from "next/link";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Alert from "react-bootstrap/Alert";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { userRegister } from "@/utils/service/userlogin";
+import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "@/app/context/Authcontext";
+import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
+
+const Register = () => {
+  const router = useRouter();
+  const { setIsLoggedIn } = useContext(AuthContext);
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const response = await userRegister(formData);
+      if (response.status) {
+        setMessage(response?.message);
+        setError("");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setConfirmPassword("");
+        const decodedToken = jwtDecode(response.token);
+        localStorage.setItem("authToken", response.token);
+        localStorage.setItem("expires_at", decodedToken.exp);
+        setIsLoggedIn(true);
+        // extra
+        router.push("/onboarding-form");
+      } else {
+        setMessage(response?.message);
+      }
+    } catch (err) {
+      setError(err?.response?.data?.message || "Registration failed.");
+      setMessage("");
+    }
+  };
+
+  return (
+    <PublicOnlyRoute>
+      <div className="page-register sec-padding">
+        <Container fluid="xl">
+          <Heading title="My Account" />
+          <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
+            <Col>
+              <div className="bg-gray p-3 p-lg-4">
+                <h4 className="color-light">Register</h4>
+                <p>Start your journey with us—it's quick and simple.</p>
+                <Form className="mt-4" onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3" controlId="formRegisterFullName">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Jane Smith"
+                      required
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formRegisterEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="jane@framer.com"
+                      required
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formRegisterPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="********"
+                      required
+                      value={formData.password}
+                      onChange={(e) =>
+                        setFormData({ ...formData, password: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="formRegisterConfirmPassword"
+                  >
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="********"
+                      required
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Button className="btn-main" type="submit">
+                    Register
+                  </Button>
+                  {message && (
+                    <Alert
+                      variant="success"
+                      className="mt-3 small py-2 rounded-0"
+                    >
+                      {message}
+                    </Alert>
+                  )}
+                  {error && (
+                    <Alert
+                      variant="danger"
+                      className="mt-3 small py-2 rounded-0"
+                    >
+                      {error}
+                    </Alert>
+                  )}
+                </Form>
+              </div>
+            </Col>
+            <Col>
+              <div className="bg-gray p-3 p-lg-4 h-100">
+                <h4 className="color-light">Already Have an Account?</h4>
+                <p>
+                  Log in to access your account, check your orders, and continue
+                  where you left off.
+                </p>
+                <Link href="/login" className="d-inline-block">
+                  <Button className="btn-main">Login</Button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </PublicOnlyRoute>
+  );
+};
+
+export default Register;

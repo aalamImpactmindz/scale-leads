@@ -1,12 +1,14 @@
 "use client";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 
 // Create the context
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const hasReloaded = useRef(false); // ensure reload happens only once
 
+  // Initial login check
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     const expiresAt = localStorage.getItem("expires_at");
@@ -16,16 +18,16 @@ export const AuthProvider = ({ children }) => {
       const expiresAtNumber = Number(expiresAt);
 
       if (currentTime < expiresAtNumber) {
-        setIsLoggedIn(true); // User is logged in
+        setIsLoggedIn(true);
       } else {
-        setIsLoggedIn(false); // Token expired
+        setIsLoggedIn(false);
       }
     } else {
-      setIsLoggedIn(false); // No token found, user is not logged in
+      setIsLoggedIn(false);
     }
   }, []);
 
-  // Optional: Clear localStorage if logged out
+  // Clear localStorage if logged out
   useEffect(() => {
     if (isLoggedIn === false) {
       localStorage.removeItem("authToken");
@@ -33,6 +35,25 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("form_filled");
     }
   }, [isLoggedIn]);
+
+  // Monitor token expiry every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const expiresAt = localStorage.getItem("expires_at");
+      if (!expiresAt) return;
+
+      const currentTime = Math.floor(Date.now() / 1000);
+      const expiresAtNumber = Number(expiresAt);
+
+      if (currentTime >= expiresAtNumber && !hasReloaded.current) {
+        hasReloaded.current = true; // prevent multiple reloads
+        setIsLoggedIn(false); // update state to trigger cleanup
+        window.location.reload(); // reload the page
+      }
+    }, 2000);
+
+    return () => clearInterval(interval); // clean up on unmount
+  }, []);
 
   return (
     <AuthContext.Provider

@@ -4,6 +4,7 @@ import React from "react";
 import { Button, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import Link from "next/link";
 
 const PaymentSuccessful = () => {
   return (
@@ -12,9 +13,9 @@ const PaymentSuccessful = () => {
         <FontAwesomeIcon icon={faCircleCheck} className="mb-3 text-success" />
         <h2>Payment Successful!</h2>
         <p>Your payment has been completed.</p>
-        <a href="https://dashboard-scaleleads.netlify.app/">
+        <Link href="/dashboard">
           <Button className="btn-main">Go to Dashboard</Button>
-        </a>
+        </Link>
       </Container>
     </div>
   );
