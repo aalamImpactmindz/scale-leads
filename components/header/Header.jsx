@@ -27,6 +27,7 @@ const Header = () => {
   const handleLogout = () => {
     if (isClient) {
       setIsLoggedIn(false);
+      window.location.reload();
     }
   };
 

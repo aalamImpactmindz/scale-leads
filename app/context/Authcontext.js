@@ -33,6 +33,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("authToken");
       localStorage.removeItem("expires_at");
       localStorage.removeItem("form_filled");
+      localStorage.removeItem("messages_filled");
+      localStorage.removeItem("campaign_to_edit");
+      localStorage.removeItem("has_active_plan");
     }
   }, [isLoggedIn]);
 

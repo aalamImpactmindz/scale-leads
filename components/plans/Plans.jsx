@@ -2,7 +2,7 @@
 import "./plans.css";
 import React from "react";
 import PlanCard from "../plan-card/PlanCard";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { useState, useEffect } from "react";
@@ -23,7 +23,6 @@ const Plans = ({ customClass }) => {
     try {
       const response = await axiosInstance.get("/api/plans");
       const allPlans = response.data.plans;
-      console.log(allPlans);
       // Separate plans by interval
       const monthly = allPlans.filter((plan) => plan.interval === "month");
       const yearly = allPlans.filter((plan) => plan.interval === "year");
@@ -31,7 +30,7 @@ const Plans = ({ customClass }) => {
       setYearlyPlans(yearly);
     } catch (err) {
       console.log("Error fetching plans:", err);
-      setError("Could not load plans.");
+      setError("Could not load Plans.");
     } finally {
       setLoading(false);
     }
@@ -40,10 +39,11 @@ const Plans = ({ customClass }) => {
   const fetchUsersPlan = async () => {
     try {
       const response = await axiosInstance.get("/api/user/plan");
-      console.log(response.data);
       setUsersPlan(response.data.plan);
+      localStorage.setItem("has_active_plan", "true");
     } catch (err) {
       console.log("Error fetching user's plan:", err);
+      localStorage.setItem("has_active_plan", "false");
     } finally {
       setLoading(false);
     }
@@ -94,7 +94,9 @@ const Plans = ({ customClass }) => {
             <p className="mt-3">Loading plans...</p>
           </div>
         ) : error ? (
-          <p className="text-danger">{error}</p>
+          <Alert variant="danger" className="px-3 py-2 small">
+            {error}
+          </Alert>
         ) : (
           <>
             {activeTab === "monthly-plans" && (

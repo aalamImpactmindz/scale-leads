@@ -38,7 +38,7 @@ const PlanCard = ({
   }, []);
 
   const handlecheckout = async () => {
-    if (!isMounted) return; // Prevent executing before mount
+    if (!isMounted) return;
 
     if (isLoggedIn) {
       const stripe = await loadStripe(
@@ -50,10 +50,6 @@ const PlanCard = ({
       };
 
       try {
-        // const response = await axios.post(
-        //   "https://impactmindz.in/client/scaleleads/checkout-session",
-        //   body
-        // );
         const response = await paymentlink(body);
 
         const sessionId = response.url;
@@ -69,10 +65,19 @@ const PlanCard = ({
 
   return (
     <div
-      className={`plan p-3 px-md-2 px-lg-3 py-lg-4 h-100 d-flex flex-column ${
+      className={`plan p-3 px-md-2 px-lg-3 py-lg-4 h-100 d-flex flex-column position-relative ${
         customClass ? customClass : ""
       }`}
     >
+      {customClass === "your-plan" && (
+        <Badge
+          bg="light"
+          className="color-dark py-2 position-absolute"
+          style={{ left: "auto", right: "1rem" }}
+        >
+          Active
+        </Badge>
+      )}
       <p className="small color-light">{title}</p>
       <h6 className="fs-6 fw-light color-text mb-3 color-light d-flex flex-wrap align-items-center gap-2">
         <span className="me-2 d-inline-flex align-items-center">

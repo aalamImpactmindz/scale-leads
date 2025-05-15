@@ -59,6 +59,18 @@
     opacity: 0.9;
 }
 
+@media (max-width: 991px) {
+    .plan > .badge {
+        right: 0.5rem!important;
+    }
+}
+
+@media (max-width: 767px) {
+    .plan > .badge {
+        right: 1rem!important;
+    }
+}
+
 @media (max-width: 575px) {
     .plan li span {
         top: 0;

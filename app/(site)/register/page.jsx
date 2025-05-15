@@ -51,9 +51,11 @@ const Register = () => {
         const decodedToken = jwtDecode(response.token);
         localStorage.setItem("authToken", response.token);
         localStorage.setItem("expires_at", decodedToken.exp);
+        localStorage.setItem("form_filled", decodedToken.form_filled);
+        localStorage.setItem("messages_filled", decodedToken.messages_filled);
         setIsLoggedIn(true);
         // extra
-        router.push("/onboarding-form");
+        router.push("/onboarding");
       } else {
         setMessage(response?.message);
       }

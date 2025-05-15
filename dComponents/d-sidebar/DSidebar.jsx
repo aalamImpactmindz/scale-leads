@@ -22,7 +22,7 @@ const DSidebar = () => {
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: faGaugeHigh },
-    { name: "Onboarding", href: "/dashboard/onboarding", icon: faPenToSquare },
+    // { name: "Onboarding", href: "/dashboard/onboarding", icon: faPenToSquare },
     {
       name: "Subscriptions",
       href: "/dashboard/subscriptions",

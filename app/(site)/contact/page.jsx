@@ -1,5 +1,5 @@
 import "./contact.css";
-import ContactForm from "@/components/contact-form/ContactForm";
+import ContactForm from "@/components/forms/contact-form/ContactForm";
 import Faqs from "@/components/faqs/Faqs";
 import Heading from "@/components/heading/Heading";
 import React from "react";

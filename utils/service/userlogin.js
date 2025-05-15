@@ -35,3 +35,12 @@ export const userOnboardingForm = async (payload) => {
     console.log(err);
   }
 };
+
+export const updateUserOnboardingForm = async (id, payload) => {
+  try {
+    let response = await axiosInstance.put(`/api/profiles/${id}`, payload);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

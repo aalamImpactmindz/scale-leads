@@ -8,8 +8,13 @@ const PublicOnlyRoute = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoggedIn === true) {
+    if (isLoggedIn === true && localStorage.getItem("form_filled") === "true") {
       router.replace("/");
+    } else if (
+      isLoggedIn === true &&
+      localStorage.getItem("form_filled") === "false"
+    ) {
+      router.replace("/onboarding");
     }
   }, [isLoggedIn, router]);
 

@@ -10,6 +10,11 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     if (isLoggedIn === false) {
       router.replace("/login");
+    } else if (
+      isLoggedIn &&
+      localStorage.getItem("has_active_plan") !== "true"
+    ) {
+      router.push("/abonnement");
     }
   }, [isLoggedIn, router]);
 
