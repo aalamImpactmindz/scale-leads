@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
+import Cookies from "js-cookie";
 
 const PaymentSuccessful = async () => {
   const fetchUsersPlan = async () => {
@@ -19,7 +20,7 @@ const PaymentSuccessful = async () => {
 
       // Store plan in cookies
       Cookies.set("has_active_plan", "true", {
-        expires: expiresAtDate,
+        expires: Number(localStorage.getItem("expires_at")),
         path: "/",
         secure: true,
         sameSite: "Strict",
