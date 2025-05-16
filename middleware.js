@@ -71,7 +71,6 @@ export async function middleware(request) {
           sameSite: "Strict",
         });
       }
-      console.log("Hello there!");
     } catch (error) {
       console.error("Failed to fetch user's plan:", error);
     }
