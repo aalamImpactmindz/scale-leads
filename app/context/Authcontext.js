@@ -1,17 +1,17 @@
 "use client";
 import React, { createContext, useState, useEffect, useRef } from "react";
+import Cookies from "js-cookie";
 
 // Create the context
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const hasReloaded = useRef(false); // ensure reload happens only once
 
-  // Initial login check
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-    const expiresAt = localStorage.getItem("expires_at");
+    const authToken = Cookies.get("authToken");
+    const expiresAt = Cookies.get("expires_at");
 
     if (authToken && expiresAt) {
       const currentTime = Math.floor(Date.now() / 1000);
@@ -27,22 +27,10 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Clear localStorage if logged out
-  useEffect(() => {
-    if (isLoggedIn === false) {
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("expires_at");
-      localStorage.removeItem("form_filled");
-      localStorage.removeItem("messages_filled");
-      localStorage.removeItem("campaign_to_edit");
-      localStorage.removeItem("has_active_plan");
-    }
-  }, [isLoggedIn]);
-
   // Monitor token expiry every 2 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      const expiresAt = localStorage.getItem("expires_at");
+      const expiresAt = Cookies.get("expires_at");
       if (!expiresAt) return;
 
       const currentTime = Math.floor(Date.now() / 1000);
@@ -55,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       }
     }, 2000);
 
-    return () => clearInterval(interval); // clean up on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (

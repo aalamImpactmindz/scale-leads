@@ -51,15 +51,14 @@ const PlanCard = ({
 
       try {
         const response = await paymentlink(body);
-
         const sessionId = response.url;
-
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
+        console.log(response);
       } catch (err) {
         console.log(err);
       }
     } else {
-      router.push("/login");
+      // router.push("/login");
     }
   };
 

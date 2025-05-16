@@ -14,6 +14,7 @@ import { userRegister } from "@/utils/service/userlogin";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "@/app/context/Authcontext";
 import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
+import Cookies from "js-cookie";
 
 const Register = () => {
   const router = useRouter();
@@ -48,14 +49,42 @@ const Register = () => {
           password: "",
         });
         setConfirmPassword("");
+        console.log("safasdk")
         const decodedToken = jwtDecode(response.token);
+        const expiresAtDate = new Date(decodedToken.exp * 1000);
         localStorage.setItem("authToken", response.token);
         localStorage.setItem("expires_at", decodedToken.exp);
         localStorage.setItem("form_filled", decodedToken.form_filled);
         localStorage.setItem("messages_filled", decodedToken.messages_filled);
+       Cookies.set("authToken", response.token, {
+                expires: expiresAtDate,
+                path: "/", // available across site
+                secure: true, // optional
+                sameSite: "Strict", // optional
+          });
+        Cookies.set("expires_at", decodedToken.exp, {
+                expires: expiresAtDate,
+                path: "/", // available across site
+                secure: true, // optional
+                sameSite: "Strict", // optional
+              });
+      Cookies.set("form_filled", decodedToken.form_filled, {
+                expires: expiresAtDate,
+                path: "/",
+                secure: true,
+                sameSite: "Strict",
+              });
+    Cookies.set("messages_filled", decodedToken.messages_filled, {
+                expires: expiresAtDate,
+                path: "/",
+                secure: true,
+                sameSite: "Strict",
+              });
+        
         setIsLoggedIn(true);
+        router.push('/onboarding');
+     
         // extra
-        router.push("/onboarding");
       } else {
         setMessage(response?.message);
       }
@@ -66,7 +95,7 @@ const Register = () => {
   };
 
   return (
-    <PublicOnlyRoute>
+    // <PublicOnlyRoute>
       <div className="page-register sec-padding">
         <Container fluid="xl">
           <Heading title="My Account" />
@@ -162,7 +191,7 @@ const Register = () => {
           </Row>
         </Container>
       </div>
-    </PublicOnlyRoute>
+    // </PublicOnlyRoute>
   );
 };
 

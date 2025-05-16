@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
   baseURL: "https://impactmindz.in/client/scaleleads",
@@ -6,7 +7,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken");
+    const token = Cookies.get("authToken");
     if (token) {
       config.headers.authorization = `Bearer ${token}`;
     }

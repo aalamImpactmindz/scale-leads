@@ -6,6 +6,7 @@ export const metadata = {
   description: "Générez des leads qualifiés pendant que vous dormez.",
 };
 
+
 export default function SiteLayout({ children }) {
   return (
     <>

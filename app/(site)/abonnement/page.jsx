@@ -14,19 +14,30 @@ const Abonnement = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log(isLoggedIn);
-    if (
-      (isLoggedIn || isLoggedIn === null) &&
-      localStorage.getItem("has_active_plan") === "false"
-    ) {
-      setMessage("You don't have an active plan. Please purchase a plan.");
+    if (isLoggedIn) {
+      // Read cookies
+      const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+        const [name, value] = cookie.split("=");
+        acc[name] = value;
+        return acc;
+      }, {});
+
+      if (!cookies.has_active_plan || cookies.has_active_plan !== "true") {
+        setMessage("You don't have an active plan. Please purchase a plan.");
+      } else {
+        setMessage(""); // Clear message if has active plan
+      }
+    } else {
+      setMessage(""); // Clear message if not logged in
     }
-  }, []);
-  // console.log(message);
+  }, [isLoggedIn]);
+
+  console.log(isLoggedIn);
+
   return (
     <div className="page-abonnement">
-      <Container className="mt-3">
-        {message !== "" && <Alert variant="warning">{message}</Alert>}
+      <Container className="mt-3" style={{ marginBottom: "-5vw" }}>
+        {message !== "" && <Alert variant="warning" className="px-3 py-2 small">{message}</Alert>}
       </Container>
       <Plans />
       <Faqs />

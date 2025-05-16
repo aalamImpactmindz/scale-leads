@@ -45,7 +45,6 @@ const OnboardingForm = ({ onSuccess }) => {
           existing_messages: "",
           competitors: "",
         });
-        localStorage.setItem("form_filled", "true");
         if (onSuccess) onSuccess(); // trigger navigation or other behavior
       } else {
         setMessage(response?.message);

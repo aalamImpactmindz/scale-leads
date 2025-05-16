@@ -88,16 +88,16 @@ const Messages = () => {
     }
   };
 
-  useEffect(() => {
-    if (
-      (isLoggedIn && localStorage.getItem("messages_filled") === "true") ||
-      localStorage.getItem("messages_filled") === null
-    ) {
-      router.push("/");
-    } else if (localStorage.getItem("form_filled") === "false") {
-      router.push("/onboarding");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (
+  //     (isLoggedIn && localStorage.getItem("messages_filled") === "true") ||
+  //     localStorage.getItem("messages_filled") === null
+  //   ) {
+  //     router.push("/");
+  //   } else if (localStorage.getItem("form_filled") === "false") {
+  //     router.push("/onboarding");
+  //   }
+  // }, []);
 
   return (
     <section className="all-messages sec-padding">

@@ -36,26 +36,32 @@ const Plans = ({ customClass }) => {
     }
   };
 
-  const fetchUsersPlan = async () => {
-    try {
-      const response = await axiosInstance.get("/api/user/plan");
-      setUsersPlan(response.data.plan);
-      localStorage.setItem("has_active_plan", "true");
-    } catch (err) {
-      console.log("Error fetching user's plan:", err);
-      localStorage.setItem("has_active_plan", "false");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetchUsersPlan();
+      const cookies = document.cookie.split("; ").reduce((acc, current) => {
+        const [name, value] = current.split("=");
+        acc[name] = value;
+        return acc;
+      }, {});
+
+      if (cookies.has_active_plan === "true") {
+        const planString = localStorage.getItem("plan");
+        if (planString) {
+          try {
+            const plan = JSON.parse(planString);
+            setUsersPlan(plan);
+          } catch (e) {
+            console.error("Failed to parse plan from localStorage", e);
+            setUsersPlan(null);
+          }
+        }
+      } else {
+        setUsersPlan(null);
+      }
     }
   }, [isLoggedIn]);
 

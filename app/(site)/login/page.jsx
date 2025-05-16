@@ -1,5 +1,6 @@
 "use client";
 import Heading from "@/components/heading/Heading";
+import Cookies from "js-cookie";
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -14,9 +15,11 @@ import { useContext } from "react";
 import { userLogin } from "@/utils/service/userlogin";
 import { AuthContext } from "@/app/context/Authcontext";
 import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
+import axiosInstance from "@/utils/axiosInstance";
 
 const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -25,7 +28,6 @@ const Login = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [formFilled, setFormFilled] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,22 +35,109 @@ const Login = () => {
     try {
       const response = await userLogin(formData);
       const decodedToken = jwtDecode(response.token);
-      localStorage.setItem("authToken", response.token);
+      const expiresAtDate = new Date(decodedToken.exp * 1000);
       localStorage.setItem("expires_at", decodedToken.exp);
-      localStorage.setItem("form_filled", decodedToken.form_filled);
-      localStorage.setItem("messages_filled", decodedToken.messages_filled);
+      Cookies.set("authToken", response.token, {
+        expires: expiresAtDate,
+        path: "/", // available across site
+        secure: true, // optional
+        sameSite: "Strict", // optional
+      });
+      Cookies.set("expires_at", decodedToken.exp, {
+        expires: expiresAtDate,
+        path: "/", // available across site
+        secure: true, // optional
+        sameSite: "Strict", // optional
+      });
+      Cookies.set("form_filled", decodedToken.form_filled, {
+        expires: expiresAtDate,
+        path: "/",
+        secure: true,
+        sameSite: "Strict",
+      });
+      Cookies.set("messages_filled", decodedToken.messages_filled, {
+        expires: expiresAtDate,
+        path: "/",
+        secure: true,
+        sameSite: "Strict",
+      });
+
       setIsLoggedIn(true);
       setMessage("Login successful!");
       setError("");
-      // extra
-      if (localStorage.getItem("form_filled") === "false") {
-        router.push("/onboarding");
-      }
+
+      // Fetch user's plan
+      const fetchUsersPlan = async () => {
+        try {
+          const response = await axiosInstance.get("/api/user/plan");
+          const plan = response.data.plan;
+
+          // Store in localStorage
+          localStorage.setItem("plan", JSON.stringify(plan));
+
+          // Store plan in cookies
+          Cookies.set("has_active_plan", "true", {
+            expires: expiresAtDate,
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+        } catch (err) {
+          console.log("Error fetching user's plan:", err);
+        }
+      };
+      await fetchUsersPlan();
+
+      setIsRedirecting(true);
+
+      // Redirect logic
+      // Fetch user's plan
+      const fetchUsersStatus = async () => {
+        try {
+          const response = await axiosInstance.get("/api/status");
+          if (
+            response.data.on_boarding_form === true &&
+            response.data.messages === true
+          ) {
+            router.push("/");
+          } else if (
+            response.data.on_boarding_form === true &&
+            response.data.messages === false
+          ) {
+            router.push("/messages");
+          } else if (response.data.on_boarding_form === false) {
+            router.push("/onboarding");
+          }
+        } catch (err) {
+          console.log("Error fetching user's status:", err);
+        }
+      };
+      await fetchUsersStatus();
+
+      // if (
+      //   decodedToken.form_filled === false ||
+      //   decodedToken.form_filled === "false"
+      // ) {
+      //   router.push("/onboarding");
+      // } else if (
+      //   (decodedToken.form_filled === true ||
+      //     decodedToken.form_filled === "true") &&
+      //   (decodedToken.messages_filled === false ||
+      //     decodedToken.messages_filled === "false")
+      // ) {
+      //   router.push("/messages");
+      // } else {
+      //   router.push("/");
+      // }
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed.");
       setMessage("");
     }
   };
+
+  if (isRedirecting) {
+    return <div className="sec-padding text-center">Redirecting...</div>;
+  }
 
   return (
     <PublicOnlyRoute>

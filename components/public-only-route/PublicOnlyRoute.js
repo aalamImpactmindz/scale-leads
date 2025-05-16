@@ -18,7 +18,7 @@ const PublicOnlyRoute = ({ children }) => {
     }
   }, [isLoggedIn, router]);
 
-  if (isLoggedIn === null || isLoggedIn === true) {
+  if (isLoggedIn === true) {
     return null;
   }
 
