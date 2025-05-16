@@ -12,6 +12,7 @@ const PaymentSuccessful = async () => {
     try {
       const response = await axiosInstance.get("/api/user/plan");
       const plan = response.data.plan;
+      console.log(plan);
 
       // Store in localStorage
       localStorage.setItem("plan", JSON.stringify(plan));
