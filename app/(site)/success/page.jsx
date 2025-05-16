@@ -29,7 +29,7 @@ const PaymentSuccessful = async () => {
     }
   };
   useEffect(() => {
-    fetchUsersPlan;
+    fetchUsersPlan();
   }, []);
   return (
     <div className="payment-successful sec-padding">
