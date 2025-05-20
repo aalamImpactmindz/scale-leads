@@ -413,6 +413,14 @@ video {
   border-radius: 8px;
 }
 
+.dashboard .col div {
+  background-image: url("../public/assets/images/bars.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center bottom;
+  padding-bottom: 100px!important;
+}
+
 @media (max-width: 991px) {
   .navbar-toggler {
     border: 0;

@@ -15,6 +15,7 @@ const PageDLeads = () => {
     try {
       const response = await axiosInstance.get("/api/linkedin/leads");
       setLeads(response.data.leads || []);
+      console.log(response.data.leads);
     } catch (err) {
       console.log("Error fetching leads:", err);
       setError("Could not load Leads.");

@@ -113,22 +113,6 @@ const Login = () => {
         }
       };
       await fetchUsersStatus();
-
-      // if (
-      //   decodedToken.form_filled === false ||
-      //   decodedToken.form_filled === "false"
-      // ) {
-      //   router.push("/onboarding");
-      // } else if (
-      //   (decodedToken.form_filled === true ||
-      //     decodedToken.form_filled === "true") &&
-      //   (decodedToken.messages_filled === false ||
-      //     decodedToken.messages_filled === "false")
-      // ) {
-      //   router.push("/messages");
-      // } else {
-      //   router.push("/");
-      // }
     } catch (err) {
       setError(err?.response?.data?.message || "Login failed.");
       setMessage("");

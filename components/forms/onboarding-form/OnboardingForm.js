@@ -125,13 +125,12 @@ const OnboardingForm = ({ onSuccess }) => {
           </Form.Group>
         </Col>
       </Row>
-      <Row className="row-cols-1 g-0 g-md-4">
+      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingObjective">
             <Form.Label>What is your main objective?</Form.Label>
             <Form.Control
-              as="textarea"
-              rows={3}
+              type="text"
               placeholder="Your Objective"
               required
               value={formData.objective}
@@ -141,8 +140,6 @@ const OnboardingForm = ({ onSuccess }) => {
             />
           </Form.Group>
         </Col>
-      </Row>
-      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingYourOffer">
             <Form.Label>What's your offer (your promise)?</Form.Label>
@@ -157,6 +154,8 @@ const OnboardingForm = ({ onSuccess }) => {
             />
           </Form.Group>
         </Col>
+      </Row>
+      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingYourWebsite">
             <Form.Label>Do you have a website?</Form.Label>
@@ -171,8 +170,6 @@ const OnboardingForm = ({ onSuccess }) => {
             />
           </Form.Group>
         </Col>
-      </Row>
-      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingChannel">
             <Form.Label>Which channel do you want to prospect on?</Form.Label>
@@ -187,6 +184,8 @@ const OnboardingForm = ({ onSuccess }) => {
             />
           </Form.Group>
         </Col>
+      </Row>
+      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingMessageCount">
             <Form.Label>How many follow-up messages you want?</Form.Label>
@@ -208,8 +207,6 @@ const OnboardingForm = ({ onSuccess }) => {
             </Form.Select>
           </Form.Group>
         </Col>
-      </Row>
-      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingFollowUpDelay">
             <Form.Label>How much delay between follow-up messages?</Form.Label>
@@ -232,6 +229,8 @@ const OnboardingForm = ({ onSuccess }) => {
             </Form.Select>
           </Form.Group>
         </Col>
+      </Row>
+      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingTone">
             <Form.Label>
@@ -243,24 +242,6 @@ const OnboardingForm = ({ onSuccess }) => {
               value={formData.tone}
               onChange={(e) =>
                 setFormData({ ...formData, tone: e.target.value })
-              }
-            />
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
-        <Col>
-          <Form.Group className="mb-3" controlId="formOnboardingMessages">
-            <Form.Label>Do you already have messages you've used?</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="(optional)"
-              value={formData.existing_messages}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  existing_messages: e.target.value,
-                })
               }
             />
           </Form.Group>
@@ -278,6 +259,25 @@ const OnboardingForm = ({ onSuccess }) => {
                 setFormData({
                   ...formData,
                   competitors: e.target.value,
+                })
+              }
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="row-cols-1 g-0 g-md-4">
+        <Col>
+          <Form.Group className="mb-3" controlId="formOnboardingMessages">
+            <Form.Label>Do you already have messages you've used?</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="(optional)"
+              value={formData.existing_messages}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  existing_messages: e.target.value,
                 })
               }
             />

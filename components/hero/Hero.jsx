@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import imageAppView from "@/public/assets/images/app-view.png";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -20,10 +21,12 @@ const Hero = () => {
               ScaleLeads trouve, contacte et relance tes prospects
               automatiquement sur LinkedIn et Email. Toi, tu closes. C'est tout.
             </p>
-            <Button className="btn-bg text-uppercase mt-2">
-              Démarrer l'essaie gratuit{" "}
-              <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
-            </Button>
+            <Link href="/abonnement">
+              <Button className="btn-bg text-uppercase mt-2">
+                Démarrer l'essaie gratuit{" "}
+                <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
+              </Button>
+            </Link>
             {/* <Button className="btn-main text-uppercase mt-2">Free Trial</Button> */}
           </Col>
           <Col className="d-none d-lg-block">

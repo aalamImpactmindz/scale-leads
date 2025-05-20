@@ -30,8 +30,8 @@ const DSidebar = () => {
     },
     { name: "Campaigns", href: "/dashboard/campaigns", icon: faBullhorn },
     { name: "Leads", href: "/dashboard/leads", icon: faArrowTrendUp },
-    { name: "Invoices", href: "/dashboard/invoices", icon: faReceipt },
-    { name: "Notifications", href: "/dashboard/notifications", icon: faBell },
+    // { name: "Invoices", href: "/dashboard/invoices", icon: faReceipt },
+    // { name: "Notifications", href: "/dashboard/notifications", icon: faBell },
     {
       name: "Settings",
       href: "/dashboard/settings",

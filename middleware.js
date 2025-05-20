@@ -98,6 +98,7 @@ export async function middleware(request) {
 
   // Redirect if user lacks active plan
   if (token && pathname.startsWith("/dashboard") && !hasActivePlan) {
+    console.log("This is working!");
     return NextResponse.redirect(new URL("/abonnement", request.url));
   }
 

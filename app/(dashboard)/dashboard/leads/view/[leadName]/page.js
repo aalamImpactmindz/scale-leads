@@ -16,7 +16,7 @@ const PageViewLead = () => {
         </Row>
         <Row className="g-3">
           <Col md={6}>
-            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Phasellus at commodo turpis. Praesent auctor dui et libero
                 semper porta. Suspendisse potenti. Maecenas vel ipsum tellus.
@@ -31,7 +31,7 @@ const PageViewLead = () => {
             </Card>
           </Col>
           <Col md={6}>
-            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Aenean in lacinia nibh, a tristique urna. Donec non urna vitae
                 urna finibus feugiat. Mauris vitae velit pretium, ultricies
@@ -47,7 +47,7 @@ const PageViewLead = () => {
         </Row>
         <Row className="g-3">
           <Col md={6}>
-            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Aliquam commodo dolor non lacus varius, eu dictum est dictum.
                 Duis ac purus ac risus rutrum finibus. Nam scelerisque felis vel
@@ -61,7 +61,7 @@ const PageViewLead = () => {
             </Card>
           </Col>
           <Col md={6}>
-            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Ut gravida tellus sit amet elementum commodo. In et congue est.
                 Suspendisse volutpat, leo eu sodales varius, sapien leo iaculis
@@ -87,7 +87,7 @@ const PageViewLead = () => {
         </Row>
         <Row className="g-3">
           <Col md={6}>
-            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Phasellus at commodo turpis. Praesent auctor dui et libero
                 semper porta. Suspendisse potenti. Maecenas vel ipsum tellus.
@@ -102,7 +102,7 @@ const PageViewLead = () => {
             </Card>
           </Col>
           <Col md={6}>
-            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Aenean in lacinia nibh, a tristique urna. Donec non urna vitae
                 urna finibus feugiat. Mauris vitae velit pretium, ultricies
@@ -118,7 +118,7 @@ const PageViewLead = () => {
         </Row>
         <Row className="g-3">
           <Col md={6}>
-            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 bg-gray color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Aliquam commodo dolor non lacus varius, eu dictum est dictum.
                 Duis ac purus ac risus rutrum finibus. Nam scelerisque felis vel
@@ -132,7 +132,7 @@ const PageViewLead = () => {
             </Card>
           </Col>
           <Col md={6}>
-            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4">
+            <Card className="mb-2 p-3 d-bg-gradient color-light h-100 rounded-4 border-0">
               <p className="mb-0">
                 Ut gravida tellus sit amet elementum commodo. In et congue est.
                 Suspendisse volutpat, leo eu sodales varius, sapien leo iaculis

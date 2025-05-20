@@ -28,16 +28,18 @@ const Abonnement = () => {
         setMessage(""); // Clear message if has active plan
       }
     } else {
-      setMessage(""); // Clear message if not logged in
+      setMessage("Start with a 7-day Free trial - No commitment."); // Clear message if not logged in
     }
   }, [isLoggedIn]);
-
-  console.log(isLoggedIn);
 
   return (
     <div className="page-abonnement">
       <Container className="mt-3" style={{ marginBottom: "-5vw" }}>
-        {message !== "" && <Alert variant="warning" className="px-3 py-2 small">{message}</Alert>}
+        {message !== "" && (
+          <Alert variant="warning" className="px-3 py-2 small">
+            {message}
+          </Alert>
+        )}
       </Container>
       <Plans />
       <Faqs />

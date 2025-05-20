@@ -68,7 +68,10 @@ const Campaigns = () => {
               <th>#</th>
               <th>Campaign Name</th>
               <th>Target Channels</th>
-              <th>Status</th>
+              <th>Number of Leads</th>
+              <th>Campaign Status</th>
+              <th>Sequences in progress</th>
+              <th>Results</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -85,7 +88,10 @@ const Campaigns = () => {
                   </h6>
                 </td>
                 <td>{campaign.channel}</td>
+                <td>8</td>
+                <td>In progress</td>
                 <td>{campaign.campaign_status}</td>
+                <td>2</td>
                 <td>
                   <Button className="btn-rounded" size="sm">
                     Delete

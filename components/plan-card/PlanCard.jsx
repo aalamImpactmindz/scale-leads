@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { paymentlink } from "@/utils/service/userlogin";
+import Cookies from "js-cookie";
 const PlanCard = ({
   planid,
   title,
@@ -30,12 +31,14 @@ const PlanCard = ({
   }, []);
 
   useEffect(() => {
-    let token = localStorage?.getItem("authToken");
+    let token = Cookies.get("authToken");
     if (token) {
       const decodedToken = jwtDecode(token);
       setemail(decodedToken?.email);
     }
   }, []);
+
+
 
   const handlecheckout = async () => {
     if (!isMounted) return;
