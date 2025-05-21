@@ -7,6 +7,7 @@ import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import axiosInstance from "@/utils/axiosInstance";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const PaymentSuccessful = async () => {
   const fetchUsersPlan = async () => {
@@ -34,8 +35,8 @@ const PaymentSuccessful = async () => {
   };
   useEffect(() => {
     fetchUsersPlan().then(() => {
-      // force reload to ensure middleware picks up cookie
-      window.location.reload();
+      // Refresh to ensure middleware picks up cookie
+      router.refresh();
     });
   }, []);
   return (

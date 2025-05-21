@@ -10,8 +10,10 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isClient, setIsClient] = useState(false);
 
@@ -30,7 +32,7 @@ const Header = () => {
       Cookies.remove("has_active_plan", { path: "/" });
       localStorage.removeItem("plan");
       localStorage.removeItem("expires_at");
-      window.location.reload(); // reload the page
+      router.refresh();
     }
   };
 
