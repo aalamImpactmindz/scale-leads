@@ -9,7 +9,9 @@ import axiosInstance from "@/utils/axiosInstance";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-const PaymentSuccessful = async () => {
+const PaymentSuccessful = () => {
+  const router = useRouter();
+
   const fetchUsersPlan = async () => {
     try {
       const response = await axiosInstance.get("/api/user/plan");
@@ -33,9 +35,10 @@ const PaymentSuccessful = async () => {
       console.log("Error fetching user's plan:", err);
     }
   };
+
   useEffect(() => {
     fetchUsersPlan().then(() => {
-      // Refresh to ensure middleware picks up cookie
+      // Refresh the page to apply new cookie changes (middleware)
       router.refresh();
     });
   }, []);
