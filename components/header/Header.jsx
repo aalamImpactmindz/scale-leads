@@ -8,11 +8,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRightFromBracket,
-  faArrowRightToBracket,
-} from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
 
@@ -30,7 +25,7 @@ const Header = () => {
       setIsLoggedIn(false);
       Cookies.remove("authToken", { path: "/" });
       Cookies.remove("expires_at", { path: "/" });
-      Cookies.remove("form_filled", { path: "/" });
+      Cookies.remove("onboarding_form_filled", { path: "/" });
       Cookies.remove("messages_filled", { path: "/" });
       Cookies.remove("has_active_plan", { path: "/" });
       localStorage.removeItem("plan");

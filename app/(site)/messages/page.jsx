@@ -1,6 +1,6 @@
 "use client";
 import "./messages.css";
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axiosInstance from "@/utils/axiosInstance";
 import Heading from "@/components/heading/Heading";
 import { Container } from "react-bootstrap";
@@ -8,11 +8,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRouter } from "next/navigation";
 import Alert from "react-bootstrap/Alert";
-import { AuthContext } from "@/app/context/Authcontext";
-import ProtectedRoute from "@/components/protected-route/ProtectedRoute";
+import Cookies from "js-cookie";
 
 const Messages = () => {
-  const { isLoggedIn } = useContext(AuthContext);
   const hasSetInitialTone = useRef(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -75,8 +73,26 @@ const Messages = () => {
       if (data.status) {
         setMessage(data.message);
         setError("");
-        router.push("/abonnement");
-        localStorage.setItem("messages_filled", "true");
+
+        // Change messages_filled cookie to true
+        const expiresAt = localStorage.getItem("expires_at");
+        if (expiresAt) {
+          Cookies.set("messages_filled", "true", {
+            expires: new Date(expiresAt),
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+        }
+
+        // Redirect logic
+        const hasActivePlan = Cookies.get("has_active_plan");
+        console.log(hasActivePlan);
+        if (hasActivePlan === false || hasActivePlan === "false") {
+          router.push("/abonnement");
+        } else {
+          router.push("/");
+        }
       } else {
         setMessage(data.message || "Something went wrong.");
       }

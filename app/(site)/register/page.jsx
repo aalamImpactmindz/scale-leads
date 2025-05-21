@@ -5,15 +5,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { userRegister } from "@/utils/service/userlogin";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "@/app/context/Authcontext";
-import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
 import Cookies from "js-cookie";
 
 const Register = () => {
@@ -49,41 +47,43 @@ const Register = () => {
           password: "",
         });
         setConfirmPassword("");
-        console.log("safasdk")
         const decodedToken = jwtDecode(response.token);
         const expiresAtDate = new Date(decodedToken.exp * 1000);
-        localStorage.setItem("authToken", response.token);
-        localStorage.setItem("expires_at", decodedToken.exp);
-        localStorage.setItem("form_filled", decodedToken.form_filled);
-        localStorage.setItem("messages_filled", decodedToken.messages_filled);
-       Cookies.set("authToken", response.token, {
-                expires: expiresAtDate,
-                path: "/", // available across site
-                secure: true, // optional
-                sameSite: "Strict", // optional
-          });
+        Cookies.set("authToken", response.token, {
+          expires: expiresAtDate,
+          path: "/", // available across site
+          secure: true, // optional
+          sameSite: "Strict", // optional
+        });
         Cookies.set("expires_at", decodedToken.exp, {
-                expires: expiresAtDate,
-                path: "/", // available across site
-                secure: true, // optional
-                sameSite: "Strict", // optional
-              });
-      Cookies.set("form_filled", decodedToken.form_filled, {
-                expires: expiresAtDate,
-                path: "/",
-                secure: true,
-                sameSite: "Strict",
-              });
-    Cookies.set("messages_filled", decodedToken.messages_filled, {
-                expires: expiresAtDate,
-                path: "/",
-                secure: true,
-                sameSite: "Strict",
-              });
-        
+          expires: expiresAtDate,
+          path: "/", // available across site
+          secure: true, // optional
+          sameSite: "Strict", // optional
+        });
+        Cookies.set("onboarding_form_filled", decodedToken.form_filled, {
+          expires: expiresAtDate,
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("messages_filled", decodedToken.messages_filled, {
+          expires: expiresAtDate,
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("has_active_plan", "false", {
+          expires: expiresAtDate,
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        localStorage.setItem("expires_at", new Date(decodedToken.exp * 1000));
+
         setIsLoggedIn(true);
-        router.push('/onboarding');
-     
+        router.push("/onboarding");
+
         // extra
       } else {
         setMessage(response?.message);
@@ -95,103 +95,98 @@ const Register = () => {
   };
 
   return (
-    // <PublicOnlyRoute>
-      <div className="page-register sec-padding">
-        <Container fluid="xl">
-          <Heading title="My Account" />
-          <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
-            <Col>
-              <div className="bg-gray p-3 p-lg-4">
-                <h4 className="color-light">Register</h4>
-                <p>Start your journey with us—it's quick and simple.</p>
-                <Form className="mt-4" onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3" controlId="formRegisterFullName">
-                    <Form.Label>Full Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Jane Smith"
-                      required
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formRegisterEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="jane@framer.com"
-                      required
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formRegisterPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="********"
-                      required
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="formRegisterConfirmPassword"
+    <div className="page-register sec-padding">
+      <Container fluid="xl">
+        <Heading title="My Account" />
+        <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
+          <Col>
+            <div className="bg-gray p-3 p-lg-4">
+              <h4 className="color-light">Register</h4>
+              <p>Start your journey with us—it's quick and simple.</p>
+              <Form className="mt-4" onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formRegisterFullName">
+                  <Form.Label>Full Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Jane Smith"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formRegisterEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="jane@framer.com"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formRegisterPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="********"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="formRegisterConfirmPassword"
+                >
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="********"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </Form.Group>
+                <Button className="btn-main" type="submit">
+                  Register
+                </Button>
+                {message && (
+                  <Alert
+                    variant="success"
+                    className="mt-3 small py-2 rounded-0"
                   >
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="********"
-                      required
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                  </Form.Group>
-                  <Button className="btn-main" type="submit">
-                    Register
-                  </Button>
-                  {message && (
-                    <Alert
-                      variant="success"
-                      className="mt-3 small py-2 rounded-0"
-                    >
-                      {message}
-                    </Alert>
-                  )}
-                  {error && (
-                    <Alert
-                      variant="danger"
-                      className="mt-3 small py-2 rounded-0"
-                    >
-                      {error}
-                    </Alert>
-                  )}
-                </Form>
-              </div>
-            </Col>
-            <Col>
-              <div className="bg-gray p-3 p-lg-4 h-100">
-                <h4 className="color-light">Already Have an Account?</h4>
-                <p>
-                  Log in to access your account, check your orders, and continue
-                  where you left off.
-                </p>
-                <Link href="/login" className="d-inline-block">
-                  <Button className="btn-main">Login</Button>
-                </Link>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    // </PublicOnlyRoute>
+                    {message}
+                  </Alert>
+                )}
+                {error && (
+                  <Alert variant="danger" className="mt-3 small py-2 rounded-0">
+                    {error}
+                  </Alert>
+                )}
+              </Form>
+            </div>
+          </Col>
+          <Col>
+            <div className="bg-gray p-3 p-lg-4 h-100">
+              <h4 className="color-light">Already Have an Account?</h4>
+              <p>
+                Log in to access your account, check your orders, and continue
+                where you left off.
+              </p>
+              <Link href="/login" className="d-inline-block">
+                <Button className="btn-main">Login</Button>
+              </Link>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

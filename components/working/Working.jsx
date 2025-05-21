@@ -1,10 +1,6 @@
 import React from "react";
 import WorkingCard from "../working-card/WorkingCard";
 import { Container, Row, Col } from "react-bootstrap";
-import logo from "@/public/assets/images/logo.png";
-import arrowTopLeft from "@/public/assets/images/arrow-top-left.svg";
-import userMultiple from "@/public/assets/images/user-multiple.svg";
-import rocket from "@/public/assets/images/rocket.svg";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faMessage } from "@fortawesome/free-regular-svg-icons";
 import { faRotate } from "@fortawesome/free-solid-svg-icons";

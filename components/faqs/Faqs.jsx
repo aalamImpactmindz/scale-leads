@@ -1,6 +1,6 @@
 import "./faqs.css";
 import React from "react";
-import { Container, Row, Col, Accordion } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Heading from "../heading/Heading";
 import AllFaqs from "../all-faqs/AllFaqs";
 

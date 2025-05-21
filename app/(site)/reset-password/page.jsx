@@ -4,12 +4,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Link from "next/link";
-import PublicOnlyRoute from "@/components/public-only-route/PublicOnlyRoute";
 
 const ResetPassword = () => {
   return (
-    <PublicOnlyRoute>
       <div className="page-reset-password sec-padding">
         <Container fluid="xl">
           <Heading title="Reset Password" />
@@ -37,7 +34,6 @@ const ResetPassword = () => {
           </Row>
         </Container>
       </div>
-    </PublicOnlyRoute>
   );
 };
 

@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
@@ -38,12 +37,11 @@ const PlanCard = ({
     }
   }, []);
 
-
-
   const handlecheckout = async () => {
     if (!isMounted) return;
 
     if (isLoggedIn) {
+      const hasActivePlan = Cookies.get("has_active_plan");
       const stripe = await loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
       );
@@ -61,7 +59,7 @@ const PlanCard = ({
         console.log(err);
       }
     } else {
-      // router.push("/login");
+      router.push("/login");
     }
   };
 

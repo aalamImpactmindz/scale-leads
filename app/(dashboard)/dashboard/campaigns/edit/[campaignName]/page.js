@@ -1,9 +1,9 @@
 "use client";
-
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { updateUserOnboardingForm } from "@/utils/service/userlogin";
+import Cookies from "js-cookie";
 
 const EditCampaign = () => {
   const router = useRouter();
@@ -64,7 +64,17 @@ const EditCampaign = () => {
           competitors: formData.competitors || "",
           campaign_status: formData.campaign_status,
         });
-        localStorage.setItem("form_filled", "true");
+
+        // Change onboarding_form_filled cookie to true
+        const expiresAt = localStorage.getItem("expires_at");
+        if (expiresAt) {
+          Cookies.set("onboarding_form_filled", "true", {
+            expires: new Date(expiresAt),
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+        }
       } else {
         setMessage(response?.message);
       }

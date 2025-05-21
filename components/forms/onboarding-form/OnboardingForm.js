@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { userOnboardingForm } from "@/utils/service/userlogin";
+import Cookies from "js-cookie";
 
 const OnboardingForm = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -45,6 +46,18 @@ const OnboardingForm = ({ onSuccess }) => {
           existing_messages: "",
           competitors: "",
         });
+
+        // Change onboarding_form_filled cookie to true
+        const expiresAt = localStorage.getItem("expires_at");
+        if (expiresAt) {
+          Cookies.set("onboarding_form_filled", "true", {
+            expires: new Date(expiresAt),
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+        }
+
         if (onSuccess) onSuccess(); // trigger navigation or other behavior
       } else {
         setMessage(response?.message);

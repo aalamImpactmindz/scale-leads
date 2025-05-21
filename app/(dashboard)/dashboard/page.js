@@ -1,5 +1,5 @@
 "use client";
-import { Card, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 export default function DashboardHome() {
   return (

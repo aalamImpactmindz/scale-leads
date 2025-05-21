@@ -1,6 +1,6 @@
 import "./solutions.css";
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import imageSolution from "@/public/assets/images/solution.png";
 
@@ -29,18 +29,7 @@ const Solution = () => {
                   Tu veux plus de rendez-vous sans t'épuiser ? C'est bon, t'as
                   trouvé.
                 </p>
-                {/* <ol className="d-flex flex-column gap-3 fs-5">
-                  <li>You fill out a form with your target audience.</li>
-                  <li>
-                    And ScaleLeads automatically sends messages, follows up, and
-                    handles replies.
-                  </li>
-                </ol> */}
               </div>
-              {/* <h4 className="my-4 fw-light">Zero effort. Zero friction.</h4> */}
-              {/* <Button className="btn-main text-uppercase mb-5 mb-lg-0">
-                See a free demo!
-              </Button> */}
             </Col>
           </Row>
         </div>

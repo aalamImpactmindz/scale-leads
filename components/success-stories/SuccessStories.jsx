@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Heading from "../heading/Heading";
 import Testimonials from "../testimonials/Testimonials";
 
 const SuccessStories = ({ customClass }) => {

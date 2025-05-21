@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/app/context/Authcontext";
 import { Alert } from "react-bootstrap";
 import { Container } from "react-bootstrap";
+import Cookies from "js-cookie";
 
 const Abonnement = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -15,14 +16,10 @@ const Abonnement = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      // Read cookies
-      const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-        const [name, value] = cookie.split("=");
-        acc[name] = value;
-        return acc;
-      }, {});
+      // Check Plan
+      const hasActivePlan = Cookies.get("has_active_plan");
 
-      if (!cookies.has_active_plan || cookies.has_active_plan !== "true") {
+      if (hasActivePlan === "false" || hasActivePlan === false) {
         setMessage("You don't have an active plan. Please purchase a plan.");
       } else {
         setMessage(""); // Clear message if has active plan

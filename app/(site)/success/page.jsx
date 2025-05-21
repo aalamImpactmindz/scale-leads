@@ -18,13 +18,16 @@ const PaymentSuccessful = async () => {
       // Store in localStorage
       localStorage.setItem("plan", JSON.stringify(plan));
 
-      // Store plan in cookies
-      Cookies.set("has_active_plan", "true", {
-        expires: Number(localStorage.getItem("expires_at")),
-        path: "/",
-        secure: true,
-        sameSite: "Strict",
-      });
+      // Change has_active_plan cookie to true
+      const expiresAt = localStorage.getItem("expires_at");
+      if (expiresAt) {
+        Cookies.set("has_active_plan", "true", {
+          expires: new Date(expiresAt),
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+      }
     } catch (err) {
       console.log("Error fetching user's plan:", err);
     }
