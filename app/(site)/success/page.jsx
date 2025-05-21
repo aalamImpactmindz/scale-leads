@@ -33,7 +33,10 @@ const PaymentSuccessful = async () => {
     }
   };
   useEffect(() => {
-    fetchUsersPlan();
+    fetchUsersPlan().then(() => {
+      // force reload to ensure middleware picks up cookie
+      window.location.reload();
+    });
   }, []);
   return (
     <div className="payment-successful sec-padding">

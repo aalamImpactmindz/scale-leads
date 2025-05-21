@@ -38,7 +38,6 @@ export async function middleware(request) {
     pathname.startsWith("/dashboard") &&
     (hasActivePlan === false || hasActivePlan === "false")
   ) {
-    console.log("This is working!");
     return NextResponse.redirect(new URL("/abonnement", request.url));
   }
 

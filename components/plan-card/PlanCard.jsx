@@ -45,6 +45,7 @@ const PlanCard = ({
       const stripe = await loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
       );
+
       let body = {
         priceId: planid,
         customerEmail: email,
@@ -54,7 +55,6 @@ const PlanCard = ({
         const response = await paymentlink(body);
         const sessionId = response.url;
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
-        console.log(response);
       } catch (err) {
         console.log(err);
       }
