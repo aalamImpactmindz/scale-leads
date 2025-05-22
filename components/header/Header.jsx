@@ -25,13 +25,10 @@ const Header = () => {
   const handleLogout = () => {
     if (isClient) {
       setIsLoggedIn(false);
-      Cookies.remove("authToken", { path: "/" });
-      Cookies.remove("expires_at", { path: "/" });
-      Cookies.remove("onboarding_form_filled", { path: "/" });
-      Cookies.remove("messages_filled", { path: "/" });
-      Cookies.remove("has_active_plan", { path: "/" });
-      localStorage.removeItem("plan");
-      localStorage.removeItem("expires_at");
+      Object.keys(Cookies.get()).forEach((cookieName) => {
+        Cookies.remove(cookieName, { path: "/" });
+      });
+      localStorage.clear();
       router.refresh();
     }
   };
@@ -88,22 +85,22 @@ const Header = () => {
               </Link>
             </Nav>
           </Navbar.Collapse>
-          {!isLoggedIn && (
+          {(isLoggedIn === "false" || isLoggedIn === false) && (
             <Link href="/login" className="ms-auto ms-lg-4">
               <Button className="btn-main">Login</Button>
             </Link>
           )}
-          {isLoggedIn && (
+          {(isLoggedIn === "true" || isLoggedIn === true) && (
             <Link href="/" className="ms-auto ms-lg-4" onClick={handleLogout}>
               <Button className="btn-main">Logout</Button>
             </Link>
           )}
-          {!isLoggedIn && (
+          {(isLoggedIn === "false" || isLoggedIn === false) && (
             <Link href="/register" className="ms-2 ms-lg-4">
               <Button className="btn-main">Sign up</Button>
             </Link>
           )}
-          {isLoggedIn && (
+          {(isLoggedIn === "true" || isLoggedIn === true) && (
             <Link href="/dashboard" className="ms-2 ms-lg-4">
               <Button className="btn-main">Dashboard</Button>
             </Link>

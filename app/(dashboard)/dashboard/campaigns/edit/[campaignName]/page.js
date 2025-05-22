@@ -89,7 +89,7 @@ const EditCampaign = () => {
   return (
     <div className="edit-campaign mb-4">
       <h2 className="mb-4 fw-bold">Edit Campaign: {formData.campaign_name}</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="d-bg-gradient p-4 rounded-2">
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>
             <Form.Group className="mb-3">

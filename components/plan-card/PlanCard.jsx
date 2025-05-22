@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { paymentlink } from "@/utils/service/userlogin";
 import Cookies from "js-cookie";
+
 const PlanCard = ({
   planid,
   title,
@@ -40,7 +41,7 @@ const PlanCard = ({
   const handlecheckout = async () => {
     if (!isMounted) return;
 
-    if (isLoggedIn) {
+    if (isLoggedIn === "true" || isLoggedIn === true) {
       const hasActivePlan = Cookies.get("has_active_plan");
       const stripe = await loadStripe(
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -55,6 +56,18 @@ const PlanCard = ({
         const response = await paymentlink(body);
         const sessionId = response.url;
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
+
+        // Change can_access_protected_pages cookie to true
+        const expiresAt = localStorage.getItem("expires_at");
+        if (expiresAt) {
+          Cookies.set("can_access_protected_pages", "true", {
+            expires: new Date(expiresAt),
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+        }
+        router.refresh();
       } catch (err) {
         console.log(err);
       }

@@ -33,12 +33,14 @@ export const AuthProvider = ({ children }) => {
       const expiresAt = Cookies.get("expires_at");
       if (!expiresAt) return;
 
-      const currentTime = Math.floor(Date.now() / 1000);
+      const currentTime = Math.floor(Date.now() / 1000) + 2;
       const expiresAtNumber = Number(expiresAt);
+      console.log(currentTime >= expiresAtNumber);
 
       if (currentTime >= expiresAtNumber && !hasReloaded.current) {
         hasReloaded.current = true; // prevent multiple reloads
         setIsLoggedIn(false); // update state to trigger cleanup
+        localStorage.clear(); // clear localstorage;
         window.location.reload(); // reload the page
       }
     }, 2000);

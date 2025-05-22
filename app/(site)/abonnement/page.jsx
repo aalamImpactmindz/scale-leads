@@ -15,7 +15,7 @@ const Abonnement = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn === "true" || isLoggedIn === true) {
       // Check Plan
       const hasActivePlan = Cookies.get("has_active_plan");
 

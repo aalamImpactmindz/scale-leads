@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   const token = request.cookies.get("authToken")?.value;
-  const onboardingFormFilled =
-    request.cookies.get("onboarding_form_filled")?.value === "true";
-  const messagesFilled =
-    request.cookies.get("messages_filled")?.value === "true";
-  const hasActivePlan =
-    request.cookies.get("has_active_plan")?.value === "true";
+  const onboardingFormFilled = request.cookies.get(
+    "onboarding_form_filled"
+  )?.value;
+  const messagesFilled = request.cookies.get("messages_filled")?.value;
+  const hasActivePlan = request.cookies.get("has_active_plan")?.value;
+  const canAccessProtectedPages = request.cookies.get(
+    "can_access_protected_pages"
+  )?.value;
   const { pathname } = request.nextUrl;
 
   const res = NextResponse.next();
@@ -27,7 +29,9 @@ export async function middleware(request) {
     !token &&
     (pathname.startsWith("/dashboard") ||
       pathname.startsWith("/onboarding") ||
-      pathname.startsWith("/messages"))
+      pathname.startsWith("/messages") ||
+      pathname === "/success" ||
+      pathname === "/cancel")
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -44,7 +48,7 @@ export async function middleware(request) {
   // Redirect based on onboarding and messages filled status
   if (
     token &&
-    onboardingFormFilled &&
+    (onboardingFormFilled === true || onboardingFormFilled === "true") &&
     (messagesFilled === false || messagesFilled === "false") &&
     pathname.startsWith("/onboarding")
   ) {
@@ -53,8 +57,8 @@ export async function middleware(request) {
 
   if (
     token &&
-    onboardingFormFilled &&
-    messagesFilled &&
+    (onboardingFormFilled === true || onboardingFormFilled === "true") &&
+    (messagesFilled === true || messagesFilled === "true") &&
     (hasActivePlan === false || hasActivePlan === "false") &&
     (pathname.startsWith("/onboarding") || pathname.startsWith("/messages"))
   ) {
@@ -71,10 +75,20 @@ export async function middleware(request) {
 
   if (
     token &&
-    onboardingFormFilled &&
-    messagesFilled &&
-    hasActivePlan &&
+    (onboardingFormFilled === true || onboardingFormFilled === "true") &&
+    (messagesFilled === true || messagesFilled === "true") &&
+    (hasActivePlan === true || hasActivePlan === "true") &&
     (pathname.startsWith("/onboarding") || pathname.startsWith("/messages"))
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Redirect user from protected pages
+  if (
+    token &&
+    (canAccessProtectedPages === false ||
+      canAccessProtectedPages === "false") &&
+    (pathname.startsWith("/success") || pathname.startsWith("/cancel"))
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -90,5 +104,7 @@ export const config = {
     "/login",
     "/register",
     "/reset-password",
+    "/success",
+    "/cancel",
   ],
 };

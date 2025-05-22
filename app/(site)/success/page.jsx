@@ -21,10 +21,16 @@ const PaymentSuccessful = () => {
       // Store in localStorage
       localStorage.setItem("plan", JSON.stringify(plan));
 
-      // Change has_active_plan cookie to true
+      // Change has_active_plan cookie to true and can_access_protected_pages cookie to false
       const expiresAt = localStorage.getItem("expires_at");
       if (expiresAt) {
         Cookies.set("has_active_plan", "true", {
+          expires: new Date(expiresAt),
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        Cookies.set("can_access_protected_pages", "false", {
           expires: new Date(expiresAt),
           path: "/",
           secure: true,

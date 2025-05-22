@@ -41,7 +41,7 @@ const Plans = ({ customClass }) => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn === "true" || isLoggedIn === true) {
       const cookies = document.cookie.split("; ").reduce((acc, current) => {
         const [name, value] = current.split("=");
         acc[name] = value;
