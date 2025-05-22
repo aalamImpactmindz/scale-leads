@@ -30,12 +30,12 @@ const PaymentSuccessful = () => {
           secure: true,
           sameSite: "Strict",
         });
-        Cookies.set("can_access_protected_pages", "false", {
-          expires: new Date(expiresAt),
-          path: "/",
-          secure: true,
-          sameSite: "Strict",
-        });
+        // Cookies.set("can_access_protected_pages", "false", {
+        //   expires: new Date(expiresAt),
+        //   path: "/",
+        //   secure: true,
+        //   sameSite: "Strict",
+        // });
       }
     } catch (err) {
       console.log("Error fetching user's plan:", err);

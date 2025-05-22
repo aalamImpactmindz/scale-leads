@@ -7,9 +7,9 @@ export async function middleware(request) {
   )?.value;
   const messagesFilled = request.cookies.get("messages_filled")?.value;
   const hasActivePlan = request.cookies.get("has_active_plan")?.value;
-  const canAccessProtectedPages = request.cookies.get(
-    "can_access_protected_pages"
-  )?.value;
+  // const canAccessProtectedPages = request.cookies.get(
+  //   "can_access_protected_pages"
+  // )?.value;
   const { pathname } = request.nextUrl;
 
   const res = NextResponse.next();
@@ -84,14 +84,14 @@ export async function middleware(request) {
   }
 
   // Redirect user from protected pages
-  if (
-    token &&
-    (canAccessProtectedPages === false ||
-      canAccessProtectedPages === "false") &&
-    (pathname.startsWith("/success") || pathname.startsWith("/cancel"))
-  ) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (
+  //   token &&
+  //   (canAccessProtectedPages === false ||
+  //     canAccessProtectedPages === "false") &&
+  //   (pathname.startsWith("/success") || pathname.startsWith("/cancel"))
+  // ) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   return res;
 }

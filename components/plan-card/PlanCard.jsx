@@ -58,16 +58,16 @@ const PlanCard = ({
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
 
         // Change can_access_protected_pages cookie to true
-        const expiresAt = localStorage.getItem("expires_at");
-        if (expiresAt) {
-          Cookies.set("can_access_protected_pages", "true", {
-            expires: new Date(expiresAt),
-            path: "/",
-            secure: true,
-            sameSite: "Strict",
-          });
-        }
-        router.refresh();
+        // const expiresAt = localStorage.getItem("expires_at");
+        // if (expiresAt) {
+        //   Cookies.set("can_access_protected_pages", "true", {
+        //     expires: new Date(expiresAt),
+        //     path: "/",
+        //     secure: true,
+        //     sameSite: "Strict",
+        //   });
+        // }
+        // router.refresh();
       } catch (err) {
         console.log(err);
       }
