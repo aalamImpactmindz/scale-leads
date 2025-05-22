@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
 
       const currentTime = Math.floor(Date.now() / 1000) + 2;
       const expiresAtNumber = Number(expiresAt);
-      console.log(currentTime >= expiresAtNumber);
 
       if (currentTime >= expiresAtNumber && !hasReloaded.current) {
         hasReloaded.current = true; // prevent multiple reloads

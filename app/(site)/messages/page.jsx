@@ -87,7 +87,6 @@ const Messages = () => {
 
         // Redirect logic
         const hasActivePlan = Cookies.get("has_active_plan");
-        console.log(hasActivePlan);
         if (hasActivePlan === false || hasActivePlan === "false") {
           router.push("/abonnement");
         } else {

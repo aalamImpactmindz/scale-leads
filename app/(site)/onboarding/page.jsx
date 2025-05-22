@@ -3,8 +3,10 @@ import "./onboarding.css";
 import React from "react";
 import { Container } from "react-bootstrap";
 import OnboardingForm from "@/components/forms/onboarding-form/OnboardingForm";
+import { useRouter } from "next/navigation";
 
 const Onboarding = () => {
+  const router = useRouter();
   return (
     <div className="page-onboarding sec-padding">
       <Container fluid="xl">
