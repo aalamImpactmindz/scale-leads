@@ -29,9 +29,7 @@ export async function middleware(request) {
     !token &&
     (pathname.startsWith("/dashboard") ||
       pathname.startsWith("/onboarding") ||
-      pathname.startsWith("/messages") ||
-      pathname === "/success" ||
-      pathname === "/cancel")
+      pathname.startsWith("/messages"))
   ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
