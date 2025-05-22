@@ -10,10 +10,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
-import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isClient, setIsClient] = useState(false);
 
@@ -29,7 +27,7 @@ const Header = () => {
         Cookies.remove(cookieName, { path: "/" });
       });
       localStorage.clear();
-      router.refresh();
+      window.location.href = "/login";
     }
   };
 
