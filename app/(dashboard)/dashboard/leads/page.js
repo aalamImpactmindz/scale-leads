@@ -44,7 +44,9 @@ const PageDLeads = () => {
           {error}
         </Alert>
       ) : leads.length === 0 ? (
-        <p className="text-center py-5">No leads found.</p>
+        <Alert variant="warning" className="px-3 py-2 small">
+          No leads found.
+        </Alert>
       ) : (
         <Table striped hover responsive className="mb-0 small">
           <thead className="table-dark">

@@ -14,7 +14,13 @@ const Onboarding = () => {
           <h4 className="color-light mb-4 fw-bold">
             Custom Client Onboarding Form
           </h4>
-          <OnboardingForm onSuccess={() => router.push("/messages")} />
+          <OnboardingForm
+            onSuccess={() => {
+              setTimeout(() => {
+                router.push("/messages");
+              }, 2000);
+            }}
+          />
         </div>
       </Container>
     </div>
