@@ -34,7 +34,7 @@ export default function DashboardHome() {
                       Lorem ipsum dolor sit
                     </p>
                   </Col>
-                  <Col md={5}>
+                  <Col md={5} className="d-flex flex-column align-items-end">
                     <AnimatedProgressbar value={66} strokeColor="#29003b" />
                     <p className="mb-0 text-white text-opacity-75 small mt-2">
                       Aliqua massa arcu
@@ -61,7 +61,7 @@ export default function DashboardHome() {
                       Lorem ipsum dolor sit
                     </p>
                   </Col>
-                  <Col md={5}>
+                  <Col md={5} className="d-flex flex-column align-items-end">
                     <AnimatedProgressbar value={41} strokeColor="#000957" />
                     <p className="mb-0 text-white text-opacity-75 small mt-2">
                       Aliqua massa arcu
