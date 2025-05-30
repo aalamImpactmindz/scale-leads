@@ -11,7 +11,7 @@ const blogBuildingANavigationComponent = () => {
       <Container fluid="xl">
         <Heading title="Building a Navigation Component with Variables" />
         <div className="ratio ratio-16x9 mb-3">
-          
+          <Image
             src={imageBlog4}
             alt="Blog"
             fill
