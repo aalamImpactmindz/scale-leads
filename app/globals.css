@@ -413,12 +413,12 @@ video {
   border-radius: 8px;
 }
 
-.dashboard .col div {
-  background-image: url("../public/assets/images/bars.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center bottom;
-  padding-bottom: 100px!important;
+.bg-gradient-purple {
+  background-image: linear-gradient(to right, #470d67, #8500b5);
+}
+
+.bg-gradient-blue {
+  background-image: linear-gradient(to right, #344CB7, #577BC1);
 }
 
 @media (max-width: 991px) {

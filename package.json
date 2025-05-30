@@ -23,7 +23,9 @@
     "next": "15.2.5",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
+    "react-circular-progressbar": "^2.2.0",
     "react-dom": "^19.0.0",
+    "react-spring": "^10.0.1",
     "stripe": "^18.0.0",
     "swiper": "^11.2.6"
   }
