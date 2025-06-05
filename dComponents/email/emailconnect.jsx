@@ -24,7 +24,7 @@ const EmailConnect = () => {
   const { data: session } = useSession();
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
- 
+
   const [isMicrosoftConnected, setIsMicrosoftConnected] = useState(false);
   const [showSmtpModal, setShowSmtpModal] = useState(false); // 🔑
   const [emaildata, setemaildata] = useState([]);
@@ -36,7 +36,7 @@ const EmailConnect = () => {
   const [selectedsmid, setselectedsmid] = useState();
   const [outlookdata, setoutlookdata] = useState([]);
   const { smtp, setsmtp } = useContext(AuthContext);
-  const[existsmtp,setexistsmtp] = useState([]);
+  const [existsmtp, setexistsmtp] = useState([]);
   useEffect(() => {
 
 
@@ -68,17 +68,17 @@ const EmailConnect = () => {
     setShowSmtpModal(false); // 🔑 Close modal
   };
 
-useEffect(()=>{
-  if(session){
-    
-     
+  useEffect(() => {
+    if (session) {
+
+
     setIsConnected(true);
-    const expiresAt = new Date(Date.now() + 60* 60 * 1000);
-   Cookies.set("gmail_refresh_token",session.refreshToken,{expires:expiresAt})
-   Cookies.set("gexpire",session.expiresAt,{expires:expiresAt});
-    
-     Cookies.set("gmail_user",session.user.email,{expires:expiresAt});
- const syncTokenToBackend = async () => {
+      const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+      Cookies.set("gmail_refresh_token", session.refreshToken, { expires: expiresAt })
+      Cookies.set("gexpire", session.expiresAt, { expires: expiresAt });
+            Cookies.set("gmail_access_token", session.accessToken, { expires: 7 });
+      Cookies.set("gmail_user", session.user.email, { expires: expiresAt });
+      const syncTokenToBackend = async () => {
         try {
           const response = await axiosInstance.post("/api/email-token", {
             access_token: session.accessToken,
@@ -90,40 +90,45 @@ useEffect(()=>{
           });
 
           if (response.data?.status) {
+            setIsConnected(true);
             Cookies.set("gmail_access_token", session.accessToken, { expires: 7 });
           }
         } catch (error) {
-          console.error("❌ Failed to send token to backend:", error);
+          if (error.response?.status === 409) {
+            console.warn("Token already exists, skipping...");
+          } else {
+            console.error("❌ Token sync failed:", error);
+          }
         }
       };
 
       //check Cookies 
-    let flag =   Cookies.get("gmail_access_token");
-    if(!flag){
-      syncTokenToBackend();
+      let flag = Cookies.get("gmail_access_token");
+      if (!flag) {
+        syncTokenToBackend();
+      }
+
+
+
+
+
+
+
+
+
     }
+  }, [session])
 
+  const handlegmaillogin = async () => {
+    try {
+      await signIn("google", {
+        callbackUrl: "/dashboard",
+      });
 
-
-
-
-
-
-
-
+    } catch (err) {
+      console.error("❌ Gmail login failed:", err);
+    }
   }
-},[session])
-
-const handlegmaillogin = async()=>{
-   try {
-    await signIn("google", {
-      callbackUrl: "/dashboard", 
-    });
-
-  } catch (err) {
-    console.error("❌ Gmail login failed:", err);
-  }
-}
 
 
   const handleMicrosoftLogin = async () => {
@@ -149,11 +154,11 @@ const handlegmaillogin = async()=>{
       const expires_in = user?.stsTokenManager?.expirationTime;
 
       let email = user?.email;
-  const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-  Cookies.set("microsoft_refresh_token",refresh_token,{expires:expiresAt})
-  Cookies.set("mexpire",expires_in,{expires:expiresAt});
+      const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+      Cookies.set("microsoft_refresh_token", refresh_token, { expires: expiresAt })
+      Cookies.set("mexpire", expires_in, { expires: expiresAt });
 
-  Cookies.set("ms_email",user.email,{expires:expiresAt});
+      Cookies.set("ms_email", user.email, { expires: expiresAt });
 
 
 
@@ -212,20 +217,20 @@ const handlegmaillogin = async()=>{
     }
   }
 
-const checkexistsmtp = async()=>{
-  try{
-     let response = await axiosInstance.get('/api/smtps');
-  const {data} = response;
-if(response?.status===200){
-setexistsmtp(data?.data);
-}
+  const checkexistsmtp = async () => {
+    try {
+      let response = await axiosInstance.get('/api/smtps');
+      const { data } = response;
+      if (response?.status === 200) {
+        setexistsmtp(data?.data);
+      }
 
 
-  
-  }catch(err){
-    console.log(err);
+
+    } catch (err) {
+      console.log(err);
+    }
   }
-}
 
   useEffect(() => {
     const getCookies = Cookies.get("microsoft_access_token");
@@ -248,7 +253,7 @@ setexistsmtp(data?.data);
     if (id) {
       setselectedid(id);
     }
-    if(smid){
+    if (smid) {
       setselectedsmid(smid);
     }
     if (mid) {
@@ -266,16 +271,16 @@ setexistsmtp(data?.data);
       const { data } = response;
 
       if (data?.status) {
-          const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
- 
- 
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 
-        Cookies.set("gmail_user",item?.email_id,{expires:expiresAt});
+
+
+        Cookies.set("gmail_user", item?.email_id, { expires: expiresAt });
         Cookies.set("gmail_access_token", data?.access_token, { expires: 7 });
-          Cookies.set("gmail_refresh_token",item?.refresh_token,{expires:expiresAt})
-   Cookies.set("gexpire",item?.expires_in,{expires:expiresAt});
+        Cookies.set("gmail_refresh_token", item?.refresh_token, { expires: expiresAt })
+        Cookies.set("gexpire", item?.expires_in, { expires: expiresAt });
 
-   
+
 
         setIsConnected(true);
         Cookies.set('selectedid', item?.id);
@@ -295,15 +300,15 @@ setexistsmtp(data?.data);
 
     try {
 
-           Cookies.set('uapppas',item?.app_password);
-            Cookies.set('uemail',item?.email);
+      Cookies.set('uapppas', item?.app_password);
+      Cookies.set('uemail', item?.email);
 
-        setsmtp(true);
-        Cookies.set('selectedsmid', item?.id);
-        setselectedsmid(item?.id);
-      }
+      setsmtp(true);
+      Cookies.set('selectedsmid', item?.id);
+      setselectedsmid(item?.id);
+    }
 
-     catch (err) {
+    catch (err) {
       console.log(err);
     }
 
@@ -342,6 +347,7 @@ setexistsmtp(data?.data);
       if (provider === "gmail") {
         Cookies.remove("gmail_access_token");
         Cookies.remove('selectedid');
+        await signOut()
         setIsConnected(false);
         setShowDropdown(false);
 
@@ -367,97 +373,46 @@ setexistsmtp(data?.data);
 
   return (
     <>
-      <div className="container bg-white rounded-4 border p-4 shadow-sm mt-5">
-        <h5 className="fw-bold mb-4 text-black ">Connect your Email account (Choose any one) </h5>
+      <div className="container custombackgrond rounded-4 border p-4 shadow-sm mt-5">
+        <h5 className="fw-bold mb-4 text-white ">Connect your Email account (Choose any one) </h5>
 
         <div className="d-flex gap-3 mt-3 flex-wrap">
           {/* Gmail Box */}
-          <div className="flex-fill d-flex justify-content-between align-items-center border rounded-3 px-4 py-3" style={{position:"relative"}}>
-            {/* Left: Icon and Text */}
-            <div className="d-flex align-items-center gap-1">
-              <Image src={login} alt="Login Icon" width={35} height={35} className="me-2">
-
-              </Image>
-              <div>
-                <div className="fw-semibold text-black">Log in using SMTP (email and app password) </div>
-                <div className="text-muted small">
-                  {smtp ? "you're connected with SMTP account" : "You're not connected with  SMTP account"}
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Button */}
-            <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary d-flex align-items-center gap-1 px-4 rounded-pill">
-              {smtp ? 'Connected' : 'Log in'}
-            </button>
-            {!isMicrosoftConnected && !isConnected && existsmtp?.length > 0 && (<FontAwesomeIcon icon={faChevronDown} className="text-primary drop_icon " onClick={() => setShowsmDropdown(prev => !prev)} />)}
-
-
-            {showsmDropdown && (
-              <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
-                {existsmtp?.length > 0 && existsmtp?.map((item) => {
-                  return (
-                    <div className=" " key={item.id}>
-                      <div className="d-flex align-items-center justify-content-between mt-3  ">
-                        <div className="text-muted d-block small mb-1">{item?.email}</div>
-                           <div className="d-flex gap-3">
-                                <button disabled={smtp} onClick={() => handleexistingsmtp(item)}
-                          className="btn btn-primary gap-2 px-4 rounded-pill"
-                        >
-                          {item?.id == selectedsmid && smtp ? 'Connected' : 'Continue'}
-
-
-
-                        </button>
-
-                        {item?.id == selectedsmid && smtp && (
-                          <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
-                            <Image src={remove} alt="Connected" width={22} height={22} />
-                          </span>
-                        )}
-                           </div>
-                      </div>
-
-
-                    </div>
-                  )
-
-
-
-
-
-                })}
-
-
-
-              </div>
-            )}
-
-          </div>
-
-          <div className="flex-fill d-flex justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
+          <div className=" flex-fill custombackgroundcard d-flex justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
             {/* Left: Icon and Text */}
             <div className="d-flex align-items-center gap-3">
               <Image src={gmailicon} alt="Gmail Icon" width={35} height={35} className="me-2">
 
               </Image>
               <div>
-                <div className="fw-semibold text-black">Log in using Gmail</div>
-                <div className="text-muted small">{isConnected ? 'Connected to Gmail' : 'You are not connected to Gmail'}</div>
+                <div className="fw-semibold text-white">Log in using Gmail</div>
+                <div className="text-white small">{isConnected ? 'Connected to Gmail' : 'You are not connected to Gmail'}</div>
               </div>
             </div>
 
             {/* Right: Button */}
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlegmaillogin}
-              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill"
+              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
             >
-              {isConnected ? 'Connected' : 'Log in'}
-
+              {isConnected ? 'Connected' : 'Log in'} 
             </button>
 
+{isConnected ? (
+  <span onClick={() => handledisconnect('gmail')} className="d-flex align-items-center gap-2 disconnect_button">
+    <Image src={remove} alt="Connected" width={22} height={22} />
+  </span>
+) : 
+  (!isMicrosoftConnected && !smtp && emaildata?.length > 0 && (
+    <FontAwesomeIcon
+      icon={faChevronDown}
+      className="text-primary drop_icon"
+      onClick={() => setShowDropdown(prev => !prev)}
+    />
+  ))
+}
 
-            {!isMicrosoftConnected && !smtp  &&  emaildata?.length > 0 && (<FontAwesomeIcon icon={faChevronDown} className="text-primary drop_icon " onClick={() => setShowDropdown(prev => !prev)} />)}
 
+            
 
             {showDropdown && (
               <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
@@ -499,28 +454,41 @@ setexistsmtp(data?.data);
 
           </div>
 
-          {/* Outlook Box */}
-          <div className="flex-fill d-flex justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
+          <div className="flex-fill d-flex custombackgroundcard justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
             {/* Left: Icon and Text */}
             <div className="d-flex align-items-center gap-3">
               <Image src={outlook} alt="Outlook Icon" width={35} height={35} className="me-2">
 
               </Image>
               <div>
-                <div className="fw-semibold text-black">Log in using Outlook</div>
-                <div className="text-muted small">{isMicrosoftConnected ? 'Connected to Outlook' : 'You are not connected to Outlook'}</div>
+                <div className="fw-semibold text-white">Log in using Outlook</div>
+                <div className="text-white small">{isMicrosoftConnected ? 'Connected to Outlook' : 'You are not connected to Outlook'}</div>
               </div>
             </div>
 
             {/* Right: Button */}
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handleMicrosoftLogin}
 
-              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill"
+              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
             >
               {isMicrosoftConnected ? `Connected` : 'Log in'}
 
             </button>
-            {!isConnected  && !smtp &&  outlookdata.length > 0 && (<FontAwesomeIcon icon={faChevronDown} className="text-primary drop_icon " onClick={() => setmShowDropdown(prev => !prev)} />)}
+{isMicrosoftConnected ? (
+  <span onClick={() => handledisconnect('outlook')} className="d-flex align-items-center gap-2 disconnect_button">
+    <Image src={remove} alt="Connected" width={22} height={22} />
+  </span>
+) : 
+  (!isConnected && !smtp && outlookdata.length > 0 && (
+    <FontAwesomeIcon
+      icon={faChevronDown}
+      className="text-primary drop_icon"
+      onClick={() => setmShowDropdown(prev => !prev)}
+    />
+  ))
+}
+
+            
 
             {showmDropdown && (
               <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
@@ -530,7 +498,7 @@ setexistsmtp(data?.data);
                       <div className="d-flex align-items-center justify-content-between mt-3  ">
                         <div className="text-muted d-block small mb-1">{item?.email_id}</div>
                         <button disabled={isMicrosoftConnected} onClick={() => handleexistingoutlook(item)}
-                          className="btn btn-primary gap-2 px-4 rounded-pill"
+                          className="btn btn-primary gap-2 px-4 rounded-pill btn-main "
                         >
                           {item?.id == selectedmid && isMicrosoftConnected ? 'Connected' : 'Continue'}
 
@@ -572,6 +540,87 @@ setexistsmtp(data?.data);
               </>
             )} */}
           </div>
+
+          <div className="flex-fill d-flex justify-content-between custombackgroundcard align-items-center border rounded-3 px-4 py-3" style={{ position: "relative" }}>
+            {/* Left: Icon and Text */}
+            <div className="d-flex align-items-center gap-1">
+              <Image src={login} alt="Login Icon" width={35} height={35} className="me-2">
+
+              </Image>
+              <div>
+                <div className="fw-semibold text-white">Log in using SMTP (Email and app Password)  </div>
+                <div className="text-white small">
+                  {smtp ? "you're connected with SMTP account" : "You're not connected with smtp account "}
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Button */}
+            <button  disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary btn-main d-flex align-items-center gap-1 px-4 rounded-pill ms-auto me-3">
+              {smtp ? 'Connected' : 'Log in'}
+            </button>
+{smtp ? (
+  <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
+    <Image src={remove} alt="Connected" width={22} height={22} />
+  </span>
+) : 
+  (!isMicrosoftConnected && !isConnected && existsmtp?.length > 0 && (
+    <FontAwesomeIcon
+      icon={faChevronDown}
+      className="text-primary drop_icon"
+      onClick={() => setShowsmDropdown(prev => !prev)}
+    />
+  ))
+}
+
+
+
+            {showsmDropdown && (
+              <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
+                {existsmtp?.length > 0 && existsmtp?.map((item) => {
+                  return (
+                    <div className=" " key={item.id}>
+                      <div className="d-flex align-items-center justify-content-between mt-3  ">
+                        <div className="text-muted d-block small mb-1">{item?.email}</div>
+                        <div className="d-flex gap-3">
+                          <button disabled={smtp} onClick={() => handleexistingsmtp(item)}
+                            className="btn btn-primary gap-2 px-4 rounded-pill "
+                          >
+                            {item?.id == selectedsmid && smtp ? 'Connected' : 'Continue'}
+
+
+
+                          </button>
+
+                          {item?.id == selectedsmid && smtp && (
+                            <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
+                              <Image src={remove} alt="Connected" width={22} height={22} />
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+
+                    </div>
+                  )
+
+
+
+
+
+                })}
+
+
+
+              </div>
+            )}
+
+          </div>
+
+
+
+          {/* Outlook Box */}
+
         </div>
 
 

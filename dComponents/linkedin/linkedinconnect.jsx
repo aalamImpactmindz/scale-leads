@@ -6,7 +6,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import chromicon from '../../public/assets/images/chrome_icon.png';
-import linkedin from '../../public/assets/images/linkedin_icon.png';
+import linkedin from '../../public/assets/images/linkedinicon.svg';
 import { jwtDecode } from "jwt-decode";
 
 
@@ -128,20 +128,20 @@ const getlinkedintoken = async(sid)=>{
 }
 
   return (
-    <div className="container bg-white rounded-4 border p-4 shadow-sm mt-5">
-      <h5 className="fw-bold mb-4 text-black ">Connect your LinkedIn account</h5>
+    <div className="container bg-gray custombackgrond rounded-4 border p-4 shadow-sm mt-5">
+      <h5 className="fw-bold mb-4 text-white ">Connect your LinkedIn account</h5>
       {isExtensionInstalled?(     
   <div>
 
-          <div className="d-flex justify-content-between align-items-center border rounded-3 px-4 py-3">
+          <div className="d-flex justify-content-between align-items-center border rounded-3 px-4 py-3 custombackgroundcard">
         {/* Left: Icon and Text */}
         <div className="d-flex align-items-center gap-3">
           <Image src={linkedin} alt="LinkedIn Icon" width={35} height={35} className="me-2">
 
           </Image>
-          <div>
-            <div className="fw-semibold text-black">Log in to your LinkedIn account</div>
-            <div className="text-muted small">
+          <div >
+            <div className="fw-semibold text-white">Log in to your LinkedIn account</div>
+            <div className="small text-white">
               {islinkedinConnected?"You're connected to LinkedIn":"You're not connected to LinkedIn so our extension can't detect your account"}
             </div>
           </div>
@@ -157,7 +157,7 @@ const getlinkedintoken = async(sid)=>{
     
         {/* Right: Button */}
       <div className="d-flex gap-2">
-          <button disabled={islinkedinConnected} onClick={handleLogin} className="btn btn-primary d-flex align-items-center gap-1 px-4 rounded-pill">
+          <button disabled={islinkedinConnected} onClick={handleLogin} className="btn btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main">
          {islinkedinConnected?'Connected':'Log in to LinkedIn '} 
         </button>
 {/* {islinkedinConnected&&(
@@ -179,23 +179,23 @@ const getlinkedintoken = async(sid)=>{
   </div>
     
     ):(<div className="w-75 mx-auto my-4">
-      <p className="text-center mb-3 text-black">
+      <p className="text-center mb-3 text-white">
         Connect your LinkedIn account automatically with our browser extension
       </p>
 
-      <div className="d-flex align-items-center justify-content-between border rounded-3 px-3 py-2 bg-light">
+      <div className="d-flex align-items-center justify-content-between border rounded-3 px-3 py-2 custombackgroundcard ">
         {/* Left: Icon + Label */}
         <div className="d-flex align-items-center gap-2">
           <Image src={chromicon} alt="Chrome Icon" width={45} height={45} className="me-2">
 
           </Image>
-          <div className="fw-semibold text-dark">Chrome Web Store</div>
+          <div className="fw-semibold text-white">Chrome Web Store</div>
         </div>
 
         {/* Right: Button */}
         <button
           onClick={() => window.open("https://chromewebstore.google.com/detail/scalelead/nmckndphoocceadajdmdgbckfagcifjp?authuser=0&hl=en", "_blank")}
-          className="btn btn-primary d-flex align-items-center gap-1 px-4 py-2 rounded-pill"
+          className="btn btn-primary d-flex align-items-center gap-1 px-4 py-2 rounded-pill btn-main"
         >
           Get the Extension 
           <FontAwesomeIcon

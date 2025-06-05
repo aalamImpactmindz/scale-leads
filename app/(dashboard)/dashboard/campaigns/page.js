@@ -27,55 +27,52 @@ const Campaigns = () => {
     }
   };
 
-  const startcompain = async (compain) => {
-    let { id, channel, company_size, ideal_customer, sector } = compain;
+const startcompain = async (compain) => {
+  let gmail = Cookies.get('gmail_access_token');
+  let outlook = Cookies.get('microsoft_access_token');
+  let user = Cookies.get("uapppas");
+  let linkedin = Cookies.get("user_token");
 
-    let body = {
-      id: id,
-      channel: channel,
-      company_size: company_size,
-      ideal_customer: ideal_customer,
-      sector: sector,
-    };
+  if (!gmail && !outlook && !user && !linkedin) {
+    setError("To start any campaign, please log in to your account first.");
+    return;
+  }
 
-    try {
-      if (channel === "Email") {
-        let senddata = await scrapInstance.post(
-          "/api/scrapemail",
-          { body },
-          {
-            withCredentials: true,
-          }
-        );
-      }
-      if (channel === "Linkedin") {
-        try {
-          setIsLoading(true);
+  let { id, channel, company_size, ideal_customer, sector } = compain;
 
-          let start = await scrapInstance.post(
-            `/api/scrap`,
-            { body },
-            {
-              withCredentials: true,
-            }
-          );
-          const { data } = start;
-          if (data?.status) {
-            setIsLoading(false);
-          } else {
-            setIsLoading(false);
-          }
-        } catch (err) {
-          setIsLoading(false);
-          console.log(err);
-        }
-      }
-    } catch (err) {
-      console.log("Error starting campaign:", err);
-      setError("Could not start Campaign.");
+  let body = {
+    id,
+    channel,
+    company_size,
+    ideal_customer,
+    sector,
+  };
+
+  try {
+    if (channel === "Email") {
+      await scrapInstance.post("/api/scrapemail", { body }, { withCredentials: true });
     }
 
-  };
+    if (channel === "Linkedin") {
+      try {
+        setIsLoading(true);
+        const { data } = await scrapInstance.post("/api/scrap", { body }, { withCredentials: true });
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        console.log("LinkedIn error:", err);
+      }
+    }
+  let updatestatus = await axiosInstance.patch(`api/campaign/${id}/status`,{
+  campaign_status: "active"
+})
+    fetchData();
+  } catch (err) {
+    console.log("Error starting campaign:", err);
+    setError("Could not start campaign.");
+  }
+};
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -92,11 +89,18 @@ const Campaigns = () => {
     const encodedName = encodeURIComponent(campaign.campaign_name);
     router.push(`/dashboard/campaigns/edit/${encodedName}`);
   };
+  
+
   const stopcomapin = async(compain)=>{
    let {id} = compain;
    
     try{
           let stopcompain = await scrapInstance.post('/api/stopcompain',{id:id})
+          // change status
+          let updatestatus = await axiosInstance.patch(`api/campaign/${id}/status`,{
+  campaign_status: "deactive"
+})
+fetchData();
     }catch(err){
       console.log(err)
     }
@@ -155,13 +159,23 @@ const Campaigns = () => {
                 <td>{campaign.campaign_status}</td>
                 <td>2</td>
                 <td>
+                  {campaign.campaign_status==="active"?(            <Button
+                    onClick={()=> stopcomapin(campaign)}
+                    className="btn-rounded me-3"
+                    size="sm"
+                  >
+                  Stop
+                  </Button>):(<>
                   <Button
                     onClick={() => startcompain(campaign)}
                     className="btn-rounded me-3"
                     size="sm"
                   >
-                    Start
+                  Start
                   </Button>
+                  
+                  </>)}
+                  
                   <Button className="btn-rounded me-3" size="sm">
                     Delete
                   </Button>
@@ -170,7 +184,7 @@ const Campaigns = () => {
                     className="btn-rounded me-3"
                     size="sm"
                   >
-                    Stop
+                   View leads
                   </Button>
                 </td>
               </tr>

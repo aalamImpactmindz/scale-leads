@@ -21,6 +21,7 @@ import imageUser from "@/public/assets/images/user.jpg"
 import Cookies from "js-cookie";
 import { AuthContext } from "@/app/context/Authcontext";
 import axiosInstance from "@/utils/axiosInstance";
+import { signOut } from "next-auth/react";
 
 const DSidebar = () => {
   const pathname = usePathname();
@@ -32,7 +33,7 @@ const[show,setshow] = useState(false);
     setIsClient(true);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     if (isClient) {
       setIsLoggedIn(false);
       setshow(false);
@@ -40,6 +41,7 @@ const[show,setshow] = useState(false);
       Cookies.remove("microsoft_access_token");
       Cookies.remove("gmail_access_token");
       Cookies.remove("user_token");
+      await signOut()
       
       localStorage.clear();
      router.push("/");

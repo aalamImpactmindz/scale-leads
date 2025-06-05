@@ -10,6 +10,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
+import { signOut } from "next-auth/react";
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -20,7 +21,7 @@ const Header = () => {
     setIsClient(true);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     if (isClient) {
       setIsLoggedIn(false);
       
@@ -29,6 +30,7 @@ const Header = () => {
          Cookies.remove("gmail_access_token");
              Cookies.remove("user_token");
       localStorage.clear();
+      await signOut();
       window.location.href = "/login";
     }
   };

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 export async function middleware(request) {
-  const token = request.cookies.get("authToken")?.value || await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  const gtoken = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+  const token = request.cookies.get("authToken")?.value ||gtoken ;
   const onboardingFormFilled = request.cookies.get(
     "onboarding_form_filled"
   )?.value;
@@ -10,6 +11,7 @@ export async function middleware(request) {
   // const canAccessProtectedPages = request.cookies.get(
   //   "can_access_protected_pages"
   // )?.value;
+  console.log(gtoken);
   const { pathname } = request.nextUrl;
 
   const res = NextResponse.next();
