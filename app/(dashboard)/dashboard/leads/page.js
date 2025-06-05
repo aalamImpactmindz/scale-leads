@@ -28,8 +28,9 @@ const PageDLeads = () => {
   }, []);
 
   const handleEditClick = (lead) => {
-    const encodedName = encodeURIComponent(lead.leadName);
-    router.push(`/dashboard/leads/view/${encodedName}`);
+   window.open(lead.url, '_blank'); // Open in a new tab
+    // const encodedName = encodeURIComponent(lead.leadName);
+    // router.push(`/dashboard/leads/view/${encodedName}`);
   };
 
   return (

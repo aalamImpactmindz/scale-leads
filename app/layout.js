@@ -5,6 +5,7 @@ import "swiper/css/pagination";
 import "./globals.css";
 import AOSInitializer from "@/components/aos-initializer/AOSInitializer";
 import { AuthProvider } from "./context/Authcontext";
+import SessionWrapper from "@/components/SessionWrapper";
 
 const fontOutfit = Outfit({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -21,10 +22,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+     <SessionWrapper>
       <body className={`${fontOutfit.className}`}>
         <AOSInitializer />
         <AuthProvider>{children}</AuthProvider>
       </body>
+</SessionWrapper>
     </html>
   );
 }

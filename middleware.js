@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-
+import { getToken } from "next-auth/jwt";
 export async function middleware(request) {
-  const token = request.cookies.get("authToken")?.value;
+  const token = request.cookies.get("authToken")?.value || await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
   const onboardingFormFilled = request.cookies.get(
     "onboarding_form_filled"
   )?.value;
@@ -81,15 +81,7 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Redirect user from protected pages
-  // if (
-  //   token &&
-  //   (canAccessProtectedPages === false ||
-  //     canAccessProtectedPages === "false") &&
-  //   (pathname.startsWith("/success") || pathname.startsWith("/cancel"))
-  // ) {
-  //   return NextResponse.redirect(new URL("/", request.url));
-  // }
+
 
   return res;
 }

@@ -5,12 +5,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import axiosInstance from "@/utils/axiosInstance";
+import scrapInstance from "@/utils/scrapeInstace";
+import Cookies from "js-cookie";
 
 const Campaigns = () => {
   const router = useRouter();
   const [campaigns, setCampaigns] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isloading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -24,6 +27,55 @@ const Campaigns = () => {
     }
   };
 
+  const startcompain = async (compain) => {
+    let { id, channel, company_size, ideal_customer, sector } = compain;
+
+    let body = {
+      id: id,
+      channel: channel,
+      company_size: company_size,
+      ideal_customer: ideal_customer,
+      sector: sector,
+    };
+
+    try {
+      if (channel === "Email") {
+        let senddata = await scrapInstance.post(
+          "/api/scrapemail",
+          { body },
+          {
+            withCredentials: true,
+          }
+        );
+      }
+      if (channel === "Linkedin") {
+        try {
+          setIsLoading(true);
+
+          let start = await scrapInstance.post(
+            `/api/scrap`,
+            { body },
+            {
+              withCredentials: true,
+            }
+          );
+          const { data } = start;
+          if (data?.status) {
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
+        } catch (err) {
+          setIsLoading(false);
+          console.log(err);
+        }
+      }
+    } catch (err) {
+      console.log("Error starting campaign:", err);
+      setError("Could not start Campaign.");
+    }
+
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -40,6 +92,16 @@ const Campaigns = () => {
     const encodedName = encodeURIComponent(campaign.campaign_name);
     router.push(`/dashboard/campaigns/edit/${encodedName}`);
   };
+  const stopcomapin = async(compain)=>{
+   let {id} = compain;
+   
+    try{
+          let stopcompain = await scrapInstance.post('/api/stopcompain',{id:id})
+    }catch(err){
+      console.log(err)
+    }
+
+  }
 
   return (
     <div className="campaigns mb-4">
@@ -93,8 +155,22 @@ const Campaigns = () => {
                 <td>{campaign.campaign_status}</td>
                 <td>2</td>
                 <td>
-                  <Button className="btn-rounded" size="sm">
+                  <Button
+                    onClick={() => startcompain(campaign)}
+                    className="btn-rounded me-3"
+                    size="sm"
+                  >
+                    Start
+                  </Button>
+                  <Button className="btn-rounded me-3" size="sm">
                     Delete
+                  </Button>
+                     <Button
+                    onClick={() => stopcomapin(campaign)}
+                    className="btn-rounded me-3"
+                    size="sm"
+                  >
+                    Stop
                   </Button>
                 </td>
               </tr>

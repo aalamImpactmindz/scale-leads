@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "@/components/logo/Logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/navigation";
 import {
   faGaugeHigh,
   faPenToSquare,
@@ -16,9 +18,40 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import imageUser from "@/public/assets/images/user.jpg"
+import Cookies from "js-cookie";
+import { AuthContext } from "@/app/context/Authcontext";
+import axiosInstance from "@/utils/axiosInstance";
 
 const DSidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+const[show,setshow] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleLogout = () => {
+    if (isClient) {
+      setIsLoggedIn(false);
+      setshow(false);
+      Cookies.remove("authToken");
+      Cookies.remove("microsoft_access_token");
+      Cookies.remove("gmail_access_token");
+      Cookies.remove("user_token");
+      
+      localStorage.clear();
+     router.push("/");
+    }
+  };
+
+  if (!isClient) {
+    return null;
+  }
+
+ 
+
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: faGaugeHigh },
@@ -61,9 +94,20 @@ const DSidebar = () => {
           ))}
         </Nav>
       </div>
+         {show && (
+        <div className="dropdown-logout bg-white border-top p-3">
+          <div
+            onClick={handleLogout}
+            style={{ cursor: "pointer", color: "black" }}
+          >
+           <FontAwesomeIcon icon={faArrowRightFromBracket} /> Logout
+          </div>
+        </div>
+      )}
       <div className="d-sidebar-footer mt-auto border-top border-gray">
-        <div className="profile d-flex align-items-center w-100 p-3">
-          <img alt="User" width="40" className="rounded-circle me-3" src={imageUser.src} />
+        <div onClick={()=>setshow(!show)} className="profile d-flex align-items-center w-100 p-3  " style={{cursor:'pointer'}}>
+         
+          <img alt="User" width="40" className="rounded-circle me-3 " src={imageUser.src} />
           <span className="text-truncate">Olivia Williams</span>
         </div>
       </div>

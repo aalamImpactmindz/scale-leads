@@ -23,9 +23,11 @@ const Header = () => {
   const handleLogout = () => {
     if (isClient) {
       setIsLoggedIn(false);
-      Object.keys(Cookies.get()).forEach((cookieName) => {
-        Cookies.remove(cookieName, { path: "/" });
-      });
+      
+        Cookies.remove("authToken");
+         Cookies.remove("microsoft_access_token");
+         Cookies.remove("gmail_access_token");
+             Cookies.remove("user_token");
       localStorage.clear();
       window.location.href = "/login";
     }
