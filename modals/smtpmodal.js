@@ -38,8 +38,12 @@ let response =await axiosInstance.post('/api/smtps',{email:email,app_password:tr
        const{data} = response;
        if(data?.status){
         setsmtp(true);
-        Cookies.set('uapppas',data?.data?.app_password);
-        Cookies.set('uemail',data?.data?.email);
+        Cookies.set('uapppas',data?.data?.app_password,{path: "/",
+            secure: true,
+            sameSite: "None"});
+        Cookies.set('uemail',data?.data?.email,{path: "/",
+            secure: true,
+            sameSite: "None"});
         setMessage(check?.message);
 
         

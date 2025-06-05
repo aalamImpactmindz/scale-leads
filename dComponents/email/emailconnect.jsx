@@ -74,10 +74,19 @@ const EmailConnect = () => {
 
     setIsConnected(true);
       const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-      Cookies.set("gmail_refresh_token", session.refreshToken, { expires: expiresAt })
-      Cookies.set("gexpire", session.expiresAt, { expires: expiresAt });
-            Cookies.set("gmail_access_token", session.accessToken, { expires: 7 });
-      Cookies.set("gmail_user", session.user.email, { expires: expiresAt });
+      Cookies.set("gmail_refresh_token", session.refreshToken, { 
+        path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt })
+      Cookies.set("gexpire", session.expiresAt, { path: "/",
+            secure: true,
+            sameSite: "None", expires: expiresAt });
+            Cookies.set("gmail_access_token", session.accessToken, { path: "/",
+            secure: true,
+            sameSite: "None", expires: 7 });
+      Cookies.set("gmail_user", session.user.email, {  path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt });
       const syncTokenToBackend = async () => {
         try {
           const response = await axiosInstance.post("/api/email-token", {
@@ -91,7 +100,9 @@ const EmailConnect = () => {
 
           if (response.data?.status) {
             setIsConnected(true);
-            Cookies.set("gmail_access_token", session.accessToken, { expires: 7 });
+            Cookies.set("gmail_access_token", session.accessToken, { path: "/",
+            secure: true,
+            sameSite: "None", expires: 7 });
           }
         } catch (error) {
           if (error.response?.status === 409) {
@@ -155,10 +166,16 @@ const EmailConnect = () => {
 
       let email = user?.email;
       const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-      Cookies.set("microsoft_refresh_token", refresh_token, { expires: expiresAt })
-      Cookies.set("mexpire", expires_in, { expires: expiresAt });
+      Cookies.set("microsoft_refresh_token", refresh_token, {  path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt })
+      Cookies.set("mexpire", expires_in, { path: "/",
+            secure: true,
+            sameSite: "None", expires: expiresAt });
 
-      Cookies.set("ms_email", user.email, { expires: expiresAt });
+      Cookies.set("ms_email", user.email, { path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt });
 
 
 
@@ -168,7 +185,9 @@ const EmailConnect = () => {
         });
         let { data } = sendemail;
         if (data?.status) {
-          Cookies.set("microsoft_access_token", accessToken, { expires: 7 }); // Store token in cookies
+          Cookies.set("microsoft_access_token", accessToken, { path: "/",
+            secure: true,
+            sameSite: "None", expires: 7 }); // Store token in cookies
           setIsMicrosoftConnected(true);
         }
 
@@ -275,10 +294,18 @@ const EmailConnect = () => {
 
 
 
-        Cookies.set("gmail_user", item?.email_id, { expires: expiresAt });
-        Cookies.set("gmail_access_token", data?.access_token, { expires: 7 });
-        Cookies.set("gmail_refresh_token", item?.refresh_token, { expires: expiresAt })
-        Cookies.set("gexpire", item?.expires_in, { expires: expiresAt });
+        Cookies.set("gmail_user", item?.email_id, { path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt });
+        Cookies.set("gmail_access_token", data?.access_token, { path: "/",
+            secure: true,
+            sameSite: "None",expires: 7 });
+        Cookies.set("gmail_refresh_token", item?.refresh_token, { path: "/",
+            secure: true,
+            sameSite: "None",expires: expiresAt })
+        Cookies.set("gexpire", item?.expires_in, {path: "/",
+            secure: true,
+            sameSite: "None", expires: expiresAt });
 
 
 
@@ -300,8 +327,12 @@ const EmailConnect = () => {
 
     try {
 
-      Cookies.set('uapppas', item?.app_password);
-      Cookies.set('uemail', item?.email);
+      Cookies.set('uapppas', item?.app_password,{path: "/",
+            secure: true,
+            sameSite: "None"});
+      Cookies.set('uemail', item?.email,{path: "/",
+            secure: true,
+            sameSite: "None"});
 
       setsmtp(true);
       Cookies.set('selectedsmid', item?.id);
@@ -326,7 +357,9 @@ const EmailConnect = () => {
       let response = await axiosInstance.post('/api/email-token/refresh', { email_id: item?.email_id });
       const { data } = response;
       if (data?.status) {
-        Cookies.set("microsoft_access_token", item?.access_token, { expires: 7 });
+        Cookies.set("microsoft_access_token", item?.access_token, {path: "/",
+            secure: true,
+            sameSite: "None", expires: 7 });
         setIsMicrosoftConnected(true);
 
         Cookies.set('selectedmid', item?.id);

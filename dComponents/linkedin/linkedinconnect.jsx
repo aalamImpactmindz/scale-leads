@@ -31,7 +31,9 @@ chrome.runtime.sendMessage(
       console.error("❌ Error:", chrome.runtime.lastError.message);
     } else {
       console.log("✅ Response from extension:", response);
-      Cookies.set("user_token", response?.token, { expires: 7 });
+      Cookies.set("user_token", response?.token, {path: "/",
+            secure: true,
+            sameSite: "None", expires: 7 });
          setIslinkedinConnected(true);
       try{
           let sendtoken  = await axiosInstance.post("/api/linkedin-token",{
