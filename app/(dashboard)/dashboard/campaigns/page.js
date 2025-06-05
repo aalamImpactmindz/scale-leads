@@ -50,7 +50,7 @@ const startcompain = async (compain) => {
 
   try {
     if (channel === "Email") {
-      await scrapInstance.post("/api/scrapemail", { body }, { withCredentials: true });
+      await scrapInstance.post("/api/scrapemail", body, { withCredentials: true });
     }
 
     if (channel === "Linkedin") {

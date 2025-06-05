@@ -1,9 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const scrapInstance = axios.create({
-  baseURL: "https://linkdin-0ge3.onrender.com/",
-  withCredentials: true 
-    // baseURL: "https://linkdin-0ge3.onrender.com/",
+  baseURL: "https://linkdin-0ge3.onrender.com/"
 });
 
 scrapInstance.interceptors.request.use(
