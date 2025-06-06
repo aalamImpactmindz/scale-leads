@@ -12,7 +12,8 @@ import outlook from '../../public/assets/images/outlook_icon.png'
 import circle from '../../public/assets/images/circle-tick.png'
 import remove from '../../public/assets/images/remove.png'
 import login from '../../public/assets/images/login.png'
-import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup} from "firebase/auth";
+import{ signOut as firebaseSignOut} from 'firebase/auth';
 import Cookies from "js-cookie";
 import SmtpModal from "@/modals/smtpmodal";
 import axiosInstance from "@/utils/axiosInstance";
@@ -20,6 +21,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useRef } from "react";
+
 const EmailConnect = () => {
   const { data: session } = useSession();
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
@@ -400,6 +402,7 @@ useEffect(()=>{
       }
       if (provider === "outlook") {
         Cookies.remove("microsoft_access_token");
+        await firebaseSignOut(auth);
         setmShowDropdown(false)
         setIsMicrosoftConnected(false);
       }

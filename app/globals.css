@@ -539,3 +539,7 @@ video {
 .drop_icon{
   color:#8D4AEA !important;
 }
+ .modal-content{
+ background-color:#272829 !important;
+  border: none !important ;
+ }

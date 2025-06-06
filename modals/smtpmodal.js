@@ -67,14 +67,14 @@ let response =await axiosInstance.post('/api/smtps',{email:email,app_password:tr
 
 
   return (
-    <Modal show={isOpen} onHide={onClose} centered size="md">
-      <Modal.Header closeButton >
-        <Modal.Title >SMTP Login</Modal.Title>
+    <Modal  show={isOpen} onHide={onClose} centered size="md">
+      <Modal.Header className="text-white" closeButton >
+        <Modal.Title className="text-white" >SMTP Login</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className={styles.modalContent}>
         <Form noValidate onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="smtpEmail">
+          <Form.Group className="mb-3 text-white" controlId="smtpEmail">
             <Form.Label>Email Address</Form.Label>
             <Form.Control
               type="email"
@@ -90,7 +90,7 @@ let response =await axiosInstance.post('/api/smtps',{email:email,app_password:tr
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="smtpAppPassword">
+          <Form.Group className="mb-3 text-white" controlId="smtpAppPassword">
             <Form.Label>App Password</Form.Label>
             <InputGroup>
               <Form.Control
@@ -120,9 +120,9 @@ let response =await axiosInstance.post('/api/smtps',{email:email,app_password:tr
           </Form.Group>
 
           <Button
-            variant="primary"
+            
             type="submit"
-            className={`w-100 ${styles.btnConnect}`}
+            className="w-100 btn-main"
             disabled={!isFormValid}
           >
             Connect
