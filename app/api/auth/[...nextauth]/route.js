@@ -7,6 +7,7 @@ const handler= NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      
       authorization: {
         params: {
           scope: 'openid email profile https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.metadata',
@@ -15,17 +16,22 @@ const handler= NextAuth({
         },
       },
     }),
+   
   ],
+
+
   session: {
     strategy: 'jwt',
   },
   callbacks: {
     async jwt({ token, account, user }) {
       if (account) {
+        
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
         token.expiresAt = account.expires_at;
         token.email = user?.email;
+        token.provider = account.provider;
       }
       return token;
     },
@@ -34,6 +40,7 @@ const handler= NextAuth({
       session.refreshToken = token.refreshToken;
       session.expiresAt = token.expiresAt;
       session.user.email = token.email;
+      session.provider = token.provider;
       return session;
     },
   },

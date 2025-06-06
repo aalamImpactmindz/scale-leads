@@ -1,7 +1,7 @@
 // components/LinkedInConnect.js
 "use client";
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, signOut,getProviders, useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -37,6 +37,20 @@ const EmailConnect = () => {
   const [outlookdata, setoutlookdata] = useState([]);
   const { smtp, setsmtp } = useContext(AuthContext);
   const [existsmtp, setexistsmtp] = useState([]);
+const userRef = useRef(null);
+
+
+useEffect(()=>{
+  let check = Cookies.get("gmail_access_token");
+  if(!check){
+    setIsConnected(false);
+  }
+  let microsoft = Cookies.get("microsoft_access_token");
+  if(!microsoft){
+    setIsMicrosoftConnected(false);
+  }
+},[])
+
   useEffect(() => {
 
 
@@ -68,67 +82,69 @@ const EmailConnect = () => {
     setShowSmtpModal(false); // 🔑 Close modal
   };
 
-  useEffect(() => {
-    if (session) {
+useEffect(()=>{
+  if (!session) return;
 
-
-    setIsConnected(true);
-      const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-      Cookies.set("gmail_refresh_token", session.refreshToken, { 
-        path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt })
-      Cookies.set("gexpire", session.expiresAt, { path: "/",
-            secure: true,
-            sameSite: "None", expires: expiresAt });
-            Cookies.set("gmail_access_token", session.accessToken, { path: "/",
-            secure: true,
-            sameSite: "None", expires: 7 });
-      Cookies.set("gmail_user", session.user.email, {  path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt });
-      const syncTokenToBackend = async () => {
-        try {
-          const response = await axiosInstance.post("/api/email-token", {
-            access_token: session.accessToken,
-            provider: "gmail",
-            email_id: session.user.email,
-            refresh_token: session.refreshToken,
-            expires_in: session.expiresAt,
-            status: true,
-          });
-
-          if (response.data?.status) {
-            setIsConnected(true);
-            Cookies.set("gmail_access_token", session.accessToken, { path: "/",
-            secure: true,
-            sameSite: "None", expires: 7 });
-          }
-        } catch (error) {
-          if (error.response?.status === 409) {
-            console.warn("Token already exists, skipping...");
-          } else {
-            console.error("❌ Token sync failed:", error);
-          }
+    const provider = session.provider;
+     console.log(session.expiresAt);
+    
+     const syncTokenToBackend = async () => {
+      try {
+        await axiosInstance.post("/api/email-token", {
+          access_token: session.accessToken,
+          provider: provider,
+          email_id: session.user.email,
+          refresh_token: session.refreshToken,
+          expires_in: session.expiresAt,
+          status: true,
+        });
+      } catch (error) {
+        if (error.response?.status === 409) {
+          console.warn("Token already exists, skipping...");
+        } else {
+          console.error("❌ Token sync failed:", error);
         }
-      };
-
-      //check Cookies 
-      let flag = Cookies.get("gmail_access_token");
-      if (!flag) {
-        syncTokenToBackend();
       }
+    };
+  if (provider === "google") {
+      setIsConnected(true);
+ Cookies.set("gmail_access_token", session.accessToken, {
+      path: "/",
+      secure: true,
+      sameSite: "Strict",
+      expires: new Date(session.expiresAt * 1000)
+,
+    });
 
-
-
-
-
-
-
-
-
+      Cookies.set("gmail_refresh_token", session.refreshToken, {
+        path: "/",
+        secure: true,
+             sameSite: "Strict",
+        expires: session.expiresAt
+,
+      });
+      Cookies.set("gexpire", session.expiresAt
+, {
+        path: "/",
+        secure: true,
+              sameSite: "Strict",
+        expires: session.expiresAt
+,
+      });
+      Cookies.set("gmail_user", session.user.email, {
+        path: "/",
+        secure: true,
+              sameSite: "Strict",
+        expires: session.expiresAt
+,
+      });
     }
-  }, [session])
+    if (!Cookies.get("gmail_access_token")) {
+      syncTokenToBackend();
+    }
+  
+
+},[session])
 
   const handlegmaillogin = async () => {
     try {
@@ -141,8 +157,7 @@ const EmailConnect = () => {
     }
   }
 
-
-  const handleMicrosoftLogin = async () => {
+ const handleMicrosoftLogin = async () => {
     const msprovider = new OAuthProvider('microsoft.com');
     msprovider.setCustomParameters({ prompt: "consent" });
     msprovider.addScope("Mail.Send");
@@ -187,7 +202,7 @@ const EmailConnect = () => {
         if (data?.status) {
           Cookies.set("microsoft_access_token", accessToken, { path: "/",
             secure: true,
-            sameSite: "None", expires: 7 }); // Store token in cookies
+            sameSite: "None", expires: new Date(expires_in*1000) }); // Store token in cookies
           setIsMicrosoftConnected(true);
         }
 
@@ -204,6 +219,7 @@ const EmailConnect = () => {
       });
     }
   };
+ 
 
   const checkexistgmailaccount = async () => {
     try {
@@ -299,7 +315,7 @@ const EmailConnect = () => {
             sameSite: "None",expires: expiresAt });
         Cookies.set("gmail_access_token", data?.access_token, { path: "/",
             secure: true,
-            sameSite: "None",expires: 7 });
+            sameSite: "None",expires: new Date(item?.expires_in * 1000) });
         Cookies.set("gmail_refresh_token", item?.refresh_token, { path: "/",
             secure: true,
             sameSite: "None",expires: expiresAt })
@@ -353,22 +369,18 @@ const EmailConnect = () => {
   const handleexistingoutlook = async (item) => {
 
 
-    try {
-      let response = await axiosInstance.post('/api/email-token/refresh', { email_id: item?.email_id });
-      const { data } = response;
-      if (data?.status) {
+
+
         Cookies.set("microsoft_access_token", item?.access_token, {path: "/",
             secure: true,
-            sameSite: "None", expires: 7 });
+            sameSite: "None", expires:new Date(item?.expires_in * 1000)});
         setIsMicrosoftConnected(true);
 
         Cookies.set('selectedmid', item?.id);
         setselectedmid(item?.id);
-      }
+      
 
-    } catch (err) {
-      console.log(err);
-    }
+    
 
     setmShowDropdown(false);
 
@@ -403,7 +415,46 @@ const EmailConnect = () => {
     }
 
   }
+const refreshFirebaseToken = async (user) => {
+  try {
+    const idToken = await user.getIdToken(true);
+    const decoded = await user.getIdTokenResult();
+    const expireTime = new Date(decoded.expirationTime);
 
+    Cookies.set("microsoft_access_token", idToken, {
+      path: "/",
+      secure: true,
+      sameSite: "Strict",
+      expires: expireTime,
+    });
+
+    console.log("✅ Token refreshed and cookie set");
+  } catch (err) {
+    console.error("❌ Failed to refresh Firebase token:", err);
+  }
+};
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userRef.current = user;
+      console.log("✅ Firebase user signed in:", user.email);
+      refreshFirebaseToken(user);
+    } else {
+      userRef.current = null;
+      console.warn("⚠️ No Firebase user signed in");
+    }
+  });
+      const interval = setInterval(() => {
+      if (userRef.current) {
+        console.log("🔁 Refreshing Firebase token...");
+        refreshFirebaseToken(userRef.current);
+      }
+    }, 1 * 60 * 1000); // 55 minutes
+
+
+  return () => {unsubscribe(); clearInterval(interval)};
+}, []);
   return (
     <>
       <div className="container custombackgrond rounded-4 border p-4 shadow-sm mt-5">
@@ -448,14 +499,14 @@ const EmailConnect = () => {
             
 
             {showDropdown && (
-              <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
+              <div className="shows  pe-3 ps-3 p-2 border rounded shadow customdropdowncard ">
                 {emaildata?.length > 0 && emaildata?.map((item) => {
                   return (
                     <div className=" " key={item.id}>
                       <div className="d-flex align-items-center justify-content-between mt-3  ">
-                        <div className="text-muted d-block small mb-1">{item?.email_id}</div>
+                        <div className="text-white d-block small mb-1">{item?.email_id}</div>
                         <button disabled={isConnected} onClick={() => handleexistinggmail(item)}
-                          className="btn btn-primary gap-2 px-4 rounded-pill"
+                          className="btn btn-primary gap-2 px-4 rounded-pill btn-main"
                         >
                           {item?.id == selectedid && isConnected ? 'Connected' : 'Continue'}
 
@@ -524,12 +575,12 @@ const EmailConnect = () => {
             
 
             {showmDropdown && (
-              <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
+              <div className="shows  pe-3 ps-3 p-2 border rounded  customdropdowncard  ">
                 {outlookdata?.length > 0 && outlookdata?.map((item) => {
                   return (
                     <div className=" " key={item.id}>
                       <div className="d-flex align-items-center justify-content-between mt-3  ">
-                        <div className="text-muted d-block small mb-1">{item?.email_id}</div>
+                        <div className="text-white d-block small mb-1">{item?.email_id}</div>
                         <button disabled={isMicrosoftConnected} onClick={() => handleexistingoutlook(item)}
                           className="btn btn-primary gap-2 px-4 rounded-pill btn-main "
                         >
@@ -609,15 +660,15 @@ const EmailConnect = () => {
 
 
             {showsmDropdown && (
-              <div className="shows  pe-3 ps-3 p-2 border rounded shadow bg-white ">
+              <div className="shows  pe-3 ps-3 p-2 border rounded shadow  customdropdowncard ">
                 {existsmtp?.length > 0 && existsmtp?.map((item) => {
                   return (
                     <div className=" " key={item.id}>
-                      <div className="d-flex align-items-center justify-content-between mt-3  ">
-                        <div className="text-muted d-block small mb-1">{item?.email}</div>
+                      <div className="d-flex align-items-center justify-content-between mt-3   ">
+                        <div className="text-white d-block small mb-1">{item?.email}</div>
                         <div className="d-flex gap-3">
                           <button disabled={smtp} onClick={() => handleexistingsmtp(item)}
-                            className="btn btn-primary gap-2 px-4 rounded-pill "
+                            className="btn btn-primary gap-2 px-4 rounded-pill btn-main"
                           >
                             {item?.id == selectedsmid && smtp ? 'Connected' : 'Continue'}
 
