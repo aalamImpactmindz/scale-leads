@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axiosInstance from "@/utils/axiosInstance";
 import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
+import { Cookie } from "next/font/google";
 
 const Campaigns = () => {
   const router = useRouter();
@@ -30,10 +31,21 @@ const Campaigns = () => {
 const startcompain = async (compain) => {
   let gmail = Cookies.get('gmail_access_token');
   let outlook = Cookies.get('microsoft_access_token');
-  let user = Cookies.get("uapppas");
+  let userpass = Cookies.get("uapppas");
   let linkedin = Cookies.get("user_token");
+  let grefreshtoken = Cookies.get("gmail_refresh_token");
+  let mrefreshtoken = Cookies.get("microsoft_refresh_token");
+  let gtokenexpire  = Cookies.get("gexpire");
+  let mtokenexpire = Cookies.get("mexpire");
+  let user = Cookies.get('uemail');
+  let  uemail = Cookies.get('gmail_user');
+  let memail = Cookies.get('ms_email');
+  let pass = userpass;
+// gtoken,mstoken,grefreshtoken,mrefreshtoken,gtokenexpire,mtokenexpire,user,uemail,memail,pass
+let gtoken = gmail;
+let mstoken = outlook;
 
-  if (!gmail && !outlook && !user && !linkedin) {
+  if (!gmail && !outlook && !userpass && !linkedin) {
     setError("To start any campaign, please log in to your account first.");
     return;
   }
@@ -46,6 +58,7 @@ const startcompain = async (compain) => {
     company_size,
     ideal_customer,
     sector,
+    gtoken,mstoken,grefreshtoken,mrefreshtoken,gtokenexpire,mtokenexpire,user,uemail,memail,pass
   };
 
   try {
