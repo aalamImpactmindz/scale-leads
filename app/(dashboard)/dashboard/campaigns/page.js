@@ -9,6 +9,7 @@ import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
 import { Cookie } from "next/font/google";
 
+
 const Campaigns = () => {
   const router = useRouter();
   const [campaigns, setCampaigns] = useState([]);
@@ -119,6 +120,7 @@ fetchData();
     }
 
   }
+  //view leads
 
   return (
     <div className="campaigns mb-4">
@@ -193,7 +195,7 @@ fetchData();
                     Delete
                   </Button>
                      <Button
-                    onClick={() => stopcomapin(campaign)}
+                    onClick={() => router.push(`/dashboard/leads/${campaign.id}`)}
                     className="btn-rounded me-3"
                     size="sm"
                   >
