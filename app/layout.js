@@ -6,7 +6,7 @@ import "./globals.css";
 import AOSInitializer from "@/components/aos-initializer/AOSInitializer";
 import { AuthProvider } from "./context/Authcontext";
 import SessionWrapper from "@/components/SessionWrapper";
-
+import { Suspense } from 'react';
 const fontOutfit = Outfit({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   style: ["normal"],
@@ -22,10 +22,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      
      <SessionWrapper>
       <body className={`${fontOutfit.className}`}>
         <AOSInitializer />
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider><Suspense fallback={<div>Loading...</div>}>
+              {children}
+            </Suspense></AuthProvider>
       </body>
 </SessionWrapper>
     </html>
