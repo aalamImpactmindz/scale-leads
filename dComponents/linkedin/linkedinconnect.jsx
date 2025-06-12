@@ -18,6 +18,7 @@ const LinkedInConnect = () => {
     const[isExtensionInstalled, setIsExtensionInstalled] = useState(false);
     const[islinkedinConnected, setIslinkedinConnected] = useState(false);
     const[isloading, setIsLoading] = useState(false);
+   const [selectedid, setselectedid] = useState();
     const[message,setmessage] = useState("")
     const[id,setId] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
@@ -132,6 +133,25 @@ const handledisconnect = ()=>{
   setIslinkedinConnected(false);
 
 }
+useEffect(()=>{
+  let id = Cookies.get("selectedlid");
+  if(id){
+        setselectedid(id);
+  }
+},[])
+const handleexistlinkedin = (item)=>{
+
+
+  try{
+     Cookies.set("user_token", item?.linkedin_token, { expires: 200 });
+     Cookies.set("lid",item?.id,{ expires: 20 })
+      Cookies.set('selectedlid', item?.id);
+    setselectedid(item?.id);
+     setIslinkedinConnected(true);
+  }catch(err){
+    console.log(err)
+  }
+}
 
 
   return (
@@ -167,7 +187,7 @@ const handledisconnect = ()=>{
 {islinkedinConnected ? (
   <button
     disabled
-    className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main"
+    className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main "
   >
     Connected
   </button>
@@ -205,8 +225,8 @@ const handledisconnect = ()=>{
                            <div className="text-white d-block small mb-1">{item?.username}</div>
                         <div className="text-white d-block small mb-1">{item?.email_id}</div>
                         </div>
-                        <button disabled={islinkedinConnected} 
-                          className="btn btn-primary gap-2 px-4 rounded-pill btn-main"
+                        <button disabled={islinkedinConnected} onClick={()=>handleexistlinkedin(item)}
+                          className="btn btn-primary gap-2 px-4 rounded-pill btn-main  ms-auto me-3"
                         >
                           {/* {item?.id == selectedid && islinkedinConnected ? 'Connected' : 'Continue'} */}
                           {islinkedinConnected ? 'Connected' : 'Continue'}
