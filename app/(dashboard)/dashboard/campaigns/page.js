@@ -7,8 +7,7 @@ import { useState, useEffect } from "react";
 import axiosInstance from "@/utils/axiosInstance";
 import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
-import { Cookie } from "next/font/google";
-
+import { toast } from "react-toastify";
 
 const Campaigns = () => {
   const router = useRouter();
@@ -29,63 +28,120 @@ const Campaigns = () => {
     }
   };
 
-const startcompain = async (compain) => {
-  let gmail = Cookies.get('gmail_access_token');
-  let outlook = Cookies.get('microsoft_access_token');
-  let userpass = Cookies.get("uapppas");
-  let linkedin = Cookies.get("user_token");
-  let grefreshtoken = Cookies.get("gmail_refresh_token");
-  let mrefreshtoken = Cookies.get("microsoft_refresh_token");
-  let gtokenexpire  = Cookies.get("gexpire");
-  let mtokenexpire = Cookies.get("mexpire");
-  let user = Cookies.get('uemail');
-  let  uemail = Cookies.get('gmail_user');
-  let memail = Cookies.get('ms_email');
-  let pass = userpass;
-// gtoken,mstoken,grefreshtoken,mrefreshtoken,gtokenexpire,mtokenexpire,user,uemail,memail,pass
-let gtoken = gmail;
-let mstoken = outlook;
+  const startcompain = async (compain) => {
+    let gmail = Cookies.get("gmail_access_token");
+    let outlook = Cookies.get("microsoft_access_token");
+    let userpass = Cookies.get("uapppas");
+    let linkedin = Cookies.get("user_token");
+    let grefreshtoken = Cookies.get("gmail_refresh_token");
+    let mrefreshtoken = Cookies.get("microsoft_refresh_token");
+    let gtokenexpire = Cookies.get("gexpire");
+    let mtokenexpire = Cookies.get("mexpire");
+    let user = Cookies.get("uemail");
+    let uemail = Cookies.get("gmail_user");
+    let memail = Cookies.get("ms_email");
+    let usertoken = Cookies.get("user_token");
+    let mid = Cookies.get("mid");
+    let pass = userpass;
 
-  if (!gmail && !outlook && !userpass && !linkedin) {
-    setError("To start any campaign, please log in to your account first.");
-    return;
-  }
+    let gtoken = gmail;
+    let mstoken = outlook;
 
-  let { id, channel, company_size, ideal_customer, sector } = compain;
-
-  let body = {
-    id,
-    channel,
-    company_size,
-    ideal_customer,
-    sector,
-    gtoken,mstoken,grefreshtoken,mrefreshtoken,gtokenexpire,mtokenexpire,user,uemail,memail,pass
-  };
-
-  try {
-    if (channel === "Email") {
-      await scrapInstance.post("/api/scrapemail", { body }, { withCredentials: true });
+    if (!gmail && !outlook && !userpass && !linkedin) {
+      toast.warn("To Start first Login")
+      
+      return;
     }
 
-    if (channel === "Linkedin") {
-      try {
-        setIsLoading(true);
-        const { data } = await scrapInstance.post("/api/scrap", { body }, { withCredentials: true });
-        setIsLoading(false);
-      } catch (err) {
-        setIsLoading(false);
-        console.log("LinkedIn error:", err);
-      }
+    let { id, channel, company_size, ideal_customer, sector } = compain;
+
+    try {
+      if (channel === "Email") {
+        let body = {
+          id,
+          channel,
+          company_size,
+          ideal_customer,
+          sector,
+          gtoken,
+          mstoken,
+          grefreshtoken,
+          mrefreshtoken,
+          gtokenexpire,
+          mtokenexpire,
+          user,
+          uemail,
+          memail,
+          pass,
+        };
+
+    let response = await axiosInstance.patch(
+        `api/campaign/${id}/status`,
+        {
+          campaign_status: "active",
+        }
+      );
+   const{data} = response;
+  
+
+   if(data.status===true){
+     fetchData();
+     let response =    await scrapInstance.post(
+          "/api/scrapemail",
+          { body },
+          { withCredentials: true }
+        );
+      
+
+      const {data} = response;
+
+      if(!data.isSuccess){
+         await toast.warn("Outlook Token expired, please sign in again!");
+         stopddcomapin(compain);
+         try{
+            let deletetoken = await axiosInstance.delete(`/api/email-token/${mid}`);
+            Cookies.remove("microsoft_access_token")
+         }catch(err){
+          console.log(err);
+         }
+         // here delete api
+    }else{
+      await toast.success("Compain Start Successfully")
     }
-  let updatestatus = await axiosInstance.patch(`api/campaign/${id}/status`,{
-  campaign_status: "active"
-})
     fetchData();
-  } catch (err) {
-    console.log("Error starting campaign:", err);
-    setError("Could not start campaign.");
-  }
-};
+   }
+  
+      }
+
+      if (channel === "Linkedin") {
+        try {
+          setIsLoading(true);
+          let body = {
+            id,
+            channel,
+            company_size,
+            ideal_customer,
+            sector,
+            usertoken,
+          };
+          const { data } = await scrapInstance.post(
+            "/api/scrap",
+            { body },
+            { withCredentials: true }
+          );
+          setIsLoading(false);
+        } catch (err) {
+          setIsLoading(false);
+          console.log("LinkedIn error:", err);
+        }
+      }
+      
+    } catch (err) {
+      console.log("Error starting campaign:", err);
+      stopddcomapin(compain);
+      toast.error("Only one compain at a Time")
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -103,23 +159,50 @@ let mstoken = outlook;
     const encodedName = encodeURIComponent(campaign.campaign_name);
     router.push(`/dashboard/campaigns/edit/${encodedName}`);
   };
+  const stopddcomapin = async (compain) => {
+    let { id } = compain;
+
+    try {
+      let stopcompain = await scrapInstance.post("/api/stopcompain", {
+        id: id,
+      });
+      const{data}  =stopcompain;
   
-
-  const stopcomapin = async(compain)=>{
-   let {id} = compain;
-   
-    try{
-          let stopcompain = await scrapInstance.post('/api/stopcompain',{id:id})
-          // change status
-          let updatestatus = await axiosInstance.patch(`api/campaign/${id}/status`,{
-  campaign_status: "deactive"
-})
-fetchData();
-    }catch(err){
-      console.log(err)
+      // change status
+      let updatestatus = await axiosInstance.patch(
+        `api/campaign/${id}/status`,
+        {
+          campaign_status: "deactive",
+        }
+      );
+      fetchData();
+    } catch (err) {
+      console.log(err);
     }
+  };
+  const stopcomapin = async (compain) => {
+    let { id } = compain;
 
-  }
+    try {
+      let stopcompain = await scrapInstance.post("/api/stopcompain", {
+        id: id,
+      });
+      const{data}  =stopcompain;
+      if(data?.isSuccess){
+        await toast.success("Compain stoped Successfully");
+      }
+      // change status
+      let updatestatus = await axiosInstance.patch(
+        `api/campaign/${id}/status`,
+        {
+          campaign_status: "deactive",
+        }
+      );
+      fetchData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   //view leads
 
   return (
@@ -170,36 +253,41 @@ fetchData();
                 </td>
                 <td>{campaign.channel}</td>
                 <td>8</td>
-                <td>In progress</td>
+                <td>{campaign?.campaign_status==="active"?'In process':'Stopped'}</td>
                 <td>{campaign.campaign_status}</td>
                 <td>2</td>
                 <td>
-                  {campaign.campaign_status==="active"?(            <Button
-                    onClick={()=> stopcomapin(campaign)}
-                    className="btn-rounded me-3"
-                    size="sm"
-                  >
-                  Stop
-                  </Button>):(<>
-                  <Button
-                    onClick={() => startcompain(campaign)}
-                    className="btn-rounded me-3"
-                    size="sm"
-                  >
-                  Start
-                  </Button>
-                  
-                  </>)}
-                  
+                  {campaign.campaign_status === "active" ? (
+                    <Button
+                      onClick={() => stopcomapin(campaign)}
+                      className="btn-rounded me-3"
+                      size="sm"
+                    >
+                      Stop
+                    </Button>
+                  ) : (
+                    <>
+                      <Button
+                        onClick={() => startcompain(campaign)}
+                        className="btn-rounded me-3"
+                        size="sm"
+                      >
+                        Start
+                      </Button>
+                    </>
+                  )}
+
                   <Button className="btn-rounded me-3" size="sm">
                     Delete
                   </Button>
-                     <Button
-                    onClick={() => router.push(`/dashboard/leads/${campaign.id}`)}
+                  <Button
+                    onClick={() =>
+                      router.push(`/dashboard/leads/${campaign.id}`)
+                    }
                     className="btn-rounded me-3"
                     size="sm"
                   >
-                   View leads
+                    View leads
                   </Button>
                 </td>
               </tr>

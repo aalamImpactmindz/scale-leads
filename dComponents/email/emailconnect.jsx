@@ -1,7 +1,8 @@
 // components/LinkedInConnect.js
 "use client";
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
-import { signIn, signOut,getProviders, useSession } from 'next-auth/react';
+import { signIn, signOut, getProviders, useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -12,8 +13,8 @@ import outlook from '../../public/assets/images/outlook_icon.png'
 import circle from '../../public/assets/images/circle-tick.png'
 import remove from '../../public/assets/images/remove.png'
 import login from '../../public/assets/images/login.png'
-import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup} from "firebase/auth";
-import{ signOut as firebaseSignOut} from 'firebase/auth';
+import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { signOut as firebaseSignOut } from 'firebase/auth';
 import Cookies from "js-cookie";
 import SmtpModal from "@/modals/smtpmodal";
 import axiosInstance from "@/utils/axiosInstance";
@@ -24,6 +25,9 @@ import { useRef } from "react";
 
 const EmailConnect = () => {
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
+
+
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -39,19 +43,65 @@ const EmailConnect = () => {
   const [outlookdata, setoutlookdata] = useState([]);
   const { smtp, setsmtp } = useContext(AuthContext);
   const [existsmtp, setexistsmtp] = useState([]);
-const userRef = useRef(null);
+  const [hasSavedOutlookToken, setHasSavedOutlookToken] = useState(false);
+  const userRef = useRef(null);
 
 
-useEffect(()=>{
-  let check = Cookies.get("gmail_access_token");
-  if(!check){
-    setIsConnected(false);
+  useEffect(() => {
+    let check = Cookies.get("gmail_access_token");
+    console.log(Cookies.get("microsoft_access_token"))
+    if (!check) {
+      setIsConnected(false);
+    }
+    let microsoft = Cookies.get("microsoft_access_token");
+    if (!microsoft) {
+      setIsMicrosoftConnected(false);
+    }
+  }, [])
+useEffect(() => {
+  const userEmail = searchParams.get('email');
+  const expires_in = searchParams.get('expires_in');
+
+  const saveEmailToken = async () => {
+    const accessToken = Cookies.get('microsoft_access_token');
+    const refreshToken = Cookies.get('microsoft_refresh_token');
+    const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
+
+    if (userEmail && accessToken && refreshToken && !hasSavedOutlookToken) {
+      try {
+        const response = await axiosInstance.post('/api/email-token', {
+          access_token: accessToken,
+          email_id: userEmail,
+          provider: 'outlook',
+          refresh_token: refreshToken,
+          expires_in: expires_in,
+          status: true,
+        });
+
+        const { data } = response;
+
+        if (data?.status) {
+          Cookies.set('mid', data?.data?.id, { path: '/' });
+          Cookies.set('mexpire', expires_in, {
+            expires: expiresAt,
+            path: '/',
+            sameSite: true,
+          });
+
+          setIsMicrosoftConnected(true);
+          setHasSavedOutlookToken(true); // ✅ Prevent future calls
+        }
+      } catch (error) {
+        console.error('❌ Failed to save Microsoft email token:', error);
+      }
+    }
+  };
+
+  if (userEmail && !hasSavedOutlookToken) {
+    saveEmailToken();
   }
-  let microsoft = Cookies.get("microsoft_access_token");
-  if(!microsoft){
-    setIsMicrosoftConnected(false);
-  }
-},[])
+}, [searchParams, hasSavedOutlookToken]);
+
 
   useEffect(() => {
 
@@ -84,13 +134,14 @@ useEffect(()=>{
     setShowSmtpModal(false); // 🔑 Close modal
   };
 
-useEffect(()=>{
-  if (!session) return;
+  useEffect(() => {
+    if (!session) return;
 
-    const provider = session.provider;
-     console.log(session.expiresAt);
-    
-     const syncTokenToBackend = async () => {
+    let  provider = session.provider;
+provider = provider === "google" ? "gmail" : provider;
+
+
+    const syncTokenToBackend = async () => {
       try {
         await axiosInstance.post("/api/email-token", {
           access_token: session.accessToken,
@@ -100,6 +151,7 @@ useEffect(()=>{
           expires_in: session.expiresAt,
           status: true,
         });
+            setIsConnected(true);
       } catch (error) {
         if (error.response?.status === 409) {
           console.warn("Token already exists, skipping...");
@@ -108,45 +160,39 @@ useEffect(()=>{
         }
       }
     };
-  if (provider === "google") {
-      setIsConnected(true);
- Cookies.set("gmail_access_token", session.accessToken, {
-      path: "/",
-      secure: true,
-      sameSite: "Strict",
-      expires: new Date(session.expiresAt * 1000)
-,
-    });
+    if (provider === "google") {
+  
+      
 
       Cookies.set("gmail_refresh_token", session.refreshToken, {
         path: "/",
         secure: true,
-             sameSite: "Strict",
+        sameSite: "Strict",
         expires: session.expiresAt
-,
+        ,
       });
       Cookies.set("gexpire", session.expiresAt
-, {
-        path: "/",
-        secure: true,
-              sameSite: "Strict",
-        expires: session.expiresAt
-,
-      });
+        , {
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+          expires: session.expiresAt
+          ,
+        });
       Cookies.set("gmail_user", session.user.email, {
         path: "/",
         secure: true,
-              sameSite: "Strict",
+        sameSite: "Strict",
         expires: session.expiresAt
-,
+        ,
       });
     }
     if (!Cookies.get("gmail_access_token")) {
       syncTokenToBackend();
     }
-  
 
-},[session])
+
+  }, [session])
 
   const handlegmaillogin = async () => {
     try {
@@ -159,70 +205,33 @@ useEffect(()=>{
     }
   }
 
- const handleMicrosoftLogin = async () => {
-    const msprovider = new OAuthProvider('microsoft.com');
-    msprovider.setCustomParameters({ prompt: "consent" });
-    msprovider.addScope("Mail.Send");
-    msprovider.addScope("Mail.ReadWrite");
-    msprovider.addScope("MailboxSettings.ReadWrite");
-    msprovider.addScope("offline_access");
-    msprovider.addScope("email");
-    msprovider.addScope("openid");
-    msprovider.addScope("profile");
-    try {
-      const result = await signInWithPopup(auth, msprovider);
 
-      // Get credential
-      const credential = OAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
-      const idToken = credential.idToken;
+const handleMicrosoftLogin=async()=>{
+const scopes = [
+    'openid',
+    'profile',
+    'offline_access',
+    'email',
+    'https://graph.microsoft.com/Mail.Send',
+    'https://graph.microsoft.com/Mail.ReadWrite',
+    'https://graph.microsoft.com/MailboxSettings.ReadWrite',
+  ].join(' ');
+try{
+  const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?` +
+    `client_id=${process.env.NEXT_PUBLIC_MICROSOFT_CLIENT_ID}` +
+    `&response_type=code` +
+    `&redirect_uri=${encodeURIComponent(process.env.NEXT_PUBLIC_MICROSOFT_REDIRECT_URI)}` +
+    `&response_mode=query` +
+    `&scope=${encodeURIComponent(scopes)}` +
+    `&prompt=consent` +  // 👈 forces the consent screen to appear
+    `&state=1234`;
 
-      const user = result.user;
-      const refresh_token = user?.stsTokenManager?.refreshToken;
-      const expires_in = user?.stsTokenManager?.expirationTime;
+  window.location.href = authUrl;
 
-      let email = user?.email;
-      const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
-      Cookies.set("microsoft_refresh_token", refresh_token, {  path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt })
-      Cookies.set("mexpire", expires_in, { path: "/",
-            secure: true,
-            sameSite: "None", expires: expiresAt });
-
-      Cookies.set("ms_email", user.email, { path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt });
-
-
-
-      try {
-        let sendemail = await axiosInstance.post("/api/email-token", {
-          access_token: accessToken, email_id: email, provider: "outlook", refresh_token: refresh_token, expires_in: expires_in, status: true
-        });
-        let { data } = sendemail;
-        if (data?.status) {
-          Cookies.set("microsoft_access_token", accessToken, { path: "/",
-            secure: true,
-            sameSite: "None", expires: new Date(expires_in*1000) }); // Store token in cookies
-          setIsMicrosoftConnected(true);
-        }
-
-      } catch (err) {
-        console.log(err);
-      }
-
-    } catch (error) {
-      console.error("Microsoft login failed:", {
-        code: error.code,
-        message: error.message,
-        email: error.customData?.email,
-        credential: OAuthProvider.credentialFromError(error),
-      });
-    }
-  };
- 
-
+}catch(err){
+  console.log(err);
+}
+}
   const checkexistgmailaccount = async () => {
     try {
       const letdata = await axiosInstance.get('/api/email-token/gmail');
@@ -304,7 +313,7 @@ useEffect(()=>{
   const handleexistinggmail = async (item) => {
 
     try {
-      let response = await axiosInstance.post('/api/email-token/refresh', { email_id: item?.email_id });
+      let response = await axiosInstance.post('/api/email-token/refresh', { email_id: item?.email_id,provider:"gmail" });
       const { data } = response;
 
       if (data?.status) {
@@ -312,19 +321,31 @@ useEffect(()=>{
 
 
 
-        Cookies.set("gmail_user", item?.email_id, { path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt });
-        Cookies.set("gmail_access_token", data?.access_token, { path: "/",
-            secure: true,
-            sameSite: "None",expires: new Date(item?.expires_in * 1000) });
-        Cookies.set("gmail_refresh_token", item?.refresh_token, { path: "/",
-            secure: true,
-            sameSite: "None",expires: expiresAt })
-        Cookies.set("gexpire", item?.expires_in, {path: "/",
-            secure: true,
-            sameSite: "None", expires: expiresAt });
-
+        Cookies.set("gmail_user", item?.email_id, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        });
+        Cookies.set("gmail_access_token", data?.access_token, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: new Date(item?.expires_in * 1000)
+        });
+        Cookies.set("gmail_refresh_token", item?.refresh_token, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        })
+        Cookies.set("gexpire", item?.expires_in, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        });
+       Cookies.set("tid",item?.id,{
+        path:"/",
+        secure:true,
+        sameSite:"None",expires:expiresAt
+       })
 
 
         setIsConnected(true);
@@ -345,12 +366,16 @@ useEffect(()=>{
 
     try {
 
-      Cookies.set('uapppas', item?.app_password,{path: "/",
-            secure: true,
-            sameSite: "None"});
-      Cookies.set('uemail', item?.email,{path: "/",
-            secure: true,
-            sameSite: "None"});
+      Cookies.set('uapppas', item?.app_password, {
+        path: "/",
+        secure: true,
+        sameSite: "None"
+      });
+      Cookies.set('uemail', item?.email, {
+        path: "/",
+        secure: true,
+        sameSite: "None"
+      });
 
       setsmtp(true);
       Cookies.set('selectedsmid', item?.id);
@@ -370,21 +395,69 @@ useEffect(()=>{
 
   const handleexistingoutlook = async (item) => {
 
+    try {
+      let response = await axiosInstance.post('/api/email-token/refresh', { email_id: item?.email_id,provider:"outlook" });
+      const { data } = response;
+
+      Cookies.set("microsoft_access_token", item?.access_token, {
+        path: "/",
+        secure: true,
+        sameSite: "None", expires: new Date(item?.expires_in * 1000)
+      });
+         Cookies.set("mid",item?.id,{
+        path:"/",
+        secure:true,
+        sameSite:"None",expires:new Date(item?.expires_in * 1000)
+       })
+
+          if (data?.status) {
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 
 
 
-        Cookies.set("microsoft_access_token", item?.access_token, {path: "/",
-            secure: true,
-            sameSite: "None", expires:new Date(item?.expires_in * 1000)});
-        setIsMicrosoftConnected(true);
+        Cookies.set("ms_email", item?.email_id, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        });
+        Cookies.set("microsoft_access_token", data?.access_token, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: new Date(item?.expires_in * 1000)
+        });
+        Cookies.set("microsoft_refresh_token", item?.refresh_token, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        })
+        Cookies.set("mexpire", item?.expires_in, {
+          path: "/",
+          secure: true,
+          sameSite: "None", expires: expiresAt
+        });
+       Cookies.set("mid",item?.id,{
+        path:"/",
+        secure:true,
+        sameSite:"None",expires:expiresAt
+       })
 
-        Cookies.set('selectedmid', item?.id);
-        setselectedmid(item?.id);
-      
+
+    setIsMicrosoftConnected(true);
+   Cookies.set('selectedmid', item?.id);
+      setselectedmid(item?.id);
+      }
+     
 
     
 
-    setmShowDropdown(false);
+
+
+
+      setmShowDropdown(false);
+
+    } catch (err) {
+      console.log(err);
+    }
 
 
 
@@ -418,46 +491,9 @@ useEffect(()=>{
     }
 
   }
-const refreshFirebaseToken = async (user) => {
-  try {
-    const idToken = await user.getIdToken(true);
-    const decoded = await user.getIdTokenResult();
-    const expireTime = new Date(decoded.expirationTime);
-
-    Cookies.set("microsoft_access_token", idToken, {
-      path: "/",
-      secure: true,
-      sameSite: "Strict",
-      expires: expireTime,
-    });
-
-    console.log("✅ Token refreshed and cookie set");
-  } catch (err) {
-    console.error("❌ Failed to refresh Firebase token:", err);
-  }
-};
-
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      userRef.current = user;
-      console.log("✅ Firebase user signed in:", user.email);
-      refreshFirebaseToken(user);
-    } else {
-      userRef.current = null;
-      console.warn("⚠️ No Firebase user signed in");
-    }
-  });
-      const interval = setInterval(() => {
-      if (userRef.current) {
-        console.log("🔁 Refreshing Firebase token...");
-        refreshFirebaseToken(userRef.current);
-      }
-    }, 1 * 60 * 1000); // 55 minutes
+ 
 
 
-  return () => {unsubscribe(); clearInterval(interval)};
-}, []);
   return (
     <>
       <div className="container custombackgrond rounded-4 border p-4 shadow-sm mt-5">
@@ -481,25 +517,25 @@ useEffect(() => {
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlegmaillogin}
               className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
             >
-              {isConnected ? 'Connected' : 'Log in'} 
+              {isConnected ? 'Connected' : 'Log in'}
             </button>
 
-{isConnected ? (
-  <span onClick={() => handledisconnect('gmail')} className="d-flex align-items-center gap-2 disconnect_button">
-    <Image src={remove} alt="Connected" width={22} height={22} />
-  </span>
-) : 
-  (!isMicrosoftConnected && !smtp && emaildata?.length > 0 && (
-    <FontAwesomeIcon
-      icon={faChevronDown}
-      className="text-primary drop_icon"
-      onClick={() => setShowDropdown(prev => !prev)}
-    />
-  ))
-}
+            {isConnected ? (
+              <span onClick={() => handledisconnect('gmail')} className="d-flex align-items-center gap-2 disconnect_button">
+                <Image src={remove} alt="Connected" width={22} height={22} />
+              </span>
+            ) :
+              (!isMicrosoftConnected && !smtp && emaildata?.length > 0 && (
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="text-primary drop_icon"
+                  onClick={() => setShowDropdown(prev => !prev)}
+                />
+              ))
+            }
 
 
-            
+
 
             {showDropdown && (
               <div className="shows  pe-3 ps-3 p-2 border rounded shadow customdropdowncard ">
@@ -561,21 +597,21 @@ useEffect(() => {
               {isMicrosoftConnected ? `Connected` : 'Log in'}
 
             </button>
-{isMicrosoftConnected ? (
-  <span onClick={() => handledisconnect('outlook')} className="d-flex align-items-center gap-2 disconnect_button">
-    <Image src={remove} alt="Connected" width={22} height={22} />
-  </span>
-) : 
-  (!isConnected && !smtp && outlookdata.length > 0 && (
-    <FontAwesomeIcon
-      icon={faChevronDown}
-      className="text-primary drop_icon"
-      onClick={() => setmShowDropdown(prev => !prev)}
-    />
-  ))
-}
+            {isMicrosoftConnected ? (
+              <span onClick={() => handledisconnect('outlook')} className="d-flex align-items-center gap-2 disconnect_button">
+                <Image src={remove} alt="Connected" width={22} height={22} />
+              </span>
+            ) :
+              (!isConnected && !smtp && outlookdata.length > 0 && (
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="text-primary drop_icon"
+                  onClick={() => setmShowDropdown(prev => !prev)}
+                />
+              ))
+            }
 
-            
+
 
             {showmDropdown && (
               <div className="shows  pe-3 ps-3 p-2 border rounded  customdropdowncard  ">
@@ -643,22 +679,22 @@ useEffect(() => {
             </div>
 
             {/* Right: Button */}
-            <button  disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary btn-main d-flex align-items-center gap-1 px-4 rounded-pill ms-auto me-3">
+            <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary btn-main d-flex align-items-center gap-1 px-4 rounded-pill ms-auto me-3">
               {smtp ? 'Connected' : 'Log in'}
             </button>
-{smtp ? (
-  <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
-    <Image src={remove} alt="Connected" width={22} height={22} />
-  </span>
-) : 
-  (!isMicrosoftConnected && !isConnected && existsmtp?.length > 0 && (
-    <FontAwesomeIcon
-      icon={faChevronDown}
-      className="text-primary drop_icon"
-      onClick={() => setShowsmDropdown(prev => !prev)}
-    />
-  ))
-}
+            {smtp ? (
+              <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
+                <Image src={remove} alt="Connected" width={22} height={22} />
+              </span>
+            ) :
+              (!isMicrosoftConnected && !isConnected && existsmtp?.length > 0 && (
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="text-primary drop_icon"
+                  onClick={() => setShowsmDropdown(prev => !prev)}
+                />
+              ))
+            }
 
 
 
