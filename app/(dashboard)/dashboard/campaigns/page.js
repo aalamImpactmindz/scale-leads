@@ -47,16 +47,21 @@ const Campaigns = () => {
     let gtoken = gmail;
     let mstoken = outlook;
 
-    if (!gmail && !outlook && !userpass && !linkedin) {
+    
+
+    let { id, channel, company_size, ideal_customer, sector,message_delay } = compain;
+      if (!gmail && !outlook && !userpass&& !linkedin) {
       toast.warn("To Start first Login")
       
       return;
     }
-
-    let { id, channel, company_size, ideal_customer, sector } = compain;
-
     try {
       if (channel === "Email") {
+        if (!gmail && !outlook && !userpass) {
+      toast.warn("To Start first Login")
+      
+      return;
+    }
         let body = {
           id,
           channel,
@@ -73,6 +78,7 @@ const Campaigns = () => {
           uemail,
           memail,
           pass,
+          message_delay
         };
 
     let response = await axiosInstance.patch(
@@ -115,6 +121,11 @@ const Campaigns = () => {
 
       if (channel === "Linkedin") {
         try {
+            if (!linkedin) {
+      toast.warn("To Start first Login")
+      
+      return;
+    }
           setIsLoading(true);
           let body = {
             id,
@@ -124,11 +135,43 @@ const Campaigns = () => {
             sector,
             usertoken,
           };
-          const { data } = await scrapInstance.post(
-            "/api/scrap",
-            { body },
-            { withCredentials: true }
-          );
+
+
+          let response = await axiosInstance.patch(
+        `api/campaign/${id}/status`,
+        {
+          campaign_status: "active",
+        }
+      );
+       const{data} = response;
+         if(data.status===true){
+           fetchData();
+          await toast.success("Compain Start Successfully")
+         
+     let response =    await scrapInstance.post(
+          "/api/scrap",
+          { body },
+          { withCredentials: true }
+        );
+      
+
+      const {data} = response;
+
+    //   if(!data.isSuccess){
+    //      await toast.warn("Outlook Token expired, please sign in again!");
+    //      stopddcomapin(compain);
+    //      try{
+    //         let deletetoken = await axiosInstance.delete(`/api/email-token/${mid}`);
+    //         Cookies.remove("microsoft_access_token")
+    //      }catch(err){
+    //       console.log(err);
+    //      }
+    //      // here delete api
+    // }else{
+    //   await toast.success("Compain Start Successfully")
+    // }
+    fetchData();
+   }
           setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
@@ -181,16 +224,30 @@ const Campaigns = () => {
     }
   };
   const stopcomapin = async (compain) => {
-    let { id } = compain;
+    let { id,channel} = compain;
+    console.log(channel);
+
 
     try {
-      let stopcompain = await scrapInstance.post("/api/stopcompain", {
+     if(channel==="Email"){
+let stopcompain = await scrapInstance.post("/api/stopcompain", {
         id: id,
       });
       const{data}  =stopcompain;
       if(data?.isSuccess){
         await toast.success("Compain stoped Successfully");
       }
+     }
+     if(channel==="Linkedin"){
+      let stopcompain = await scrapInstance.post("/api/pausescrap", {
+        id: id,
+      });
+      const{data}  =stopcompain;
+      if(data?.isSuccess){
+        await toast.success("Compain stoped Successfully");
+      }
+     }
+      
       // change status
       let updatestatus = await axiosInstance.patch(
         `api/campaign/${id}/status`,

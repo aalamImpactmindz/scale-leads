@@ -76,7 +76,7 @@ useEffect(() => {
 setIsExtensionInstalled(false);
        
       }
-    }, 100); // Check every 300ms
+    }, 300); // Check every 300ms
 
     // Stop after 3 seconds
     setTimeout(() => clearInterval(checkInterval), 300);
@@ -148,6 +148,7 @@ const handleexistlinkedin = (item)=>{
       Cookies.set('selectedlid', item?.id);
     setselectedid(item?.id);
      setIslinkedinConnected(true);
+     setShowDropdown(false);
   }catch(err){
     console.log(err)
   }
