@@ -64,7 +64,7 @@ const[show,setshow] = useState(false);
       icon: faUserPlus,
     },
     { name: "Campaigns", href: "/dashboard/campaigns", icon: faBullhorn },
-    { name: "Leads", href: "/dashboard/leads", icon: faArrowTrendUp },
+    // { name: "Leads", href: "/dashboard/leads", icon: faArrowTrendUp },
     // { name: "Invoices", href: "/dashboard/invoices", icon: faReceipt },
     // { name: "Notifications", href: "/dashboard/notifications", icon: faBell },
     {
