@@ -2,25 +2,39 @@
 
 import React from "react";
 import { Button, Table, Alert } from "react-bootstrap";
-import { useRouter } from "next/navigation";
+import { useRouter,useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import axiosInstance from "@/utils/axiosInstance";
 import { use } from "react";
 const PageDLeads = ({params}) => {
-   const { id } = use(params);
-
+   const { id} = use(params); 
   const router = useRouter();
+  const searchParams = useSearchParams(); // Get query params
+  const channel = searchParams.get("channel"); // Read `channel`
+
   const [leads, setLeads] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`/api/campaign/${id}/leads`);
+      if(channel=="Email"){
+  const response = await axiosInstance.get(`/api/campaign/${id}/leads`);
    const {data} =response; 
    if(data?.status){
 setLeads(data?.data ||[])
    }
+      }
+      if(channel=="Linkedin"){
+         const response = await axiosInstance.get(`/api/linkedin/leads?campaign_id=${id}`);
+     
+   const {data} =response; 
+
+   if(data?.status){
+setLeads(data?.leads ||[])
+   }
+      }
+    
      
       
     } catch (err) {

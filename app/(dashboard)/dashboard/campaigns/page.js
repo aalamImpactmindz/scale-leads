@@ -339,7 +339,7 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
                   </Button>
                   <Button
                     onClick={() =>
-                      router.push(`/dashboard/leads/${campaign.id}`)
+                      router.push(`/dashboard/leads/${campaign?.id}?channel=${campaign?.channel}`)
                     }
                     className="btn-rounded me-3"
                     size="sm"
