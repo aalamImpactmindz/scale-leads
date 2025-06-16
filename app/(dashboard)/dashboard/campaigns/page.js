@@ -15,6 +15,12 @@ const Campaigns = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [isloading, setIsLoading] = useState(false);
+const [showMessageModal, setShowMessageModal] = useState(false);
+const [linkedinMessage, setLinkedinMessage] = useState('');
+const [emailMessage, setEmailMessage] = useState('');
+const[msgId,setmsgid] = useState('');
+
+
 
   const fetchData = async () => {
     try {
@@ -28,7 +34,43 @@ const Campaigns = () => {
     }
   };
 
-  const startcompain = async (compain) => {
+
+const fetchMessages = async () => {
+  try {
+    const res = await axiosInstance.get("/api/user/messages/latest");
+     const {data} = res;
+
+     setmsgid(data?.data?.id);
+    setLinkedinMessage(data?.data?.message_content || '');
+    setEmailMessage(data?.data?.email_content || '');
+  } catch (err) {
+    toast.error("Failed to load messages");
+  }
+};
+  
+
+const handleOpenMessageModal = () => {
+  fetchMessages();
+  setShowMessageModal(true);
+};
+
+// Save updated messages
+const handleSaveMessages = async () => {
+  try {
+    await axiosInstance.post("/api/user-messages/update", {
+      id:msgId,
+      message_content: linkedinMessage,
+      email_content: emailMessage
+    });
+    toast.success("Messages saved!");
+    setShowMessageModal(false);
+  } catch (err) {
+    toast.error("Failed to save messages");
+  }
+};
+
+
+const startcompain = async (compain) => {
     let gmail = Cookies.get("gmail_access_token");
     let outlook = Cookies.get("microsoft_access_token");
     let userpass = Cookies.get("uapppas");
@@ -261,11 +303,21 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
     }
   };
   //view leads
+useEffect(() => {
+  document.body.style.overflow = showMessageModal ? 'hidden' : 'auto';
+}, [showMessageModal]);
 
   return (
     <div className="campaigns mb-4">
       <div className="d-heading-container d-flex flex-wrap justify-content-between mb-4">
         <h2 className="mb-0 fw-bold me-5 d-inline-block">Campaigns</h2>
+                 <Button
+                   onClick={handleOpenMessageModal}
+                    className="btn-rounded me-3 ms-auto"
+                    size="sm"
+                  >
+                    View Messages
+                  </Button>
         <Link href="/dashboard/onboarding">
           <Button className="btn-rounded" size="sm">
             Add New Campaign
@@ -308,10 +360,10 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
                     {campaign.campaign_name}
                   </h6>
                 </td>
-                <td>{campaign.channel}</td>
-                <td>8</td>
+                <td>{campaign?.channel}</td>
+                <td>{campaign?.total_leads}</td>
                 <td>{campaign?.campaign_status==="active"?'In process':'Stopped'}</td>
-                <td>{campaign.campaign_status}</td>
+                <td>{campaign?.campaign_status}</td>
                 <td>2</td>
                 <td>
                   {campaign.campaign_status === "active" ? (
@@ -346,12 +398,62 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
                   >
                     View leads
                   </Button>
+                  
+         
+                  
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
       )}
+      {showMessageModal && (
+  <div
+    className="modal fade show"
+    style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+    tabIndex="-1"
+  >
+    <div className="modal-dialog modal-lg modal-dialog-centered">
+      <div className="modal-content text-light" style={{ backgroundColor: "#1e003e" }}>
+        <div className="modal-header border-0">
+          <h5 className="modal-title">Edit Default Messages</h5>
+          <button
+            type="button"
+            className="btn-close btn-close-white"
+            onClick={() => setShowMessageModal(false)}
+          ></button>
+        </div>
+        <div className="modal-body">
+          <div className="mb-4">
+            <label className="form-label">LinkedIn Message</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={linkedinMessage}
+              onChange={(e) => setLinkedinMessage(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email Message</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={emailMessage}
+              onChange={(e) => setEmailMessage(e.target.value)}
+            ></textarea>
+          </div>
+        </div>
+        <div className="modal-footer border-0">
+          <button className="btn btn-secondary btn-main" onClick={() => setShowMessageModal(false)}>Cancel</button>
+          <button className="btn btn-primary btn-main" onClick={handleSaveMessages}>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
