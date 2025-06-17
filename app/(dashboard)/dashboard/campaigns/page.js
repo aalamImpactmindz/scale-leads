@@ -131,9 +131,11 @@ const startcompain = async (compain) => {
       );
    const{data} = response;
   
+  
 
    if(data.status===true){
      fetchData();
+     await toast.success("Compain Start Successfully")
      let response =    await scrapInstance.post(
           "/api/scrapemail",
           { body },
@@ -154,7 +156,7 @@ const startcompain = async (compain) => {
          }
          // here delete api
     }else{
-      await toast.success("Compain Start Successfully")
+      await toast.success("leads retrive successfully")
     }
     fetchData();
    }
@@ -198,7 +200,9 @@ const startcompain = async (compain) => {
       
 
       const {data} = response;
-
+      if(data?.status===true){
+        toast.success("Leads retrive successfully");
+      }
     //   if(!data.isSuccess){
     //      await toast.warn("Outlook Token expired, please sign in again!");
     //      stopddcomapin(compain);
