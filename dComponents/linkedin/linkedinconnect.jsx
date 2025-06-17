@@ -22,7 +22,8 @@ const LinkedInConnect = () => {
     const[message,setmessage] = useState("")
     const[id,setId] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
-
+    const[planid,setplanid] = useState('');
+let linkedinlimit;
     const[existlinkedin , setexistlinkedin] = useState([]);
     const handleLogin = async() => {
   const extensionId = "nmckndphoocceadajdmdgbckfagcifjp"; // 🧩 Replace with your extension's real ID
@@ -138,7 +139,34 @@ useEffect(()=>{
   if(id){
         setselectedid(id);
   }
+
+  const currentplan = localStorage.getItem("plan");
+  let pid = JSON.parse(currentplan);
+  setplanid(pid?.id);
+ 
 },[])
+
+const getlinkedinlimit = (pid)=>{
+  
+  switch(pid){
+    case 1:
+      return 1
+    case 2:
+      return 3
+    case 3:
+      return 5
+    case 4:
+      return 1
+    case 5:
+      return 3
+    case 6:
+      return 5
+  }
+}
+linkedinlimit = getlinkedinlimit(planid);
+
+
+
 const handleexistlinkedin = (item)=>{
 
 
@@ -209,11 +237,21 @@ const handleexistlinkedin = (item)=>{
         ):(
           
                          existlinkedin.length>0 && (
+                          <>
+                          {existlinkedin.length <linkedinlimit &&(
+                            <button
+    onClick={handleLogin}
+    className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main"
+  >
+   Add new Account
+  </button>
+                          )}
                           <FontAwesomeIcon
                             icon={faChevronDown}
                             className="text-primary drop_icon"
                              onClick={() => setShowDropdown(prev => !prev)}
                           />
+                          </>
                         )
         )}
  {showDropdown && (

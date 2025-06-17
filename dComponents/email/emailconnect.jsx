@@ -43,6 +43,7 @@ const EmailConnect = () => {
   const [outlookdata, setoutlookdata] = useState([]);
   const { smtp, setsmtp } = useContext(AuthContext);
   const [existsmtp, setexistsmtp] = useState([]);
+  const[planid,setplanid] = useState(0);
   const [hasSavedOutlookToken, setHasSavedOutlookToken] = useState(false);
   const userRef = useRef(null);
 
@@ -310,6 +311,34 @@ try{
     checkexistsmtp();
   }, [])
 
+useEffect(()=>{
+    let checkplan = localStorage.getItem('plan');
+    let pid = JSON.parse(checkplan);
+    if(pid){
+         setplanid(pid?.id)
+    }
+},[])
+
+const getemaillimit = (pid)=>{
+switch(pid){
+    case 1:
+      return 1
+    case 2:
+      return 3
+    case 3:
+      return 5
+    case 4:
+      return 1
+    case 5:
+      return 3
+    case 6:
+      return 5
+  }
+  }
+
+let emaillimit = getemaillimit(planid);
+
+
   const handleexistinggmail = async (item) => {
 
     try {
@@ -517,7 +546,9 @@ try{
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlegmaillogin}
               className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
             >
-              {isConnected ? 'Connected' : 'Log in'}
+              {isConnected
+    ? 'Connected'
+    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
             </button>
 
             {isConnected ? (
@@ -594,8 +625,10 @@ try{
 
               className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
             >
-              {isMicrosoftConnected ? `Connected` : 'Log in'}
-
+              
+  {isMicrosoftConnected
+    ? 'Connected'
+    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
             </button>
             {isMicrosoftConnected ? (
               <span onClick={() => handledisconnect('outlook')} className="d-flex align-items-center gap-2 disconnect_button">
@@ -680,7 +713,10 @@ try{
 
             {/* Right: Button */}
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary btn-main d-flex align-items-center gap-1 px-4 rounded-pill ms-auto me-3">
-              {smtp ? 'Connected' : 'Log in'}
+            
+               {smtp
+    ? 'Connected'
+    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
             </button>
             {smtp ? (
               <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
