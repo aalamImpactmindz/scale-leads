@@ -12,65 +12,60 @@ import LinkedInConnect from "@/dComponents/linkedin/linkedinconnect";
 import EmailConnect from "@/dComponents/email/emailconnect";
 import { useEffect, useState } from "react";
 import axiosInstance from "@/utils/axiosInstance";
-
-import CountUp from 'react-countup';
-
-
-
-
-
-
-
-
+import { jwtDecode } from "jwt-decode";
+import CountUp from "react-countup";
+import Cookies from "js-cookie";
 
 export default function DashboardHome() {
-const[leads,totalleads] = useState(0);
-const[leadperc,setleadperc] = useState(0);
-const[emailleads,totalemailleads] = useState(0);
-const[leademailperc,setlemaileadperc] = useState(0);
-//linkedin
- const fetchData = async () => {
+  const [leads, totalleads] = useState(0);
+  const [leadperc, setleadperc] = useState(0);
+  const [emailleads, totalemailleads] = useState(0);
+  const [leademailperc, setlemaileadperc] = useState(0);
+  const [user, setusername] = useState("");
+  //linkedin
+  const fetchData = async () => {
     try {
       const response = await axiosInstance.get("/api/linkedin/leads");
       totalleads(response.data.leads.length || 0);
-           let leadpercentage = Math.round((response.data.leads.length / 500) * 100);
- console.log(leadpercentage)
-  setleadperc(leadpercentage);
+      let leadpercentage = Math.round((response.data.leads.length / 500) * 100);
+      console.log(leadpercentage);
+      setleadperc(leadpercentage);
     } catch (err) {
       console.log("Error fetching leads:", err);
-    
     } finally {
-   
     }
   };
- const fetchemailData = async () => {
+  const fetchemailData = async () => {
     try {
       const response = await axiosInstance.get("/api/email-leads");
-  
-    
-      totalemailleads(response.data?.data?.length || 0);
-           let leadpercentage = Math.round((response.data?.data?.length / 500) * 100);
 
-  setlemaileadperc(leadpercentage);
+      totalemailleads(response.data?.data?.length || 0);
+      let leadpercentage = Math.round(
+        (response.data?.data?.length / 500) * 100
+      );
+
+      setlemaileadperc(leadpercentage);
     } catch (err) {
       console.log("Error fetching leads:", err);
-    
     } finally {
-   
     }
   };
 
   useEffect(() => {
     fetchData();
-fetchemailData();
-
+    fetchemailData();
   }, []);
 
-
-
-
-
-
+  useEffect(() => {
+    const token = Cookies?.get("authToken");
+    if (token) {
+      let decode = jwtDecode(token);
+      if (decode) {
+        const { name } = decode;
+        setusername(name);
+      }
+    }
+  }, []);
 
   return (
     <div className="dashboard">
@@ -91,13 +86,18 @@ fetchemailData();
                         LinkedIn
                       </span>
                     </h5>
-                    <h3 className="mt-auto display-5 fw-semibold"><CountUp end={leads} duration={6} /></h3>
+                    <h3 className="mt-auto display-5 fw-semibold">
+                      <CountUp end={leads} duration={6} />
+                    </h3>
                     <p className="mb-0 text-white text-opacity-75 small">
                       Lorem ipsum dolor sit
                     </p>
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
-                    <AnimatedProgressbar value={leadperc} strokeColor="#29003b" />
+                    <AnimatedProgressbar
+                      value={leadperc}
+                      strokeColor="#29003b"
+                    />
                     <p className="mb-0 text-white text-opacity-75 small mt-2">
                       Aliqua massa arcu
                     </p>
@@ -118,13 +118,18 @@ fetchemailData();
                         Email
                       </span>
                     </h5>
-                    <h3 className="mt-auto display-5 fw-semibold"><CountUp end={emailleads} duration={6} /></h3>
+                    <h3 className="mt-auto display-5 fw-semibold">
+                      <CountUp end={emailleads} duration={6} />
+                    </h3>
                     <p className="mb-0 text-white text-opacity-75 small">
                       Lorem ipsum dolor sit
                     </p>
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
-                    <AnimatedProgressbar value={leademailperc} strokeColor="#000957" />
+                    <AnimatedProgressbar
+                      value={leademailperc}
+                      strokeColor="#000957"
+                    />
                     <p className="mb-0 text-white text-opacity-75 small mt-2">
                       Aliqua massa arcu
                     </p>
@@ -135,18 +140,19 @@ fetchemailData();
           </Row>
           <div className="rounded-3 bg-gray mt-4 p-4">
             <h5>Actions envoyees</h5>
-            <div className="d-flex flex-wrap gap-2 mt-3">
-              <div
-                className="d-flex flex-column align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+            <Row className="row-cols-5 flex-wrap mt-3">
+              <Col
+                
               >
+                <div className="d-flex flex-column flex-grow-1 align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 <span
                   className="d-flex align-items-center justify-content-center rounded-circle mb-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     backgroundColor: "#FFE3E1",
-                    opacity: "0.8"
+                    opacity: "0.8",
                   }}
                 >
                   <FontAwesomeIcon
@@ -162,18 +168,20 @@ fetchemailData();
                 <p className="mb-0 small text-white text-opacity-75">
                   Invitations acceptees
                 </p>
-              </div>
-              <div
-                className="d-flex flex-column align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                </div>
+              </Col>
+              <Col
+               
               >
+                <div  className="d-flex flex-column flex-grow-1 align-items-center  shadow-sm px-3 py-4 rounded-3 gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 <span
                   className="d-flex align-items-center justify-content-center rounded-circle mb-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     backgroundColor: "#FFE3E1",
-                    opacity: "0.8"
+                    opacity: "0.8",
                   }}
                 >
                   <FontAwesomeIcon
@@ -185,22 +193,24 @@ fetchemailData();
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">641</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">38</h4>
                 <p className="mb-0 small text-white text-opacity-75">
-                  Invitations acceptees
+                  Demandes de
                 </p>
-              </div>
-              <div
-                className="d-flex flex-column align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                </div>
+              </Col>
+              <Col
+               
               >
+                <div  className="d-flex flex-column  flex-grow-1 align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 <span
                   className="d-flex align-items-center justify-content-center rounded-circle mb-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     backgroundColor: "#FFE3E1",
-                    opacity: "0.8"
+                    opacity: "0.8",
                   }}
                 >
                   <FontAwesomeIcon
@@ -212,22 +222,24 @@ fetchemailData();
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">641</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">177</h4>
                 <p className="mb-0 small text-white text-opacity-75">
-                  Invitations acceptees
+                  Messages
                 </p>
-              </div>
-              <div
-                className="d-flex flex-column align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                </div>
+              </Col>
+              <Col
+               
               >
+                <div  className="d-flex flex-column flex-grow-1 align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 <span
                   className="d-flex align-items-center justify-content-center rounded-circle mb-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     backgroundColor: "#FFE3E1",
-                    opacity: "0.8"
+                    opacity: "0.8",
                   }}
                 >
                   <FontAwesomeIcon
@@ -239,22 +251,22 @@ fetchemailData();
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">641</h4>
-                <p className="mb-0 small text-white text-opacity-75">
-                  Invitations acceptees
-                </p>
-              </div>
-              <div
-                className="d-flex flex-column align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
-                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+                <h4 className="mb-0 lh-1 fw-semibold">306</h4>
+                <p className="mb-0 small text-white text-opacity-75">Visits</p>
+                </div>
+              </Col>
+              <Col
+              
               >
+                <div   className="d-flex flex-column flex-grow-1 align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
+                style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 <span
                   className="d-flex align-items-center justify-content-center rounded-circle mb-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     backgroundColor: "#FFE3E1",
-                    opacity: "0.8"
+                    opacity: "0.8",
                   }}
                 >
                   <FontAwesomeIcon
@@ -266,15 +278,14 @@ fetchemailData();
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">641</h4>
-                <p className="mb-0 small text-white text-opacity-75">
-                  Invitations acceptees
-                </p>
-              </div>
-            </div>
+                <h4 className="mb-0 lh-1 fw-semibold">82</h4>
+                <p className="mb-0 small text-white text-opacity-75">Suivis</p>
+                </div>
+              </Col>
+            </Row>
           </div>
-            <LinkedInConnect></LinkedInConnect>
-             <EmailConnect/>
+          <LinkedInConnect></LinkedInConnect>
+          <EmailConnect />
         </Col>
         <Col md={4}>
           <div className="bg-gray rounded-3 p-4 d-flex flex-wrap flex-column align-items-center">
@@ -288,7 +299,7 @@ fetchemailData();
                 className="object-fit-cover rounded-circle"
               />
             </div>
-            <h5 className="my-3">Lisa J. Martinez</h5>
+            <h5 className="my-3">{user}</h5>
             <span className="mb-3 bg-gradient-purple px-3 py-2 lh-1 rounded-3 small">
               <FontAwesomeIcon
                 icon={faCrown}
@@ -380,9 +391,7 @@ fetchemailData();
             </Button>
           </div>
         </Col>
-     
       </Row>
-      
     </div>
   );
 }
