@@ -71,8 +71,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="copyright mt-4 small d-flex flex-wrap flex-column flex-md-row gap-3 align-items-center justify-content-between">
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/terms-conditions">Terms & Conditions</Link>
+         
+          <footer style={{textAlign: 'center' }}>
+  <Link href="/privacy-policy">Privacy Policy</Link> |{' '}
+  <Link href="/terms-conditions">Terms & Conditions</Link>
+</footer>
           <p className="ms-md-auto mb-0 text-center text-sm-left">
             Powered by ScaleLeads. All Right Reserved
           </p>
