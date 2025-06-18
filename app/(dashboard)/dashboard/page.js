@@ -15,13 +15,15 @@ import axiosInstance from "@/utils/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import CountUp from "react-countup";
 import Cookies from "js-cookie";
-
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/Authcontext";
 export default function DashboardHome() {
+  
   const [leads, totalleads] = useState(0);
   const [leadperc, setleadperc] = useState(0);
   const [emailleads, totalemailleads] = useState(0);
   const [leademailperc, setlemaileadperc] = useState(0);
-  const [user, setusername] = useState("");
+    const {user,setuser } = useContext(AuthContext);
   //linkedin
   const fetchData = async () => {
     try {
@@ -62,7 +64,7 @@ export default function DashboardHome() {
       let decode = jwtDecode(token);
       if (decode) {
         const { name } = decode;
-        setusername(name);
+        setuser(name);
       }
     }
   }, []);

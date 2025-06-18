@@ -71,6 +71,7 @@ const handleSaveMessages = async () => {
 
 
 const startcompain = async (compain) => {
+  setLoading(false);
     let gmail = Cookies.get("gmail_access_token");
     let outlook = Cookies.get("microsoft_access_token");
     let userpass = Cookies.get("uapppas");
@@ -146,6 +147,7 @@ const startcompain = async (compain) => {
       const {data} = response;
 
       if(!data.isSuccess){
+        setLoading(true);
          await toast.warn("Outlook Token expired, please sign in again!");
          stopddcomapin(compain);
          try{
@@ -156,6 +158,7 @@ const startcompain = async (compain) => {
          }
          // here delete api
     }else{
+      setLoading(true);
       await toast.success("leads retrive successfully")
     }
     fetchData();
@@ -201,6 +204,7 @@ const startcompain = async (compain) => {
 
       const {data} = response;
       if(data?.status===true){
+        setLoading(true);
         toast.success("Leads retrive successfully");
       }
     //   if(!data.isSuccess){

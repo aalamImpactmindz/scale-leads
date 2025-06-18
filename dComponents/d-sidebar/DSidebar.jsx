@@ -22,13 +22,15 @@ import Cookies from "js-cookie";
 import { AuthContext } from "@/app/context/Authcontext";
 import axiosInstance from "@/utils/axiosInstance";
 import { signOut } from "next-auth/react";
+import { jwtDecode } from "jwt-decode";
 
 const DSidebar = () => {
   const pathname = usePathname();
   const router = useRouter();
-const[show,setshow] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const[show,setshow] = useState(false);
+  const {user,isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -75,6 +77,7 @@ const[show,setshow] = useState(false);
     },
   ];
 
+
   return (
     <div className="d-sidebar position-fixed top-0 bottom-0 start-0 d-flex flex-column small">
       <div className="d-sidebar-header p-3 pb-0">
@@ -110,7 +113,7 @@ const[show,setshow] = useState(false);
         <div onClick={()=>setshow(!show)} className="profile d-flex align-items-center w-100 p-3  " style={{cursor:'pointer'}}>
          
           <img alt="User" width="40" className="rounded-circle me-3 " src={imageUser.src} />
-          <span className="text-truncate">Olivia Williams</span>
+          <span className="text-truncate">{user}</span>
         </div>
       </div>
     </div>
