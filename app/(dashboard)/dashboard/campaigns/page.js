@@ -205,6 +205,7 @@ const startcompain = async (compain) => {
             ideal_customer,
             sector,
             usertoken,
+            message_delay
           };
 
 
