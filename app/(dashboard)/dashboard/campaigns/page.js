@@ -18,6 +18,9 @@ const Campaigns = () => {
 const [showMessageModal, setShowMessageModal] = useState(false);
 const [linkedinMessage, setLinkedinMessage] = useState('');
 const [emailMessage, setEmailMessage] = useState('');
+const [showfollowModal, setShowfolloupModal] = useState(false);
+const [linkedinsfolloup, setLinkedinfollowup] = useState('');
+const[emailfollowup,setEmailfollowup] = useState('');
 const[msgId,setmsgid] = useState('');
 
 
@@ -35,6 +38,8 @@ const[msgId,setmsgid] = useState('');
   };
 
 
+
+
 const fetchMessages = async () => {
   try {
     const res = await axiosInstance.get("/api/user/messages/latest");
@@ -43,6 +48,8 @@ const fetchMessages = async () => {
      setmsgid(data?.data?.id);
     setLinkedinMessage(data?.data?.message_content || '');
     setEmailMessage(data?.data?.email_content || '');
+    setLinkedinfollowup(data?.data?.follow_up_linkedin || '');
+    setEmailfollowup(data?.data?.follow_up_email || '')
   } catch (err) {
     toast.error("Failed to load messages");
   }
@@ -54,6 +61,10 @@ const handleOpenMessageModal = () => {
   setShowMessageModal(true);
 };
 
+const handleOpenfollowupModal = ()=>{
+  fetchMessages();
+  setShowfolloupModal(true);
+}
 // Save updated messages
 const handleSaveMessages = async () => {
   try {
@@ -64,6 +75,19 @@ const handleSaveMessages = async () => {
     });
     toast.success("Messages saved!");
     setShowMessageModal(false);
+  } catch (err) {
+    toast.error("Failed to save messages");
+  }
+};
+const handlefollowupMessages = async () => {
+  try {
+    await axiosInstance.post("/api/user-messages/follow-up", {
+      id:msgId,
+      follow_up_linkedin: linkedinsfolloup,
+      follow_up_email: emailfollowup
+    });
+    toast.success("Messages saved!");
+    setShowfolloupModal(false);
   } catch (err) {
     toast.error("Failed to save messages");
   }
@@ -326,6 +350,13 @@ useEffect(() => {
                   >
                     View Messages
                   </Button>
+                 <Button
+                   onClick={handleOpenfollowupModal}
+                    className="btn-rounded me-3 "
+                    size="sm"
+                  >
+                    View Follow up Messages
+                  </Button>
         <Link href="/dashboard/onboarding">
           <Button className="btn-rounded" size="sm">
             Add New Campaign
@@ -456,6 +487,52 @@ useEffect(() => {
         <div className="modal-footer border-0">
           <button className="btn btn-secondary btn-main" onClick={() => setShowMessageModal(false)}>Cancel</button>
           <button className="btn btn-primary btn-main" onClick={handleSaveMessages}>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+      {showfollowModal && (
+  <div
+    className="modal fade show"
+    style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+    tabIndex="-1"
+  >
+    <div className="modal-dialog modal-lg modal-dialog-centered">
+      <div className="modal-content text-light" style={{ backgroundColor: "#1e003e" }}>
+        <div className="modal-header border-0">
+          <h5 className="modal-title">Edit Default Messages</h5>
+          <button
+            type="button"
+            className="btn-close btn-close-white"
+            onClick={() => setShowfolloupModal(false)}
+          ></button>
+        </div>
+        <div className="modal-body">
+          <div className="mb-4">
+            <label className="form-label">LinkedIn Message</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={linkedinsfolloup}
+              onChange={(e) => setLinkedinfollowup(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email Message</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={emailfollowup}
+              onChange={(e) => setEmailfollowup(e.target.value)}
+            ></textarea>
+          </div>
+        </div>
+        <div className="modal-footer border-0">
+          <button className="btn btn-secondary btn-main" onClick={() => setShowfolloupModal(false)}>Cancel</button>
+          <button className="btn btn-primary btn-main" onClick={handlefollowupMessages}>Save</button>
         </div>
       </div>
     </div>

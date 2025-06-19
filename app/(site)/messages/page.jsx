@@ -17,17 +17,22 @@ const Messages = () => {
 
   const [allMessages, setAllMessages] = useState({});
   const [formData, setFormData] = useState({ linkedin: "", email: "" });
+  const[followupdata,setfollowupdata] = useState({linkedin:"",email:""})
   const [selectedTone, setSelectedTone] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const[allfollowup,setFollowupmsg] = useState({});
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const response = await axiosInstance.get("/api/message-formats");
         const messages = response.data.messages || {};
+        const followup = response.data.follow_ups
+ ||{};
+    
         setAllMessages(messages);
-
+         setFollowupmsg(followup);
         const firstTone = Object.keys(messages)[0];
         if (!hasSetInitialTone.current && firstTone) {
           setSelectedTone(firstTone);
@@ -35,6 +40,10 @@ const Messages = () => {
             linkedin: messages[firstTone]?.linkedin || "",
             email: messages[firstTone]?.email || "",
           });
+          setfollowupdata({
+            linkedin:followup[firstTone]?.linkedin || "",
+            email:followup[firstTone]?.email || ""
+          })
           hasSetInitialTone.current = true;
         }
       } catch (err) {
@@ -53,6 +62,10 @@ const Messages = () => {
       linkedin: allMessages[tone]?.linkedin || "",
       email: allMessages[tone]?.email || "",
     });
+    setfollowupdata({
+      linkedin:allfollowup[tone]?.linkeding || "",
+      email:allfollowup[tone]?.email || ""
+    })
     setError("");
   };
 
@@ -68,6 +81,8 @@ const Messages = () => {
       const { data } = await axiosInstance.post("/api/user-messages", {
         message_content: formData.linkedin,
         email_content: formData.email,
+        follow_up_linkedin:followupdata?.linkedin,
+        follow_up_email:followupdata?.email
       });
 
       if (data.status) {
