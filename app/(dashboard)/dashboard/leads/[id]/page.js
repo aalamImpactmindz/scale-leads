@@ -78,7 +78,8 @@ setLeads(data?.leads ||[])
               <th>Lead Name</th>
               <th>Source</th>
               <th>Location</th>
-              <th>Status</th>
+              <th>Follow up</th>
+              <th>Replied</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -88,8 +89,9 @@ setLeads(data?.leads ||[])
                 <td>{index + 1}</td>
                 <td>{lead.name}</td>
                 <td>{lead.source==='gmail' || lead.source==='outlook' || lead.source==='smtp' ?'Email':'Linkedin'}</td>
-                <td>{lead?.country}</td>
-                <td>{lead.replied === false ? "Pending" : "Active"}</td>
+                <td>{lead?.country || '-'} </td>
+                <td>{lead?.emailsend ==1 || lead?.connection_request ?'Sent':'Failed'}</td>
+                <td>{lead.replied === false ? "None" : "Yes"}</td>
                 <td>
                   <Button
                     className="btn-rounded"
