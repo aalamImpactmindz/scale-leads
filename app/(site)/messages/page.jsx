@@ -63,7 +63,7 @@ const Messages = () => {
       email: allMessages[tone]?.email || "",
     });
     setfollowupdata({
-      linkedin:allfollowup[tone]?.linkeding || "",
+      linkedin:allfollowup[tone]?.linkedin || "",
       email:allfollowup[tone]?.email || ""
     })
     setError("");
@@ -151,13 +151,25 @@ const Messages = () => {
               {selectedTone && (
                 <>
                   <Form.Group className="mb-3" controlId="linkedinMessage">
-                    <Form.Label>LinkedIn Message</Form.Label>
+                    <Form.Label className="text-xl">LinkedIn Message</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
                       value={formData.linkedin}
                       onChange={(e) =>
                         setFormData({ ...formData, linkedin: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="linkedinMessage">
+                    <Form.Label>LinkedIn Follow up Message</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.linkedin}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, linkedin: e.target.value })
                       }
                       required
                     />
@@ -171,6 +183,18 @@ const Messages = () => {
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-4" controlId="emailMessage">
+                    <Form.Label>Email Follow up Message</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.email}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, email: e.target.value })
                       }
                       required
                     />

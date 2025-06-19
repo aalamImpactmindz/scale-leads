@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section className="hero sec-padding ">
       <Container fluid="xl">
-        <Row className="row-cols-1 row-cols-lg-2 my-5">
+        <Row className="row-cols-1 row-cols-lg-2 my-5 ">
           <Col>
             <h1 className="text-light fw-normal display-5 mt-0">
               <strong>Automatise ta prospection.</strong>
@@ -34,7 +34,7 @@ const Hero = () => {
               src={imageAppView}
               priority={true}
               alt="App View"
-              className="mw-100 object-fit-contain"
+              className="mw-100 object-fit-contain "
             />
           </Col>
         </Row>
