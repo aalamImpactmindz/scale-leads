@@ -163,8 +163,8 @@ const startcompain = async (compain) => {
      await toast.success("Compain Start Successfully")
      let response =    await scrapInstance.post(
           "/api/scrapemail",
-          { body },
-          { withCredentials: true }
+          { body }
+    
         );
       
 
@@ -222,8 +222,7 @@ const startcompain = async (compain) => {
          
      let response =    await scrapInstance.post(
           "/api/scrap",
-          { body },
-          { withCredentials: true }
+          { body }
         );
       
 
