@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const scrapInstance = axios.create({
-baseURL: "https://linkdin-qtuz.onrender.com/"
+baseURL: "https://linkdin-kb53.onrender.com/"
 //baseURL: "http://localhost:4000/"
 });
 
