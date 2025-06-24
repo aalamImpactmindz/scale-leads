@@ -78,7 +78,8 @@ setLeads(data?.leads ||[])
               <th>Lead Name</th>
               <th>Source</th>
               <th>Location</th>
-              <th>Follow up</th>
+              <th>Connection Request</th>
+          
               <th>Replied</th>
               <th>Actions</th>
             </tr>

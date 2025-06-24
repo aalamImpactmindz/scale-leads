@@ -153,6 +153,12 @@ provider = provider === "google" ? "gmail" : provider;
           status: true,
         });
             setIsConnected(true);
+            Cookies.set("gmail_access_token",session.accessToken, {
+         path: "/",
+        secure: true,
+        sameSite: "Strict",
+        expires: session.expiresAt
+      })
       } catch (error) {
         if (error.response?.status === 409) {
           console.warn("Token already exists, skipping...");
@@ -161,8 +167,8 @@ provider = provider === "google" ? "gmail" : provider;
         }
       }
     };
-    if (provider === "google") {
-  
+    if (provider === "gmail") {
+     
       
 
       Cookies.set("gmail_refresh_token", session.refreshToken, {
