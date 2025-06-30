@@ -234,6 +234,7 @@ message_count
         setLoading(true);
         toast.success("Leads retrive successfully");
       }
+      console.log(data);
     //   if(!data.isSuccess){
     //      await toast.warn("Outlook Token expired, please sign in again!");
     //      stopddcomapin(compain);
@@ -252,13 +253,14 @@ message_count
           setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
+           stopcomapin(compain);
           console.log("LinkedIn error:", err);
         }
       }
       
     } catch (err) {
       console.log("Error starting campaign:", err);
-      stopddcomapin(compain);
+      stopcomapin(compain);
       toast.error("Only one compain at a Time")
     }
   };
