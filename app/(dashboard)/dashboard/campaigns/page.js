@@ -116,7 +116,9 @@ const startcompain = async (compain) => {
 
     
 
-    let { id, channel, company_size, ideal_customer, sector,message_delay } = compain;
+    let { id, channel, company_size, ideal_customer, sector,message_delay,
+message_count
+ } = compain;
       if (!gmail && !outlook && !userpass&& !linkedin) {
       toast.warn("To Start first Login")
       
@@ -145,7 +147,7 @@ const startcompain = async (compain) => {
           uemail,
           memail,
           pass,
-          message_delay
+          message_delay,message_count
         };
 
     let response = await axiosInstance.patch(
@@ -205,7 +207,8 @@ const startcompain = async (compain) => {
             ideal_customer,
             sector,
             usertoken,
-            message_delay
+            message_delay,
+            message_count
           };
 
 
@@ -299,7 +302,6 @@ const startcompain = async (compain) => {
   };
   const stopcomapin = async (compain) => {
     let { id,channel} = compain;
-    console.log(channel);
 
 
     try {
