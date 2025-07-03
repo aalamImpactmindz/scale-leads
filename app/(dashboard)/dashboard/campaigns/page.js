@@ -235,6 +235,12 @@ message_count
         toast.success("Leads retrive successfully");
       }
       console.log(data);
+
+      if(!data?.status){
+        setLoading(false);
+         stopcomapin(compain);
+        toast.error("Cookies Expire Please login Again");
+      }
     //   if(!data.isSuccess){
     //      await toast.warn("Outlook Token expired, please sign in again!");
     //      stopddcomapin(compain);
