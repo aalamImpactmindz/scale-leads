@@ -31,11 +31,26 @@ const[msgId,setmsgid] = useState('');
       setCampaigns(response.data.campaigns || []);
     } catch (err) {
       console.log("Error fetching campaigns:", err);
-      setError("Could not load Campaigns.");
+      setError("No Campaign found");
     } finally {
       setLoading(false);
     }
   };
+
+
+const handledelete = async(id)=>{
+  try{
+       let resp = await axiosInstance.delete(`/api/campaigns/${id}`);
+       const{data} =resp;
+    if(data?.status){
+      toast.success(data?.message);
+      fetchData();
+    }
+  }catch(err){
+    console.log(err);
+
+  }
+}
 
 
 
@@ -391,6 +406,8 @@ useEffect(() => {
               <th>Campaign Name</th>
               <th>Target Channels</th>
               <th>Number of Leads</th>
+              <th>daily limit/Pending</th>
+              
               <th>Campaign Status</th>
               <th>Sequences in progress</th>
               <th>Results</th>
@@ -411,6 +428,7 @@ useEffect(() => {
                 </td>
                 <td>{campaign?.channel}</td>
                 <td>{campaign?.total_leads}</td>
+                <td> {campaign?.daily_limit}/100 </td>
                 <td>{campaign?.campaign_status==="active"?'In process':'Stopped'}</td>
                 <td>{campaign?.campaign_status}</td>
                 <td>2</td>
@@ -435,7 +453,7 @@ useEffect(() => {
                     </>
                   )}
 
-                  <Button className="btn-rounded me-3" size="sm">
+                  <Button onClick={()=>handledelete(campaign?.id)} className="btn-rounded me-3" size="sm">
                     Delete
                   </Button>
                   <Button
