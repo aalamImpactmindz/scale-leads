@@ -53,7 +53,15 @@ const handledelete = async(id)=>{
 }
 
 
-
+const deletetoken = async(id)=>{
+  try{
+         let res = await axiosInstance.delete(`/api/linkedin-tokens/${id}`)
+         const {data}  = res;
+         console.log(data);
+  }catch(err){
+    console.log(err);
+  }
+}
 
 const fetchMessages = async () => {
   try {
@@ -124,6 +132,7 @@ const startcompain = async (compain) => {
     let memail = Cookies.get("ms_email");
     let usertoken = Cookies.get("user_token");
     let mid = Cookies.get("mid");
+    let lid = Cookies.get('lid');
     let pass = userpass;
 
     let gtoken = gmail;
@@ -254,6 +263,9 @@ message_count
       if(!data?.status){
         setLoading(false);
          stopcomapin(compain);
+         deletetoken(lid);
+         Cookies.remove("lid");
+         Cookies.remove("user_token");
         toast.error("Cookies Expire Please login Again");
       }
     //   if(!data.isSuccess){
