@@ -440,7 +440,9 @@ useEffect(() => {
                 </td>
                 <td>{campaign?.channel}</td>
                 <td>{campaign?.total_leads}</td>
-                <td> {campaign?.daily_limit}/100 </td>
+              <td>
+  {campaign?.channel === 'Linkedin' ? `${campaign?.daily_limit}/100` : '-'}
+</td>
                 <td>{campaign?.campaign_status==="active"?'In process':'Stopped'}</td>
                 <td>{campaign?.campaign_status}</td>
                
