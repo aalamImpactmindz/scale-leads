@@ -422,7 +422,7 @@ useEffect(() => {
               
               <th>Campaign Status</th>
               <th>Sequences in progress</th>
-              <th>Results</th>
+             
               <th>Actions</th>
             </tr>
           </thead>
@@ -443,7 +443,7 @@ useEffect(() => {
                 <td> {campaign?.daily_limit}/100 </td>
                 <td>{campaign?.campaign_status==="active"?'In process':'Stopped'}</td>
                 <td>{campaign?.campaign_status}</td>
-                <td>2</td>
+               
                 <td>
                   {campaign.campaign_status === "active" ? (
                     <Button
