@@ -254,20 +254,27 @@ message_count
       
 
       const {data} = response;
+      console.log(data);
       if(data?.status===true){
         setLoading(true);
         toast.success("Leads retrive successfully");
       }
-      console.log(data);
-
-      if(!data?.status){
+     if(data?.limit){
         setLoading(false);
+        stopcomapin(compain);
+         toast.error("Linkedin Limit Exceed")
+      }
+
+      if(!data?.isSuccess){
+        setLoading(false); 
          stopcomapin(compain);
          deletetoken(lid);
          Cookies.remove("lid");
          Cookies.remove("user_token");
         toast.error("Cookies Expire Please login Again");
       }
+
+  
     //   if(!data.isSuccess){
     //      await toast.warn("Outlook Token expired, please sign in again!");
     //      stopddcomapin(compain);
@@ -287,7 +294,7 @@ message_count
         } catch (err) {
           setIsLoading(false);
            stopcomapin(compain);
-          console.log("LinkedIn error:", err);
+         toast.error("Limit exceed")
         }
       }
       
