@@ -265,7 +265,7 @@ message_count
          toast.error("Linkedin Limit Exceed")
       }
 
-      if(!data?.isSuccess){
+      if(!data?.status){
         setLoading(false); 
          stopcomapin(compain);
          deletetoken(lid);
@@ -273,28 +273,20 @@ message_count
          Cookies.remove("user_token");
         toast.error("Cookies Expire Please login Again");
       }
-
+      if(data?.limit){
+        setLoading(false);
+        stopcomapin(compain);
+        toast.error("Limit Exceed")
+      }
   
-    //   if(!data.isSuccess){
-    //      await toast.warn("Outlook Token expired, please sign in again!");
-    //      stopddcomapin(compain);
-    //      try{
-    //         let deletetoken = await axiosInstance.delete(`/api/email-token/${mid}`);
-    //         Cookies.remove("microsoft_access_token")
-    //      }catch(err){
-    //       console.log(err);
-    //      }
-    //      // here delete api
-    // }else{
-    //   await toast.success("Compain Start Successfully")
-    // }
+
     fetchData();
    }
           setIsLoading(false);
         } catch (err) {
           setIsLoading(false);
            stopcomapin(compain);
-         toast.error("Limit exceed")
+          console.log("LinkedIn error:", err);
         }
       }
       
