@@ -255,29 +255,25 @@ message_count
 
       const {data} = response;
       console.log(data);
-      if(data?.status===true){
+      if(data?.status==true){
         setLoading(true);
         toast.success("Leads retrive successfully");
       }
-     if(data?.limit){
+     if(data?.status=="limit"){
         setLoading(false);
         stopcomapin(compain);
          toast.error("Linkedin Limit Exceed")
       }
 
-      if(!data?.status){
+      if(data?.status==false){
         setLoading(false); 
          stopcomapin(compain);
          deletetoken(lid);
          Cookies.remove("lid");
          Cookies.remove("user_token");
-        toast.error("Cookies Expire Please login Again");
+        toast.error("Linkedin Cookies Expire Please login Again");
       }
-      if(data?.limit){
-        setLoading(false);
-        stopcomapin(compain);
-        toast.error("Limit Exceed")
-      }
+      
   
 
     fetchData();
