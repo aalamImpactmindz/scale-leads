@@ -1,8 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const scrapInstance = axios.create({
-// baseURL: "https://linkedinscrap.sytes.net/"
-baseURL: "https://linkdin-cudt.onrender.com/"
+baseURL: "https://linkedinscrap.sytes.net/"
 
 //baseURL: "http://65.0.92.139:4000/"
 });
