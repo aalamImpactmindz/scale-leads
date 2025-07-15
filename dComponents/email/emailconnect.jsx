@@ -690,98 +690,10 @@ let emaillimit = getemaillimit(planid);
               </div>
             )}
 
-            {/* {isMicrosoftConnected && (
-              <>
-
-                <span className="d-flex align-items-center gap-2">
-                  <Image src={circle} alt="Connected" width={22} height={22} />
-                </span>
-                <span onClick={() => handledisconnect('microsoft')} className="d-flex align-items-center gap-2 disconnect_button">
-                  <Image src={remove} alt="Connected" width={22} height={22} />
-                </span>
-              </>
-            )} */}
+           
           </div>
 
-          <div className="flex-fill d-flex justify-content-between custombackgroundcard align-items-center border rounded-3 px-4 py-3" style={{ position: "relative" }}>
-            {/* Left: Icon and Text */}
-            <div className="d-flex align-items-center gap-1">
-              <Image src={login} alt="Login Icon" width={35} height={35} className="me-2">
-
-              </Image>
-              <div>
-                <div className="fw-semibold text-white">Log in using SMTP (Email and app Password)  </div>
-                <div className="text-white small">
-                  {smtp ? "you're connected with SMTP account" : "You're not connected with smtp account "}
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Button */}
-            <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlesmtplogin} className="btn btn-primary btn-main d-flex align-items-center gap-1 px-4 rounded-pill ms-auto me-3">
-            
-               {smtp
-    ? 'Connected'
-    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
-            </button>
-            {smtp ? (
-              <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
-                <Image src={remove} alt="Connected" width={22} height={22} />
-              </span>
-            ) :
-              (!isMicrosoftConnected && !isConnected && existsmtp?.length > 0 && (
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-primary drop_icon"
-                  onClick={() => setShowsmDropdown(prev => !prev)}
-                />
-              ))
-            }
-
-
-
-            {showsmDropdown && (
-              <div className="shows  pe-3 ps-3 p-2 border rounded shadow  customdropdowncard ">
-                {existsmtp?.length > 0 && existsmtp?.map((item) => {
-                  return (
-                    <div className=" " key={item.id}>
-                      <div className="d-flex align-items-center justify-content-between mt-3   ">
-                        <div className="text-white d-block small mb-1">{item?.email}</div>
-                        <div className="d-flex gap-3">
-                          <button disabled={smtp} onClick={() => handleexistingsmtp(item)}
-                            className="btn btn-primary gap-2 px-4 rounded-pill btn-main"
-                          >
-                            {item?.id == selectedsmid && smtp ? 'Connected' : 'Continue'}
-
-
-
-                          </button>
-
-                          {item?.id == selectedsmid && smtp && (
-                            <span onClick={() => handledisconnect('smtp')} className="d-flex align-items-center gap-2 disconnect_button">
-                              <Image src={remove} alt="Connected" width={22} height={22} />
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-
-                    </div>
-                  )
-
-
-
-
-
-                })}
-
-
-
-              </div>
-            )}
-
-          </div>
-
+         
 
 
           {/* Outlook Box */}
