@@ -12,7 +12,7 @@ import outlook from '../../public/assets/images/outlook_icon.png'
 
 import remove from '../../public/assets/images/remove.png'
 
-import { signOut as firebaseSignOut } from 'firebase/auth';
+
 import Cookies from "js-cookie";
 import SmtpModal from "@/modals/smtpmodal";
 import axiosInstance from "@/utils/axiosInstance";
@@ -508,7 +508,7 @@ let emaillimit = getemaillimit(planid);
       }
       if (provider === "outlook") {
         Cookies.remove("microsoft_access_token");
-        await firebaseSignOut(auth);
+       
         setmShowDropdown(false)
         setIsMicrosoftConnected(false);
       }
