@@ -2,24 +2,22 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
-import { signIn, signOut, getProviders, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { auth } from "@/utils/firebase/firebase";
+
+
 import Image from "next/image";
 import gmailicon from '../../public/assets/images/gmail.png'
 import outlook from '../../public/assets/images/outlook_icon.png'
-import circle from '../../public/assets/images/circle-tick.png'
+
 import remove from '../../public/assets/images/remove.png'
-import login from '../../public/assets/images/login.png'
-import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+
 import { signOut as firebaseSignOut } from 'firebase/auth';
 import Cookies from "js-cookie";
 import SmtpModal from "@/modals/smtpmodal";
 import axiosInstance from "@/utils/axiosInstance";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+
 import { AuthContext } from "@/app/context/Authcontext";
 import { useRef } from "react";
 
