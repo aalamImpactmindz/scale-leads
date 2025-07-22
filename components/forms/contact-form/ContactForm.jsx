@@ -8,7 +8,7 @@ const ContactForm = () => {
   return (
     <Form className="text-start p-3 p-md-4 bg-gray m-auto" id="contact-form">
       <Form.Group className="mb-3" controlId="contactFormName">
-        <Form.Label className="small">Name</Form.Label>
+        <Form.Label className="small">Nom</Form.Label>
         <Form.Control type="text" placeholder="Jane Smith" />
       </Form.Group>
 

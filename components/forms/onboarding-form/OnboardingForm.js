@@ -75,7 +75,7 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label>Campaign Name</Form.Label>
+            <Form.Label>Nom de la campagne</Form.Label>
             <Form.Control
               type="text"
               required
@@ -88,7 +88,7 @@ const OnboardingForm = ({ onSuccess }) => {
         </Col>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label>Who's your ideal customer?</Form.Label>
+            <Form.Label>Qui est votre client idéal ?</Form.Label>
             <Form.Control
               type="text"
               required
@@ -103,7 +103,7 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label>What sector does he work in?</Form.Label>
+            <Form.Label>Dans quel secteur travaille-t-il ?</Form.Label>
             <Form.Control
               type="text"
               required
@@ -116,7 +116,7 @@ const OnboardingForm = ({ onSuccess }) => {
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingCompanySize">
-            <Form.Label>What size company are you targeting?</Form.Label>
+            <Form.Label>Quelle taille d’entreprise ciblez-vous ?</Form.Label>
             <Form.Select
               aria-label="Select company size"
               required
@@ -129,11 +129,11 @@ const OnboardingForm = ({ onSuccess }) => {
               }
               className="form-control"
             >
-              <option value="1">1 employee</option>
-              <option value="2-10">2-10 employees</option>
-              <option value="11-25">11-25 employees</option>
-              <option value="26-50">26-50 employees</option>
-              <option value="50+">50+ employees</option>
+              <option value="1">1 employé</option>
+              <option value="2-10">2-10 employé</option>
+              <option value="11-25">11-25 employé</option>
+              <option value="26-50">26-50 employé</option>
+              <option value="50+">50+ employé</option>
             </Form.Select>
           </Form.Group>
         </Col>
@@ -141,10 +141,10 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingObjective">
-            <Form.Label>What is your main objective?</Form.Label>
+            <Form.Label>Quel est votre objectif principal ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Your Objective"
+              placeholder="Votre objectif"
               required
               value={formData.objective}
               onChange={(e) =>
@@ -155,10 +155,11 @@ const OnboardingForm = ({ onSuccess }) => {
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingYourOffer">
-            <Form.Label>What's your offer (your promise)?</Form.Label>
+            <Form.Label>
+Quelle est votre offre (votre promesse) ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Your Offer"
+              placeholder="Votre offre"
               required
               value={formData.offer}
               onChange={(e) =>
@@ -171,10 +172,10 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingYourWebsite">
-            <Form.Label>Do you have a website?</Form.Label>
+            <Form.Label>Avez-vous un site Web ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter Website"
+              placeholder="Entrer sur le site Web"
               required
               value={formData.website}
               onChange={(e) =>
@@ -185,10 +186,11 @@ const OnboardingForm = ({ onSuccess }) => {
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingChannel">
-            <Form.Label>Which channel do you want to prospect on?</Form.Label>
+            <Form.Label>
+Sur quelle chaîne souhaitez-vous prospecter ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter Channel"
+              placeholder="Entrer dans la chaîne"
               required
               value={formData.channel}
               onChange={(e) =>
@@ -201,9 +203,10 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingMessageCount">
-            <Form.Label>How many follow-up messages you want?</Form.Label>
+            <Form.Label>
+Combien de messages de suivi souhaitez-vous ?</Form.Label>
             <Form.Select
-              aria-label="Select follow-up message count"
+              aria-label="Sélectionnez le nombre de messages de suivi"
               required
               value={formData.message_count}
               onChange={(e) =>
@@ -222,9 +225,9 @@ const OnboardingForm = ({ onSuccess }) => {
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingFollowUpDelay">
-            <Form.Label>How much delay between follow-up messages?</Form.Label>
+            <Form.Label>Quel est le délai entre les messages de suivi ?</Form.Label>
             <Form.Select
-              aria-label="Select follow-up message delay"
+              aria-label="Sélectionnez le délai de suivi des messages"
               required
               value={formData.message_delay}
               onChange={(e) =>
@@ -235,10 +238,10 @@ const OnboardingForm = ({ onSuccess }) => {
               }
               className="form-control"
             >
-              <option value="1">1 day</option>
-              <option value="3">3 days</option>
-              <option value="7">7 days</option>
-              <option value="14">14 days</option>
+              <option value="1">1 jour</option>
+              <option value="3">3 jours</option>
+              <option value="7">7 jours</option>
+              <option value="14">14 jours</option>
             </Form.Select>
           </Form.Group>
         </Col>
@@ -247,11 +250,12 @@ const OnboardingForm = ({ onSuccess }) => {
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingTone">
             <Form.Label>
-              What tone do you want your messages to take?
+              Quel ton souhaitez-vous que vos messages prennent ?
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="(optional)"
+              placeholder="
+(facultatif)"
               value={formData.tone}
               onChange={(e) =>
                 setFormData({ ...formData, tone: e.target.value })
@@ -262,11 +266,12 @@ const OnboardingForm = ({ onSuccess }) => {
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingCompetitors">
             <Form.Label>
-              Any competitors or approaches you'd like to avoid?
+              Des concurrents ou des approches que vous aimeriez éviter ?
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="(optional)"
+              placeholder="
+(facultatif)"
               value={formData.competitors}
               onChange={(e) =>
                 setFormData({
@@ -281,11 +286,11 @@ const OnboardingForm = ({ onSuccess }) => {
       <Row className="row-cols-1 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3" controlId="formOnboardingMessages">
-            <Form.Label>Do you already have messages you've used?</Form.Label>
+            <Form.Label>Avez-vous déjà utilisé des messages ?</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="(optional)"
+              placeholder="(facultatif)"
               value={formData.existing_messages}
               onChange={(e) =>
                 setFormData({

@@ -9,9 +9,9 @@ const Faqs = () => {
     <div className="page-faqs sec-padding">
       <Container fluid="xl">
         <Heading
-          title="Frequently Asked Questions"
+          title="Questions fréquemment posées"
           highlightedWords={["Questions"]}
-          description="Have questions about our AI-Powered Design Assistant? Find answers to the most common questions and learn how our platform can enhance your creative process."
+          description="Vous avez des questions sur notre assistant de conception basé sur l’IA ? Trouvez des réponses aux questions les plus courantes et découvrez comment notre plateforme peut améliorer votre processus créatif."
         />
         <AllFaqs />
       </Container>

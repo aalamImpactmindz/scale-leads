@@ -37,7 +37,7 @@ const WalkThrough = () => {
               </strong>
               <span className="fw-light">
                 Les messages partent, les relances aussi. Tu vois tout sur le
-                dashboard.
+                Tableau de bord.
               </span>
             </p>
           </Col>

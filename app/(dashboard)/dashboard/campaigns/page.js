@@ -31,7 +31,7 @@ const[msgId,setmsgid] = useState('');
       setCampaigns(response.data.campaigns || []);
     } catch (err) {
       console.log("Error fetching campaigns:", err);
-      setError("No Campaign found");
+      setError("Aucune campagne trouvée");
     } finally {
       setLoading(false);
     }
@@ -74,7 +74,7 @@ const fetchMessages = async () => {
     setLinkedinfollowup(data?.data?.follow_up_linkedin || '');
     setEmailfollowup(data?.data?.follow_up_email || '')
   } catch (err) {
-    toast.error("Failed to load messages");
+    toast.error("Impossible de charger les messages");
   }
 };
   
@@ -96,10 +96,10 @@ const handleSaveMessages = async () => {
       message_content: linkedinMessage,
       email_content: emailMessage
     });
-    toast.success("Messages saved!");
+    toast.success("Messages enregistrés !");
     setShowMessageModal(false);
   } catch (err) {
-    toast.error("Failed to save messages");
+    toast.error("Impossible d'enregistrer les messages");
   }
 };
 const handlefollowupMessages = async () => {
@@ -109,10 +109,10 @@ const handlefollowupMessages = async () => {
       follow_up_linkedin: linkedinsfolloup,
       follow_up_email: emailfollowup
     });
-    toast.success("Messages saved!");
+    toast.success("Messages enregistrés !");
     setShowfolloupModal(false);
   } catch (err) {
-    toast.error("Failed to save messages");
+    toast.error("Impossible d'enregistrer les messages");
   }
 };
 
@@ -144,14 +144,14 @@ const startcompain = async (compain) => {
 message_count
  } = compain;
       if (!gmail && !outlook && !userpass&& !linkedin) {
-      toast.warn("To Start first Login")
+      toast.warn("Pour commencer, connectez-vous en premier")
       
       return;
     }
     try {
       if (channel === "Email") {
         if (!gmail && !outlook && !userpass) {
-      toast.warn("To Start first Login")
+      toast.warn("Pour commencer, connectez-vous en premier")
       
       return;
     }
@@ -198,7 +198,7 @@ message_count
 
       if(!data.isSuccess){
         setLoading(true);
-         await toast.warn("Outlook Token expired, please sign in again!");
+         await toast.warn("Outlook Token a expiré, veuillez vous reconnecter !");
          stopddcomapin(compain);
          try{
             let deletetoken = await axiosInstance.delete(`/api/email-token/${mid}`);
@@ -209,7 +209,7 @@ message_count
          // here delete api
     }else{
       setLoading(true);
-      await toast.success("leads retrive successfully")
+      await toast.success("les leads récupèrent avec succès")
     }
     fetchData();
    }
@@ -219,7 +219,7 @@ message_count
       if (channel === "Linkedin") {
         try {
             if (!linkedin) {
-      toast.warn("To Start first Login")
+      toast.warn("Pour commencer, connectez-vous en premier")
       
       return;
     }
@@ -245,7 +245,7 @@ message_count
        const{data} = response;
          if(data.status===true){
            fetchData();
-          await toast.success("Compain Start Successfully")
+          await toast.success("Entretenir Démarrer avec succès")
          
      let response =    await scrapInstance.post(
           "/api/scrap",
@@ -257,12 +257,12 @@ message_count
       console.log(data);
       if(data?.status==true){
         setLoading(true);
-        toast.success("Leads retrive successfully");
+        toast.success("Les leads récupèrent avec succès");
       }
      if(data?.status=="limit"){
         setLoading(false);
         stopcomapin(compain);
-         toast.error("Linkedin Limit Exceed")
+         toast.error("Dépassement de la limite Linkedin")
       }
 
       if(data?.status==false){
@@ -271,7 +271,7 @@ message_count
          deletetoken(lid);
          Cookies.remove("lid");
          Cookies.remove("user_token");
-        toast.error("Linkedin Cookies Expire Please login Again");
+        toast.error("Les cookies Linkedin expirent Veuillez vous reconnecter");
       }
       
   
@@ -289,7 +289,7 @@ message_count
     } catch (err) {
       console.log("Error starting campaign:", err);
       stopcomapin(compain);
-      toast.error("Only one compain at a Time")
+      toast.error("Une seule plainte à la fois")
     }
   };
 
@@ -341,7 +341,7 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
       });
       const{data}  =stopcompain;
       if(data?.isSuccess){
-        await toast.success("Compain stoped Successfully");
+        await toast.success("Compain arrêté avec succès");
       }
      }
      if(channel==="Linkedin"){
@@ -350,7 +350,7 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
       });
       const{data}  =stopcompain;
       if(data?.isSuccess){
-        await toast.success("Compain stoped Successfully");
+        await toast.success("Compain arrêté avec succès");
       }
      }
       
@@ -380,43 +380,43 @@ useEffect(() => {
                     className="btn-rounded me-3 ms-auto"
                     size="sm"
                   >
-                    View Messages
+                    Afficher les messages
                   </Button>
                  <Button
                    onClick={handleOpenfollowupModal}
                     className="btn-rounded me-3 "
                     size="sm"
                   >
-                    View Follow up Messages
+                   Voir les messages de suivi
                   </Button>
         <Link href="/dashboard/onboarding">
           <Button className="btn-rounded" size="sm">
-            Add New Campaign
+          Ajouter une nouvelle campagne
           </Button>
         </Link>
       </div>
       {loading ? (
         <div className="text-center py-5">
-          <p className="mt-3">Loading campaigns...</p>
+          <p className="mt-3">Chargement des campagnes...</p>
         </div>
       ) : error ? (
         <Alert variant="danger" className="px-3 py-2 small">
           {error}
         </Alert>
       ) : campaigns.length === 0 ? (
-        <p className="text-center py-5">No campaigns found.</p>
+        <p className="text-center py-5">Aucune campagne trouvée.</p>
       ) : (
         <Table striped hover responsive className="mb-0 small">
           <thead className="table-dark">
             <tr>
               <th>#</th>
-              <th>Campaign Name</th>
-              <th>Target Channels</th>
-              <th>Number of Leads</th>
-              <th>daily limit/Pending</th>
+              <th>Nom de la campagne</th>
+              <th>Canaux cibles</th>
+              <th>Nombre de prospects</th>
+              <th>limite journalière/En attente</th>
               
-              <th>Campaign Status</th>
-              <th>Sequences in progress</th>
+              <th>Statut de la campagne</th>
+              <th>Séquences en cours</th>
              
               <th>Actions</th>
             </tr>
@@ -448,7 +448,7 @@ useEffect(() => {
                       className="btn-rounded me-3"
                       size="sm"
                     >
-                      Stop
+                      Arrêter
                     </Button>
                   ) : (
                     <>
@@ -457,13 +457,13 @@ useEffect(() => {
                         className="btn-rounded me-3"
                         size="sm"
                       >
-                        Start
+                        Démarrer
                       </Button>
                     </>
                   )}
 
                   <Button onClick={()=>handledelete(campaign?.id)} className="btn-rounded me-3" size="sm">
-                    Delete
+                Supprimer
                   </Button>
                   <Button
                     onClick={() =>
@@ -472,7 +472,7 @@ useEffect(() => {
                     className="btn-rounded me-3"
                     size="sm"
                   >
-                    View leads
+                    Voir les pistes
                   </Button>
                   
          
@@ -492,7 +492,7 @@ useEffect(() => {
     <div className="modal-dialog modal-lg modal-dialog-centered">
       <div className="modal-content text-light" style={{ backgroundColor: "#1e003e" }}>
         <div className="modal-header border-0">
-          <h5 className="modal-title">Edit Default Messages</h5>
+          <h5 className="modal-title">Modifier les messages par défaut</h5>
           <button
             type="button"
             className="btn-close btn-close-white"
@@ -501,7 +501,7 @@ useEffect(() => {
         </div>
         <div className="modal-body">
           <div className="mb-4">
-            <label className="form-label">LinkedIn Message</label>
+            <label className="form-label">Message LinkedIn</label>
             <textarea
               className="form-control"
               rows="6"
@@ -511,7 +511,7 @@ useEffect(() => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label className="form-label">Email Message</label>
+            <label className="form-label">Message par e-mail</label>
             <textarea
               className="form-control"
               rows="6"
@@ -522,8 +522,9 @@ useEffect(() => {
           </div>
         </div>
         <div className="modal-footer border-0">
-          <button className="btn btn-secondary btn-main" onClick={() => setShowMessageModal(false)}>Cancel</button>
-          <button className="btn btn-primary btn-main" onClick={handleSaveMessages}>Save</button>
+          <button className="btn btn-secondary btn-main" onClick={() => setShowMessageModal(false)}>
+Annuler</button>
+          <button className="btn btn-primary btn-main" onClick={handleSaveMessages}>Enregistrer</button>
         </div>
       </div>
     </div>
@@ -538,7 +539,7 @@ useEffect(() => {
     <div className="modal-dialog modal-lg modal-dialog-centered">
       <div className="modal-content text-light" style={{ backgroundColor: "#1e003e" }}>
         <div className="modal-header border-0">
-          <h5 className="modal-title">Edit Default Messages</h5>
+          <h5 className="modal-title">Modifier les messages par défaut</h5>
           <button
             type="button"
             className="btn-close btn-close-white"
@@ -547,7 +548,7 @@ useEffect(() => {
         </div>
         <div className="modal-body">
           <div className="mb-4">
-            <label className="form-label">LinkedIn Message</label>
+            <label className="form-label">Message LinkedIn</label>
             <textarea
               className="form-control"
               rows="6"
@@ -557,7 +558,7 @@ useEffect(() => {
             ></textarea>
           </div>
           <div className="mb-3">
-            <label className="form-label">Email Message</label>
+            <label className="form-label">Message par e-mail</label>
             <textarea
               className="form-control"
               rows="6"
@@ -568,8 +569,8 @@ useEffect(() => {
           </div>
         </div>
         <div className="modal-footer border-0">
-          <button className="btn btn-secondary btn-main" onClick={() => setShowfolloupModal(false)}>Cancel</button>
-          <button className="btn btn-primary btn-main" onClick={handlefollowupMessages}>Save</button>
+          <button className="btn btn-secondary btn-main" onClick={() => setShowfolloupModal(false)}>Annuler</button>
+          <button className="btn btn-primary btn-main" onClick={handlefollowupMessages}>Enregistrer</button>
         </div>
       </div>
     </div>

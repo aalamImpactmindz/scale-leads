@@ -108,11 +108,11 @@ const Register = () => {
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>
             <div className="bg-gray p-3 p-lg-4">
-              <h4 className="color-light">Register</h4>
-              <p>Start your journey with us—it's quick and simple.</p>
+              <h4 className="color-light">S'inscrire</h4>
+              <p>Commencez votre voyage avec nous—c'est rapide et facile.</p>
               <Form className="mt-4" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formRegisterFullName">
-                  <Form.Label>Full Name</Form.Label>
+                  <Form.Label>Nom complet</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Jane Smith"
@@ -124,7 +124,7 @@ const Register = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formRegisterEmail">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label>Adresse e-mail</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="jane@framer.com"
@@ -136,7 +136,7 @@ const Register = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formRegisterPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Mot de passe</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="********"
@@ -151,7 +151,7 @@ const Register = () => {
                   className="mb-3"
                   controlId="formRegisterConfirmPassword"
                 >
-                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Label>Confirmer le mot de passe</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="********"
@@ -161,7 +161,7 @@ const Register = () => {
                   />
                 </Form.Group>
                 <Button className="btn-main" type="submit">
-                  Register
+                  S'inscrire
                 </Button>
                 {message && (
                   <Alert
@@ -181,13 +181,12 @@ const Register = () => {
           </Col>
           <Col>
             <div className="bg-gray p-3 p-lg-4 h-100">
-              <h4 className="color-light">Already Have an Account?</h4>
+              <h4 className="color-light">Vous avez déjà un compte ?</h4>
               <p>
-                Log in to access your account, check your orders, and continue
-                where you left off.
+                Connectez-vous pour accéder à votre compte, vérifier vos commandes et continuer là où tu t'es arrêté.
               </p>
               <Link href="/login" className="d-inline-block">
-                <Button className="btn-main">Login</Button>
+                <Button className="btn-main">Se connecter</Button>
               </Link>
             </div>
           </Col>

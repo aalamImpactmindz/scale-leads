@@ -185,7 +185,7 @@ const handleexistlinkedin = (item)=>{
 
   return (
     <div className="container bg-gray custombackgrond rounded-4 border p-4 shadow-sm mt-5" style={{ minWidth: "300px", position: "relative" }}>
-      <h5 className="fw-bold mb-4 text-white ">Connect your LinkedIn account</h5>
+      <h5 className="fw-bold mb-4 text-white ">Connectez votre compte LinkedIn</h5>
       {isExtensionInstalled?(     
   <div>
 
@@ -196,9 +196,9 @@ const handleexistlinkedin = (item)=>{
 
           </Image>
           <div >
-            <div className="fw-semibold text-white">Log in to your LinkedIn account</div>
+            <div className="fw-semibold text-white">Connectez-vous à votre compte LinkedIn</div>
             <div className="small text-white">
-              {islinkedinConnected?"You're connected to LinkedIn":"You're not connected to LinkedIn so our extension can't detect your account"}
+              {islinkedinConnected?"Vous êtes connecté à LinkedIn":"Vous n'êtes pas connecté à LinkedIn donc notre extension ne peut pas détecter votre compte"}
             </div>
           </div>
         </div>
@@ -218,14 +218,14 @@ const handleexistlinkedin = (item)=>{
     disabled
     className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main "
   >
-    Connected
+    Connecté
   </button>
 ) : (!existlinkedin || existlinkedin.length === 0) && (
   <button
     onClick={handleLogin}
     className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main"
   >
-    Log in to LinkedIn
+    Connectez-vous à LinkedIn
   </button>
 )}
 
@@ -243,7 +243,7 @@ const handleexistlinkedin = (item)=>{
     onClick={handleLogin}
     className="btn me-2 btn-primary d-flex align-items-center gap-1 px-4 rounded-pill btn-main"
   >
-   Add new Account
+   Ajouter un nouveau compte
   </button>
                           )}
                           <FontAwesomeIcon
@@ -306,7 +306,7 @@ const handleexistlinkedin = (item)=>{
     
     ):(<div className="w-75 mx-auto my-4">
       <p className="text-center mb-3 text-white">
-        Connect your LinkedIn account automatically with our browser extension
+        Connectez automatiquement votre compte LinkedIn avec notre extension de navigateur
       </p>
 
       <div className="d-flex align-items-center justify-content-between border rounded-3 px-3 py-2 custombackgroundcard ">
@@ -315,7 +315,7 @@ const handleexistlinkedin = (item)=>{
           <Image src={chromicon} alt="Chrome Icon" width={45} height={45} className="me-2">
 
           </Image>
-          <div className="fw-semibold text-white">Chrome Web Store</div>
+          <div className="fw-semibold text-white">Boutique en ligne Chrome</div>
         </div>
 
         {/* Right: Button */}
@@ -323,7 +323,7 @@ const handleexistlinkedin = (item)=>{
           onClick={() => window.open("https://chromewebstore.google.com/detail/scalelead/nmckndphoocceadajdmdgbckfagcifjp?authuser=0&hl=en", "_blank")}
           className="btn btn-primary d-flex align-items-center gap-1 px-4 py-2 rounded-pill btn-main"
         >
-          Get the Extension 
+        Obtenez l'extension
           <FontAwesomeIcon
             icon={faUpRightFromSquare}
             style={{ transform: "rotate(0deg)" }}

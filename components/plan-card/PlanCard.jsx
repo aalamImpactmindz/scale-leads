@@ -88,7 +88,8 @@ const PlanCard = ({
           className="color-dark py-2 position-absolute"
           style={{ left: "auto", right: "1rem" }}
         >
-          Active
+          
+Actif
         </Badge>
       )}
       <p className="small color-light">{title}</p>
@@ -101,7 +102,8 @@ const PlanCard = ({
         </span>
         {saveAnnually && (
           <Badge bg="light" className="color-dark py-2">
-            Save €{saveAnnually}
+           
+Enregistrer  €{saveAnnually}
           </Badge>
         )}
       </h6>
@@ -109,7 +111,7 @@ const PlanCard = ({
         className="btn-rounded w-100 mb-4 text-capitalize"
         onClick={handlecheckout}
       >
-        Start your prospecting
+        Commencez votre prospection
       </Button>
       <ul className="ls-none d-flex flex-column gap-4 small mb-5">
         {features.map((feature, index) => {

@@ -9,12 +9,15 @@ const AllFaqs = () => {
         eventKey="0"
         className="bg-transparent border-0 rounded-0"
       >
-        <Accordion.Header>How does the AI generate designs?</Accordion.Header>
+        <Accordion.Header>Comment l’IA génère-t-elle des designs ?</Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          Our AI analyzes your design brief and uses advanced algorithms to
-          generate multiple design concepts tailored to your specifications. It
-          takes into account your preferences, style, and project requirements
-          to deliver unique and high-quality designs.
+           Notre IA analyse votre dossier de conception et utilise des algorithmes avancés pour
+          générez plusieurs concepts de conception adaptés à vos spécifications. Il
+          prend en compte vos préférences, votre style et les exigences de votre projet
+          pour offrir des designs uniques et de haute qualité. Notre IA analyse votre dossier de conception et utilise des algorithmes avancés pour
+          générez plusieurs concepts de conception adaptés à vos spécifications. Il
+          prend en compte vos préférences, votre style et les exigences de votre projet
+          pour offrir des designs uniques et de haute qualité.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item
@@ -22,60 +25,51 @@ const AllFaqs = () => {
         className="bg-transparent border-0 rounded-0"
       >
         <Accordion.Header>
-          Can I customize the AI-generated designs?
+          Puis-je personnaliser les conceptions générées par l’IA ?
         </Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          Yes, our platform includes powerful customization tools that allow you
-          to refine and perfect your chosen designs. You can make adjustments,
-          add elements, and tweak details to ensure the final design matches
-          your vision.
+         Oui, notre plateforme comprend de puissants outils de personnalisation qui vous permettent
+          pour affiner et perfectionner les designs que vous avez choisis. Vous pouvez faire des ajustements,
+          ajoutez des éléments et modifiez les détails pour garantir que la conception finale correspond
+          votre vision.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item
         eventKey="2"
         className="bg-transparent border-0 rounded-0"
       >
-        <Accordion.Header>What support options are available?</Accordion.Header>
+        <Accordion.Header>Quelles options de support sont disponibles ?</Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          We offer comprehensive support for all our plans. Starter users have
-          access to email support, Pro users benefit from priority email
-          support, and Enterprise users receive 24/7 priority support along with
-          a dedicated account manager.
+          Nous offrons un soutien complet pour tous nos plans. Les utilisateurs de démarrage ont accès à l'assistance par e-mail, les utilisateurs Pro bénéficient d'un e-mail prioritaire assistance, et les utilisateurs d'Enterprise reçoivent une assistance prioritaire 24h/24 et 7j/7 un gestionnaire de compte dédié.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item
         eventKey="3"
         className="bg-transparent border-0 rounded-0"
       >
-        <Accordion.Header>Is there a free trial available?</Accordion.Header>
+        <Accordion.Header>Existe-t-il un essai gratuit disponible ?</Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          Yes, we offer a 14-day free trial for all new users. You can explore
-          all the features of our AI-powered design assistant and see how it can
-          enhance your creative process before committing to a subscription.
+         Oui, nous offrons un essai gratuit de 14 jours pour tous les nouveaux utilisateurs. Vous pouvez explorer
+          toutes les fonctionnalités de notre assistant de conception alimenté par l'IA et voyez comment il peut
+          améliorez votre processus créatif avant de vous engager dans un abonnement.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item
         eventKey="4"
         className="bg-transparent border-0 rounded-0"
       >
-        <Accordion.Header>How secure is my data?</Accordion.Header>
+        <Accordion.Header>Dans quelle mesure mes données sont-elles sécurisées ?</Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          We prioritize the security of your data. All your designs and project
-          details are stored in secure cloud storage with advanced encryption.
-          Enterprise users have access to enhanced security options for added
-          peace of mind.
+          Nous privilégions la sécurité de vos données. Toutes vos conceptions et projets les détails sont stockés dans un stockage cloud sécurisé avec un cryptage avancé. Les utilisateurs d'entreprise ont accès à des options de sécurité améliorées pour plus de tranquillité d'esprit.
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item
         eventKey="5"
         className="bg-transparent border-0 rounded-0"
       >
-        <Accordion.Header>What integrations are available?</Accordion.Header>
+        <Accordion.Header>Quelles intégrations sont disponibles ?</Accordion.Header>
         <Accordion.Body className="color-text p-0 pb-3 small">
-          Our platform seamlessly integrates with popular design and project
-          management tools such as Adobe Creative Suite, Figma, and Trello. This
-          allows you to streamline your workflow and easily incorporate our
-          AI-powered design assistant into your existing processes.
+          Notre plateforme s'intègre parfaitement à la conception et au projet populaires outils de gestion tels qu'Adobe Creative Suite, Figma et Trello. Cette vous permet de rationaliser votre flux de travail et d'intégrer facilement notre Assistant de conception basé sur l'IA dans vos processus existants.
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

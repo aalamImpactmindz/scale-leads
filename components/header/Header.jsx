@@ -89,7 +89,7 @@ const Header = () => {
           </Navbar.Collapse>
           {(isLoggedIn === "false" || isLoggedIn === false) && (
             <Link href="/login" className="ms-auto ms-lg-4">
-              <Button className="btn-main">Login</Button>
+              <Button className="btn-main">Se connecter</Button>
             </Link>
           )}
           {(isLoggedIn === "true" || isLoggedIn === true) && (
@@ -99,12 +99,12 @@ const Header = () => {
           )}
           {(isLoggedIn === "false" || isLoggedIn === false) && (
             <Link href="/register" className="ms-2 ms-lg-4">
-              <Button className="btn-main">Sign up</Button>
+              <Button className="btn-main">Signez uo</Button>
             </Link>
           )}
           {(isLoggedIn === "true" || isLoggedIn === true) && (
             <Link href="/dashboard" className="ms-2 ms-lg-4">
-              <Button className="btn-main">Dashboard</Button>
+              <Button className="btn-main">Tableau de bord</Button>
             </Link>
           )}
           <Navbar.Toggle aria-controls="navbar-main" className="ms-2" />

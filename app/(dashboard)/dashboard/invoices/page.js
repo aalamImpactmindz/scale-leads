@@ -39,14 +39,14 @@ export default function LinkedInLogin() {
  
   return (
     <div className="border p-4 rounded shadow w-full max-w-md">
-      <h2 className="text-xl font-semibold mb-4">Connect your LinkedIn account</h2>
+      <h2 className="text-xl font-semibold mb-4">Connectez votre compte LinkedIn</h2>
  
       {status === "connected" && user ? (
         <div className="flex items-center space-x-4">
           <img src={user.image} alt="profile" className="w-10 h-10 rounded-full" />
           <div>
             <p className="font-medium">{user.name}</p>
-            <p className="text-sm text-gray-500">Subscription: {user.subscription}</p>
+            <p className="text-sm text-gray-500">Abonnement: {user.subscription}</p>
           </div>
         </div>
       ) : (
@@ -55,7 +55,7 @@ export default function LinkedInLogin() {
             onClick={handleLogin}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
-            🔗 Log in to LinkedIn
+            🔗 Connectez-vous à LinkedIn
           </button>
           <p className="mt-2 text-sm text-gray-600">
             {status === "waiting"

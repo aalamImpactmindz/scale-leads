@@ -20,12 +20,12 @@ const Abonnement = () => {
       const hasActivePlan = Cookies.get("has_active_plan");
 
       if (hasActivePlan === "false" || hasActivePlan === false) {
-        setMessage("You don't have an active plan. Please purchase a plan.");
+        setMessage("Vous n'avez pas de plan actif. Veuillez acheter un forfait.");
       } else {
         setMessage(""); // Clear message if has active plan
       }
     } else {
-      setMessage("Start with a 7-day Free trial - No commitment."); // Clear message if not logged in
+      setMessage("Commencez par un essai gratuit de 7 jours - Aucun engagement."); // Clear message if not logged in
     }
   }, [isLoggedIn]);
 

@@ -131,21 +131,21 @@ const Login = () => {
   };
 
   if (isRedirecting) {
-    return <div className="sec-padding text-center">Redirecting...</div>;
+    return <div className="sec-padding text-center">Redirection...</div>;
   }
 
   return (
     <div className="page-login sec-padding">
       <Container fluid="xl">
-        <Heading title="My Account" />
+        <Heading title="Mon compte" />
         <Row className="row-cols-1 row-cols-md-2 g-3 g-md-4">
           <Col>
             <div className="bg-gray p-3 p-lg-4">
-              <h4 className="color-light">Login</h4>
-              <p>Already have an account? Log in to continue.</p>
+              <h4 className="color-light">Se connecter</h4>
+              <p>Vous avez déjà un compte ? Connectez-vous pour continuer.</p>
               <Form className="mt-4" onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formLoginEmail">
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label>Adresse e-mail</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="jane@framer.com"
@@ -158,7 +158,7 @@ const Login = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formLoginPassword">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Mot de passe</Form.Label>
                   <Form.Control
                     type="password"
                     placeholder="********"
@@ -171,9 +171,9 @@ const Login = () => {
                 </Form.Group>
                 <div className="d-flex flex-wrap align-items-center justify-content-between">
                   <Button className="btn-main" type="submit">
-                    Login
+                    Se connecter
                   </Button>
-                  <Link href="/reset-password">Forgot Password?</Link>
+                  <Link href="/reset-password">Mot de passe oublié ?</Link>
                 </div>
                 {message && (
                   <Alert
@@ -193,15 +193,12 @@ const Login = () => {
           </Col>
           <Col>
             <div className="bg-gray p-3 p-lg-4 h-100">
-              <h4 className="color-light">New Customer?</h4>
+              <h4 className="color-light">Nouveau client ?</h4>
               <p>
-                Create an account to easily track your order status and view
-                your purchase history. We'll set up your account quickly and
-                only ask for the information needed to make your shopping
-                experience faster and smoother.
+                Créez un compte pour suivre facilement l'état de votre commande et consulter votre historique d'achat. Nous configurerons votre compte rapidement et vous demanderons uniquement les informations nécessaires pour rendre votre expérience d'achat plus rapide et plus fluide.
               </p>
               <Link href="/register" className="d-inline-block">
-                <Button className="btn-main">Register</Button>
+                <Button className="btn-main">S'inscrire</Button>
               </Link>
             </div>
           </Col>

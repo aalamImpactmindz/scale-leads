@@ -18,14 +18,14 @@ const Footer = () => {
     <footer className="bg-gray sec-padding-small mt-auto">
       <Container fluid="xl">
         <div className="ftr-top mb-5">
-          <h2 className="fw-bold">Launch your prospecting tool today</h2>
-          <p>in 5 minutes, no credit card needed.</p>
+          <h2 className="fw-bold">Lancez votre outil de prospection dès aujourd'hui</h2>
+          <p>en 5 minutes, aucune carte de crédit nécessaire.</p>
           <Form className="d-flex flex-wrap flex-column flex-sm-row gap-3">
             <Form.Group controlId="formFooterEmail">
-              <Form.Control type="email" placeholder="Email address" />
+              <Form.Control type="email" placeholder="Adresse e-mail" />
             </Form.Group>
             <Button className="btn-bg text-uppercase" type="submit">
-              Start now{" "}
+              Commencez maintenant{" "}
               <FontAwesomeIcon icon={faArrowRightLong} className="ms-2" />
             </Button>
           </Form>
@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="ftr-bottom pt-4 border-top border-gray d-flex flex-wrap flex-column flex-md-row gap-3 align-items-center justify-content-between">
           <Logo />
           <div className="d-flex flex-wrap align-items-center">
-            Follow Us
+            Suivez-nous
             <ul className="ls-none d-flex flex-wrap justify-content-center gap-2 color-light ms-3">
               <li>
                 <Link
@@ -73,11 +73,11 @@ const Footer = () => {
         <div className="copyright mt-4 small d-flex flex-wrap flex-column flex-md-row gap-3 align-items-center justify-content-between">
          
           <footer style={{textAlign: 'center' }}>
-  <Link href="/privacy-policy">Privacy Policy</Link> |{' '}
-  <Link href="/terms-conditions">Terms & Conditions</Link>
+  <Link href="/privacy-policy">Politique de confidentialité</Link> |{' '}
+  <Link href="/terms-conditions">Termes et conditions</Link>
 </footer>
           <p className="ms-md-auto mb-0 text-center text-sm-left">
-            Powered by ScaleLeads. All Right Reserved
+            Propulsé par ScaleLeads. Tous droits réservés
           </p>
         </div>
       </Container>

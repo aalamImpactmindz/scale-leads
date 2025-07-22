@@ -72,7 +72,7 @@ const Plans = ({ customClass }) => {
       <Container fluid="xl">
         <div className="heading-container position-relative">
           <h2 className="mb-4 fw-bold" style={{ paddingRight: "320px" }}>
-            Subscriptions
+            Abonnements
           </h2>
           <Tabs
             activeKey={activeTab}
@@ -85,19 +85,19 @@ const Plans = ({ customClass }) => {
               eventKey="annual"
               title={
                 <span className="d-inline-flex align-items-center">
-                  Annual{" "}
+                  Annuel{" "}
                   <span className="badge bg-light ms-2 color-dark py-2">
-                    Save 15%
+                    Économisez 15 %
                   </span>
                 </span>
               }
             />
-            <Tab eventKey="monthly-plans" title="Monthly" />
+            <Tab eventKey="monthly-plans" title="Mensuel" />
           </Tabs>
         </div>
         {loading ? (
           <div className="text-center py-5">
-            <p className="mt-3">Loading plans...</p>
+            <p className="mt-3">Plans de chargement...</p>
           </div>
         ) : error ? (
           <Alert variant="danger" className="px-3 py-2 small">
@@ -118,7 +118,7 @@ const Plans = ({ customClass }) => {
                         usersPlan &&
                         usersPlan.interval === "month" &&
                         usersPlan.name === plan.name
-                          ? "your-plan"
+                          ? "votre plan"
                           : ""
                       }
                     />
@@ -139,7 +139,7 @@ const Plans = ({ customClass }) => {
                         usersPlan &&
                         usersPlan.interval === "year" &&
                         usersPlan.name === plan.name
-                          ? "your-plan"
+                          ? "votre plan"
                           : ""
                       }
                     />

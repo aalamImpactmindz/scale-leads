@@ -532,29 +532,29 @@ let emaillimit = getemaillimit(planid);
   return (
     <>
       <div className="container custombackgrond rounded-4 border p-4 shadow-sm mt-5">
-        <h5 className="fw-bold mb-4 text-white ">Connect your Email account (Choose any one) </h5>
+        <h5 className="fw-bold mb-4 text-white ">Connectez votre compte de messagerie (choisissez-en un) </h5>
 
         <div className="d-flex gap-3 mt-3 flex-wrap">
           {/* Gmail Box */}
-          <div className=" flex-fill custombackgroundcard d-flex justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
+          <div className=" flex-fill custombackgroundcard d-flex justify-content-between align-items-center border rounded-3 px-3 py-3" style={{ minWidth: "300px", position: "relative" }}>
             {/* Left: Icon and Text */}
             <div className="d-flex align-items-center gap-3">
               <Image src={gmailicon} alt="Gmail Icon" width={35} height={35} className="me-2">
 
               </Image>
               <div>
-                <div className="fw-semibold text-white">Log in using Gmail</div>
-                <div className="text-white small">{isConnected ? 'Connected to Gmail' : 'You are not connected to Gmail'}</div>
+                <div className="fw-semibold text-white">Connectez-vous en utilisant Gmail</div>
+                <div className="text-white small">{isConnected ? 'Connecté à Gmail' : "Vous n'êtes pas connecté à Gmail"}</div>
               </div>
             </div>
 
             {/* Right: Button */}
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handlegmaillogin}
-              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
+              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto  btn-main"
             >
               {isConnected
-    ? 'Connected'
-    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
+    ? 'Connecté'
+    : (emaildata?.length < emaillimit ? 'Ajouter' : 'Se connecter')}
             </button>
 
             {isConnected ? (
@@ -584,7 +584,7 @@ let emaillimit = getemaillimit(planid);
                         <button disabled={isConnected} onClick={() => handleexistinggmail(item)}
                           className="btn btn-primary gap-2 px-4 rounded-pill btn-main"
                         >
-                          {item?.id == selectedid && isConnected ? 'Connected' : 'Continue'}
+                          {item?.id == selectedid && isConnected ? 'Connecté' : 'Continuer'}
 
 
 
@@ -614,27 +614,27 @@ let emaillimit = getemaillimit(planid);
 
           </div>
 
-          <div className="flex-fill d-flex custombackgroundcard justify-content-between align-items-center border rounded-3 px-4 py-3" style={{ minWidth: "300px", position: "relative" }}>
+          <div className="flex-fill d-flex custombackgroundcard justify-content-between align-items-center border rounded-3 px-3 py-3" style={{ minWidth: "300px", position: "relative" }}>
             {/* Left: Icon and Text */}
             <div className="d-flex align-items-center gap-3">
               <Image src={outlook} alt="Outlook Icon" width={35} height={35} className="me-2">
 
               </Image>
               <div>
-                <div className="fw-semibold text-white">Log in using Outlook</div>
-                <div className="text-white small">{isMicrosoftConnected ? 'Connected to Outlook' : 'You are not connected to Outlook'}</div>
+                <div className="fw-semibold text-white">Connectez-vous à l'aide d'Outlook</div>
+                <div className="text-white small">{isMicrosoftConnected ? "Connecté à Outlook" : "Vous n'êtes pas connecté à Outlook"}</div>
               </div>
             </div>
 
             {/* Right: Button */}
             <button disabled={isConnected || isMicrosoftConnected || smtp} onClick={handleMicrosoftLogin}
 
-              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto me-3 btn-main"
+              className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto  btn-main"
             >
               
   {isMicrosoftConnected
-    ? 'Connected'
-    : (emaildata?.length < emaillimit ? 'Add' : 'Log in')}
+    ? 'Connecté'
+    : (emaildata?.length < emaillimit ? 'Ajouter' : 'Se connecter')}
             </button>
             {isMicrosoftConnected ? (
               <span onClick={() => handledisconnect('outlook')} className="d-flex align-items-center gap-2 disconnect_button">
@@ -662,7 +662,7 @@ let emaillimit = getemaillimit(planid);
                         <button disabled={isMicrosoftConnected} onClick={() => handleexistingoutlook(item)}
                           className="btn btn-primary gap-2 px-4 rounded-pill btn-main "
                         >
-                          {item?.id == selectedmid && isMicrosoftConnected ? 'Connected' : 'Continue'}
+                          {item?.id == selectedmid && isMicrosoftConnected ? 'Connecté' : 'Continuer'}
 
 
 

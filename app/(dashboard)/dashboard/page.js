@@ -141,7 +141,7 @@ export default function DashboardHome() {
             </Col>
           </Row>
           <div className="rounded-3 bg-gray mt-4 p-4">
-            <h5>Actions envoyees</h5>
+            <h5>Actions envoyés</h5>
             <Row className="row-cols-5 flex-wrap mt-3">
               <Col
                 
@@ -168,7 +168,7 @@ export default function DashboardHome() {
                 </span>
                 <h4 className="mb-0 lh-1 fw-semibold">641</h4>
                 <p className="mb-0 small text-white text-opacity-75">
-                  Invitations acceptees
+                  Invitations acceptées
                 </p>
                 </div>
               </Col>
@@ -254,7 +254,7 @@ export default function DashboardHome() {
                   />
                 </span>
                 <h4 className="mb-0 lh-1 fw-semibold">306</h4>
-                <p className="mb-0 small text-white text-opacity-75">Visits</p>
+                <p className="mb-0 small text-white text-opacity-75">Visites</p>
                 </div>
               </Col>
               <Col
@@ -281,7 +281,7 @@ export default function DashboardHome() {
                   />
                 </span>
                 <h4 className="mb-0 lh-1 fw-semibold">82</h4>
-                <p className="mb-0 small text-white text-opacity-75">Suivis</p>
+                <p className="mb-0 small text-white text-opacity-75">Suivi</p>
                 </div>
               </Col>
             </Row>
@@ -308,7 +308,7 @@ export default function DashboardHome() {
                 className="me-2"
                 style={{ width: "18px", height: "18px" }}
               />
-              Plan Business
+              Planifier une entreprise
             </span>
             <div className="d-flex flex-wrap justify-content-center gap-4">
               <span className="text-center fs-5 fw-bold">
@@ -320,7 +320,7 @@ export default function DashboardHome() {
               <span className="text-center fs-5 fw-bold">
                 277
                 <i className="fst-normal fw-normal text-white text-opacity-75 d-block small">
-                  En attente
+                 En attention
                 </i>
               </span>
               <span className="text-center fs-5 fw-bold">
@@ -333,8 +333,8 @@ export default function DashboardHome() {
           </div>
           <div className="bg-gray rounded-3 p-4 d-flex flex-wrap flex-column mt-4">
             <div className="d-flex justify-content-between align-items-center">
-              <h5 className="mb-0">Status de prospection</h5>
-              <Badge className="bg-light color-dark py-2">Inactive</Badge>
+              <h5 className="mb-0">État de la prospection</h5>
+              <Badge className="bg-light color-dark py-2">Inactif</Badge>
             </div>
             <div className="d-flex flex-wrap justify-content-evenly my-4">
               <div>

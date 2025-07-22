@@ -57,10 +57,10 @@ setLeads(data?.leads ||[])
 
   return (
     <div className="leads mb-4">
-      <h2 className="mb-4 fw-bold">Leads</h2>
+      <h2 className="mb-4 fw-bold">Dirigeants</h2>
       {loading ? (
         <div className="text-center py-5">
-          <p className="mt-3">Loading leads...</p>
+          <p className="mt-3">Chargement des câbles...</p>
         </div>
       ) : error ? (
         <Alert variant="danger" className="px-3 py-2 small">
@@ -68,19 +68,19 @@ setLeads(data?.leads ||[])
         </Alert>
       ) : leads.length === 0 ? (
         <Alert variant="warning" className="px-3 py-2 small">
-          No leads found.
+          Aucune piste trouvée.
         </Alert>
       ) : (
         <Table striped hover responsive className="mb-0 small">
           <thead className="table-dark">
             <tr>
               <th>#</th>
-              <th>Lead Name</th>
+              <th>Nom du lead</th>
               <th>Source</th>
-              <th>Location</th>
-              <th>Connection Request</th>
+              <th>Localisation</th>
+              <th>Demande de connexion</th>
           
-              <th>Replied</th>
+              <th>Répondit</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -99,7 +99,8 @@ setLeads(data?.leads ||[])
                     size="sm"
                     onClick={() => handleEditClick(lead)}
                   >
-                    View
+                    
+Vue
                   </Button>
                 </td>
               </tr>

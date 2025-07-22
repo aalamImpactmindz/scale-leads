@@ -22,59 +22,31 @@ const blogBuildingANavigationComponent = () => {
         </div>
         <div className="d-flex flex-wrap justify-content-between small mb-3">
           <span>6 févr. 2022</span>
-          <span>6 min read</span>
+          <span>6 min de lecture</span>
         </div>
         <p>
-          Navigation is key within any digital interface. Smart Components
-          enable us to create custom interactive navigation components that work
-          perfectly with the rest of your prototype.In this guide, we will cover
-          the concepts of nesting components, adding events to elements in a
-          component using Event Variables, and passing these through your
-          components. One of the main benefits of using nested components is
-          that it provides full control over its states, such as unique hover
-          states of elements within another component.
+          La navigation est essentielle dans toute interface numérique. Composants intelligents nous permettre de créer des composants de navigation interactifs personnalisés qui fonctionnent parfaitement avec le reste de votre prototype. Dans ce guide, nous aborderons les concepts d'imbrication de composants, d'ajout d'événements aux éléments d'un composant utilisant des variables d'événement et les transmettant via votre composants. L’un des principaux avantages de l’utilisation de composants imbriqués est qu'il offre un contrôle total sur ses états, comme un survol unique états des éléments au sein d'un autre composant.
         </p>
-        <h3 className="color-light">Starting at the atomic level</h3>
+        <h3 className="color-light">En commençant au niveau atomique</h3>
         <p>
-          Framer allows you to create fully interactive and animated components,
-          and even allows you to nest components within other components. We're
-          building a navigation bar component for a website that will contain
-          two different kinds of nested components, with their own unique
-          interactions. Our project will contain a Navigation bar that contains
-          various nested components, namely five Nav items and one Shopping cart
-          component. The design of our nested components, the nav list item and
-          the shopping cart, will impact how we design our navigation bar. For
-          this reason, an optimal workflow includes starting with the 'deepest'
-          nested component and building up from there.
+         Framer vous permet de créer des composants entièrement interactifs et animés, et vous permet même d'imbriquer des composants dans d'autres composants. Nous sommes création d'un composant de barre de navigation pour un site Web qui contiendra deux types différents de composants imbriqués, avec leur propre unique interactions. Notre projet contiendra une barre de navigation qui contient divers composants imbriqués, à savoir cinq éléments Nav et un panier composant. La conception de nos composants imbriqués, l'élément de liste de navigation et le panier aura un impact sur la façon dont nous concevons notre barre de navigation. Pour pour cette raison, un flux de travail optimal inclut de commencer par le « plus profond » composant imbriqué et construction à partir de là.
         </p>
-        <h3 className="color-light">Nesting components</h3>
+        <h3 className="color-light">Composants de nidification</h3>
         <p>
           {" "}
-          Once we have our two components ready, we can start creating the
-          component in which we will nest these. Draw your navigation bar,
-          select it on the canvas and click the Component tool in the Toolbar.
-          To nest a different component in our new component, just drag any
-          other component to the Component Canvas and place it within your
-          designed navigation bar.
+         Une fois nos deux composants prêts, nous pouvons commencer à créer le composant dans lequel nous allons les imbriquer. Dessinez votre barre de navigation, sélectionnez-le sur le canevas et cliquez sur l'outil Composant dans la barre d'outils. Pour imbriquer un composant différent dans notre nouveau composant, faites simplement glisser n'importe lequel autre composant du Component Canvas et placez-le dans votre barre de navigation conçue.
         </p>
         <h3 className="color-light">
-          Triggering interactions from the navigation bar
+          Déclenchement des interactions depuis la barre de navigation
         </h3>
         <p>
-          Back on the main canvas, we'd like to be able to tap 'Clothing' and
-          navigate to an entire new Screen. If you'd connect the component using
-          the Prototyping Connector to a new screen, we could set up an
-          Interaction. However, this would be triggered if we tap anywhere
-          within our component. This isn't what we want to do, as we want to
-          trigger this transition only from a specific element. This is where
-          Event Variables come in, which are special types of Variables not
-          attached to properties (like opacity or fill) but instead to events.
+          De retour sur la toile principale, nous aimerions pouvoir demander sur « Vêtements » et accédez à un tout nouveau écran. Si vous connectez le composant en utilisant le connecteur de prototypage vers un nouvel écran, nous pourrions configurer un Interaction. Dépendant, cela sert declenché si nous appuyions n'importe où au sein de notre compositeur. Ce n'est pas ce que nous voulons faire, comme nous le voulons déclenchez cette transition unique à partir d'un élément spécifique. C'est ici Les variables d'événement arrivant, qui sont des types spéciaux de variables non attaché à des propriétés (comme l'opacité ou le remblissage) mais plutôt à des événements.
         </p>
       </Container>
       <div className="more-blogs sec-padding">
         <Container>
           <h3 className="mb-3">
-            Read <span className="color-theme">More</span>
+            Lire<span className="color-theme">Plus</span>
           </h3>
           <Row className="g-3 g-lg-4 row-cols-1 row-cols-sm-2 row-cols-lg-3">
             <Col>
