@@ -26,7 +26,7 @@ const LinkedInConnect = () => {
 let linkedinlimit;
     const[existlinkedin , setexistlinkedin] = useState([]);
     const handleLogin = async() => {
-  const extensionId = "nmckndphoocceadajdmdgbckfagcifjp"; // 🧩 Replace with your extension's real ID
+  const extensionId = "hhfbaibjbeanbpigmnlebbncceblfndo"; // 🧩 Replace with your extension's real ID
  
 chrome.runtime.sendMessage(
   extensionId,
