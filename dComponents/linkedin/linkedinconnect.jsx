@@ -320,7 +320,7 @@ const handleexistlinkedin = (item)=>{
 
         {/* Right: Button */}
         <button
-          onClick={() => window.open("https://chromewebstore.google.com/detail/scalelead/nmckndphoocceadajdmdgbckfagcifjp?authuser=0&hl=en", "_blank")}
+          onClick={() => window.open("https://chromewebstore.google.com/detail/scalelead/hhfbaibjbeanbpigmnlebbncceblfndo?authuser=0&hl=en", "_blank")}
           className="btn btn-primary d-flex align-items-center gap-1 px-4 py-2 rounded-pill btn-main"
         >
         Obtenez l'extension
