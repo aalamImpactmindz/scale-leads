@@ -217,9 +217,11 @@ const scopes = [
     'profile',
     'offline_access',
     'email',
+   
     'https://graph.microsoft.com/Mail.Send',
     'https://graph.microsoft.com/Mail.ReadWrite',
     'https://graph.microsoft.com/MailboxSettings.ReadWrite',
+     'https://graph.microsoft.com/User.Read'
   ].join(' ');
 try{
   const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?` +
