@@ -68,22 +68,7 @@ const PrivacyPolicy = () => {
           Site : <a href="https://scaleleads.fr" target="_blank" rel="noopener noreferrer">https://scaleleads.fr</a>
         </p>
 
-        <hr className="my-5" />
-
-        {/* Placeholder content */}
-        <p>
-          Maecenas in auctor tortor, id lacinia est. Suspendisse eget lectus vel
-          nibh dignissim tristique non eu nunc. Proin metus enim, ultricies sit
-          amet semper id, rutrum vel nisi.
-        </p>
-        <p>
-          Nam odio justo, mattis a semper ut, dignissim nec nulla. Fusce a
-          placerat nunc. Duis efficitur quis felis pretium aliquet.
-        </p>
-        <p>
-          Aenean mauris justo, venenatis a velit ut, tincidunt accumsan velit.
-          Mauris ut laoreet erat, quis tempus felis.
-        </p>
+   
       </Container>
     </div>
   );
