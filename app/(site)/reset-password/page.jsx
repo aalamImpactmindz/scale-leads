@@ -9,19 +9,24 @@ import Form from "react-bootstrap/Form";
 const ResetPassword = () => {
   const [email,setemail] = useState('');
   const[message,setmessage] = useState('');
+  const[loading,setloading] = useState(true);
   const handleemail = async(e)=>{
+    setloading(false);
     e.preventDefault();
     try{
         let res = await resetpassword(email);
        
         if(res.isSuccess){
+          setloading(true);
            setmessage("Veuillez vérifier votre boîte de réception e-mail. Un lien pour réinitialiser votre mot de passe a été envoyé.");
 setemail('')
         }
         if(!res.isSuccess){
+           setloading(true);
           setmessage("Email non trouvé");
         }
     }catch(err){
+       setloading(true);
       console.log(err)
     }
   }
@@ -46,7 +51,7 @@ setemail('')
                     <Form.Control type="email" placeholder="jane@framer.com" value={email} onChange={(e)=>setemail(e.target.value)} />
                   </Form.Group>
                   <Button onClick={handleemail} className="btn-main" type="submit">
-                  Réinitialiser le mot de passe
+                 {!loading ? <span className="spinner" /> : "Réinitialiser le mot de passe"}
                   </Button>
                 </Form>
               </div>
