@@ -1,4 +1,5 @@
 import axiosInstance from "../axiosInstance";
+import scrapInstance from "../scrapeInstace";
 
 export const userLogin = async (payload) => {
   try {
@@ -44,3 +45,29 @@ export const updateUserOnboardingForm = async (id, payload) => {
     console.log(err);
   }
 };
+
+
+export const resetpassword  = async(email)=>{
+ 
+  try{
+       const response = await scrapInstance.post('/api/resetpassword',{email});
+       return response.data;
+  }catch(err){
+    console.log(err)
+  }
+
+}
+
+export const newpassword = async(data)=>{
+  const{email,password,password_confirmation}  = data;
+  try{
+   const res = await axiosInstance.post('/api/update-password',{
+    email,
+    password,
+    password_confirmation
+   })
+   return res.data;
+  }catch(err){ 
+    console.log(err);
+  }
+}

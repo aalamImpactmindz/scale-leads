@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
+import { newpassword } from "@/utils/service/userlogin";
 
 const ResetPassword = () => {
   const searchParams = useSearchParams();
@@ -43,29 +44,32 @@ const ResetPassword = () => {
     }
 
     setError("");
+    const data = {
+        email:email,
+        password:password,
+        password_confirmation:confirmPassword
+    }
 
     try {
-      const response = await fetch("/api/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await newpassword(data);
+     
+      if(response?.success){
+         toast.success("Changer le mot de passe avec succès")
+      }
+      else{
+        toast.error(response.message)
+      }
 
-      const result = await response.json();
+    //   const result = await response.json();
 
-      if (response.ok) {
-        toast.success('Le mot de passe a été mis à jour avec succès.')
+    //   if (response.ok) {
+    //     toast.success('Le mot de passe a été mis à jour avec succès.')
         
 
-      } else {
-        toast.error(result.message || 'Erreur lors de la mise à jour du mot de passe.')
+    //   } else {
+    //     toast.error(result.message || 'Erreur lors de la mise à jour du mot de passe.')
     
-      }
+    //   }
     } catch (err) {
       setError("Erreur du serveur. Veuillez réessayer plus tard.");
     }

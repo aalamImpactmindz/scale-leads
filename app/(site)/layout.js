@@ -1,5 +1,6 @@
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "ScaleLeads",
@@ -10,6 +11,7 @@ export const metadata = {
 export default function SiteLayout({ children }) {
   return (
     <>
+     <ToastContainer toastStyle={{ width: '430px' }} />
       <Header />
       {children}
       <Footer />
