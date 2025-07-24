@@ -13,10 +13,10 @@ const ResetPassword = () => {
     e.preventDefault();
     try{
         let res = await resetpassword(email);
-        console.log(res);
+       
         if(res.isSuccess){
            setmessage("Veuillez vérifier votre boîte de réception e-mail. Un lien pour réinitialiser votre mot de passe a été envoyé.");
-
+setemail('')
         }
         if(!res.isSuccess){
           setmessage("Email non trouvé");

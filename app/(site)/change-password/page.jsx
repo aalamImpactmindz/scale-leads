@@ -55,21 +55,13 @@ const ResetPassword = () => {
      
       if(response?.success){
          toast.success("Changer le mot de passe avec succès")
+         setPassword('');
+         setConfirmPassword('');
       }
       else{
         toast.error(response.message)
       }
 
-    //   const result = await response.json();
-
-    //   if (response.ok) {
-    //     toast.success('Le mot de passe a été mis à jour avec succès.')
-        
-
-    //   } else {
-    //     toast.error(result.message || 'Erreur lors de la mise à jour du mot de passe.')
-    
-    //   }
     } catch (err) {
       setError("Erreur du serveur. Veuillez réessayer plus tard.");
     }
