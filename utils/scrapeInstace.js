@@ -1,9 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const scrapInstance = axios.create({
-//baseURL: "https://linkedinscrap.sytes.net/"
+baseURL: "https://linkedinscrap.sytes.net/"
 
-baseURL: "http://localhost:4000/"
+//baseURL: "http://localhost:4000/"
 });
 
 scrapInstance.interceptors.request.use(
