@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const searchParams = useSearchParams();
@@ -58,9 +59,12 @@ const ResetPassword = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setSuccess("Le mot de passe a été mis à jour avec succès.");
+        toast.success('Le mot de passe a été mis à jour avec succès.')
+        
+
       } else {
-        setError(result.message || "Erreur lors de la mise à jour du mot de passe.");
+        toast.error(result.message || 'Erreur lors de la mise à jour du mot de passe.')
+    
       }
     } catch (err) {
       setError("Erreur du serveur. Veuillez réessayer plus tard.");
