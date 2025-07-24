@@ -88,12 +88,12 @@ const EditCampaign = () => {
 
   return (
     <div className="edit-campaign mb-4">
-      <h2 className="mb-4 fw-bold">Edit Campaign: {formData.campaign_name}</h2>
+      <h2 className="mb-4 fw-bold">Modifier la campagne: {formData.campaign_name}</h2>
       <Form onSubmit={handleSubmit} className="d-bg-gradient p-4 rounded-2">
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>Campaign Name</Form.Label>
+              <Form.Label>Nom de la campagne</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -106,7 +106,7 @@ const EditCampaign = () => {
           </Col>
           <Col>
             <Form.Group className="mb-3" controlId="formOnboardingUpdateStatus">
-              <Form.Label>Status</Form.Label>
+              <Form.Label>Statut</Form.Label>
               <Form.Select
                 aria-label="Select status"
                 required
@@ -119,8 +119,8 @@ const EditCampaign = () => {
                 }
                 className="form-control"
               >
-                <option value="active">Active</option>
-                <option value="deactive">Deactive</option>
+                <option value="active">Actif</option>
+                <option value="deactive">Déactif</option>
               </Form.Select>
             </Form.Group>
           </Col>
@@ -128,7 +128,7 @@ const EditCampaign = () => {
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>Who's your ideal customer?</Form.Label>
+              <Form.Label>Qui est votre client idéal ?</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -141,7 +141,7 @@ const EditCampaign = () => {
           </Col>
           <Col>
             <Form.Group className="mb-3">
-              <Form.Label>What sector does he work in?</Form.Label>
+              <Form.Label>Dans quel secteur travaille-t-il ?</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -159,9 +159,9 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateCompanySize"
             >
-              <Form.Label>What size company are you targeting?</Form.Label>
+              <Form.Label>Quelle taille d’entreprise ciblez-vous ?</Form.Label>
               <Form.Select
-                aria-label="Select company size"
+                aria-label="Sélectionnez la taille de l'entreprise"
                 required
                 value={formData.company_size}
                 onChange={(e) =>
@@ -172,11 +172,11 @@ const EditCampaign = () => {
                 }
                 className="form-control"
               >
-                <option value="1">1 employee</option>
-                <option value="2-10">2-10 employees</option>
-                <option value="11-25">11-25 employees</option>
-                <option value="26-50">26-50 employees</option>
-                <option value="50+">50+ employees</option>
+                <option value="1">1 employé</option>
+                <option value="2-10">2-10 employés</option>
+                <option value="11-25">11-25 employés</option>
+                <option value="26-50">26-50 employés</option>
+                <option value="50+">50+ employés</option>
               </Form.Select>
             </Form.Group>
           </Col>
@@ -185,10 +185,10 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateObjective"
             >
-              <Form.Label>What is your main objective?</Form.Label>
+              <Form.Label>Quel est votre objectif principal ?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Your Objective"
+                placeholder="Objectif de Yout"
                 required
                 value={formData.objective}
                 onChange={(e) =>
@@ -204,10 +204,10 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateYourOffer"
             >
-              <Form.Label>What's your offer (your promise)?</Form.Label>
+              <Form.Label>Quelle est votre offre (votre promesse) ?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Your Offer"
+                placeholder="Votre offre"
                 required
                 value={formData.offer}
                 onChange={(e) =>
@@ -221,10 +221,10 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateYourWebsite"
             >
-              <Form.Label>Do you have a website?</Form.Label>
+              <Form.Label>Avez-vous un site Web ?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Website"
+                placeholder="Entrer sur le site Web"
                 required
                 value={formData.website}
                 onChange={(e) =>
@@ -240,10 +240,10 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateChannel"
             >
-              <Form.Label>Which channel do you want to prospect on?</Form.Label>
+              <Form.Label>Sur quelle chaîne souhaitez-vous prospecter ?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Channel"
+                placeholder="Entrer dans la chaîne"
                 required
                 value={formData.channel}
                 onChange={(e) =>
@@ -257,9 +257,9 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateMessageCount"
             >
-              <Form.Label>How many follow-up messages you want?</Form.Label>
+              <Form.Label>Combien de messages de suivi souhaitez-vous ?</Form.Label>
               <Form.Select
-                aria-label="Select follow-up message count"
+                aria-label="Sélectionnez le nombre de messages de suivi"
                 required
                 value={formData.message_count}
                 onChange={(e) =>
@@ -284,10 +284,10 @@ const EditCampaign = () => {
               controlId="formOnboardingUpdateFollowUpDelay"
             >
               <Form.Label>
-                How much delay between follow-up messages?
+                Quel est le délai entre les messages de suivi ?
               </Form.Label>
               <Form.Select
-                aria-label="Select follow-up message delay"
+                aria-label="Sélectionnez le délai de suivi du message"
                 required
                 value={formData.message_delay}
                 onChange={(e) =>
@@ -298,21 +298,21 @@ const EditCampaign = () => {
                 }
                 className="form-control"
               >
-                <option value="1">1 day</option>
-                <option value="3">3 days</option>
-                <option value="7">7 days</option>
-                <option value="14">14 days</option>
+                <option value="1">1 jour</option>
+                <option value="3">3 jours</option>
+                <option value="7">7 jours</option>
+                <option value="14">14 jours</option>
               </Form.Select>
             </Form.Group>
           </Col>
           <Col>
             <Form.Group className="mb-3" controlId="formOnboardingUpdateTone">
               <Form.Label>
-                What tone do you want your messages to take?
+               Quel ton souhaitez-vous que vos messages prennent ?
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="(optional)"
+                placeholder="(facultatif)"
                 value={formData.tone}
                 onChange={(e) =>
                   setFormData({ ...formData, tone: e.target.value })
@@ -327,10 +327,10 @@ const EditCampaign = () => {
               className="mb-3"
               controlId="formOnboardingUpdateMessages"
             >
-              <Form.Label>Do you already have messages you've used?</Form.Label>
+              <Form.Label>Avez-vous déjà utilisé des messages ?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="(optional)"
+                placeholder="(facultatif)"
                 value={formData.existing_messages}
                 onChange={(e) =>
                   setFormData({
@@ -347,11 +347,11 @@ const EditCampaign = () => {
               controlId="formOnboardingUpdateCompetitors"
             >
               <Form.Label>
-                Any competitors or approaches you'd like to avoid?
+                Des concurrents ou des approches que vous aimeriez éviter ?
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="(optional)"
+                placeholder="(facultatif)"
                 value={formData.competitors}
                 onChange={(e) =>
                   setFormData({
@@ -364,14 +364,14 @@ const EditCampaign = () => {
           </Col>
         </Row>
         <Button className="btn-main" type="submit">
-          Save
+          Enregistrer
         </Button>
         <Button
           className="btn-main ms-3"
           type="button"
           onClick={() => router.back()}
         >
-          Cancel
+         Annuler
         </Button>
         {message && (
           <Alert variant="success" className="mt-3 small py-2 rounded-0">
