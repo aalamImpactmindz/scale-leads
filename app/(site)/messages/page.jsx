@@ -73,7 +73,7 @@ const Messages = () => {
     e.preventDefault();
 
     if (!selectedTone) {
-      setError("Please select a tone.");
+      setError("Veuillez sélectionner une tonalité.");
       return;
     }
 
@@ -125,7 +125,7 @@ const Messages = () => {
         {loading ? (
           <div className="text-center py-5">
             <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
+              <span className="visually-hidden">Chargement...</span>
             </div>
           </div>
         ) : (
@@ -151,7 +151,7 @@ const Messages = () => {
               {selectedTone && (
                 <>
                   <Form.Group className="mb-3" controlId="linkedinMessage">
-                    <Form.Label className="text-xl">LinkedIn Message</Form.Label>
+                    <Form.Label className="text-xl">Message LinkedIn</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
@@ -163,7 +163,7 @@ const Messages = () => {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="linkedinMessage">
-                    <Form.Label>LinkedIn Follow up Message</Form.Label>
+                    <Form.Label>Message de suivi LinkedIn</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
@@ -176,7 +176,7 @@ const Messages = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-4" controlId="emailMessage">
-                    <Form.Label>Email Message</Form.Label>
+                    <Form.Label>Message électronique</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
@@ -188,7 +188,7 @@ const Messages = () => {
                     />
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="emailMessage">
-                    <Form.Label>Email Follow up Message</Form.Label>
+                    <Form.Label>Message de suivi par e-mail</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
@@ -203,7 +203,7 @@ const Messages = () => {
               )}
 
               <Button className="btn-main" type="submit">
-                Submit
+                Soumettre
               </Button>
 
               {message && (
