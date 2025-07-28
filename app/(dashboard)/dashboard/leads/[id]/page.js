@@ -91,8 +91,8 @@ setLeads(data?.leads ||[])
                 <td>{lead.name}</td>
                 <td>{lead.source==='gmail' || lead.source==='outlook' || lead.source==='smtp' ?'Email':'Linkedin'}</td>
                 <td>{lead?.country || '-'} </td>
-                <td>{lead?.emailsend ==1 || lead?.connection_request ?'Sent':'Failed'}</td>
-                <td>{lead.replied === false ? "None" : "Yes"}</td>
+                <td>{lead?.emailsend ==1 || lead?.connection_request ?'Envoyée':'Échoué'}</td>
+                <td>{lead.replied === false ? "Aucune" : "Oui"}</td>
                 <td>
                   <Button
                     className="btn-rounded"
