@@ -166,7 +166,7 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">641</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">
                   Invitations acceptées
                 </p>
@@ -195,7 +195,7 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">38</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">
                   Demandes de
                 </p>
@@ -224,7 +224,7 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">177</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">
                   Messages
                 </p>
@@ -253,7 +253,7 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">306</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">Visites</p>
                 </div>
               </Col>
@@ -280,7 +280,7 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">82</h4>
+                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">Suivi</p>
                 </div>
               </Col>
@@ -312,19 +312,19 @@ export default function DashboardHome() {
             </span>
             <div className="d-flex flex-wrap justify-content-center gap-4">
               <span className="text-center fs-5 fw-bold">
-                619
+                0
                 <i className="fst-normal fw-normal text-white text-opacity-75 d-block small">
                   Relations
                 </i>
               </span>
               <span className="text-center fs-5 fw-bold">
-                277
+             0
                 <i className="fst-normal fw-normal text-white text-opacity-75 d-block small">
                  En attention
                 </i>
               </span>
               <span className="text-center fs-5 fw-bold">
-                326
+                0
                 <i className="fst-normal fw-normal text-white text-opacity-75 d-block small">
                   Relations
                 </i>
@@ -356,7 +356,7 @@ export default function DashboardHome() {
                       }}
                     />
                   </span>
-                  <span>2</span>
+                  <span>0</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
                   Aliqua massa
@@ -381,7 +381,7 @@ export default function DashboardHome() {
                       }}
                     />
                   </span>
-                  <span>1214</span>
+                  <span>0</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
                   Lorem ipsum dolor

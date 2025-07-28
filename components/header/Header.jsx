@@ -99,7 +99,7 @@ const Header = () => {
           )}
           {(isLoggedIn === "false" || isLoggedIn === false) && (
             <Link href="/register" className="ms-2 ms-lg-4">
-              <Button className="btn-main">Signez uo</Button>
+              <Button className="btn-main">S’inscrire</Button>
             </Link>
           )}
           {(isLoggedIn === "true" || isLoggedIn === true) && (
