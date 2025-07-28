@@ -102,6 +102,7 @@ const Header = () => {
               <Button className="btn-main">S’inscrire</Button>
             </Link>
           )}
+          {/* login condition */}
           {(isLoggedIn === "true" || isLoggedIn === true) && (
             <Link href="/dashboard" className="ms-2 ms-lg-4">
               <Button className="btn-main">Tableau de bord</Button>
