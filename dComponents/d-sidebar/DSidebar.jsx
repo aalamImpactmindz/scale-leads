@@ -105,7 +105,7 @@ const DSidebar = () => {
             onClick={handleLogout}
             style={{ cursor: "pointer", color: "black" }}
           >
-           <FontAwesomeIcon icon={faArrowRightFromBracket} /> Logout
+           <FontAwesomeIcon icon={faArrowRightFromBracket} /> se déconnecter
           </div>
         </div>
       )}

@@ -94,7 +94,7 @@ const Header = () => {
           )}
           {(isLoggedIn === "true" || isLoggedIn === true) && (
             <Link href="/" className="ms-auto ms-lg-4" onClick={handleLogout}>
-              <Button className="btn-main">Logout</Button>
+              <Button className="btn-main">se déconnecter</Button>
             </Link>
           )}
           {(isLoggedIn === "false" || isLoggedIn === false) && (

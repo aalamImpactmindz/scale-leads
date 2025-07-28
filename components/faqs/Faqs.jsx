@@ -12,9 +12,9 @@ const Faqs = () => {
           <Row className="row-cols-1 row-cols-lg-2 align-items-center">
             <Col>
               <Heading
-                title="Frequently Asked Questions"
+                title="Questions fréquemment posées"
                 highlightedWords={["Questions"]}
-                description="Have questions about our AI-Powered Design Assistant? Find answers to the most common questions and learn how our platform can enhance your creative process."
+                description="Vous avez des questions sur notre assistant de conception basé sur l'IA ? Trouvez les réponses aux questions fréquentes et découvrez comment notre plateforme peut optimiser votre processus créatif."
                 customClass="pe-0"
               />
             </Col>
