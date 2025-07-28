@@ -13,7 +13,7 @@ const OnboardingForm = ({ onSuccess }) => {
     objective: "",
     offer: "",
     website: "",
-    channel: "",
+    channel: "Linkedin",
     message_count: "1",
     message_delay: "1",
     tone: "",
@@ -188,15 +188,23 @@ Quelle est votre offre (votre promesse) ?</Form.Label>
           <Form.Group className="mb-3" controlId="formOnboardingChannel">
             <Form.Label>
 Sur quelle chaîne souhaitez-vous prospecter ?</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Entrer dans la chaîne"
+            
+               <Form.Select
+              aria-label="Sélectionnez le nombre de messages de suivi"
               required
               value={formData.channel}
               onChange={(e) =>
-                setFormData({ ...formData, channel: e.target.value })
+                setFormData({
+                  ...formData,
+                 channel:e.target.value,
+                })
               }
-            />
+              className="form-control"
+            >
+              <option value="Linkedin">Linkedin</option>
+              <option value="Email">Email</option>
+            
+            </Form.Select>
           </Form.Group>
         </Col>
       </Row>
