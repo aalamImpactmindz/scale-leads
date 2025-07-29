@@ -43,7 +43,7 @@ const handledelete = async(id)=>{
        let resp = await axiosInstance.delete(`/api/campaigns/${id}`);
        const{data} =resp;
     if(data?.status){
-      toast.success(data?.message);
+      toast.success("La campagne et ses prospects ont été supprimés");
       fetchData();
     }
   }catch(err){
@@ -57,7 +57,7 @@ const deletetoken = async(id)=>{
   try{
          let res = await axiosInstance.delete(`/api/linkedin-tokens/${id}`)
          const {data}  = res;
-         console.log(data);
+         
   }catch(err){
     console.log(err);
   }
@@ -186,7 +186,7 @@ message_count
 
    if(data.status===true){
      fetchData();
-     await toast.success("Compain Start Successfully")
+     await toast.success("La campagne démarre avec succès")
      let response =    await scrapInstance.post(
           "/api/scrapemail",
           { body }
@@ -282,7 +282,7 @@ message_count
         } catch (err) {
           setIsLoading(false);
            stopcomapin(compain);
-          console.log("LinkedIn error:", err);
+      
         }
       }
       

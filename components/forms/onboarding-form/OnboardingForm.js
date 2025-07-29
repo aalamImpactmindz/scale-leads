@@ -26,8 +26,21 @@ const OnboardingForm = ({ onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   let response;
     try {
-      const response = await userOnboardingForm(formData);
+      //when user select Linkedin+Email
+      if(formData?.channel==="Linkedin+Email"){
+        formData.channel="Linkedin"
+      response = await userOnboardingForm(formData);
+      if(response.status){
+        formData.channel="Email"
+        response = await userOnboardingForm(formData);
+      }
+      }
+     //normally
+   else{
+      response = await userOnboardingForm(formData);
+   }
       if (response.status) {
         setMessage(response?.message);
         setError("");
@@ -203,6 +216,7 @@ Sur quelle chaîne souhaitez-vous prospecter ?</Form.Label>
             >
               <option value="Linkedin">Linkedin</option>
               <option value="Email">Email</option>
+              <option value="Linkedin+Email">Linkedin+Email</option>
             
             </Form.Select>
           </Form.Group>

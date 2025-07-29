@@ -74,6 +74,7 @@ const Plans = ({ customClass }) => {
           <h2 className="mb-4 fw-bold" style={{ paddingRight: "320px" }}>
             Abonnements
           </h2>
+          <p>Essayez gratuitement pendant 7 jours, sans engagement</p>
           <Tabs
             activeKey={activeTab}
             onSelect={(k) => setActiveTab(k)}

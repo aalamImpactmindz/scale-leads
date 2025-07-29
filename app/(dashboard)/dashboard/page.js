@@ -91,9 +91,9 @@ export default function DashboardHome() {
                     <h3 className="mt-auto display-5 fw-semibold">
                       <CountUp end={leads} duration={6} />
                     </h3>
-                    <p className="mb-0 text-white text-opacity-75 small">
+                    {/* <p className="mb-0 text-white text-opacity-75 small">
                       Lorem ipsum dolor sit
-                    </p>
+                    </p> */}
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
                     <AnimatedProgressbar
@@ -123,9 +123,9 @@ export default function DashboardHome() {
                     <h3 className="mt-auto display-5 fw-semibold">
                       <CountUp end={emailleads} duration={6} />
                     </h3>
-                    <p className="mb-0 text-white text-opacity-75 small">
+                    {/* <p className="mb-0 text-white text-opacity-75 small">
                       Lorem ipsum dolor sit
-                    </p>
+                    </p> */}
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
                     <AnimatedProgressbar
@@ -359,7 +359,7 @@ export default function DashboardHome() {
                   <span>0</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
-                  Aliqua massa
+                  E-mail
                 </h6>
               </div>
               <div>
@@ -384,13 +384,11 @@ export default function DashboardHome() {
                   <span>0</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
-                  Lorem ipsum dolor
+                    Linkedin
                 </h6>
               </div>
             </div>
-            <Button className="btn-main w-100">
-              Lorem ipsum dolor sit amet
-            </Button>
+           
           </div>
         </Col>
       </Row>
