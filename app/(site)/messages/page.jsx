@@ -84,13 +84,22 @@ const Messages = () => {
       setError("Veuillez sélectionner une tonalité.");
       return;
     }
-
+      let followuplinkedin= {
+        option1:followupdata?.linkedin1,
+        option2:followupdata?.linkedin2,
+        option3:followupdata?.linkedin3
+      }
+      let followupemails={
+        option1:followupdata?.email1,
+        option2:followupdata?.email2,
+        option3:followupdata?.email3
+      }
     try {
       const { data } = await axiosInstance.post("/api/user-messages", {
         message_content: formData.linkedin,
         email_content: formData.email,
-        follow_up_linkedin:followupdata?.linkedin,
-        follow_up_email:followupdata?.email
+        follow_up_linkedin:followuplinkedin,
+        follow_up_email:followupemails
       });
 
       if (data.status) {
