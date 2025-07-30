@@ -17,13 +17,17 @@ import CountUp from "react-countup";
 import Cookies from "js-cookie";
 import { useContext } from "react";
 import { AuthContext } from "@/app/context/Authcontext";
+import { dashboardstats } from "@/utils/service/userlogin";
 export default function DashboardHome() {
-  
+  const[islinkconnect,setconnect] = useState(false);
+ 
   const [leads, totalleads] = useState(0);
   const [leadperc, setleadperc] = useState(0);
   const [emailleads, totalemailleads] = useState(0);
   const [leademailperc, setlemaileadperc] = useState(0);
-    const {user,setuser } = useContext(AuthContext);
+    const {user,setuser ,connected,email} = useContext(AuthContext);
+    const[emailstats,setemailstats] = useState(null);
+    const[linkedinstats,setlinkedinstats] = useState(null);
   //linkedin
   const fetchData = async () => {
     try {
@@ -58,8 +62,22 @@ export default function DashboardHome() {
     fetchemailData();
   }, []);
 
+  const statsdata = async()=>{
+    try{
+    let res = await dashboardstats();
+    setemailstats(res.email);
+  
+    setlinkedinstats(res.linkedin);
+    console.log(res.linkedin);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
+    
     const token = Cookies?.get("authToken");
+  
     if (token) {
       let decode = jwtDecode(token);
       if (decode) {
@@ -67,7 +85,18 @@ export default function DashboardHome() {
         setuser(name);
       }
     }
-  }, []);
+    statsdata();
+  }, [connected,email]);
+useEffect(()=>{
+  const liid = Cookies?.get("user_token");
+      let check = Cookies.get("gmail_access_token");
+      let microsoft = Cookies.get("microsoft_access_token")
+ 
+ 
+    statsdata();
+   
+},[connected,email])
+
 
   return (
     <div className="dashboard">
@@ -91,9 +120,7 @@ export default function DashboardHome() {
                     <h3 className="mt-auto display-5 fw-semibold">
                       <CountUp end={leads} duration={6} />
                     </h3>
-                    {/* <p className="mb-0 text-white text-opacity-75 small">
-                      Lorem ipsum dolor sit
-                    </p> */}
+                   
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
                     <AnimatedProgressbar
@@ -123,9 +150,7 @@ export default function DashboardHome() {
                     <h3 className="mt-auto display-5 fw-semibold">
                       <CountUp end={emailleads} duration={6} />
                     </h3>
-                    {/* <p className="mb-0 text-white text-opacity-75 small">
-                      Lorem ipsum dolor sit
-                    </p> */}
+                   
                   </Col>
                   <Col md={5} className="d-flex flex-column align-items-center">
                     <AnimatedProgressbar
@@ -142,7 +167,7 @@ export default function DashboardHome() {
           </Row>
           <div className="rounded-3 bg-gray mt-4 p-4">
             <h5>Actions envoyés</h5>
-            <Row className="row-cols-5 flex-wrap mt-3">
+            <Row className="row-cols-4 flex-wrap mt-3">
               <Col
                 
               >
@@ -166,7 +191,18 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
+<h4 className="mb-0 lh-1 fw-semibold">
+  {connected && email
+    ? (linkedinstats?.accept || 0) + (emailstats?.accept || 0)
+    : connected
+    ? linkedinstats?.accept || 0
+    : email
+    ? emailstats?.accept || 0
+    : 0}
+</h4>
+
+
+
                 <p className="mb-0 small text-white text-opacity-75">
                   Invitations acceptées
                 </p>
@@ -195,9 +231,17 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
+              <h4 className="mb-0 lh-1 fw-semibold">
+  {connected && email
+    ? (linkedinstats?.send || 0) + (emailstats?.send || 0)
+    : connected
+    ? linkedinstats?.send || 0
+    : email
+    ? emailstats?.send || 0
+    : 0}
+</h4>
                 <p className="mb-0 small text-white text-opacity-75">
-                  Demandes de
+                 Invitations envoyées
                 </p>
                 </div>
               </Col>
@@ -224,7 +268,15 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
+                     <h4 className="mb-0 lh-1 fw-semibold">
+  {connected && email
+    ? (linkedinstats?.accept || 0) + (emailstats?.send || 0)
+    : connected
+    ? linkedinstats?.accept || 0
+    : email
+    ? emailstats?.send || 0
+    : 0}
+</h4>
                 <p className="mb-0 small text-white text-opacity-75">
                   Messages
                 </p>
@@ -253,11 +305,19 @@ export default function DashboardHome() {
                     }}
                   />
                 </span>
-                <h4 className="mb-0 lh-1 fw-semibold">0</h4>
+                     <h4 className="mb-0 lh-1 fw-semibold">
+  {connected && email
+    ? (linkedinstats?.profile_views || 0) + (emailstats?.profile_views || 0)
+    : connected
+    ? linkedinstats?.profile_views || 0
+    : email
+    ? emailstats?.profile_views || 0
+    : 0}
+</h4>
                 <p className="mb-0 small text-white text-opacity-75">Visites</p>
                 </div>
               </Col>
-              <Col
+              {/* <Col
               
               >
                 <div   className="d-flex flex-column flex-grow-1 align-items-center shadow-sm px-3 py-4 rounded-3 gap-2"
@@ -283,7 +343,7 @@ export default function DashboardHome() {
                 <h4 className="mb-0 lh-1 fw-semibold">0</h4>
                 <p className="mb-0 small text-white text-opacity-75">Suivi</p>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
           </div>
           <LinkedInConnect></LinkedInConnect>
@@ -356,14 +416,14 @@ export default function DashboardHome() {
                       }}
                     />
                   </span>
-                  <span>0</span>
+                  <span>{emailleads}</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
                   E-mail
                 </h6>
               </div>
               <div>
-                <div className="d-flex align-items-center justify-content-center fs-2 fw-bold">
+                <div className="d-flex align-items-center justify-content-center fs-2  fw-bold">
                   <span
                     className="d-flex align-items-center justify-content-center rounded-circle me-2"
                     style={{
@@ -381,7 +441,7 @@ export default function DashboardHome() {
                       }}
                     />
                   </span>
-                  <span>0</span>
+                  <span>{leads}</span>
                 </div>
                 <h6 className="mt-2 text-white text-opacity-75">
                     Linkedin

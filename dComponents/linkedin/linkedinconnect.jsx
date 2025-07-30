@@ -1,6 +1,6 @@
 // components/LinkedInConnect.js
 "use client";
-import React, { useEffect,useState,useLayoutEffect } from "react";
+import React, { useEffect,useState,useLayoutEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faChrome } from "@fortawesome/free-brands-svg-icons";
@@ -14,7 +14,9 @@ import Image from "next/image";
 import axiosInstance from "@/utils/axiosInstance";
 import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
+import { AuthContext } from "@/app/context/Authcontext";
 const LinkedInConnect = () => {
+    const {connected,setconnected } = useContext(AuthContext);
     const[isExtensionInstalled, setIsExtensionInstalled] = useState(false);
     const[islinkedinConnected, setIslinkedinConnected] = useState(false);
     const[isloading, setIsLoading] = useState(false);
@@ -42,6 +44,7 @@ chrome.runtime.sendMessage(
             secure: true,
             sameSite: "None", expires: 17 });
          setIslinkedinConnected(true);
+         setconnected(true);
        let fetchprofile = await scrapInstance.post('/api/getprofile',{
 
         user_token:response?.token
@@ -87,8 +90,9 @@ setIsExtensionInstalled(false);
 
 useEffect(()=>{
     const getCookies = Cookies.get("user_token");
-    console.log(getCookies);
+ 
     if(getCookies!==undefined){
+      setconnected(true);
         setIslinkedinConnected(true);
     }
    const token = Cookies.get("authToken");
@@ -132,7 +136,7 @@ const getlinkedintoken = async(sid)=>{
 const handledisconnect = ()=>{
   Cookies.remove('user_token');
   setIslinkedinConnected(false);
-
+setconnected(false);
 }
 useEffect(()=>{
   let id = Cookies.get("selectedlid");
@@ -174,8 +178,10 @@ const handleexistlinkedin = (item)=>{
      Cookies.set("user_token", item?.linkedin_token, { expires: 200 });
      Cookies.set("lid",item?.id,{ expires: 20 })
       Cookies.set('selectedlid', item?.id);
+      setconnected(true);
     setselectedid(item?.id);
      setIslinkedinConnected(true);
+     setconnected(true)
      setShowDropdown(false);
   }catch(err){
     console.log(err)

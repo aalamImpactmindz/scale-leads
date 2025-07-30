@@ -25,7 +25,7 @@ const EmailConnect = () => {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
 
-
+   const { email,setemailconnected } = useContext(AuthContext);
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -48,12 +48,14 @@ const EmailConnect = () => {
 
   useEffect(() => {
     let check = Cookies.get("gmail_access_token");
-    console.log(Cookies.get("microsoft_access_token"))
+
     if (!check) {
+      setemailconnected(false)
       setIsConnected(false);
     }
     let microsoft = Cookies.get("microsoft_access_token");
     if (!microsoft) {
+      setemailconnected(false)
       setIsMicrosoftConnected(false);
     }
   }, [])
@@ -86,7 +88,7 @@ useEffect(() => {
             path: '/',
             sameSite: true,
           });
-
+         setemailconnected(true);
           setIsMicrosoftConnected(true);
           setHasSavedOutlookToken(true); // ✅ Prevent future calls
         }
@@ -150,6 +152,7 @@ provider = provider === "google" ? "gmail" : provider;
           expires_in: session.expiresAt,
           status: true,
         });
+        setemailconnected(false);
             setIsConnected(true);
             Cookies.set("gmail_access_token",session.accessToken, {
          path: "/",
@@ -166,8 +169,8 @@ provider = provider === "google" ? "gmail" : provider;
       }
     };
     if (provider === "gmail") {
-     
-      
+
+
 
       Cookies.set("gmail_refresh_token", session.refreshToken, {
         path: "/",
@@ -217,7 +220,7 @@ const scopes = [
     'profile',
     'offline_access',
     'email',
-   
+
     'https://graph.microsoft.com/Mail.Send',
     'https://graph.microsoft.com/Mail.ReadWrite',
     'https://graph.microsoft.com/MailboxSettings.ReadWrite',
@@ -288,6 +291,7 @@ try{
   useEffect(() => {
     const getCookies = Cookies.get("microsoft_access_token");
     if (getCookies) {
+      setemailconnected(true);
       setIsMicrosoftConnected(true);
     }
     const apppass = Cookies.get("uapppas");
@@ -298,6 +302,7 @@ try{
 
     const getGmailCookies = Cookies.get("gmail_access_token");
     if (getGmailCookies) {
+      setemailconnected(true);
       setIsConnected(true);
     }
     let id = Cookies.get('selectedid');
@@ -384,6 +389,7 @@ let emaillimit = getemaillimit(planid);
 
 
         setIsConnected(true);
+        setemailconnected(true);
         Cookies.set('selectedid', item?.id);
         setselectedid(item?.id);
       }
@@ -476,14 +482,14 @@ let emaillimit = getemaillimit(planid);
         sameSite:"None",expires:expiresAt
        })
 
-
+setemailconnected(true);
     setIsMicrosoftConnected(true);
    Cookies.set('selectedmid', item?.id);
       setselectedmid(item?.id);
       }
-     
 
-    
+
+
 
 
 
@@ -510,7 +516,7 @@ let emaillimit = getemaillimit(planid);
       }
       if (provider === "outlook") {
         Cookies.remove("microsoft_access_token");
-       
+setemailconnected(false);
         setmShowDropdown(false)
         setIsMicrosoftConnected(false);
       }
@@ -526,7 +532,7 @@ let emaillimit = getemaillimit(planid);
     }
 
   }
- 
+
 
 
   return (
@@ -631,7 +637,7 @@ let emaillimit = getemaillimit(planid);
 
               className="btn btn-primary d-flex align-items-center gap-2 px-4 rounded-pill ms-auto  btn-main"
             >
-              
+
   {isMicrosoftConnected
     ? 'Connecté'
     : (emaildata?.length < emaillimit ? 'Ajouter' : 'Se connecter')}
@@ -690,10 +696,10 @@ let emaillimit = getemaillimit(planid);
               </div>
             )}
 
-           
+
           </div>
 
-         
+
 
 
           {/* Outlook Box */}

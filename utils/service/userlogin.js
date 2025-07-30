@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "../axiosInstance";
 import scrapInstance from "../scrapeInstace";
 
@@ -68,6 +69,16 @@ export const newpassword = async(data)=>{
    })
    return res.data;
   }catch(err){ 
+    console.log(err);
+  }
+}
+
+
+export const dashboardstats = async()=>{
+  try{
+     const res = await axiosInstance.get('/api/stats');
+     return res.data;
+  }catch(err){
     console.log(err);
   }
 }

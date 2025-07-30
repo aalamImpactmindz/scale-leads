@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const[smtp,setsmtp] = useState(false);
   const [user,setuser] = useState();
+  const [connected,setconnected] = useState(false);
+  const[email,setemailconnected] = useState(false);
   const hasReloaded = useRef(false); // ensure reload happens only once
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         setIsLoggedIn,
         smtp,setsmtp,
-        user,setuser
+        user,setuser,connected,setconnected,email,setemailconnected
       }}
     >
       {children}
