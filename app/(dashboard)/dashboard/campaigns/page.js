@@ -20,7 +20,11 @@ const [linkedinMessage, setLinkedinMessage] = useState('');
 const [emailMessage, setEmailMessage] = useState('');
 const [showfollowModal, setShowfolloupModal] = useState(false);
 const [linkedinsfolloup, setLinkedinfollowup] = useState('');
+const [linkedinsfolloup2, setLinkedinfollowup2] = useState('');
+const [linkedinsfolloup3, setLinkedinfollowup3] = useState('');
 const[emailfollowup,setEmailfollowup] = useState('');
+const[emailfollowup2,setEmailfollowup2] = useState('');
+const[emailfollowup3,setEmailfollowup3] = useState('');
 const[msgId,setmsgid] = useState('');
 
 
@@ -71,8 +75,16 @@ const fetchMessages = async () => {
      setmsgid(data?.data?.id);
     setLinkedinMessage(data?.data?.message_content || '');
     setEmailMessage(data?.data?.email_content || '');
-    setLinkedinfollowup(data?.data?.follow_up_linkedin || '');
-    setEmailfollowup(data?.data?.follow_up_email || '')
+    //followup one
+    let followupjson = JSON.parse(data?.data?.follow_up_linkedin);
+     
+    setLinkedinfollowup(followupjson?.option1 || '');
+    setLinkedinfollowup2(followupjson?.option2 || '');
+    setLinkedinfollowup3(followupjson?.option3 || '');
+    let followupemail = JSON.parse(data?.data?.follow_up_email);
+    setEmailfollowup(followupemail?.option1 ||'')
+    setEmailfollowup2(followupemail?.option2 ||'')
+    setEmailfollowup3(followupemail?.option3 ||'')
   } catch (err) {
     toast.error("Impossible de charger les messages");
   }
@@ -103,11 +115,22 @@ const handleSaveMessages = async () => {
   }
 };
 const handlefollowupMessages = async () => {
+  let linkedinsfolloups={
+    option1:linkedinsfolloup,
+    option2:linkedinsfolloup2,
+    option3:linkedinsfolloup3
+  }
+  let emailfollowups={
+    option1:emailfollowup,
+    option2:emailfollowup2,
+    option3:emailfollowup3
+
+  }
   try {
     await axiosInstance.post("/api/user-messages/follow-up", {
       id:msgId,
-      follow_up_linkedin: linkedinsfolloup,
-      follow_up_email: emailfollowup
+      follow_up_linkedin: linkedinsfolloups,
+      follow_up_email: emailfollowups
     });
     toast.success("Messages enregistrés !");
     setShowfolloupModal(false);
@@ -548,7 +571,7 @@ Annuler</button>
         </div>
         <div className="modal-body">
           <div className="mb-4">
-            <label className="form-label">Message LinkedIn</label>
+            <label className="form-label">Linkedin-followup-1</label>
             <textarea
               className="form-control"
               rows="6"
@@ -557,14 +580,54 @@ Annuler</button>
               onChange={(e) => setLinkedinfollowup(e.target.value)}
             ></textarea>
           </div>
+          <div className="mb-4">
+            <label className="form-label">Linkedin-followup-2</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={linkedinsfolloup2}
+              onChange={(e) => setLinkedinfollowup2(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-4">
+            <label className="form-label">Linkedin-followup-3</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={linkedinsfolloup3}
+              onChange={(e) => setLinkedinfollowup3(e.target.value)}
+            ></textarea>
+          </div>
           <div className="mb-3">
-            <label className="form-label">Message par e-mail</label>
+            <label className="form-label">Email-suivi-1</label>
             <textarea
               className="form-control"
               rows="6"
               style={{ backgroundColor: "#2d0350", color: "white" }}
               value={emailfollowup}
               onChange={(e) => setEmailfollowup(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email-suivi-2</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={emailfollowup2}
+              onChange={(e) => setEmailfollowup2(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email-suivi-3</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              style={{ backgroundColor: "#2d0350", color: "white" }}
+              value={emailfollowup3}
+              onChange={(e) => setEmailfollowup3(e.target.value)}
             ></textarea>
           </div>
         </div>
