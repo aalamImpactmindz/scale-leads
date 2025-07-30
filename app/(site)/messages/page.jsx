@@ -17,7 +17,7 @@ const Messages = () => {
 
   const [allMessages, setAllMessages] = useState({});
   const [formData, setFormData] = useState({ linkedin: "", email: "" });
-  const[followupdata,setfollowupdata] = useState({linkedin:"",email:""})
+  const[followupdata,setfollowupdata] = useState({linkedin1:"",linkedin2:"",linkedin3:"",email1:"",email2:"",email3:""})
   const [selectedTone, setSelectedTone] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -41,8 +41,12 @@ const Messages = () => {
             email: messages[firstTone]?.email || "",
           });
           setfollowupdata({
-            linkedin:followup[firstTone]?.linkedin || "",
-            email:followup[firstTone]?.email || ""
+            linkedin1:followup[firstTone]?.linkedin.option1 || "",
+            linkedin2:followup[firstTone]?.linkedin.option2 || "",
+            linkedin3:followup[firstTone]?.linkedin.option3 || "",
+            email1:followup[firstTone]?.email?.option1 || "",
+            email2:followup[firstTone]?.email?.option2 || "",
+            email3:followup[firstTone]?.email?.option3 || "",
           })
           hasSetInitialTone.current = true;
         }
@@ -63,8 +67,12 @@ const Messages = () => {
       email: allMessages[tone]?.email || "",
     });
     setfollowupdata({
-      linkedin:allfollowup[tone]?.linkedin || "",
-      email:allfollowup[tone]?.email || ""
+      linkedin1:allfollowup[tone]?.linkedin.option1 || "",
+      linkedin2:allfollowup[tone]?.linkedin.option2 || "",
+      linkedin3:allfollowup[tone]?.linkedin.option3 || "",
+      email1:allfollowup[tone]?.email.option1 || "",
+      email2:allfollowup[tone]?.email.option2 || "",
+      email3:allfollowup[tone]?.email.option3 || ""
     })
     setError("");
   };
@@ -163,13 +171,37 @@ const Messages = () => {
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="linkedinMessage">
-                    <Form.Label>Message de suivi LinkedIn</Form.Label>
+                    <Form.Label>Message de suivi LinkedIn-1</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
-                      value={followupdata?.linkedin}
+                      value={followupdata?.linkedin1}
                       onChange={(e) =>
-                        setfollowupdata({ ...followupdata, linkedin: e.target.value })
+                        setfollowupdata({ ...followupdata, linkedin1: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="linkedinMessage">
+                    <Form.Label>Message de suivi LinkedIn-2</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.linkedin2}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, linkedin2: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="linkedinMessage">
+                    <Form.Label>Message de suivi LinkedIn-3</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.linkedin3}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, linkedin3: e.target.value })
                       }
                       required
                     />
@@ -188,13 +220,37 @@ const Messages = () => {
                     />
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="emailMessage">
-                    <Form.Label>Message de suivi par e-mail</Form.Label>
+                    <Form.Label>Message de suivi par e-mail-1</Form.Label>
                     <Form.Control
                       as="textarea"
                       rows={4}
-                      value={followupdata?.email}
+                      value={followupdata?.email1}
                       onChange={(e) =>
-                        setfollowupdata({ ...followupdata, email: e.target.value })
+                        setfollowupdata({ ...followupdata, email1: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-4" controlId="emailMessage">
+                    <Form.Label>Message de suivi par e-mail-2</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.email2}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, email2: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-4" controlId="emailMessage">
+                    <Form.Label>Message de suivi par e-mail-3</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      value={followupdata?.email3}
+                      onChange={(e) =>
+                        setfollowupdata({ ...followupdata, email3: e.target.value })
                       }
                       required
                     />
