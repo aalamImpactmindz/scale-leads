@@ -1,0 +1,84 @@
+.plan {
+    background-color: transparent;
+    border: 1px solid;
+    border-image: linear-gradient(to right bottom, #8D4AEA, #EF31F9, #44006A);
+    border-image-slice: 1;
+    min-height: 530px;
+}
+
+.plan h6 strong {
+    background-image: linear-gradient(90.89deg, #B44AFF, #44006A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.plan li {
+    padding-left: 40px;
+}
+
+.plan li span {
+    top: -1px;
+    width: 24px;
+    height: 24px;
+}
+
+.popular,
+.your-plan {
+    background-image: linear-gradient(341.62deg, #470D67 7.31%, #8500B5 42.13%, #540083 95.5%);
+    border: 0;
+}
+
+.popular h6 strong,
+.your-plan h6 strong {
+    color: var(--color-light) !important;
+    background-image: none;
+    -webkit-text-fill-color: inherit;
+}
+
+.popular li span,
+.your-plan li span {
+    background-color: var(--color-light);
+}
+
+.popular .btn-rounded,
+.your-plan .btn-rounded {
+    background-color: var(--color-light);
+    background-image: none;
+    color: var(--color-theme-75);
+}
+
+.popular .btn-rounded:hover,
+.your-plan .btn-rounded:hover,
+.popular .btn-rounded:active,
+.your-plan .btn-rounded:active,
+.popular .btn-rounded:focus-visible,
+.your-plan .btn-rounded:focus-visible {
+    background-color: var(--color-light) !important;
+    opacity: 0.9;
+}
+
+@media (max-width: 991px) {
+    .plan > .badge {
+        right: 0.5rem!important;
+    }
+}
+
+@media (max-width: 767px) {
+    .plan > .badge {
+        right: 1rem!important;
+    }
+}
+
+@media (max-width: 575px) {
+    .plan li span {
+        top: 0;
+        width: 20px;
+        height: 20px;
+    }
+
+    .plan li {
+        padding-left: 30px;
+    }
+}

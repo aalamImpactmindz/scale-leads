@@ -1,0 +1,15 @@
+.heading {
+    padding-right: 32vw;
+}
+
+@media (max-width: 767px) {
+    .heading {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .heading h2 {
+        font-size: 30px;
+    }
+}

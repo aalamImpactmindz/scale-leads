@@ -1,0 +1,10 @@
+.page-abonnement .plans .heading {
+    padding: 0 16vw !important;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    .page-abonnement .plans .heading {
+        padding: 0 !important;
+    }
+}

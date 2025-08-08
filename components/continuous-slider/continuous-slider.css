@@ -1,0 +1,11 @@
+.continuous-slider {
+    background-image: linear-gradient(to bottom right, #3F1457, #000000);
+}
+
+.continuous-slider .swiper-wrapper {
+    transition-timing-function: linear;
+}
+
+.continuous-slider img {
+    max-width: 100%;
+}

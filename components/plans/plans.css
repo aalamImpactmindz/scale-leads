@@ -1,0 +1,37 @@
+.plans h2 {
+    background-image: linear-gradient(90.89deg, #D9D9D9 -4.91%, #B44AFF 33.28%, #44006A 125.44%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-tabs {
+    border: 1px solid #EF31F9;
+}
+
+.nav-tabs .nav-link {
+    border: 0;
+    padding: 5px 20px !important;
+    border-radius: 0;
+    margin-bottom: 0;
+    color: var(--color-light) !important;
+    background-color: transparent !important;
+    height: 100%;
+}
+
+.nav-tabs .nav-link.active {
+    background-image: linear-gradient(341.62deg, #470D67 7.31%, #8500B5 42.13%, #540083 95.5%);
+}
+
+@media (max-width: 991px) {
+    .plans h2 {
+        padding-right: 0 !important;
+    }
+
+    .plans .nav-tabs {
+        position: static !important;
+        display: inline-flex;
+        margin-bottom: 20px;
+    }
+}

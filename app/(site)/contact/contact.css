@@ -1,0 +1,8 @@
+.page-contact > .container-xl .heading {
+    padding: 0;
+}
+
+.page-contact > .container-xl p {
+    max-width: 400px;
+    margin: auto;
+}

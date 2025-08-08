@@ -1,0 +1,9 @@
+.working-card span {
+    width: 50px;
+    aspect-ratio: 1;
+}
+
+.working-card span svg {
+    width: 22px;
+    height: 22px;
+}

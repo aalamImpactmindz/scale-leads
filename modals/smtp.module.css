@@ -1,0 +1,48 @@
+.inputblack {
+  color: #000 !important;
+}
+
+/* Also override text color during autofill */
+
+/* .modalContent {
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  border: none;
+} */
+
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.input {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  color: #fff!important;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+.input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+}
+
+.btnConnect {
+  background-color: #3784ff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 10px 0;
+
+}
+
+.btnConnect:hover {
+  background-color: #216be0;
+}
+.eye{
+    transform: rotate(0deg);
+}
