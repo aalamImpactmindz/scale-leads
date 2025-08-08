@@ -11,6 +11,7 @@ export const userLogin = async (payload) => {
    return err.response?.data;
   }
 };
+//user registeration
 
 export const userRegister = async (payload) => {
   try {
