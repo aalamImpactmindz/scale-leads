@@ -12,7 +12,7 @@ export const userLogin = async (payload) => {
   }
 };
 //user registeration
-
+//new registration
 export const userRegister = async (payload) => {
   try {
     let response = await axiosInstance.post("/api/register", payload);
