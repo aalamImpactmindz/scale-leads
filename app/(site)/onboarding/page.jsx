@@ -12,7 +12,7 @@ const Onboarding = () => {
       <Container fluid="xl">
         <div className="bg-gray p-3 p-lg-4">
           <h4 className="color-light mb-4 fw-bold">
-            Custom Client Onboarding Form
+            Formulaire personnalisé d'intégration client
           </h4>
           <OnboardingForm
             onSuccess={() => {

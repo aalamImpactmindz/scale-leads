@@ -25,7 +25,7 @@ export default function DashboardHome() {
   const [leadperc, setleadperc] = useState(0);
   const [emailleads, totalemailleads] = useState(0);
   const [leademailperc, setlemaileadperc] = useState(0);
-    const {user,setuser ,connected,email} = useContext(AuthContext);
+    const {user,setuser ,connected,email,active} = useContext(AuthContext);
     const[emailstats,setemailstats] = useState(null);
     const[linkedinstats,setlinkedinstats] = useState(null);
   //linkedin
@@ -394,7 +394,7 @@ useEffect(()=>{
           <div className="bg-gray rounded-3 p-4 d-flex flex-wrap flex-column mt-4">
             <div className="d-flex justify-content-between align-items-center">
               <h5 className="mb-0">État de la prospection</h5>
-              <Badge className="bg-light color-dark py-2">Inactif</Badge>
+              <Badge className="bg-light color-dark py-2">{active?'actif':'inactif'}</Badge>
             </div>
             <div className="d-flex flex-wrap justify-content-evenly my-4">
               <div>

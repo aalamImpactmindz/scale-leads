@@ -42,7 +42,7 @@ const OnboardingForm = ({ onSuccess }) => {
       response = await userOnboardingForm(formData);
    }
       if (response.status) {
-        setMessage(response?.message);
+        setMessage("Profil créé avec succès.");
         setError("");
         setFormData({
           campaign_name: "",
@@ -77,7 +77,7 @@ const OnboardingForm = ({ onSuccess }) => {
       }
     } catch (err) {
       setError(
-        err?.response?.data?.message || "Unable to submit your details."
+        err?.response?.data?.message || "Impossible de soumettre vos coordonnées."
       );
       setMessage("");
     }

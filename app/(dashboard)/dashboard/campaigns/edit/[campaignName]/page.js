@@ -45,7 +45,7 @@ const EditCampaign = () => {
     try {
       const response = await updateUserOnboardingForm(formData.id, formData);
       if (response.status) {
-        setMessage(response?.message);
+        setMessage("Campagne mise à jour avec succès.");
         setError("");
         setFormData({
           id: formData.id,

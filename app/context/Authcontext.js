@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [connected,setconnected] = useState(false);
   const[email,setemailconnected] = useState(false);
   const hasReloaded = useRef(false); // ensure reload happens only once
-
+ const [active,setactive] = useState(false);
   useEffect(() => {
     const authToken = Cookies.get("authToken");
     const expiresAt = Cookies.get("expires_at");
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         setIsLoggedIn,
         smtp,setsmtp,
-        user,setuser,connected,setconnected,email,setemailconnected
+        user,setuser,connected,setconnected,email,setemailconnected,active,setactive
       }}
     >
       {children}

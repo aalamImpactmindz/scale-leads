@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 import { Button, Table, Alert } from "react-bootstrap";
@@ -8,7 +9,8 @@ import axiosInstance from "@/utils/axiosInstance";
 import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-
+import { AuthContext } from "@/app/context/Authcontext";
+import { useContext } from "react";
 const Campaigns = () => {
   const router = useRouter();
   const [campaigns, setCampaigns] = useState([]);
@@ -27,7 +29,7 @@ const[emailfollowup2,setEmailfollowup2] = useState('');
 const[emailfollowup3,setEmailfollowup3] = useState('');
 const[msgId,setmsgid] = useState('');
 
-
+const {active,setactive} = useContext(AuthContext);
 
   const fetchData = async () => {
     try {
@@ -204,11 +206,11 @@ message_count
         }
       );
    const{data} = response;
-  
-  
+
 
    if(data.status===true){
      fetchData();
+     setactive(true);
      await toast.success("La campagne démarre avec succès")
      let response =    await scrapInstance.post(
           "/api/scrapemail",
@@ -267,6 +269,7 @@ message_count
       );
        const{data} = response;
          if(data.status===true){
+          setactive(true);
            fetchData();
           await toast.success("Entretenir Démarrer avec succès")
          
@@ -277,7 +280,7 @@ message_count
       
 
       const {data} = response;
-      console.log(data);
+
       if(data?.status==true){
         setLoading(true);
         toast.success("Les leads récupèrent avec succès");
@@ -348,6 +351,7 @@ message_count
           campaign_status: "deactive",
         }
       );
+      setactive(false);
       fetchData();
     } catch (err) {
       console.log(err);
@@ -364,6 +368,7 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
       });
       const{data}  =stopcompain;
       if(data?.isSuccess){
+        setactive(false);
         await toast.success("Compain arrêté avec succès");
       }
      }
@@ -373,6 +378,8 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
       });
       const{data}  =stopcompain;
       if(data?.isSuccess){
+
+        setactive(false);
         await toast.success("Compain arrêté avec succès");
       }
      }

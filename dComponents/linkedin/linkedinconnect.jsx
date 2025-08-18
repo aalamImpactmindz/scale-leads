@@ -274,7 +274,7 @@ const handleexistlinkedin = (item)=>{
                           className="btn btn-primary gap-2 px-4 rounded-pill btn-main  ms-auto me-3"
                         >
                           {/* {item?.id == selectedid && islinkedinConnected ? 'Connected' : 'Continue'} */}
-                          {islinkedinConnected ? 'Connected' : 'Continue'}
+                          {islinkedinConnected ? 'Connecté' : 'Continuer'}
 
 
 
