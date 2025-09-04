@@ -275,7 +275,8 @@ message_count
          
      let response =    await scrapInstance.post(
           "/api/scrap",
-          { body }
+          { body },
+          { timeout: 30 * 60 * 1000 }
         );
       
 
