@@ -280,7 +280,7 @@ message_count
       
 
       const {data} = response;
-
+console.log(data);
       if(data?.status==true){
         setLoading(true);
         toast.success("Les leads récupèrent avec succès");
@@ -306,6 +306,7 @@ message_count
    }
           setIsLoading(false);
         } catch (err) {
+          console.log(err);
           setIsLoading(false);
            stopcomapin(compain);
       
