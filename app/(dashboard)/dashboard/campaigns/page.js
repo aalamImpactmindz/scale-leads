@@ -316,7 +316,7 @@ console.log(data);
       
     } catch (err) {
       console.log("Error starting campaign:", err);
-      stopcomapin(compain);
+     
       toast.error("Une seule plainte à la fois")
     }
   };
