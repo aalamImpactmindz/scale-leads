@@ -42,12 +42,14 @@ chrome.runtime.sendMessage(
      if(response?.token!==undefined){
           Cookies.set("user_token", response?.token, {path: "/",
             secure: true,
-            sameSite: "None", expires: 17 });
+            sameSite: "None", expires: 31 });
+          Cookies.set("ua",response?.ua,{path:"/", secure:true,sameSite:"None",expires:31})
          setIslinkedinConnected(true);
          setconnected(true);
        let fetchprofile = await scrapInstance.post('/api/getprofile',{
 
-        user_token:response?.token
+        user_token:response?.token,
+        userAgent:response?.ua
        })
        const {data}=fetchprofile;
    
