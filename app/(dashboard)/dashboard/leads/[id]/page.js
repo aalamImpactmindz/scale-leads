@@ -77,7 +77,7 @@ setLeads(data?.leads ||[])
               <th>#</th>
               <th>Nom du lead</th>
               <th>Source</th>
-              <th>Localisation</th>
+              <th>Dernière action</th>
               <th>Demande de connexion</th>
           
               <th>Répondit</th>
@@ -89,8 +89,9 @@ setLeads(data?.leads ||[])
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{lead.name}</td>
-                <td>{lead.source==='gmail' || lead.source==='outlook' || lead.source==='smtp' ?'Email':'Linkedin'}</td>
-                <td>{lead?.country || '-'} </td>
+                <td>{lead.source==='gmail' || lead.source==='outlook' ?'Email':'Linkedin'}</td>
+                   <td>{new Date(lead?.updated_at).toLocaleString()}</td>
+
                 <td>{lead?.emailsend ==1 || lead?.connection_request ?'Envoyée':'Échoué'}</td>
                 <td>{lead.replied === false ? "Aucune" : "Oui"}</td>
                 <td>

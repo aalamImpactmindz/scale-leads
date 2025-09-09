@@ -36,7 +36,7 @@ const {active,setactive} = useContext(AuthContext);
       const response = await axiosInstance.get("/api/user-campaigns");
       setCampaigns(response.data.campaigns || []);
     } catch (err) {
-      console.log("Error fetching campaigns:", err);
+    
       setError("Aucune campagne trouvée");
     } finally {
       setLoading(false);
@@ -281,7 +281,7 @@ message_count
       
 
       const {data} = response;
-console.log(data);
+
       if(data?.status==true){
         setLoading(true);
         toast.success("Les leads récupèrent avec succès");
