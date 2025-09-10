@@ -139,19 +139,32 @@ const EditCampaign = () => {
               />
             </Form.Group>
           </Col>
-          <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>Dans quel secteur travaille-t-il ?</Form.Label>
-              <Form.Control
-                type="text"
-                required
-                value={formData.sector}
-                onChange={(e) =>
-                  setFormData({ ...formData, sector: e.target.value })
-                }
-              />
-            </Form.Group>
-          </Col>
+            <Col>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Dans quel secteur travaille-t-il ?</Form.Label>
+               <Form.Select
+                      aria-label="Select secteur"
+                      required
+                      value={formData.sector}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          sector: e.target.value,
+                        })
+                      }
+                      className="form-control"
+                    >
+                      <option value="Marketing et publicité">Marketing et publicité</option>
+                      <option value="Technologies et services de l'information">Technologies et services de l'information</option>
+                      <option value="Immobilier">Immobilier</option>
+                      <option value="Conseil">Conseil</option>
+                      <option value="SaaS/Logiciel">SaaS / Logiciel</option>
+                      <option value="Ressources humaines/Recrutement">Ressources humaines/Recrutement</option>
+                      <option value="Coaching et formation">Coaching et formation</option>
+                      <option value="Finances et comptabilité">Finances et comptabilité</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
         </Row>
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>

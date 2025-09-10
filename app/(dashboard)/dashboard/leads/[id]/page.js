@@ -50,9 +50,9 @@ setLeads(data?.leads ||[])
   }, []);
 
   const handleEditClick = (lead) => {
-   window.open(lead.url, '_blank'); // Open in a new tab
-    // const encodedName = encodeURIComponent(lead.leadName);
-    // router.push(`/dashboard/leads/view/${encodedName}`);
+
+   window.open(lead.linkedin, '_blank'); 
+    
   };
 
   return (
@@ -101,7 +101,7 @@ setLeads(data?.leads ||[])
                     onClick={() => handleEditClick(lead)}
                   >
                     
-Vue
+Profil
                   </Button>
                 </td>
               </tr>

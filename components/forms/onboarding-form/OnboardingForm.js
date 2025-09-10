@@ -117,14 +117,27 @@ const OnboardingForm = ({ onSuccess }) => {
         <Col>
           <Form.Group className="mb-3">
             <Form.Label>Dans quel secteur travaille-t-il ?</Form.Label>
-            <Form.Control
-              type="text"
+       <Form.Select
+              aria-label="Select secteur"
               required
               value={formData.sector}
               onChange={(e) =>
-                setFormData({ ...formData, sector: e.target.value })
+                setFormData({
+                  ...formData,
+                  sector: e.target.value,
+                })
               }
-            />
+              className="form-control"
+            >
+              <option value="Marketing et publicité">Marketing et publicité</option>
+              <option value="Technologies et services de l'information">Technologies et services de l'information</option>
+              <option value="Immobilier">Immobilier</option>
+              <option value="Conseil">Conseil</option>
+              <option value="SaaS/Logiciel">SaaS / Logiciel</option>
+              <option value="Ressources humaines/Recrutement">Ressources humaines/Recrutement</option>
+              <option value="Coaching et formation">Coaching et formation</option>
+              <option value="Finances et comptabilité">Finances et comptabilité</option>
+            </Form.Select>
           </Form.Group>
         </Col>
         <Col>
@@ -157,7 +170,7 @@ const OnboardingForm = ({ onSuccess }) => {
             <Form.Label>Quel est votre objectif principal ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Votre objectif"
+             
               required
               value={formData.objective}
               onChange={(e) =>
@@ -172,7 +185,7 @@ const OnboardingForm = ({ onSuccess }) => {
 Quelle est votre offre (votre promesse) ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Votre offre"
+             
               required
               value={formData.offer}
               onChange={(e) =>
@@ -188,7 +201,7 @@ Quelle est votre offre (votre promesse) ?</Form.Label>
             <Form.Label>Avez-vous un site Web ?</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Entrer sur le site Web"
+            
               required
               value={formData.website}
               onChange={(e) =>
@@ -276,8 +289,7 @@ Combien de messages de suivi souhaitez-vous ?</Form.Label>
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="
-(facultatif)"
+            
               value={formData.tone}
               onChange={(e) =>
                 setFormData({ ...formData, tone: e.target.value })
@@ -292,8 +304,7 @@ Combien de messages de suivi souhaitez-vous ?</Form.Label>
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="
-(facultatif)"
+           
               value={formData.competitors}
               onChange={(e) =>
                 setFormData({
@@ -312,7 +323,7 @@ Combien de messages de suivi souhaitez-vous ?</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              placeholder="(facultatif)"
+            
               value={formData.existing_messages}
               onChange={(e) =>
                 setFormData({

@@ -468,7 +468,7 @@ useEffect(() => {
                 <td>{campaign?.channel}</td>
                 <td>{campaign?.total_leads}</td>
               <td>
-  {campaign?.channel === 'Linkedin' ? `${campaign?.daily_limit}/100` : '-'}
+   {campaign?.channel === 'Linkedin' ? `${campaign?.daily_limit}/25` : campaign?.channel==='Email' ? `${campaign?.daily_limit}/50` :'-'}
 </td>
                 <td>{campaign?.campaign_status==="active"?'actif':'en pause'}</td>
                  <td>{new Date(campaign?.latest_updated_at).toLocaleString()}</td>

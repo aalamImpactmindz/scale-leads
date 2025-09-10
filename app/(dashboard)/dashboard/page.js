@@ -307,14 +307,14 @@ useEffect(()=>{
                 </span>
                      <h4 className="mb-0 lh-1 fw-semibold">
   {connected && email
-    ? (linkedinstats?.profile_views || 0) + (emailstats?.profile_views || 0)
+    ? (linkedinstats?.replies || 0) + (emailstats?.replies || 0)
     : connected
-    ? linkedinstats?.profile_views || 0
+    ? linkedinstats?.replies || 0
     : email
-    ? emailstats?.profile_views || 0
+    ? emailstats?.replies || 0
     : 0}
 </h4>
-                <p className="mb-0 small text-white text-opacity-75">Visites</p>
+                <p className="mb-0 small text-white text-opacity-75">Réponses</p>
                 </div>
               </Col>
               {/* <Col
