@@ -1,7 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const scrapInstance = axios.create({
-baseURL: "https://api.scaleleads.fr/"
+
+baseURL: process.env.NEXT_PUBLIC_SCRAPE_URL
+
 
 
 });
