@@ -160,7 +160,7 @@ let startingpage = Math.floor(Math.random() * 50) + 1;
       }
   
    }catch(err){
-     setloader(false);
+    
     console.log(err)
    }
 
