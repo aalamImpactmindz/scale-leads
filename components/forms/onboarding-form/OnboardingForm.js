@@ -19,6 +19,7 @@ const OnboardingForm = ({ onSuccess }) => {
     tone: "",
     existing_messages: "",
     competitors: "",
+    automatic_campaign: false, // 🔹 added field
   });
 
   const [message, setMessage] = useState("");
@@ -27,19 +28,28 @@ const OnboardingForm = ({ onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
    let response;
+ 
     try {
       //when user select Linkedin+Email
       if(formData?.channel==="Linkedin+Email"){
-        formData.channel="Linkedin"
+      formData.channel="Linkedin";
       response = await userOnboardingForm(formData);
       if(response.status){
-        formData.channel="Email"
+        formData.channel="Email";
+        formData.automatic_campaign = true;
         response = await userOnboardingForm(formData);
       }
       }
+       if(formData?.channel=="Email"){
+      formData.automatic_campaign=true;
+      response = await userOnboardingForm(formData);
+
+    }
      //normally
    else{
-      response = await userOnboardingForm(formData);
+   
+     response = await userOnboardingForm(formData);
+
    }
       if (response.status) {
         setMessage("Profil créé avec succès.");
@@ -58,6 +68,7 @@ const OnboardingForm = ({ onSuccess }) => {
           tone: "",
           existing_messages: "",
           competitors: "",
+          automatic_campaign: false, // 🔹 reset toggle
         });
 
         // Change onboarding_form_filled cookie to true
@@ -85,6 +96,24 @@ const OnboardingForm = ({ onSuccess }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+           <Row className="mb-3 ">
+     {formData?.channel==="Linkedin" &&(
+         <Col className="d-flex justify-content-end">
+          <Form.Check
+            type="switch"
+            id="automatic-campaign-toggle"
+            label="Campagne automatique"
+            checked={formData.automatic_campaign}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                automatic_campaign: e.target.checked,
+              })
+            }
+          />
+        </Col>
+     )}
+      </Row>
       <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
         <Col>
           <Form.Group className="mb-3">

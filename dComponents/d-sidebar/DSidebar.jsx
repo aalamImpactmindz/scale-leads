@@ -16,6 +16,7 @@ import {
   faReceipt,
   faBell,
   faGear,
+  faEye
 } from "@fortawesome/free-solid-svg-icons";
 import imageUser from "@/public/assets/images/user.jpg"
 import Cookies from "js-cookie";
@@ -65,16 +66,23 @@ const DSidebar = () => {
       href: "/dashboard/subscriptions",
       icon: faUserPlus,
     },
-    { name: "Campagnes", href: "/dashboard/campaigns", icon: faBullhorn },
+    { name: "Campagnes automatiques", href: "/dashboard/campaigns", icon: faBullhorn },
     // { name: "Leads", href: "/dashboard/leads", icon: faArrowTrendUp },
     // { name: "Invoices", href: "/dashboard/invoices", icon: faReceipt },
     // { name: "Notifications", href: "/dashboard/notifications", icon: faBell },
+       {
+      name: "Campagnes manuelles",
+      href: "/dashboard/manual",
+      icon: faBell,
+      customClass: "mt-auto",
+    },
     {
       name: "Paramètres",
       href: "/dashboard/settings",
       icon: faGear,
       customClass: "mt-auto",
-    },
+    }
+ 
   ];
 
 

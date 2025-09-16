@@ -12,10 +12,12 @@ scrapInstance.interceptors.request.use(
   (config) => {
     const token = Cookies.get("authToken");
     const ua = Cookies.get("ua");
+    const ltoken = Cookies.get("user_token");
    
     if (token) {
       config.headers.authorization = `Bearer ${token}`;
       config.headers.userAgent=`${ua}`;
+      config.headers.xencryption=`${ltoken}`;
     }
     return config;
   },

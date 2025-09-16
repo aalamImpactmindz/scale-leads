@@ -10,9 +10,9 @@ import scrapInstance from "@/utils/scrapeInstace";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/Authcontext";
-import { useContext } from "react";
+import { useContext } from "react"; 
+import day from '../../../../public/assets/images/24-hours.png'
 import all from '../../../../public/assets/images/mark.png'
-import Image from "next/image";
 import {
 faPlayCircle,
 faPauseCircle,
@@ -21,7 +21,8 @@ faTrashAlt,
  
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Campaigns = () => {
+import Image from "next/image";
+const Page= () => {
   const router = useRouter();
   const [campaigns, setCampaigns] = useState([]);
   const [error, setError] = useState("");
@@ -38,12 +39,13 @@ const[emailfollowup,setEmailfollowup] = useState('');
 const[emailfollowup2,setEmailfollowup2] = useState('');
 const[emailfollowup3,setEmailfollowup3] = useState('');
 const[msgId,setmsgid] = useState('');
+const[errormessage,setmesssage] = useState('')
 
 const {active,setactive} = useContext(AuthContext);
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get("/api/user-campaigns");
+      const response = await axiosInstance.get("/api/musers-campaigns");
       setCampaigns(response.data.campaigns || []);
     } catch (err) {
     
@@ -176,7 +178,7 @@ const startcompain = async (compain) => {
     
 
     let { id, channel, company_size, ideal_customer, sector,message_delay,
-message_count
+message_count,automatic_campaign
  } = compain;
       if (!gmail && !outlook && !userpass&& !linkedin) {
       toast.warn("Pour commencer, connectez-vous en premier")
@@ -206,7 +208,7 @@ message_count
           uemail,
           memail,
           pass,
-          message_delay,message_count
+          message_delay,message_count,automatic_campaign
         };
 
     let response = await axiosInstance.patch(
@@ -265,9 +267,8 @@ message_count
             company_size,
             ideal_customer,
             sector,
-            usertoken,
             message_delay,
-            message_count
+            message_count,automatic_campaign
           };
 
 
@@ -278,23 +279,25 @@ message_count
         }
       );
        const{data} = response;
+       
          if(data.status===true){
           setactive(true);
            fetchData();
           await toast.success("Entretenir Démarrer avec succès")
          
      let response =    await scrapInstance.post(
-          "/api/scrap",
+          "/api/manualscrap",
           { body },
           { timeout: 30 * 60 * 1000 }
         );
       
 
       const {data} = response;
-
+      
       if(data?.status==true){
         setLoading(true);
         toast.success("Les leads récupèrent avec succès");
+        fetchData();
       }
      if(data?.status=="limit"){
         setLoading(false);
@@ -315,9 +318,14 @@ message_count
 
     fetchData();
    }
+
+        
           setIsLoading(false);
         } catch (err) {
-          console.log(err);
+          const {data} = err.response;
+          if(data?.status===false){
+           await toast.warn("Vous avez déjà une campagne active pour cette chaîne.")
+          }
           setIsLoading(false);
 
       
@@ -416,7 +424,7 @@ useEffect(() => {
   return (
     <div className="campaigns mb-4">
       <div className="d-heading-container d-flex flex-wrap justify-content-between mb-4">
-        <h2 className="mb-0 fw-bold me-5 d-inline-block">Toutes les campagnes automatiques</h2>
+        <h2 className="mb-0 fw-bold me-5 d-inline-block">Toutes les campagnes manuelles</h2>
                  <Button
                    onClick={handleOpenMessageModal}
                     className="btn-rounded me-3 ms-auto"
@@ -476,52 +484,73 @@ useEffect(() => {
                   </h6>
                 </td>
                 <td>{campaign?.channel}</td>
-                <td>{campaign?.total_leads}</td>
-              <td>
-   {campaign?.channel === 'Linkedin' ? `${campaign?.daily_limit}/25` : campaign?.channel==='Email' ? `${campaign?.daily_limit}/50` :'-'}
+<td>
+  {campaign?.total_leads > 15 
+    ? campaign.total_leads - 5 
+    : campaign?.total_leads || 0}
 </td>
+
+
+           <td>
+  {campaign?.channel === 'Linkedin'
+    ? `${campaign?.daily_limit > 15 ? campaign.daily_limit - 5 : campaign?.daily_limit || 0}/25`
+    : campaign?.channel === 'Email'
+    ? `${campaign?.daily_limit || 0}/50`
+    : '-'}
+</td>
+
                 <td>{campaign?.campaign_status==="active"?'actif':'en pause'}</td>
                  <td>{new Date(campaign?.latest_updated_at).toLocaleString()}</td>
 
                
-                        <td>
-                                 {campaign.campaign_status === "active" ? (
-                                   <Button title="Arrêter"
-                                     onClick={() => stopcomapin(campaign)}
-                                     className="btn-eyerounded me-3"
-                                     size="sm"
-                                   >
-                                    <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'black',width:'24px',height:'24px'}} icon={faPauseCircle}></FontAwesomeIcon>
-                                   </Button>
-                                 ) : (
-                                   <>
-                                     <Button title ="Démarrer"
-                                       onClick={() => startcompain(campaign)}
-                                       className="btn-eyerounded me-3"
-                                       size="sm"
-                                     >
-                                      <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'green',width:'24px',height:'24px'}} icon={faPlayCircle}></FontAwesomeIcon>
-                                     </Button>
-                                   </>
-                                 )}
-               
-                            
-                                 <Button title="toutes perspectives"
-                                   onClick={() =>
-                                     router.push(`/dashboard/leads/${campaign?.id}?channel=${campaign?.channel}`)
-                                   }
-                                   className="btn-eyerounded me-3"
-                                   size="sm"
-                                 >
-                                  <Image alt="toutes perspectives"  src={all} width={30} height={30}></Image>
-                                 </Button>
-                                 
-                                 <Button title="Supprimer" onClick={()=>handledelete(campaign?.id)} className="btn-eyerounded me-3" size="sm">
-                               <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'#d74a4af0',width:'22px',height:'22px'}} icon={faTrashAlt}></FontAwesomeIcon>
-                                 </Button>
-                        
-                                 
-                               </td>
+                <td>
+                  {campaign.campaign_status === "active" ? (
+                    <Button title="Arrêter"
+                      onClick={() => stopcomapin(campaign)}
+                      className="btn-eyerounded me-3"
+                      size="sm"
+                    >
+                     <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'black',width:'24px',height:'24px'}} icon={faPauseCircle}></FontAwesomeIcon>
+                    </Button>
+                  ) : (
+                    <>
+                      <Button title ="Démarrer"
+                        onClick={() => startcompain(campaign)}
+                        className="btn-eyerounded me-3"
+                        size="sm"
+                      >
+                       <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'green',width:'24px',height:'24px'}} icon={faPlayCircle}></FontAwesomeIcon>
+                      </Button>
+                    </>
+                  )}
+
+                  {campaign.campaign_status==="active" &&(
+                    <Button title="aujourd'hui, perspectives"
+                    onClick={() =>
+                      router.push(`/dashboard/manual/${campaign?.id}?channel=${campaign?.channel}`)
+                    }
+                    className="btn-eyerounded me-3"
+                    size="sm"
+                  >
+                    <Image alt="aujourd'hui, perspectives" src={day} width={30} height={30}></Image>
+                  </Button>
+                  )}
+                  <Button title="toutes perspectives"
+                    onClick={() =>
+                      router.push(`/dashboard/allleads/${campaign?.id}?channel=${campaign?.channel}`)
+                    }
+                    className="btn-eyerounded me-3"
+                    size="sm"
+                  >
+                   <Image alt="toutes perspectives"  src={all} width={30} height={30}></Image>
+                  </Button>
+                  
+                  <Button title="Supprimer" onClick={()=>handledelete(campaign?.id)} className="btn-eyerounded me-3" size="sm">
+                <FontAwesomeIcon style={{transform:'rotate(0deg)',color:'#d74a4af0',width:'22px',height:'22px'}} icon={faTrashAlt}></FontAwesomeIcon>
+                  </Button>
+         
+                  
+                </td>
               </tr>
             ))}
           </tbody>
@@ -665,4 +694,4 @@ Annuler</button>
   );
 };
 
-export default Campaigns;
+export default Page;

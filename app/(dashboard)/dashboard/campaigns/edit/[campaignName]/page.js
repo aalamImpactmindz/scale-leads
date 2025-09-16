@@ -32,6 +32,7 @@ const EditCampaign = () => {
         existing_messages: campaign.existing_messages || "",
         competitors: campaign.competitors || "",
         campaign_status: campaign.campaign_status || "",
+        automatic_campaign:campaign?.automatic_campaign
       });
     } else {
       setError(
@@ -63,6 +64,7 @@ const EditCampaign = () => {
           existing_messages: formData.existing_messages || "",
           competitors: formData.competitors || "",
           campaign_status: formData.campaign_status,
+          automatic_campaign:formData?.automatic_campaign
         });
 
         // Change onboarding_form_filled cookie to true
@@ -90,6 +92,25 @@ const EditCampaign = () => {
     <div className="edit-campaign mb-4">
       <h2 className="mb-4 fw-bold">Modifier la campagne: {formData.campaign_name}</h2>
       <Form onSubmit={handleSubmit} className="d-bg-gradient p-4 rounded-2">
+         {formData.channel==="Linkedin" &&(
+<Row className="mb-3 ">
+                <Col className="d-flex justify-content-end">
+                  <Form.Check
+                    type="switch"
+                    id="automatic-campaign-toggle"
+                    label="Campagne automatique"
+                    checked={formData.automatic_campaign}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        automatic_campaign: e.target.checked,
+                      })
+                    }
+                  />
+                </Col>
+              </Row>
+
+         )}
         <Row className="row-cols-1 row-cols-md-2 g-0 g-md-4">
           <Col>
             <Form.Group className="mb-3">

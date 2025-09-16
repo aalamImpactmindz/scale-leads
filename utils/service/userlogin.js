@@ -102,3 +102,41 @@ export const cancelSubscription = async()=>{
    return err.response?.data;
   }
 }
+
+export const deleteleads = async(id)=>{
+  try{
+      const response = await axiosInstance.delete(`/api/linkedin-leads/${id}`);
+      return response?.data
+  }catch(err){
+    return err.response?.data;
+  }
+}
+export const musercampaigns = async(id)=>{
+  try{
+      const response = await axiosInstance.get(`/api/musers-campaigns`);
+      return response?.data
+  }catch(err){
+    return err.response?.data;
+  }
+}
+
+
+export const validatelist = async(payload)=>{
+
+  try{
+     const response = await scrapInstance.post(`/api/sendrequest`,payload);
+     return response?.data;
+  }catch(err){
+    return err?.response?.data
+  }
+}
+export const deletelist = async(payload)=>{
+
+  try{
+     const response = await axiosInstance.post(`/api/bulk-linkedin-leads`,payload);
+     return response?.data;
+  }catch(err){
+    return err?.response?.data
+  }
+}
+
