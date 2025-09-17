@@ -40,7 +40,7 @@ const[errormessage,seterrormessage] = useState('Aucune piste trouvée.')
    
 
  setLeads((data?.leads || []).slice(0, 15)) 
- setallleads(data?.leads);
+ 
    }
       }
       if(channel=="Linkedin"){
@@ -49,8 +49,9 @@ const[errormessage,seterrormessage] = useState('Aucune piste trouvée.')
    const {data} =response; 
 
    if(data?.status){
-
+setallleads(data?.leads || []);
 setLeads((data?.leads || []).slice(0, 15))
+
 setcompaigndata(data?.campain_status);
 
 
@@ -122,6 +123,7 @@ setcompaigndata(data?.campain_status);
 
   
   const handlegenerate = async()=>{
+  
     setloader(true);
      seterrormessage('générer de nouveaux leads')
    try{
@@ -159,6 +161,9 @@ let startingpage = Math.floor(Math.random() * 50) + 1;
       if(data.status===true){
       setloader(false);
         fetchData();
+      }
+      if(data.status===false){
+         setloader(false);
       }
   
    }catch(err){
