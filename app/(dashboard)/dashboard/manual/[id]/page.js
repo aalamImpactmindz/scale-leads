@@ -28,6 +28,7 @@ const PageDLeads = ({params}) => {
   const [loading, setLoading] = useState(true);
   const [showloader,setloader]=useState(false);
   const [allleads,setallleads] = useState([]);
+  const[validate,setvalidate] = useState(false);
 const[errormessage,seterrormessage] = useState('Aucune piste trouvée.')
   const fetchData = async () => {
     try {
@@ -98,7 +99,7 @@ setcompaigndata(data?.campain_status);
     }
   }
   const handlevalidate =async()=>{
-  
+  setvalidate(true);
     
     try{
   const profileLinks = leads.map((lead) => ({
@@ -114,9 +115,14 @@ setcompaigndata(data?.campain_status);
     links:profileLinks
   }
   const response = await validatelist(data);
-  console.log(response);
+if(response.status==429){
+  setvalidate(false);
+   toast.warn("Trop de demandes, veuillez réessayer après 24 heures")
+}
     }catch(err){
+      setvalidate(false);
       console.log(err);
+     
     }
   }
 
@@ -171,7 +177,7 @@ let startingpage = Math.floor(Math.random() * 50) + 1;
     
     if(err.status===429){
       setloader(false);
-      toast.warn("Trop de demandes, veuillez réessayer après 2 heures")
+      toast.warn("Trop de demandes, veuillez réessayer après 24 heures")
     }
    }
 
@@ -267,6 +273,21 @@ Générer une nouvelle liste
         <circle class="front" cx="17" cy="17" r="14"></circle>
     </svg>
     <div class="text" data-text="Generating"></div>
+</div>
+</div>
+)}
+
+{validate && (
+  <div id="loader-overlay">
+<div class="spinners">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 </div>
 )}

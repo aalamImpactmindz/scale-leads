@@ -127,7 +127,7 @@ export const validatelist = async(payload)=>{
      const response = await scrapInstance.post(`/api/sendrequest`,payload);
      return response?.data;
   }catch(err){
-    return err?.response?.data
+    return err?.response
   }
 }
 export const deletelist = async(payload)=>{

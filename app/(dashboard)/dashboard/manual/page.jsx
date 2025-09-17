@@ -323,8 +323,14 @@ message_count,automatic_campaign
           setIsLoading(false);
         } catch (err) {
           const {data} = err.response;
+        
           if(data?.status===false){
            await toast.warn("Vous avez déjà une campagne active pour cette chaîne.")
+          }
+          if(err.status===429){
+
+            toast.warn("Trop de demandes, veuillez réessayer après 24 heures")
+             stopcomapin(compain);
           }
           setIsLoading(false);
 

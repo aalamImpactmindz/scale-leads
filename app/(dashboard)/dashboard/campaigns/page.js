@@ -322,7 +322,7 @@ message_count
     
        if(err.status===429){
        stopcomapin(compain);
-      toast.warn("Trop de demandes, veuillez réessayer après 2 heures")
+      toast.warn("Trop de demandes, veuillez réessayer après 24 heures")
     }
           setIsLoading(false);
 
