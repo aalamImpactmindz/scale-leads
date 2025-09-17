@@ -45,7 +45,7 @@ export async function GET(request) {
     response.cookies.set('microsoft_access_token', access_token, {
  
       path: '/',
-      maxAge: 60 * 60, // 1 hour
+      maxAge: 60 * 60 * 24 * 90, // 1 hour
     });
 
     response.cookies.set('microsoft_refresh_token', refresh_token, {

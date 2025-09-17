@@ -29,7 +29,8 @@ let linkedinlimit;
     const[existlinkedin , setexistlinkedin] = useState([]);
     const handleLogin = async() => {
   const extensionId = "hhfbaibjbeanbpigmnlebbncceblfndo"; // 🧩 Replace with your extension's real ID
- 
+ const threeMonthsLater = new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000);
+
 chrome.runtime.sendMessage(
   extensionId,
   { action: "test_trigger" },
@@ -42,8 +43,8 @@ chrome.runtime.sendMessage(
      if(response?.token!==undefined){
           Cookies.set("user_token", response?.token, {path: "/",
             secure: true,
-            sameSite: "None", expires: 31 });
-          Cookies.set("ua",response?.ua,{path:"/", secure:true,sameSite:"None",expires:31})
+            sameSite: "None", expires: threeMonthsLater });
+          Cookies.set("ua",response?.ua,{path:"/", secure:true,sameSite:"None",expires:threeMonthsLater})
          setIslinkedinConnected(true);
          setconnected(true);
        let fetchprofile = await scrapInstance.post('/api/getprofile',{

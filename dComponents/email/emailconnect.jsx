@@ -140,6 +140,7 @@ useEffect(() => {
 
     let  provider = session.provider;
 provider = provider === "google" ? "gmail" : provider;
+const threeMonthsLater = new Date(Date.now() + 3 * 30 * 24 * 60 * 60 * 1000);
 
 
     const syncTokenToBackend = async () => {
@@ -158,7 +159,7 @@ provider = provider === "google" ? "gmail" : provider;
          path: "/",
         secure: true,
         sameSite: "Strict",
-        expires: session.expiresAt
+        expires: threeMonthsLater
       })
       } catch (error) {
         if (error.response?.status === 409) {

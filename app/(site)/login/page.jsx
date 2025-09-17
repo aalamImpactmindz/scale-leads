@@ -68,12 +68,7 @@ const Login = () => {
         secure: true,
         sameSite: "Strict",
       });
-      // Cookies.set("can_access_protected_pages", "false", {
-      //   expires: expiresAtDate,
-      //   path: "/",
-      //   secure: true,
-      //   sameSite: "Strict",
-      // });
+
 
       localStorage.setItem("expires_at", new Date(decodedToken.exp * 1000));
 
