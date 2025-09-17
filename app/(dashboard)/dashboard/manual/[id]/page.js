@@ -115,6 +115,10 @@ setcompaigndata(data?.campain_status);
     links:profileLinks
   }
   const response = await validatelist(data);
+  console.log(response);
+  if(response.status===true){
+    setvalidate(false);
+  }
 if(response.status==429){
   setvalidate(false);
    toast.warn("Trop de demandes, veuillez réessayer après 24 heures")
