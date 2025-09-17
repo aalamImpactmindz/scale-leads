@@ -318,6 +318,12 @@ message_count
           setIsLoading(false);
         } catch (err) {
           console.log(err);
+    
+    
+       if(err.status===429){
+       stopcomapin(compain);
+      toast.warn("Trop de demandes, veuillez réessayer après 2 heures")
+    }
           setIsLoading(false);
 
       

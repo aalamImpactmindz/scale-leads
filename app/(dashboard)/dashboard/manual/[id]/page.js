@@ -155,7 +155,7 @@ let startingpage = Math.floor(Math.random() * 50) + 1;
           { timeout: 30 * 60 * 1000 }
         );
       
-
+     
       const {data} = response;
       
       if(data.status===true){
@@ -168,7 +168,11 @@ let startingpage = Math.floor(Math.random() * 50) + 1;
   
    }catch(err){
     
-    console.log(err)
+    
+    if(err.status===429){
+      setloader(false);
+      toast.warn("Trop de demandes, veuillez réessayer après 2 heures")
+    }
    }
 
 
