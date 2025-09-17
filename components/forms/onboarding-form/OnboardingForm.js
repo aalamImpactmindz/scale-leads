@@ -8,7 +8,7 @@ const OnboardingForm = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
     campaign_name: "",
     ideal_customer: "",
-    sector: "",
+     sector: "Marketing et publicité",
     company_size: "1",
     objective: "",
     offer: "",
@@ -57,7 +57,7 @@ const OnboardingForm = ({ onSuccess }) => {
         setFormData({
           campaign_name: "",
           ideal_customer: "",
-          sector: "",
+          sector: "Marketing et publicité",
           company_size: "1",
           objective: "",
           offer: "",
