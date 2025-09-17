@@ -27,6 +27,7 @@ const PageDLeads = ({params}) => {
   const[compaigndata,setcompaigndata] = useState();
   const [loading, setLoading] = useState(true);
   const [showloader,setloader]=useState(false);
+  const [allleads,setallleads] = useState([]);
 const[errormessage,seterrormessage] = useState('Aucune piste trouvée.')
   const fetchData = async () => {
     try {
@@ -39,6 +40,7 @@ const[errormessage,seterrormessage] = useState('Aucune piste trouvée.')
    
 
  setLeads((data?.leads || []).slice(0, 15)) 
+ setallleads(data?.leads);
    }
       }
       if(channel=="Linkedin"){
@@ -123,7 +125,7 @@ setcompaigndata(data?.campain_status);
     setloader(true);
      seterrormessage('générer de nouveaux leads')
    try{
-  const list_ids = leads.map(lead => lead.id);
+  const list_ids = allleads.map(lead => lead.id);
 
 let payload = { list_ids };
 
