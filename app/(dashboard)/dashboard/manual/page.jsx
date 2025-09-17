@@ -492,14 +492,14 @@ useEffect(() => {
                 <td>{campaign?.channel}</td>
 <td>
   {campaign?.total_leads > 15 
-    ? campaign.total_leads - 5 
+    ? 15 
     : campaign?.total_leads || 0}
 </td>
 
 
            <td>
   {campaign?.channel === 'Linkedin'
-    ? `${campaign?.daily_limit > 15 ? campaign.daily_limit - 5 : campaign?.daily_limit || 0}/25`
+    ? `${campaign?.daily_limit > 15 ? 15 : campaign?.daily_limit || 0}/25`
     : campaign?.channel === 'Email'
     ? `${campaign?.daily_limit || 0}/50`
     : '-'}
@@ -530,7 +530,7 @@ useEffect(() => {
                     </>
                   )}
 
-                  {campaign.campaign_status==="active" &&(
+                  
                     <Button title="aujourd'hui, perspectives"
                     onClick={() =>
                       router.push(`/dashboard/manual/${campaign?.id}?channel=${campaign?.channel}`)
@@ -540,7 +540,7 @@ useEffect(() => {
                   >
                     <Image alt="aujourd'hui, perspectives" src={day} width={30} height={30}></Image>
                   </Button>
-                  )}
+                  
                   <Button title="toutes perspectives"
                     onClick={() =>
                       router.push(`/dashboard/allleads/${campaign?.id}?channel=${campaign?.channel}`)
