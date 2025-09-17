@@ -118,6 +118,7 @@ setcompaigndata(data?.campain_status);
   console.log(response);
   if(response.status===true){
     setvalidate(false);
+    toast.success("Valider avec succès la liste")
   }
 if(response.status==429){
   setvalidate(false);
