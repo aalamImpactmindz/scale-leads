@@ -32,8 +32,8 @@ export default function DashboardHome() {
   const fetchData = async () => {
     try {
       const response = await axiosInstance.get("/api/linkedin/leads");
-      totalleads(response.data.leads.length || 0);
-      let leadpercentage = Math.round((response.data.leads.length / 500) * 100);
+      totalleads(response.data.count || 0);
+      let leadpercentage = Math.round((response.data.count / 500) * 100);
       console.log(leadpercentage);
       setleadperc(leadpercentage);
     } catch (err) {
