@@ -37,6 +37,7 @@ const PageDLeads = ({params}) => {
       https://impactmindz.in/client/scaleleads/api/linkedin/connect-leads?campaign_id=183
       if(channel=="Linkedin"){
          const response = await axiosInstance.get(`/api/linkedin/connect-leads?campaign_id=${id}`);
+      
      
    const {data} =response; 
 

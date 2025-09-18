@@ -19,7 +19,7 @@ const OnboardingForm = ({ onSuccess }) => {
     tone: "",
     existing_messages: "",
     competitors: "",
-    automatic_campaign: false, // 🔹 added field
+    automatic_campaign: true, // 🔹 added field
   });
 
   const [message, setMessage] = useState("");
@@ -40,17 +40,19 @@ const OnboardingForm = ({ onSuccess }) => {
         response = await userOnboardingForm(formData);
       }
       }
-       if(formData?.channel=="Email"){
+      else if(formData?.channel==="Email"){
       formData.automatic_campaign=true;
       response = await userOnboardingForm(formData);
 
     }
      //normally
-   else{
-   
+   else if(formData?.channel==="Linkedin"){
+     formData.channel="Linkedin";
      response = await userOnboardingForm(formData);
 
    }
+
+
       if (response.status) {
         setMessage("Profil créé avec succès.");
         setError("");
@@ -97,7 +99,7 @@ const OnboardingForm = ({ onSuccess }) => {
   return (
     <Form onSubmit={handleSubmit}>
            <Row className="mb-3 ">
-     {formData?.channel==="Linkedin" &&(
+     {formData?.channel.includes("Linkedin") &&(
          <Col className="d-flex justify-content-end">
           <Form.Check
             type="switch"

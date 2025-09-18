@@ -140,3 +140,13 @@ export const deletelist = async(payload)=>{
   }
 }
 
+export const generatelist = async(payload)=>{
+  
+  
+  try{
+  const response = await scrapInstance.post(`/api/regeneratelist`,payload);
+  return response?.data;
+  }catch(err){
+    return err?.response;
+  }
+}

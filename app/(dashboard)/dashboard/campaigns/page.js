@@ -11,7 +11,8 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/app/context/Authcontext";
 import { useContext } from "react";
-import all from '../../../../public/assets/images/mark.png'
+import all from '../../../../public/assets/images/mark.png';
+import day from '../../../../public/assets/images/24-hours.png';
 import Image from "next/image";
 import {
 faPlayCircle,
@@ -183,6 +184,11 @@ message_count
       
       return;
     }
+     if (!linkedin) {
+      toast.warn("Pour commencer, connectez-vous en premier")
+      
+      return;
+    }
     try {
       if (channel === "Email") {
         if (!gmail && !outlook && !userpass) {
@@ -252,12 +258,12 @@ message_count
       }
 
       if (channel === "Linkedin") {
-        try {
-            if (!linkedin) {
-      toast.warn("Pour commencer, connectez-vous en premier")
-      
-      return;
-    }
+        if(compain?.automatic_campaign===false){
+          console.log('status changed')
+        }
+        else{
+              try {
+           
           setIsLoading(true);
           let body = {
             id,
@@ -327,6 +333,7 @@ message_count
           setIsLoading(false);
 
       
+        }
         }
       }
       
@@ -414,6 +421,18 @@ let stopcompain = await scrapInstance.post("/api/stopcompain", {
       console.log(err);
     }
   };
+  const handleroutes = async(campaign)=>{
+    try{
+        if(campaign.automatic_campaign===false){
+           router.push(`/dashboard/allleads/${campaign?.id}?channel=${campaign?.channel}`)
+        }
+        if(campaign.automatic_campaign===true){
+          router.push(`/dashboard/leads/${campaign?.id}?channel=${campaign?.channel}`)
+        }
+    }catch(err){ 
+      console.log(err);
+    }
+  }
   //view leads
 useEffect(() => {
   document.body.style.overflow = showMessageModal ? 'hidden' : 'auto';
@@ -422,7 +441,7 @@ useEffect(() => {
   return (
     <div className="campaigns mb-4">
       <div className="d-heading-container d-flex flex-wrap justify-content-between mb-4">
-        <h2 className="mb-0 fw-bold me-5 d-inline-block">Toutes les campagnes automatiques</h2>
+        <h2 className="mb-0 fw-bold me-5 d-inline-block">Toutes les campagnes</h2>
                  <Button
                    onClick={handleOpenMessageModal}
                     className="btn-rounded me-3 ms-auto"
@@ -464,6 +483,7 @@ useEffect(() => {
               <th>limite journalière/En attente</th>
               
               <th>Statut de la campagne</th>
+              <th>Type de campagne</th>
               <th>Dernière action</th>
              
               <th>Actions</th>
@@ -487,6 +507,7 @@ useEffect(() => {
    {campaign?.channel === 'Linkedin' ? `${campaign?.daily_limit}/25` : campaign?.channel==='Email' ? `${campaign?.daily_limit}/50` :'-'}
 </td>
                 <td>{campaign?.campaign_status==="active"?'actif':'en pause'}</td>
+                <td>{campaign?.automatic_campaign===true?'automatique':'manuel'}</td>
                  <td>{new Date(campaign?.latest_updated_at).toLocaleString()}</td>
 
                
@@ -510,12 +531,20 @@ useEffect(() => {
                                      </Button>
                                    </>
                                  )}
-               
+                   {campaign.automatic_campaign===false &&(
+                        <Button title="aujourd'hui, perspectives"
+                                   onClick={() =>
+                                     router.push(`/dashboard/manual/${campaign?.id}?channel=${campaign?.channel}`)
+                                   }
+                                   className="btn-eyerounded me-3"
+                                   size="sm"
+                                 >
+                                   <Image alt="aujourd'hui, perspectives" src={day} width={30} height={30}></Image>
+                                 </Button>
+                   )}
                             
                                  <Button title="toutes perspectives"
-                                   onClick={() =>
-                                     router.push(`/dashboard/leads/${campaign?.id}?channel=${campaign?.channel}`)
-                                   }
+                                   onClick={() =>handleroutes(campaign) }
                                    className="btn-eyerounded me-3"
                                    size="sm"
                                  >

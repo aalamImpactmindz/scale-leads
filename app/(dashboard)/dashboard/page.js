@@ -127,9 +127,7 @@ useEffect(()=>{
                       value={leadperc}
                       strokeColor="#29003b"
                     />
-                    <p className="mb-0 text-white text-opacity-75 small mt-2">
-                      Aliqua massa arcu
-                    </p>
+                    
                   </Col>
                 </Row>
               </div>
@@ -157,9 +155,7 @@ useEffect(()=>{
                       value={leademailperc}
                       strokeColor="#000957"
                     />
-                    <p className="mb-0 text-white text-opacity-75 small mt-2">
-                      Aliqua massa arcu
-                    </p>
+                   
                   </Col>
                 </Row>
               </div>
