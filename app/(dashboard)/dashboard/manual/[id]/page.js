@@ -108,6 +108,7 @@ const PageDLeads = ({ params }) => {
           );
   
     sethide(true);
+    toast.success("La validation démarre avec succès")
     router.push(`/dashboard/allleads/${id}?channel=Linkedin`)
 
     try {

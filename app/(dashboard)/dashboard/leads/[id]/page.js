@@ -57,7 +57,7 @@ setLeads(data?.leads ||[])
 
   return (
     <div className="leads mb-4">
-      <h2 className="mb-4 fw-bold">Dirigeants</h2>
+      <h2 className="mb-4 fw-bold">Toutes les perspectives</h2>
       {loading ? (
         <div className="text-center py-5">
           <p className="mt-3">Chargement des câbles...</p>
