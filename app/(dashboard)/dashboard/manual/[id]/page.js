@@ -18,7 +18,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from "js-cookie";
 import scrapInstance from "@/utils/scrapeInstace";
-import Validateloader from "@/components/loaders/Validateloader";
+
 import Generateloader from "@/components/loaders/Generateloader";
 const PageDLeads = ({ params }) => {
   const { id } = use(params);
@@ -32,8 +32,9 @@ const PageDLeads = ({ params }) => {
   const [loading, setLoading] = useState(true);
   const [showloader, setloader] = useState(false);
   const [allleads, setallleads] = useState([]);
-  const [validate, setvalidate] = useState(false);
+
   const [errormessage, seterrormessage] = useState("Aucune piste trouvée.");
+  const[hide,sethide] = useState(false);
   const fetchData = async () => {
     try {
       if (channel == "Email") {
@@ -104,7 +105,8 @@ const PageDLeads = ({ params }) => {
               campaign_status: "active",
             }
           );
-    setvalidate(true);
+  
+    sethide(true);
 
     try {
       const profileLinks = leads.map((lead) => ({
@@ -121,16 +123,19 @@ const PageDLeads = ({ params }) => {
       const response = await validatelist(data);
 
       if (response.status === true) {
-        setvalidate(false);
+      
+        sethide(false);
         toast.success("Valider avec succès la liste");
         fetchData();
       }
       if (response.status == 429) {
-        setvalidate(false);
+      
+        sethide(false)
         toast.warn("Trop de demandes, veuillez réessayer après 24 heures");
       }
     } catch (err) {
-      setvalidate(false);
+   
+       sethide(false)
       console.log(err);
     }
   };
@@ -272,11 +277,25 @@ const PageDLeads = ({ params }) => {
       )}
       <div className="text-end mt-3 ">
         <button
-          onClick={handlevalidate}
-          className="text-white btn-rounded me-2"
-        >
-          Valider la liste
-        </button>
+  disabled={hide}
+  onClick={handlevalidate}
+  className="text-white btn-rounded me-2"
+  style={{ minWidth: "150px" }}
+>
+  {hide ? (
+    <>
+      <span
+        className="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Validation...
+    </>
+  ) : (
+    "Valider la liste"
+  )}
+</button>
+
         <button onClick={handlegenerate} className="text-white btn-rounded">
           Générer une nouvelle liste
         </button>
@@ -286,9 +305,7 @@ const PageDLeads = ({ params }) => {
       <Generateloader></Generateloader>
       )}  
 
-      {validate && (
-      <Validateloader/>
-      )}
+
     </div>
   );
 };

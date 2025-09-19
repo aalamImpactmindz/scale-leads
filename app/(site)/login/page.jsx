@@ -32,9 +32,10 @@ const Login = () => {
 
     try {
       const response = await userLogin(formData);
-     console.log(response);
+  
      if(response?.status){
        setIsLoggedIn(true);
+     
       setMessage("se connecter réussi!");
       setError("");
      }else{
@@ -120,7 +121,7 @@ const Login = () => {
         (messagesFilled === "true" || messagesFilled === true) &&
         (hasActivePlan === "true" || hasActivePlan === true)
       ) {
-        router.push("/");
+        router.push("/dashboard");
       } else if (
         (messagesFilled === "true" || messagesFilled === true) &&
         (hasActivePlan === "false" || hasActivePlan === false)

@@ -24,7 +24,7 @@ export async function middleware(request) {
       pathname === "/register" ||
       pathname === "/reset-password")
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   // Redirect unauthenticated users away from protected pages
@@ -81,7 +81,7 @@ export async function middleware(request) {
     (hasActivePlan === true || hasActivePlan === "true") &&
     (pathname.startsWith("/onboarding") || pathname.startsWith("/messages"))
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
 

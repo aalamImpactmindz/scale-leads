@@ -61,21 +61,14 @@ const DSidebar = () => {
   const navLinks = [
     { name: "Tableau de bord", href: "/dashboard", icon: faGaugeHigh },
     // { name: "Onboarding", href: "/dashboard/onboarding", icon: faPenToSquare },
+    
+    { name: "Campagnes", href: "/dashboard/campaigns", icon: faBullhorn },
+
     {
       name: "Abonnements",
       href: "/dashboard/subscriptions",
       icon: faUserPlus,
     },
-    { name: "Campagnes", href: "/dashboard/campaigns", icon: faBullhorn },
-    // { name: "Leads", href: "/dashboard/leads", icon: faArrowTrendUp },
-    // { name: "Invoices", href: "/dashboard/invoices", icon: faReceipt },
-    // { name: "Notifications", href: "/dashboard/notifications", icon: faBell },
-    //    {
-    //   name: "Campagnes manuelles",
-    //   href: "/dashboard/manual",
-    //   icon: faBell,
-    //   customClass: "mt-auto",
-    // },
     {
       name: "Paramètres",
       href: "/dashboard/settings",
