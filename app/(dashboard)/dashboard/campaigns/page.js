@@ -502,15 +502,18 @@ useEffect(() => {
                   </h6>
                 </td>
                 <td>{campaign?.channel}</td>
-                <td>
-  {campaign?.total_leads > 15 
-    ? 15 
-    : campaign?.total_leads || 0}
+               <td>
+  {campaign?.channel === "Linkedin" && campaign?.automatic_campaign===false
+    ? (campaign?.total_leads > 15 ? 15 : campaign?.total_leads || 0)
+    : campaign?.channel === "Email"
+    ? campaign?.total_leads || 0
+    : 0}
 </td>
 
 
+
            <td>
-  {campaign?.channel === 'Linkedin'
+  {campaign?.channel === 'Linkedin' && campaign?.automatic_campaign===false
     ? `${campaign?.daily_limit > 15 ? 15 : campaign?.daily_limit || 0}/25`
     : campaign?.channel === 'Email'
     ? `${campaign?.daily_limit || 0}/50`
