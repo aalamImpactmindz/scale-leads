@@ -98,7 +98,8 @@ const PageDLeads = ({ params }) => {
 
       return;
     }
-    let {id} = compaigndata;
+    let {id,channel} = compaigndata;
+    console.log(compaigndata);
      let response = await axiosInstance.patch(
             `api/campaign/${id}/status`,
             {
@@ -107,6 +108,7 @@ const PageDLeads = ({ params }) => {
           );
   
     sethide(true);
+    router.push(`/dashboard/allleads/${id}?channel=Linkedin`)
 
     try {
       const profileLinks = leads.map((lead) => ({

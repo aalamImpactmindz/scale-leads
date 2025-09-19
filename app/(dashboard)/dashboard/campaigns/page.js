@@ -259,7 +259,13 @@ message_count
 
       if (channel === "Linkedin") {
         if(compain?.automatic_campaign===false){
-          console.log('status changed')
+         let response = await axiosInstance.patch(
+        `api/campaign/${id}/status`,
+        {
+          campaign_status: "active",
+        }
+      );
+       fetchData();
         }
         else{
               try {
