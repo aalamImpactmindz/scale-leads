@@ -186,7 +186,7 @@ message_count
     try {
       if (channel === "Email") {
      
-        if (!gmail && !outlook && !userpass) {
+        if (!gmail) {
       toast.warn("Pour commencer, connectez-vous en premier")
       
       return;
