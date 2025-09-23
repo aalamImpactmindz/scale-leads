@@ -156,6 +156,7 @@ const handlefollowupMessages = async () => {
 const startcompain = async (compain) => {
   setLoading(false);
     let gmail = Cookies.get("gmail_access_token");
+
     let outlook = Cookies.get("microsoft_access_token");
     let userpass = Cookies.get("uapppas");
     let linkedin = Cookies.get("user_token");
@@ -179,18 +180,12 @@ const startcompain = async (compain) => {
     let { id, channel, company_size, ideal_customer, sector,message_delay,
 message_count
  } = compain;
-      if (!gmail && !outlook && !userpass&& !linkedin) {
-      toast.warn("Pour commencer, connectez-vous en premier")
-      
-      return;
-    }
-     if (!linkedin) {
-      toast.warn("Pour commencer, connectez-vous en premier")
-      
-      return;
-    }
+ 
+     
+  
     try {
       if (channel === "Email") {
+     
         if (!gmail && !outlook && !userpass) {
       toast.warn("Pour commencer, connectez-vous en premier")
       
@@ -258,6 +253,11 @@ message_count
       }
 
       if (channel === "Linkedin") {
+           if (!linkedin) {
+      toast.warn("Pour commencer, connectez-vous en premier")
+      
+      return;
+    }
         if(compain?.automatic_campaign===false){
          let response = await axiosInstance.patch(
         `api/campaign/${id}/status`,
