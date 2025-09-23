@@ -26,11 +26,9 @@ const Header = () => {
       setIsLoggedIn(false);
       
         Cookies.remove("authToken");
-         Cookies.remove("microsoft_access_token");
-         Cookies.remove("gmail_access_token");
-             Cookies.remove("user_token");
+   
       localStorage.clear();
-      await signOut();
+    
       window.location.href = "/login";
     }
   };

@@ -41,10 +41,7 @@ const DSidebar = () => {
       setIsLoggedIn(false);
       setshow(false);
       Cookies.remove("authToken");
-      Cookies.remove("microsoft_access_token");
-      Cookies.remove("gmail_access_token");
-      Cookies.remove("user_token");
-      await signOut()
+    
       
       localStorage.clear();
      router.push("/");
