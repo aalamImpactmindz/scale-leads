@@ -3,8 +3,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/sitemap-0.xml',
-        destination: '/sitemap.xml',
+        source: '/sitemap.xml',
+        destination: '/sitemap-0.xml',
         permanent: true,
       },
     ];
