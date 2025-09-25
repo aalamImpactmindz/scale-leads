@@ -2,7 +2,7 @@
 import "./plan-card.css";
 import { Badge, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loadStripe } from "@stripe/stripe-js";
 import { AuthContext } from "@/app/context/Authcontext";
@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { paymentlink } from "@/utils/service/userlogin";
 import Cookies from "js-cookie";
-
+import { Copy } from "lucide-react";
+import { toast } from "react-toastify";
 const PlanCard = ({
   planid,
   title,
@@ -55,6 +56,7 @@ const PlanCard = ({
       try {
         const response = await paymentlink(body);
         const sessionId = response.url;
+      
         const result = stripe.redirectToCheckout({ sessionId: sessionId });
 
         // Change can_access_protected_pages cookie to true
@@ -74,6 +76,11 @@ const PlanCard = ({
     } else {
       router.push("/login");
     }
+  };
+   const copyToClipboard = () => {
+    navigator.clipboard.writeText("SCALE");
+    toast.success("Code promo copié dans le presse-papiers !");
+
   };
 
   return (
@@ -124,6 +131,24 @@ Enregistrer  €{saveAnnually}
             </li>
           );
         })}
+        {price===199 && (  <div className="bg-purple-700 text-white p-2 rounded-xl text-center shadow-lg max-w-md mx-auto">
+      <h2 className="heading-promo font-semibold mb-2">
+        Utilisez le code promo ci-dessous :
+      </h2>
+      <div className="custom-promo text-purple-700 font-bold text-2xl px-6 py-3 rounded-lg inline-block shadow-md">
+        SCALE
+         <button
+        onClick={copyToClipboard}
+        className="promocopy bg-purple-100 hover:bg-purple-200 transition"
+      >
+        <Copy className="w-3 h-3 text-purple-700 text-white" />
+      </button>
+      </div>
+      
+      <p className="mt-3 text-sm">
+        Appliquez ce code pour obtenir <span className="font-bold">50€ de réduction</span> sur votre abonnement.
+      </p>
+    </div>)}
       </ul>
     </div>
   );

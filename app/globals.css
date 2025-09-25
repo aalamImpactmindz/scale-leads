@@ -908,3 +908,15 @@ label[for="automatic-campaign-toggle"] {
     opacity: 1;
   }
 }
+.custom-promo{
+  background-image: linear-gradient(255.48deg, #914BF1 1.58%, #400A8A 94.6%);
+}
+.heading-promo{
+  font-Size:24px !important
+}
+.promocopy{
+  background:transparent;
+  border: none;
+  color:'white';
+  margin-left: 10px;
+}
