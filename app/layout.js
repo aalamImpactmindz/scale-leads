@@ -14,10 +14,7 @@ const fontOutfit = Outfit({
   display: "swap",
 });
 
-export const metadata = {
-  title: "ScaleLeads",
-  description: "Générez des leads qualifiés pendant que vous dormez.",
-};
+
 
 export default function RootLayout({ children }) {
   return (

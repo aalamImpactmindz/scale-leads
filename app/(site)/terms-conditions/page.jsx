@@ -1,6 +1,37 @@
 import Heading from "@/components/heading/Heading";
 import React from "react";
 import { Container } from "react-bootstrap";
+export const metadata = {
+  title: "Conditions d’utilisation | Vos Droits avec ScaleLeads",
+  description:
+    "Consultez les termes et conditions ScaleLeads. Toutes les conditions service prospection sont détaillées pour un usage clair, sécurisé et transparent.",
+  keywords: [
+    "conditions d’utilisation",
+    "termes et conditions ScaleLeads",
+    "conditions service prospection"
+    
+  ],
+  openGraph: {
+    title: "Conditions d’utilisation | Vos Droits avec ScaleLeads",
+    description:
+      "Consultez les termes et conditions ScaleLeads. Toutes les conditions service prospection sont détaillées pour un usage clair, sécurisé et transparent.",
+    url: "https://scaleleads.fr/terms-conditions",
+    siteName: "ScaleLeads",
+    images: [
+      {
+        url: "https://scaleleads.fr/logo.png", // replace with your actual OG image
+        width: 1200,
+        height: 630,
+        alt: "Conditions d’utilisation | Vos Droits avec ScaleLeads",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://scaleleads.fr/terms-conditions",
+  },
+};
 
 const TermsConditions = () => {
   return (

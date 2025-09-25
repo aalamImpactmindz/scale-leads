@@ -4,6 +4,7 @@ import SuccessStories from "@/components/success-stories/SuccessStories";
 import WalkThrough from "@/components/walkthrough/WalkThrough";
 import Solution from "@/components/solution/Solution";
 import Working from "@/components/working/Working";
+
 export const metadata = {
   title: "Automatisation Prospection B2B | Générez Plus de Leads",
   description:

@@ -1,8 +1,39 @@
-"use client";
+
 import Heading from "@/components/heading/Heading";
 import React from "react";
 import { Container } from "react-bootstrap";
-
+export const metadata  ={
+  title: "Politique de confidentialité ScaleLeads | Confidentialité",
+  description:
+    "La politique de confidentialité ScaleLeads assure la confidentialité données utilisateurs et la protection des données personnelles en toute transparence.",
+      keywords: [
+    "politique de confidentialité ScaleLeads",
+    "articles sur cold email",
+    "guide prospection automatisée",
+    "contenu génération de leads",
+    
+  ],
+  openGraph: {
+     title: "Politique de confidentialité ScaleLeads | Confidentialité",
+  description:
+    "La politique de confidentialité ScaleLeads assure la confidentialité données utilisateurs et la protection des données personnelles en toute transparence.",
+    url: "https://scaleleads.fr/privacy",
+    siteName: "ScaleLeads",
+    images: [
+      {
+        url: "https://scaleleads.fr/logo.png", // replace with your actual OG image
+        width: 1200,
+        height: 630,
+        alt: "Politique de confidentialité ScaleLeads",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://scaleleads.fr/privacy",
+  },
+}
 const PrivacyPolicy = () => {
   return (
     <div className="page-content sec-padding">

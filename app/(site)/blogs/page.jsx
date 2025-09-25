@@ -9,7 +9,38 @@ import imageBlog2 from "@/public/assets/images/blog2.png";
 import imageBlog3 from "@/public/assets/images/blog3.png";
 import imageBlog4 from "@/public/assets/images/blog4.png";
 import imageBlog5 from "@/public/assets/images/blog5.png";
-
+export const metadata = {
+  title: "Blog Prospection B2B | Tout pour Améliorer votre Prospection",
+  description:
+    "Un guide complet sur la prospection automatisée et la génération de leads, pour vous accompagner et booster votre prospection B2B. Explorez nos articles!",
+  keywords: [
+    "blog prospection B2B",
+    "articles sur cold email",
+    "guide prospection automatisée",
+    "contenu génération de leads",
+    
+  ],
+  openGraph: {
+    title: "Blog Prospection B2B | Tout pour Améliorer votre Prospection",
+    description:
+      "Un guide complet sur la prospection automatisée et la génération de leads, pour vous accompagner et booster votre prospection B2B. Explorez nos articles!.",
+    url: "https://scaleleads.fr/blogs",
+    siteName: "ScaleLeads",
+    images: [
+      {
+        url: "https://scaleleads.fr/logo.png", // replace with your actual OG image
+        width: 1200,
+        height: 630,
+        alt: "Blog Prospection B2B - ScaleLeads",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://scaleleads.fr/blogs",
+  },
+};
 const allBlogs = [
   {
     link: "starting-a-career-in-web-design",

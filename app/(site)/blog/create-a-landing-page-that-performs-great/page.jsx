@@ -4,7 +4,38 @@ import { Container, Row, Col } from "react-bootstrap";
 import imageBlog2 from "@/public/assets/images/blog2.png";
 import Image from "next/image";
 import BlogCard from "@/components/blog-card/BlogCard";
-
+export const metadata  ={
+  title: "Landing Page Performante: Techniques pour Captiver et Vendre",
+  description:
+    "Apprenez à optimiser votre page de destination pour créer une page d’atterrissage efficace qui capte l’attention et maximise vos conversions rapidement.",
+      keywords: [
+    "landing page performante",
+    "optimiser page de destination",
+    "conversion landing page",
+    "page d’atterrissage efficace",
+    
+  ],
+  openGraph: {
+      title: "Landing Page Performante: Techniques pour Captiver et Vendre",
+  description:
+    "Apprenez à optimiser votre page de destination pour créer une page d’atterrissage efficace qui capte l’attention et maximise vos conversions rapidement.",
+    url: "https://scaleleads.fr/blog/create-a-landing-page-that-performs-great",
+    siteName: "ScaleLeads",
+    images: [
+      {
+        url: "https://scaleleads.fr/logo.png", // replace with your actual OG image
+        width: 1200,
+        height: 630,
+        alt: "Landing Page Performante: Techniques pour Captiver et Vendre",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://scaleleads.fr/blog/create-a-landing-page-that-performs-great",
+  },
+}
 const blogCreateALandingPageThatPerforms = () => {
   return (
     <div className="blog-detail sec-padding">
