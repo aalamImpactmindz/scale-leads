@@ -26,8 +26,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build
     - run: |
        touch .env
        echo "${{ secrets.PRO_ENV_FILE }}" > .env
-    - run: pm2 restart linkedin
+    - run: npm run build
+    - run: pm2 restart scaleleads-frontend
