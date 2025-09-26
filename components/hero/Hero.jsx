@@ -14,7 +14,7 @@ const Hero = () => {
         <Row className="row-cols-1 row-cols-lg-2 my-5 ">
           <Col>
             <h1 className="text-light fw-normal display-5 mt-0">
-              <strong>Automatise ta prospection.</strong>
+              <strong>Automatise s ta prospection.</strong>
               <br /> Ne perds plus de temps à prospecter.
             </h1>
             <p className="lh-lg mb-4 fs-5 fw-light">
